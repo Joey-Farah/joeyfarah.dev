@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "hero",
+    "type": "hero",
+    "title": "Hero",
+    "order": 0,
+    "visible": true,
+    "content": {
+      "lines": ["Joey Farah", "Oracle Cloud ERP Consultant"]
+    }
+  },
+  {
+    "slug": "professional-timeline",
+    "type": "timeline",
+    "title": "Professional Timeline",
+    "order": 1,
+    "visible": true,
+    "content": {
+      "entries": [
+        {
+          "employer": "Acme Corp",
+          "role": "ERP Consultant",
+          "start": "2021-01",
+          "end": "present",
+          "accomplishments": ["Led cloud migration", "Reduced costs by 20%"]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "oracle-db-mapper",
+    "type": "erd-tile",
+    "title": "Oracle Database Mapper",
+    "order": 2,
+    "visible": true,
+    "content": {
+      "description": "Visual ERD mapper for Oracle Fusion schema.",
+      "nodes": [
+        { "id": "invoice", "label": "AP_INVOICES", "x": 50, "y": 50 },
+        { "id": "vendor", "label": "PO_VENDORS", "x": 250, "y": 50 }
+      ],
+      "edges": [
+        { "from": "invoice", "to": "vendor", "label": "VENDOR_ID" }
+      ]
+    }
+  },
+  {
+    "slug": "slippi-ranked-stats",
+    "type": "project-card",
+    "title": "Slippi Ranked Stats",
+    "order": 3,
+    "visible": true,
+    "content": {
+      "description": "Melee ranked stats dashboard.",
+      "stack": ["Python", "Streamlit"],
+      "links": [{ "label": "Live Dashboard", "url": "https://slippi-dashboard.up.railway.app" }],
+      "status": "live"
+    }
+  },
+  {
+    "slug": "contact",
+    "type": "contact-links",
+    "title": "Contact",
+    "order": 4,
+    "visible": true,
+    "content": {
+      "links": [
+        { "platform": "GitHub", "url": "https://github.com/Joey-Farah", "display": "github.com/Joey-Farah" }
+      ]
+    }
+  }
+]

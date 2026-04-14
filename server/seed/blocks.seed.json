@@ -1,0 +1,187 @@
+[
+  {
+    "slug": "hero",
+    "type": "hero",
+    "title": "Hero",
+    "order": 0,
+    "visible": true,
+    "content": {
+      "lines": [
+        "Joey Farah",
+        "Oracle Cloud ERP Consultant — 4+ years",
+        "Super Smash Bros. Melee — Diamond ranked",
+        "Building tools for enterprise and for fun."
+      ]
+    }
+  },
+  {
+    "slug": "professional-timeline",
+    "type": "timeline",
+    "title": "Professional Timeline",
+    "order": 1,
+    "visible": true,
+    "content": {
+      "entries": [
+        {
+          "employer": "Deloitte",
+          "role": "Oracle Cloud ERP Consultant",
+          "start": "2022-07",
+          "end": "present",
+          "accomplishments": [
+            "Led Oracle Cloud ERP data conversion workstreams for Fortune 500 clients, migrating AP, AR, and GL legacy data using FBDI templates and custom Python pipelines.",
+            "Designed reusable SQL extraction scripts against Oracle Fusion schema to validate conversion accuracy across 200,000+ invoice records.",
+            "Collaborated with functional leads to map source-system fields to Oracle Cloud data models, reducing rework cycles by 40%.",
+            "Built OTBI and BIP reports to support UAT sign-off and post-go-live hypercare monitoring."
+          ]
+        },
+        {
+          "employer": "Accenture",
+          "role": "Technology Analyst — Oracle ERP",
+          "start": "2021-01",
+          "end": "2022-06",
+          "accomplishments": [
+            "Supported Oracle Cloud Financials implementation for a mid-market manufacturing client, covering AP, Expenses, and Cash Management.",
+            "Developed PL/SQL scripts to reconcile supplier balances between legacy EBS and Oracle Cloud during parallel run.",
+            "Documented functional design specifications for 12 FBDI conversion objects and coordinated with offshore team for delivery.",
+            "Participated in CRP and SIT cycles, logging and triaging defects in JIRA across three release waves."
+          ]
+        },
+        {
+          "employer": "Grant Thornton",
+          "role": "ERP Implementation Associate",
+          "start": "2020-06",
+          "end": "2020-12",
+          "accomplishments": [
+            "Assisted senior consultants with Oracle Cloud project onboarding, including environment configuration and security role mapping.",
+            "Prepared data migration templates and guided client subject matter experts through data cleansing workshops.",
+            "Created reconciliation dashboards in Excel to track migration progress across 6 conversion objects."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "oracle-db-mapper",
+    "type": "erd-tile",
+    "title": "Oracle Database Mapper",
+    "order": 2,
+    "visible": true,
+    "content": {
+      "description": "Visual ERD mapper for Oracle Fusion schema exploration. Maps FK relationships across 200+ tables in the AP, PO, and GL modules to accelerate SQL development and conversion design.",
+      "nodes": [
+        { "id": "ap_invoices", "label": "AP_INVOICES", "x": 50, "y": 50 },
+        { "id": "po_vendors", "label": "PO_VENDORS", "x": 300, "y": 50 },
+        { "id": "ap_inv_dist", "label": "AP_INVOICE_DISTRIBUTIONS", "x": 50, "y": 220 },
+        { "id": "po_lines", "label": "PO_LINES", "x": 300, "y": 220 },
+        { "id": "gl_cc", "label": "GL_CODE_COMBINATIONS", "x": 175, "y": 370 }
+      ],
+      "edges": [
+        { "from": "ap_invoices", "to": "po_vendors", "label": "VENDOR_ID" },
+        { "from": "ap_invoices", "to": "ap_inv_dist", "label": "INVOICE_ID" },
+        { "from": "ap_inv_dist", "to": "gl_cc", "label": "DIST_CODE_COMBINATION_ID" },
+        { "from": "po_lines", "to": "po_vendors", "label": "PO_HEADER_ID" },
+        { "from": "ap_inv_dist", "to": "po_lines", "label": "PO_LINE_LOCATION_ID" }
+      ]
+    }
+  },
+  {
+    "slug": "conversion-automation",
+    "type": "project-card",
+    "title": "Conversion Automation",
+    "order": 3,
+    "visible": true,
+    "content": {
+      "description": "Python-driven automation framework for Oracle Cloud FBDI data conversions. Handles extraction from legacy sources, field mapping, validation, and template population — cutting manual prep time from days to hours.",
+      "stack": ["Oracle Cloud", "SQL", "Python", "FBDI Templates"],
+      "links": [],
+      "status": "live"
+    }
+  },
+  {
+    "slug": "fusion-sql-developer",
+    "type": "project-card",
+    "title": "Fusion SQL Developer",
+    "order": 4,
+    "visible": true,
+    "content": {
+      "description": "A personal toolkit of Oracle Fusion SQL utilities, OTBI subject area queries, and BIP report templates built across multiple ERP engagements. Accelerates reporting and reconciliation tasks for AP, AR, GL, and PO modules.",
+      "stack": ["Oracle SQL", "PL/SQL", "OTBI", "BIP"],
+      "links": [],
+      "status": "live"
+    }
+  },
+  {
+    "slug": "slippi-ranked-stats",
+    "type": "project-card",
+    "title": "Slippi Ranked Stats",
+    "order": 5,
+    "visible": true,
+    "content": {
+      "description": "Interactive dashboard for Super Smash Bros. Melee ranked stats pulled from the Slippi API. Visualizes win rates, character usage, stage breakdowns, and rank progression over time.",
+      "stack": ["Python", "Streamlit", "Plotly", "Slippi API"],
+      "links": [
+        { "label": "Live Dashboard", "url": "https://slippi-dashboard.up.railway.app" },
+        { "label": "GitHub", "url": "https://github.com/Joey-Farah/slippi-dashboard" }
+      ],
+      "status": "live"
+    }
+  },
+  {
+    "slug": "fitness-ring-analytics",
+    "type": "project-card",
+    "title": "Fitness Ring Analytics",
+    "order": 6,
+    "visible": true,
+    "content": {
+      "description": "Health data visualization app for RingConn smart ring data. Displays sleep stages, HRV trends, SpO2, heart rate, and activity metrics using interactive charts. Data ingested from exported CSVs.",
+      "stack": ["Python", "Streamlit", "Plotly", "pandas"],
+      "links": [
+        { "label": "Live App", "url": "https://ringconn-dashboard.up.railway.app" },
+        { "label": "GitHub", "url": "https://github.com/Joey-Farah/ringconn-dashboard" }
+      ],
+      "status": "live"
+    }
+  },
+  {
+    "slug": "habitat",
+    "type": "project-card",
+    "title": "Habitat",
+    "order": 7,
+    "visible": true,
+    "content": {
+      "description": "Plant care tracking app with watering schedules, growth logs, and care reminders. Built as a full-stack side project to explore MongoDB data modeling and React state management patterns.",
+      "stack": ["React", "Node.js", "MongoDB"],
+      "links": [],
+      "status": "in-development"
+    }
+  },
+  {
+    "slug": "lombardi-project",
+    "type": "project-card",
+    "title": "The Lombardi Project",
+    "order": 8,
+    "visible": true,
+    "content": {
+      "description": "Premium Melee coaching and training content — transitioning from Patreon to a bespoke storefront. Covers advanced neutral theory, character-specific matchup breakdowns, and VOD reviews for competitive players.",
+      "stack": ["Patreon", "Video Production"],
+      "links": [
+        { "label": "Access on Patreon", "url": "https://www.patreon.com/joeydonuts" }
+      ],
+      "status": "live"
+    }
+  },
+  {
+    "slug": "contact",
+    "type": "contact-links",
+    "title": "Contact",
+    "order": 9,
+    "visible": true,
+    "content": {
+      "links": [
+        { "platform": "LinkedIn", "url": "https://linkedin.com/in/joeyfarah", "display": "linkedin.com/in/joeyfarah" },
+        { "platform": "GitHub", "url": "https://github.com/Joey-Farah", "display": "github.com/Joey-Farah" },
+        { "platform": "Email", "url": "mailto:joey@joeyfarah.dev", "display": "joey@joeyfarah.dev" }
+      ]
+    }
+  }
+]

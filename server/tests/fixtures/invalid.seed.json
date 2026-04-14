@@ -1,0 +1,48 @@
+[
+  {
+    "slug": "bad-hero",
+    "type": "hero",
+    "title": "Bad Hero",
+    "order": 0,
+    "visible": true,
+    "content": {}
+  },
+  {
+    "slug": "bad-timeline",
+    "type": "timeline",
+    "title": "Bad Timeline",
+    "order": 1,
+    "visible": true,
+    "content": {}
+  },
+  {
+    "slug": "bad-erd-tile",
+    "type": "erd-tile",
+    "title": "Bad ERD Tile",
+    "order": 2,
+    "visible": true,
+    "content": {
+      "description": "Missing nodes and edges."
+    }
+  },
+  {
+    "slug": "bad-project-card",
+    "type": "project-card",
+    "title": "Bad Project Card",
+    "order": 3,
+    "visible": true,
+    "content": {
+      "stack": ["Python"],
+      "links": [],
+      "status": "live"
+    }
+  },
+  {
+    "slug": "bad-contact",
+    "type": "contact-links",
+    "title": "Bad Contact",
+    "order": 4,
+    "visible": true,
+    "content": {}
+  }
+]
