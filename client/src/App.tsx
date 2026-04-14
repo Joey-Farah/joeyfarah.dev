@@ -91,11 +91,13 @@ const App: React.FC = () => {
       <NavBar showHero={showHero} />
 
       {/* ScrollTransitionOrchestrator — Hero → BentoGrid animated transition */}
-      <ScrollTransitionOrchestrator
-        heroBlock={heroBlock}
-        blocks={allBlocks}
-        showHero={showHero}
-      />
+      <main>
+        <ScrollTransitionOrchestrator
+          heroBlock={heroBlock}
+          blocks={allBlocks}
+          showHero={showHero}
+        />
+      </main>
     </div>
   );
 };
