@@ -29,6 +29,35 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// Custom 404 handler
+app.use((_req, res) => {
+  res.status(404).send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — joeyfarah.dev</title>
+  <style>
+    body { background: #0d0d0d; color: #e2e8f0; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+    .container { text-align: center; }
+    .prompt { color: #06b6d4; font-size: 0.875rem; margin-bottom: 1rem; }
+    h1 { font-size: 4rem; margin: 0 0 0.5rem; color: #06b6d4; }
+    p { color: #e2e8f0; opacity: 0.6; margin-bottom: 2rem; }
+    a { color: #06b6d4; text-decoration: none; font-size: 0.875rem; border: 1px solid rgba(6,182,212,0.4); padding: 0.5rem 1rem; border-radius: 4px; }
+    a:hover { background: rgba(6,182,212,0.1); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="prompt">$ cd /</div>
+    <h1>404</h1>
+    <p>// repo not found</p>
+    <a href="/">← return home</a>
+  </div>
+</body>
+</html>`);
+});
+
 // Connect to MongoDB and start server
 const MONGODB_URI = process.env.MONGODB_URI;
 

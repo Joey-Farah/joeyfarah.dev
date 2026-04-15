@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import type { BentoBlock, LayoutConfig } from 'shared/types';
 import TimelineRenderer from './renderers/TimelineRenderer';
 import ERDTileRenderer from './renderers/ERDTileRenderer';
@@ -76,13 +77,15 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
   };
 
   return (
-    <div
+    <motion.div
       data-testid="bento-tile"
       data-slug={block.slug}
       style={gridStyle}
       aria-label={block.title}
       role="region"
       className="flex flex-col bg-brand-bg border border-brand-primary/20 rounded overflow-hidden min-h-[120px]"
+      whileHover={{ borderColor: 'rgba(6,182,212,0.5)', boxShadow: '0 0 16px rgba(6,182,212,0.08)' }}
+      transition={{ duration: 0.2 }}
     >
       {/* Terminal chrome: title bar */}
       <div
@@ -133,7 +136,7 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
       <div className="flex flex-col flex-1 min-h-0">
         {renderContent()}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
