@@ -75,8 +75,8 @@ const ScrollTransitionOrchestrator: React.FC<ScrollTransitionOrchestratorProps> 
   }
 
   return (
-    <div className="relative">
-      <AnimatePresence mode="wait" onExitComplete={() => { if (!showHero) window.scrollTo({ top: 0 }); }}>
+    <div className="relative bg-brand-bg min-h-screen">
+      <AnimatePresence mode="sync">
         {showHero ? (
           // Hero — visible while user is at top of page
           <motion.div
