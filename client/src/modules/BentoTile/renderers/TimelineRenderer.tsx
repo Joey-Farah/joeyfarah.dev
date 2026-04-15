@@ -93,7 +93,7 @@ const TimelineEntryCard: React.FC<TimelineEntryCardProps> = ({
         </p>
 
         {/* Accomplishments */}
-        <ul className="space-y-1.5">
+        <ul className="space-y-2 md:space-y-1.5">
           {entry.accomplishments.map((item, i) => (
             <li
               key={i}

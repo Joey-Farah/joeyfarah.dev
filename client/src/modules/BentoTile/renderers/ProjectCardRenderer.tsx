@@ -70,7 +70,7 @@ const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, slug
 
       {/* Stack badges */}
       {stack.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 shrink-0">
+        <div className="flex flex-wrap gap-1 md:gap-1.5 shrink-0">
           {stack.map((tech) => (
             <span
               key={tech}
@@ -94,7 +94,7 @@ const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, slug
               target="_blank"
               rel="noopener noreferrer"
               data-testid="project-link"
-              className="inline-flex items-center gap-1 px-3 py-1 rounded border border-brand-primary/40 text-brand-primary text-xs font-mono hover:bg-brand-primary/10 transition-colors"
+              className="inline-flex items-center gap-1 px-2 md:px-3 py-1 rounded border border-brand-primary/40 text-brand-primary text-xs font-mono hover:bg-brand-primary/10 transition-colors"
             >
               {link.label}
               <span aria-hidden="true" className="text-brand-primary/60">↗</span>

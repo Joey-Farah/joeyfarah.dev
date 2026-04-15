@@ -93,19 +93,19 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
         <span
           data-testid="window-control-red"
           aria-hidden="true"
-          className="inline-block w-3 h-3 rounded-full"
+          className="inline-block w-2.5 h-2.5 md:w-3 md:h-3 rounded-full"
           style={{ backgroundColor: '#ef4444' }}
         />
         <span
           data-testid="window-control-yellow"
           aria-hidden="true"
-          className="inline-block w-3 h-3 rounded-full"
+          className="inline-block w-2.5 h-2.5 md:w-3 md:h-3 rounded-full"
           style={{ backgroundColor: '#eab308' }}
         />
         <span
           data-testid="window-control-green"
           aria-hidden="true"
-          className="inline-block w-3 h-3 rounded-full"
+          className="inline-block w-2.5 h-2.5 md:w-3 md:h-3 rounded-full"
           style={{ backgroundColor: '#22c55e' }}
         />
 
@@ -125,7 +125,7 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
         <span
           data-testid="prompt-cursor"
           aria-hidden="true"
-          className="inline-block w-1.5 h-3.5 bg-brand-primary animate-pulse shrink-0"
+          className="inline-block w-1 md:w-1.5 h-3 md:h-3.5 bg-brand-primary animate-pulse shrink-0"
         />
       </div>
 

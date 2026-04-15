@@ -3,6 +3,7 @@ import type { BentoBlock, HeroContent } from 'shared/types';
 import { HttpBlockDataClient } from './adapters/BlockDataClient';
 import ScrollTransitionOrchestrator from './modules/ScrollTransition/ScrollTransitionOrchestrator';
 import NavBar from './components/NavBar';
+import ScrollProgressBar from './components/ScrollProgressBar';
 
 const client = new HttpBlockDataClient();
 
@@ -87,6 +88,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-brand-bg">
+      <ScrollProgressBar />
       {/* Sticky nav — hidden while Hero is showing */}
       <NavBar showHero={showHero} />
 

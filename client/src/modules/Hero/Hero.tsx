@@ -24,6 +24,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
 
   const [visibleLines, setVisibleLines] = useState<string[]>([]);
   const [complete, setComplete] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
   const indexRef = useRef(0);
 
   useEffect(() => {
@@ -48,6 +49,14 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
 
     return () => clearInterval(timer);
   }, [lines, prefersReducedMotion]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 0) setHasScrolled(true);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   if (prefersReducedMotion) {
     return <StaticProfileCard lines={lines} />;
@@ -88,7 +97,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
         )}
       </div>
 
-      {complete && (
+      {complete && !hasScrolled && (
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}

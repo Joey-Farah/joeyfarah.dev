@@ -86,7 +86,7 @@ const ScrollTransitionOrchestrator: React.FC<ScrollTransitionOrchestratorProps> 
             exit={{
               opacity: 0,
               y: -40,
-              transition: { duration: 0.35, ease: 'easeInOut' },
+              transition: { duration: 0.4, ease: 'easeOut' },
             }}
           >
             <Hero data={heroBlock} />

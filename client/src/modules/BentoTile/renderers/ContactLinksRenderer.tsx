@@ -31,7 +31,7 @@ const ContactLinksRenderer: React.FC<ContactLinksRendererProps> = ({ content }) 
         return (
           <div
             key={link.platform}
-            className="flex items-center gap-2 py-1.5 group"
+            className="flex items-center gap-2 py-2 md:py-1.5 group"
             role="listitem"
           >
             {/* Terminal prompt glyph */}

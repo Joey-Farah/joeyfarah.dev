@@ -87,7 +87,7 @@ const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
             className="w-full h-full"
             aria-label="Entity Relationship Diagram"
             role="img"
-            style={{ minHeight: '200px' }}
+            style={{ minHeight: 'max(150px, 30vh)' }}
           >
             {/* ── Edges ── */}
             {edges.map((edge, i) => {

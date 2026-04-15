@@ -63,12 +63,12 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
 
   return (
     <div
-      className="w-full max-w-6xl mx-auto px-6 pt-24 pb-12 space-y-16"
+      className="w-full max-w-6xl lg:max-w-7xl mx-auto px-4 md:px-6 pt-8 md:pt-24 pb-6 md:pb-12 space-y-16"
       data-testid="bento-grid"
     >
       {/* Professional section */}
       <section id="professional" aria-label="Professional experience" className="scroll-mt-16">
-        <h2 className="font-mono text-brand-primary text-sm mb-6 select-none">
+        <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
           {'// professional'}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -80,7 +80,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
 
       {/* Enterprise section */}
       <section id="enterprise" aria-label="Enterprise projects" className="scroll-mt-16">
-        <h2 className="font-mono text-brand-primary text-sm mb-6 select-none">
+        <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
           {'// enterprise'}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -92,7 +92,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
 
       {/* Projects section */}
       <section id="projects" aria-label="Personal projects" className="scroll-mt-16">
-        <h2 className="font-mono text-brand-primary text-sm mb-6 select-none">
+        <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
           {'// projects'}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -104,7 +104,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
 
       {/* Contact section */}
       <section id="contact" aria-label="Contact information" className="scroll-mt-16">
-        <h2 className="font-mono text-brand-primary text-sm mb-6 select-none">
+        <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
           {'// contact'}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

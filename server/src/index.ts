@@ -5,6 +5,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 import express from 'express';
 import mongoose from 'mongoose';
 import { createBlocksRouter } from './routes/blocks';
+import { resumeRouter } from './routes/resume';
 import { MongoBlockRepository } from './repositories/MongoBlockRepository';
 
 const app = express();
@@ -17,6 +18,7 @@ const repo = new MongoBlockRepository();
 
 // Mount API routes
 app.use('/api/blocks', createBlocksRouter(repo));
+app.use('/api', resumeRouter);
 
 // Serve Vite production build in production
 if (process.env.NODE_ENV === 'production') {
