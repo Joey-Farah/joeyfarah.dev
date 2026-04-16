@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import BentoTile from './BentoTile';
 import type { BentoBlock, LayoutConfig } from 'shared/types';
@@ -83,13 +83,16 @@ describe('BentoTile — sub-renderer dispatch', () => {
     expect(screen.getByTestId('timeline-renderer')).toBeInTheDocument();
   });
 
-  it('dispatches to ERDTileRenderer for type "erd-tile"', () => {
+  it('dispatches to ERDTileRenderer for type "erd-tile"', async () => {
     const block = baseBlock({
       type: 'erd-tile',
       content: { description: 'test', nodes: [], edges: [] },
     });
     render(<BentoTile layout={defaultLayout} block={block} />);
-    expect(screen.getByTestId('erd-tile-renderer')).toBeInTheDocument();
+    // ERDTileRenderer is lazy-loaded — wait for Suspense to resolve
+    await waitFor(() => {
+      expect(screen.getByTestId('erd-tile-renderer')).toBeInTheDocument();
+    });
   });
 
   it('dispatches to ProjectCardRenderer for type "project-card"', () => {

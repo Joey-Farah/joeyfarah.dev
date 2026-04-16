@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-04-15
+
+### Autonomous backlog pass
+- **Scroll-to-top button** (`ScrollToTopButton.tsx`): appears after 600px scroll, smooth-scrolls to top (respects `prefers-reduced-motion`). Terminal-themed `^` glyph.
+- **Keyboard section nav** (`useKeyboardSectionNav.ts`): `ArrowDown`/`ArrowUp` and `j`/`k` jump between `#professional`, `#enterprise`, `#projects`, `#contact`. Ignored while typing in inputs or when modifier keys held.
+- **Tile title-bar deep-link copy**: clicking a `BentoTile` title bar copies `{origin}/#{slug}` to clipboard. Title bar flips to `✓ copied #slug` for 2s. Tile now exposes `id={slug}` so the anchor actually scrolls.
+- **Code-split `ERDTileRenderer`**: lazy-loaded via `React.lazy` + `Suspense` with a terminal-styled fallback. Produces separate chunk (~2.2 kB) off the initial bundle.
+- **`GET /sitemap.xml`** (`routes/sitemap.ts`): generates sitemap XML at request time from the block repository — root, 4 section anchors, one URL per tile slug. Respects `SITE_URL` env var (defaults to `https://joeyfarah.dev`).
+- **Lighthouse CI workflow** (`.github/workflows/lighthouse.yml` + `lighthouserc.json`): runs `@lhci/cli autorun` against the static build on every PR and push to `main`. Asserts Accessibility & SEO ≥ 0.9 (error), Performance & Best Practices ≥ 0.9 (warn).
+
+### Documentation
+- Rewrote "What Still Needs To Be Done" in `CLAUDE.md` with concrete, ordered steps for Railway deploy (exact build/start commands, env var names, Atlas network access gotcha), Cloudflare domain + DNS records, and Plausible-vs-GA4 script-tag snippets.
+
+### Build & test fixes
+- Vitest config: defined `__BUILD_DATE__` so `BentoTile.test.tsx` suite loads (was silently failing pre-existing on main).
+- `BentoTile.test.tsx`: ERD dispatch test now awaits lazy-loaded renderer via `waitFor`.
+
+---
+
 ## 2026-04-14
 
 ### Accessibility fix

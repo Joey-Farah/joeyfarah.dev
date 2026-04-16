@@ -6,6 +6,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { createBlocksRouter } from './routes/blocks';
 import { resumeRouter } from './routes/resume';
+import { createSitemapRouter } from './routes/sitemap';
 import { MongoBlockRepository } from './repositories/MongoBlockRepository';
 
 const app = express();
@@ -19,6 +20,7 @@ const repo = new MongoBlockRepository();
 // Mount API routes
 app.use('/api/blocks', createBlocksRouter(repo));
 app.use('/api', resumeRouter);
+app.use('/', createSitemapRouter(repo));
 
 // Serve Vite production build in production
 if (process.env.NODE_ENV === 'production') {

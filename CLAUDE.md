@@ -59,26 +59,73 @@ The seed script reads from `server/.env`. If seed fails with "MONGODB_URI not se
 
 ## What Still Needs To Be Done
 
-These require Joey's input (accounts, payment, external setup):
+These require Joey's input (accounts, payment, external setup). Do them in order — each step unblocks the next.
 
 ### 1. Deploy to Railway
-- Create account at railway.app
-- New project → connect GitHub repo `Joey-Farah/joeyfarah.dev`
-- Add environment variables: `MONGODB_URI`, `NODE_ENV=production`, `PORT` (Railway sets this automatically)
-- Set start command: `node server/dist/index.js`
-- Run `npm run build` as the build command
-- Railway will auto-deploy on push to `main`
 
-### 2. Buy the domain
-- `joeyfarah.dev` — not yet purchased
-- Buy at Namecheap, Google Domains, or Cloudflare Registrar
-- Point DNS to Railway's provided URL
-- Update OG/structured data URLs in `client/index.html` (currently hardcoded to `https://joeyfarah.dev`)
+**Prereq:** GitHub repo `Joey-Farah/joeyfarah.dev` is pushed and up to date, MongoDB Atlas cluster exists with a working `MONGODB_URI`.
+
+1. Sign in at [railway.app](https://railway.app) with GitHub (free tier allows ~$5 usage/mo).
+2. Click **New Project → Deploy from GitHub repo → `Joey-Farah/joeyfarah.dev`**.
+3. Railway auto-detects Nixpacks (Node.js). On the service **Settings** tab, confirm:
+   - **Root Directory:** `/` (leave blank)
+   - **Build Command:** `npm install && npm run build`
+   - **Start Command:** `node server/dist/index.js`
+   - **Watch Paths:** `/**` (default)
+4. In **Variables**, add:
+   - `MONGODB_URI` — full Atlas connection string (includes username, password, cluster, `?retryWrites=true&w=majority`)
+   - `NODE_ENV` = `production`
+   - (Do **not** set `PORT` — Railway injects it automatically; the server reads `process.env.PORT`)
+5. Click **Deploy**. First build takes ~2 min. Tail logs in the **Deployments** tab. Expect `[server] Listening on port <N>`.
+6. **Seed the production DB** (one-time, from your laptop):
+   ```bash
+   MONGODB_URI="<prod-atlas-uri>" npm run seed
+   ```
+   Verify: `curl https://<railway-url>/api/blocks | jq '. | length'` should return the tile count.
+7. In service **Settings → Networking**, click **Generate Domain**. You'll get a free `*.up.railway.app` URL — save it; you'll point the custom domain at it next.
+
+**Atlas gotcha:** Railway's egress IPs are dynamic. In Atlas → Network Access, add `0.0.0.0/0` **or** (preferred) enable Railway's private networking if you upgrade.
+
+### 2. Buy the domain and point DNS
+
+Recommended registrar: **Cloudflare Registrar** (~$10/yr, at-cost pricing, free DNS, automatic CNAME flattening for apex records). Alternative: Porkbun, Namecheap.
+
+1. Purchase `joeyfarah.dev` at [cloudflare.com/products/registrar](https://www.cloudflare.com/products/registrar/). `.dev` is a Google-operated TLD — HTTPS is enforced via HSTS preload (no HTTP-only fallback).
+2. In Cloudflare DNS, add two records:
+   - `CNAME` / `@` / `<your-service>.up.railway.app` / Proxy **off** (orange cloud grey — Railway handles TLS itself)
+   - `CNAME` / `www` / `<your-service>.up.railway.app` / Proxy **off**
+3. In Railway → service → **Settings → Networking → Custom Domain**, add `joeyfarah.dev` and `www.joeyfarah.dev`. Railway provisions a Let's Encrypt cert automatically (~5 min).
+4. Once TLS goes green, update these hardcoded references:
+   - `client/index.html` — `og:url` and Schema.org `url` (already `https://joeyfarah.dev`, no change if the domain matches)
+   - `server/src/routes/resume.ts` — `Portfolio: joeyfarah.dev` line (already correct)
+   - `server/seed/blocks.seed.json` — search for any placeholder URLs and update
+5. Re-run `npm run seed` if you edited the seed.
 
 ### 3. Analytics
-- Choose GA4 (Google Analytics) or Plausible (privacy-first)
-- Add tracking script to `client/index.html`
-- No code changes needed beyond the script tag
+
+Pick **one**. Both are a single script tag in `client/index.html` — no React code needed.
+
+**Option A — Plausible (recommended, privacy-first, $9/mo):**
+1. Sign up at [plausible.io](https://plausible.io), add site `joeyfarah.dev`.
+2. Paste into `client/index.html` `<head>`:
+   ```html
+   <script defer data-domain="joeyfarah.dev" src="https://plausible.io/js/script.js"></script>
+   ```
+3. No cookie banner needed (GDPR-compliant by default).
+
+**Option B — GA4 (free, heavier, requires cookie consent in EU):**
+1. Create a GA4 property at [analytics.google.com](https://analytics.google.com), copy the Measurement ID (`G-XXXXXXXXXX`).
+2. Paste into `client/index.html` `<head>`:
+   ```html
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-XXXXXXXXXX');
+   </script>
+   ```
+3. If you ever ship to EU visitors, add a consent banner (e.g., `cookieconsent`).
 
 ---
 

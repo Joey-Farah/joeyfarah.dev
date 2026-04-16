@@ -4,6 +4,8 @@ import { HttpBlockDataClient } from './adapters/BlockDataClient';
 import ScrollTransitionOrchestrator from './modules/ScrollTransition/ScrollTransitionOrchestrator';
 import NavBar from './components/NavBar';
 import ScrollProgressBar from './components/ScrollProgressBar';
+import ScrollToTopButton from './components/ScrollToTopButton';
+import { useKeyboardSectionNav } from './components/useKeyboardSectionNav';
 
 const client = new HttpBlockDataClient();
 
@@ -23,6 +25,8 @@ const App: React.FC = () => {
   const [showHero, setShowHero] = useState(true);
   // Once hero has been dismissed, don't revert on scroll-up
   const hasTransitionedRef = useRef(false);
+
+  useKeyboardSectionNav();
 
   // Fetch blocks on mount
   useEffect(() => {
@@ -91,6 +95,7 @@ const App: React.FC = () => {
       <ScrollProgressBar />
       {/* Sticky nav — hidden while Hero is showing */}
       <NavBar showHero={showHero} />
+      <ScrollToTopButton />
 
       {/* ScrollTransitionOrchestrator — Hero → BentoGrid animated transition */}
       <main>
