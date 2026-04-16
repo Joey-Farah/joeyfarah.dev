@@ -2,6 +2,17 @@
 
 ## 2026-04-15
 
+### Backend hardening
+- **`GET /healthz`** (`routes/health.ts`): returns `{ status, uptime, db }`. Railway can target this as a health check.
+- **Helmet** middleware: sensible security headers (CSP, X-Frame-Options, HSTS, etc.). CSP permits Google Fonts, Plausible, and GA4 so optional analytics tags still work.
+- **Compression** middleware: gzip responses — main JS bundle now ~92 kB over the wire.
+
+### Social / SEO
+- **`og.png`** (1200×630): terminal-style card generated from SVG via `@resvg/resvg-js`. Regen with `npm run og --workspace=client`. Linked from `og:image` and `twitter:image`; Twitter card upgraded to `summary_large_image`.
+
+### Automation
+- **Dependabot config** (`.github/dependabot.yml`): weekly npm + GitHub Actions updates. Dev dependencies grouped; minor + patch updates grouped.
+
 ### A11y & SEO polish
 - **Skip-to-content link**: `// skip to content` in brand cyan, hidden until keyboard focus hits it; jumps to `<main id="main-content">`.
 - **Visible focus rings**: global `:focus-visible` outline in brand-primary so keyboard users can see where they are. Mouse/touch users unaffected.

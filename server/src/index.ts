@@ -4,14 +4,45 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 import express from 'express';
 import mongoose from 'mongoose';
+import compression from 'compression';
+import helmet from 'helmet';
 import { createBlocksRouter } from './routes/blocks';
 import { resumeRouter } from './routes/resume';
 import { createSitemapRouter } from './routes/sitemap';
+import { healthRouter } from './routes/health';
 import { MongoBlockRepository } from './repositories/MongoBlockRepository';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Security headers — CSP permits Google Fonts, Plausible, and GA4 (both are
+// optional analytics; the <script> tags in index.html decide which, if any,
+// the client actually loads).
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        'default-src': ["'self'"],
+        'script-src': [
+          "'self'",
+          "'unsafe-inline'",
+          'https://plausible.io',
+          'https://www.googletagmanager.com',
+        ],
+        'connect-src': [
+          "'self'",
+          'https://plausible.io',
+          'https://www.google-analytics.com',
+        ],
+        'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        'font-src': ["'self'", 'https://fonts.gstatic.com', 'data:'],
+        'img-src': ["'self'", 'data:', 'https:'],
+      },
+    },
+  }),
+);
+app.use(compression());
 app.use(express.json());
 
 // Wire repository
@@ -21,6 +52,7 @@ const repo = new MongoBlockRepository();
 app.use('/api/blocks', createBlocksRouter(repo));
 app.use('/api', resumeRouter);
 app.use('/', createSitemapRouter(repo));
+app.use('/', healthRouter);
 
 // Serve Vite production build in production
 if (process.env.NODE_ENV === 'production') {
