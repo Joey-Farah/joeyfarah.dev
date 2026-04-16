@@ -92,13 +92,16 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-brand-bg">
+      <a href="#main-content" className="skip-to-content">
+        {'// skip to content'}
+      </a>
       <ScrollProgressBar />
       {/* Sticky nav — hidden while Hero is showing */}
       <NavBar showHero={showHero} />
       <ScrollToTopButton />
 
       {/* ScrollTransitionOrchestrator — Hero → BentoGrid animated transition */}
-      <main>
+      <main id="main-content">
         <ScrollTransitionOrchestrator
           heroBlock={heroBlock}
           blocks={allBlocks}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useActiveSection } from './useActiveSection';
 
 export interface NavBarProps {
   /** NavBar is hidden while the Hero is showing; visible once hero exits */
@@ -8,11 +9,13 @@ export interface NavBarProps {
 
 /** Hardcoded anchor link targets — derived from BentoGrid section ids */
 const NAV_LINKS = [
-  { label: 'professional', href: '#professional' },
-  { label: 'enterprise', href: '#enterprise' },
-  { label: 'projects', href: '#projects' },
-  { label: 'contact', href: '#contact' },
+  { label: 'professional', href: '#professional', id: 'professional' },
+  { label: 'enterprise', href: '#enterprise', id: 'enterprise' },
+  { label: 'projects', href: '#projects', id: 'projects' },
+  { label: 'contact', href: '#contact', id: 'contact' },
 ] as const;
+
+const SECTION_IDS = NAV_LINKS.map((l) => l.id);
 
 /**
  * NavBar — sticky navigation bar with anchor links to each BentoGrid section.
@@ -22,6 +25,8 @@ const NAV_LINKS = [
  * exits and BentoGrid is shown.
  */
 const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
+  const activeId = useActiveSection(SECTION_IDS);
+
   return (
     <AnimatePresence>
       {!showHero && (
@@ -37,20 +42,29 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
           transition={{ duration: 0.3, ease: 'easeOut' }}
         >
           <ul className="flex items-center gap-6 list-none m-0 p-0">
-            {NAV_LINKS.map(({ label, href }) => (
-              <li key={href}>
-                <a
-                  href={href}
-                  aria-label={`Navigate to ${label} section`}
-                  className="font-mono text-xs text-brand-text hover:text-brand-primary
-                             transition-colors duration-150 select-none"
-                  data-testid={`nav-link-${label}`}
-                >
-                  {'// '}
-                  {label}
-                </a>
-              </li>
-            ))}
+            {NAV_LINKS.map(({ label, href, id }) => {
+              const isActive = activeId === id;
+              return (
+                <li key={href}>
+                  <a
+                    href={href}
+                    aria-label={`Navigate to ${label} section`}
+                    aria-current={isActive ? 'true' : undefined}
+                    className={
+                      'font-mono text-xs transition-colors duration-150 select-none ' +
+                      'border-b border-transparent pb-0.5 ' +
+                      (isActive
+                        ? 'text-brand-primary border-brand-primary'
+                        : 'text-brand-text hover:text-brand-primary')
+                    }
+                    data-testid={`nav-link-${label}`}
+                  >
+                    {'// '}
+                    {label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </motion.nav>
       )}

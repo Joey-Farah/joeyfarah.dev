@@ -2,6 +2,22 @@
 
 ## 2026-04-15
 
+### A11y & SEO polish
+- **Skip-to-content link**: `// skip to content` in brand cyan, hidden until keyboard focus hits it; jumps to `<main id="main-content">`.
+- **Visible focus rings**: global `:focus-visible` outline in brand-primary so keyboard users can see where they are. Mouse/touch users unaffected.
+- **`<meta name="theme-color" content="#0d0d0d">`**: mobile browser chrome matches the dark theme.
+- **`<link rel="canonical">`**: points at `https://joeyfarah.dev/` for SEO.
+
+### NavBar UX
+- **Active-section highlight** (`useActiveSection.ts`): IntersectionObserver watches each bento section; the NavBar link for the section currently in view switches to brand-primary with an underline. `aria-current="true"` set on the active link.
+
+### Tests
+- `sitemap.test.ts`: 7 supertest specs covering status, content-type, XML shape, root, section anchors, tile slugs, hero exclusion.
+- `ScrollToTopButton.test.tsx`: 3 specs — hidden near top, appears past threshold, `scrollTo` called on click.
+- `useKeyboardSectionNav.test.tsx`: 5 specs — ArrowDown/j triggers scroll, inputs guarded, modifiers guarded, unrelated keys ignored.
+- `test-setup.ts`: added `matchMedia` mock (jsdom lacks it; blocked multiple specs).
+- Totals: 27 client + 53 server = **80 tests passing**.
+
 ### Autonomous backlog pass
 - **Scroll-to-top button** (`ScrollToTopButton.tsx`): appears after 600px scroll, smooth-scrolls to top (respects `prefers-reduced-motion`). Terminal-themed `^` glyph.
 - **Keyboard section nav** (`useKeyboardSectionNav.ts`): `ArrowDown`/`ArrowUp` and `j`/`k` jump between `#professional`, `#enterprise`, `#projects`, `#contact`. Ignored while typing in inputs or when modifier keys held.
