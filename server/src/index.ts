@@ -6,6 +6,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import compression from 'compression';
 import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import { createBlocksRouter } from './routes/blocks';
 import { resumeRouter } from './routes/resume';
 import { createSitemapRouter } from './routes/sitemap';
@@ -14,6 +15,10 @@ import { MongoBlockRepository } from './repositories/MongoBlockRepository';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Railway terminates TLS at its edge proxy; trust one hop so rate-limit
+// keys off the real client IP instead of the proxy's.
+app.set('trust proxy', 1);
 
 // Security headers — CSP permits Google Fonts, Plausible, and GA4 (both are
 // optional analytics; the <script> tags in index.html decide which, if any,
@@ -45,12 +50,21 @@ app.use(
 app.use(compression());
 app.use(express.json());
 
+// Rate-limit the API so a misbehaving client can't burn bandwidth or
+// pound Mongo. Static files and /healthz are intentionally excluded.
+const apiLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 120,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // Wire repository
 const repo = new MongoBlockRepository();
 
 // Mount API routes
-app.use('/api/blocks', createBlocksRouter(repo));
-app.use('/api', resumeRouter);
+app.use('/api/blocks', apiLimiter, createBlocksRouter(repo));
+app.use('/api', apiLimiter, resumeRouter);
 app.use('/', createSitemapRouter(repo));
 app.use('/', healthRouter);
 
