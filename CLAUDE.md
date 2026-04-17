@@ -55,6 +55,15 @@ PORT=3001
 
 The seed script reads from `server/.env`. If seed fails with "MONGODB_URI not set", copy root `.env` to `server/.env`.
 
+### Updating the live site
+
+Two independent paths — do not confuse them:
+
+- **Code changes** (React/Express/shared): `git push origin main` → Railway auto-builds + redeploys in ~2 min. No manual step.
+- **Content changes** (`server/seed/blocks.seed.json`): `git push` does **not** update what visitors see. The live site reads tile content from MongoDB Atlas. You must run `MONGODB_URI="<prod-atlas-uri>" npm run seed` to push the JSON into the DB. Commit + push the JSON afterward to keep the repo as source of truth; otherwise the repo and live DB drift.
+
+Checklist when editing a tile: (1) edit JSON, (2) run `npm run seed` against prod, (3) verify on https://joeyfarah.dev, (4) commit + push.
+
 ---
 
 ## What Still Needs To Be Done
