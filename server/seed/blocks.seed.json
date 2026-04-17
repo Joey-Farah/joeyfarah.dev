@@ -8,9 +8,9 @@
     "content": {
       "lines": [
         "Joey Farah",
-        "Oracle Cloud Technical Consultant — 4+ years shipping Fortune 500 migrations",
-        "Super Smash Bros. Melee — Diamond ranked",
-        "200K+ invoice migrations. Open-source data tools."
+        "Oracle Cloud Technical Consultant at Elire",
+        "Independent developer",
+        "Super Smash Bros. Melee player"
       ]
     }
   },
@@ -19,43 +19,15 @@
     "type": "timeline",
     "title": "Professional Timeline",
     "order": 1,
-    "visible": true,
+    "visible": false,
     "content": {
       "entries": [
         {
-          "employer": "Deloitte",
+          "employer": "Elire",
           "role": "Oracle Cloud Technical Consultant",
-          "start": "2022-07",
+          "start": "2019",
           "end": "present",
-          "accomplishments": [
-            "Led Oracle Cloud ERP data conversion for Fortune 500 clients — migrated 200K+ invoices (AP, AR, GL) via FBDI & Python, reducing manual prep time by 75%.",
-            "Authored reusable Fusion SQL validators to reconcile legacy AP/AR/GL balances pre-cutover, ensuring sub-100-ppm error rates across 200K+ records.",
-            "Designed enterprise data mapping playbook with functional leads, eliminating 40% of UAT rework cycles and accelerating sign-off.",
-            "Built 15+ OTBI dashboards & BIP reconciliation reports — gave hypercare team real-time AP exception visibility, cutting response time by 60%."
-          ]
-        },
-        {
-          "employer": "Accenture",
-          "role": "Technology Analyst — Oracle ERP",
-          "start": "2021-01",
-          "end": "2022-06",
-          "accomplishments": [
-            "Led data migration & reporting design for mid-market manufacturer's Oracle Cloud Financials go-live — covered AP, Expenses, Cash Management, managing 180K+ supplier & expense records.",
-            "Built parallel-run reconciliation suite in PL/SQL — validated 15K supplier & GL balances with sub-account precision, enabling confident cutover.",
-            "Designed & documented 12 FBDI conversion templates (AP Invoices, Journals, Suppliers, GL Balances) — coordinated offshore delivery, met 15-day UAT deadline.",
-            "Managed defect lifecycle across 3 release waves — triaged 120+ issues, coordinated fixes with functional leads, achieved 95% UAT sign-off on first wave."
-          ]
-        },
-        {
-          "employer": "Grant Thornton",
-          "role": "ERP Implementation Associate",
-          "start": "2020-06",
-          "end": "2020-12",
-          "accomplishments": [
-            "Configured 50+ Oracle Cloud security roles & Financials module access for three concurrent client environments, ensuring day-1 user readiness.",
-            "Built AP & PO data migration templates and led 4 cleansing workshops with client SMEs — achieved 98% data quality on first submission, eliminating re-scopes.",
-            "Built 6 Excel reconciliation dashboards — tracked daily migration progress across 20K records, surfaced discrepancies to client 3 days early, preventing UAT delay."
-          ]
+          "accomplishments": []
         }
       ]
     }
@@ -67,7 +39,7 @@
     "order": 2,
     "visible": true,
     "content": {
-      "description": "Interactive ERD explorer for Oracle Fusion — visualizes FK chains across 200+ Financials tables (AP, PO, GL, AR). Cuts SQL dev time by ~40% by eliminating schema trial-and-error. Built for data engineers and conversion leads.",
+      "description": "Interactive ERD explorer for Oracle Fusion. Visualizes foreign-key chains across Financials tables (AP, PO, GL, AR) to cut schema trial-and-error when writing reports and conversion queries.",
       "nodes": [
         { "id": "ap_invoices", "label": "AP_INVOICES", "x": 50, "y": 50 },
         { "id": "po_vendors", "label": "PO_VENDORS", "x": 300, "y": 50 },
@@ -89,7 +61,7 @@
     "type": "project-card",
     "title": "Conversion Automation",
     "order": 3,
-    "visible": true,
+    "visible": false,
     "content": {
       "description": "Python automation engine for Oracle Cloud FBDI conversions. Extracts legacy data, maps to Fusion schema, validates accuracy, and auto-populates templates. Cuts conversion prep from 5+ days per object to 2–4 hours. Used across 6+ Fortune 500 migrations.",
       "stack": ["Oracle Cloud", "SQL", "Python", "FBDI Templates"],
@@ -102,7 +74,7 @@
     "type": "project-card",
     "title": "Fusion SQL Developer",
     "order": 4,
-    "visible": true,
+    "visible": false,
     "content": {
       "description": "Curated SQL toolkit for Oracle Fusion reporting & reconciliation. 50+ reusable queries, OTBI subject areas, and BIP templates covering AP, AR, GL, PO, and Assets. Battle-tested across 8+ client implementations. Slashes ad-hoc report turnaround from days to hours.",
       "stack": ["Oracle SQL", "PL/SQL", "OTBI", "BIP"],
@@ -117,11 +89,11 @@
     "order": 5,
     "visible": true,
     "content": {
-      "description": "Ranked Melee stats dashboard powered by Slippi API. Tracks win rates by character & matchup, stage-specific performance, and rank trajectory. Real-time data, interactive filters. Built for competitive players chasing Diamond+.",
-      "stack": ["Python", "Streamlit", "Plotly", "Slippi API"],
+      "description": "Windows desktop app for Slippi ranked Melee players. Scans your replay folder and surfaces matchup win rates, stage stats, session-by-session momentum, and live in-session rating deltas. Signed auto-updates, local-only storage. Free for everyone, with a premium tier supported by paying subscribers.",
+      "stack": ["Tauri", "TypeScript", "Svelte", "Rust"],
       "links": [
-        { "label": "Live Dashboard", "url": "https://slippi-dashboard.up.railway.app" },
-        { "label": "GitHub", "url": "https://github.com/Joey-Farah/slippi-dashboard" }
+        { "label": "GitHub", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats" },
+        { "label": "Download", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats/releases/latest" }
       ],
       "status": "live"
     }
@@ -180,7 +152,10 @@
       "links": [
         { "platform": "LinkedIn", "url": "https://linkedin.com/in/joeyfarah", "display": "linkedin.com/in/joeyfarah" },
         { "platform": "GitHub", "url": "https://github.com/Joey-Farah", "display": "github.com/Joey-Farah" },
-        { "platform": "Email", "url": "mailto:joey@joeyfarah.dev", "display": "joey@joeyfarah.dev" }
+        { "platform": "Email", "url": "mailto:joey@joeyfarah.dev", "display": "joey@joeyfarah.dev" },
+        { "platform": "Twitter", "url": "https://x.com/DoeyJonuts", "display": "x.com/DoeyJonuts" },
+        { "platform": "YouTube", "url": "https://youtube.com/@JoeyDonuts", "display": "youtube.com/@JoeyDonuts" },
+        { "platform": "Twitch", "url": "https://twitch.tv/joeydonuts", "display": "twitch.tv/joeydonuts" }
       ]
     }
   }

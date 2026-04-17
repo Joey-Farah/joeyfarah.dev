@@ -42,24 +42,26 @@ function getLayout(slug: string): LayoutConfig {
  * Section ids are hardcoded constants used by NavBar anchor links.
  */
 const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
-  const professionalBlocks = blocks.filter(
+  const renderable = blocks.filter((b) => b.visible);
+
+  const professionalBlocks = renderable.filter(
     (b) => b.type === 'timeline' || b.type === 'erd-tile',
   );
 
-  const enterpriseBlocks = blocks.filter(
+  const enterpriseBlocks = renderable.filter(
     (b) =>
       b.type === 'project-card' &&
       (b.slug === 'conversion-automation' || b.slug === 'fusion-sql-developer'),
   );
 
-  const projectBlocks = blocks.filter(
+  const projectBlocks = renderable.filter(
     (b) =>
       b.type === 'project-card' &&
       b.slug !== 'conversion-automation' &&
       b.slug !== 'fusion-sql-developer',
   );
 
-  const contactBlocks = blocks.filter((b) => b.type === 'contact-links');
+  const contactBlocks = renderable.filter((b) => b.type === 'contact-links');
 
   return (
     <div
