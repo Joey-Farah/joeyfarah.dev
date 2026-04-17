@@ -95,11 +95,11 @@ describe('ingestSeed — production blocks.seed.json', () => {
     expect(slugs).toContain('contact');
   });
 
-  it('hero lines reference Melee (Story 32)', async () => {
+  it('hero lines reference gaming identity (Story 32)', async () => {
     const blocks = await ingestSeed(BLOCKS_SEED);
     const hero = blocks.find((b) => b.slug === 'hero');
     const content = hero!.content as { lines: string[] };
-    expect(content.lines.some((l) => l.includes('Melee'))).toBe(true);
+    expect(content.lines.some((l) => l.includes('Gamer'))).toBe(true);
   });
 
   it('hero lines reference Oracle Cloud role (Story 32)', async () => {
