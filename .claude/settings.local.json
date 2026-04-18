@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.patreon.com)",
+      "WebFetch(domain:www.linkedin.com)",
+      "WebSearch",
+      "WebFetch(domain:slippi.gg)",
+      "WebFetch(domain:www.youtube.com)",
+      "WebFetch(domain:www.twitch.tv)",
+      "WebFetch(domain:blog.start.gg)",
+      "WebFetch(domain:www.ssbwiki.com)",
+      "WebFetch(domain:liquipedia.net)",
+      "WebFetch(domain:ringconn-dashboard.up.railway.app)",
+      "WebFetch(domain:medium.com)",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)",
+      "Bash(node *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(curl *)",
+      "Bash(netstat -ano)",
+      "Bash(awk '{print $5}')",
+      "Bash(taskkill /PID 13048 /F)",
+      "Bash(taskkill /PID 9312 /F)",
+      "Bash(cmd *)",
+      "Bash(lsof -ti:5173)",
+      "Bash(powershell -Command \"Get-Process -Id \\(Get-NetTCPConnection -LocalPort 5173 -ErrorAction SilentlyContinue\\).OwningProcess -ErrorAction SilentlyContinue | Select-Object Id, ProcessName, Path\")",
+      "Bash(powershell *)",
+      "Bash(npm install *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

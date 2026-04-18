@@ -1,11 +1,11 @@
 // Envelope — every block the API returns has this shape
 export interface BentoBlock {
   slug: string;
-  type: 'hero' | 'timeline' | 'dual-timeline' | 'erd-tile' | 'project-card' | 'contact-links';
+  type: 'hero' | 'timeline' | 'dual-timeline' | 'erd-tile' | 'project-card' | 'contact-links' | 'reading-list' | 'music-list';
   title: string;
   order: number;
   visible: boolean;
-  content: HeroContent | TimelineContent | DualTimelineContent | ErdTileContent | ProjectCardContent | ContactLinksContent;
+  content: HeroContent | TimelineContent | DualTimelineContent | ErdTileContent | ProjectCardContent | ContactLinksContent | ReadingListContent | MusicListContent;
 }
 
 export interface HeroContent {
@@ -76,6 +76,21 @@ export interface ContactLink {
 
 export interface ContactLinksContent {
   links: ContactLink[];
+}
+
+export interface ReadingListContent {
+  current: string;
+  next: string[];
+  recent: string[];
+}
+
+export interface MusicAlbum {
+  title: string;
+  artist: string;
+}
+
+export interface MusicListContent {
+  albums: MusicAlbum[];
 }
 
 export interface LayoutConfig {

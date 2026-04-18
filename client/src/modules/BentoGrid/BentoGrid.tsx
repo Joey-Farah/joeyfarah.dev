@@ -66,6 +66,8 @@ const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'joeyfarah-dev':         { colSpan: 1, rowSpan: 1 },
   'habitat':               { colSpan: 1, rowSpan: 1 },
   'lombardi-project':      { colSpan: 1, rowSpan: 1 },
+  'reading-list':          { colSpan: 1, rowSpan: 2 },
+  'music-list':            { colSpan: 1, rowSpan: 2 },
   'contact':               { colSpan: 3, rowSpan: 1 },
 };
 
@@ -94,6 +96,8 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
   const enterpriseBlocks = renderable.filter(() => false);
 
   const projectBlocks = renderable.filter((b) => b.type === 'project-card' || b.type === 'erd-tile');
+
+  const personalBlocks = renderable.filter((b) => b.type === 'reading-list' || b.type === 'music-list');
 
   const contactBlocks = renderable.filter((b) => b.type === 'contact-links');
 
@@ -138,6 +142,18 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
         <ScrollFadeSection id="professional" ariaLabel="Professional experience">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
             {professionalBlocks.map((block) => (
+              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+            ))}
+          </div>
+        </ScrollFadeSection>
+      )}
+
+      {/* Personal section */}
+      {personalBlocks.length > 0 && (
+        <ScrollFadeSection id="personal" ariaLabel="Personal interests">
+          <p className="font-mono text-xs text-brand-text/40 px-1 mb-3">// personal</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
+            {personalBlocks.map((block) => (
               <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
             ))}
           </div>

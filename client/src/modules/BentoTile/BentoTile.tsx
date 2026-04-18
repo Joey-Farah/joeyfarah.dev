@@ -7,10 +7,14 @@ import type {
   ErdTileContent,
   ProjectCardContent,
   ContactLinksContent,
+  ReadingListContent,
+  MusicListContent,
 } from 'shared/types';
 import TimelineRenderer from './renderers/TimelineRenderer';
 import ProjectCardRenderer from './renderers/ProjectCardRenderer';
 import ContactLinksRenderer from './renderers/ContactLinksRenderer';
+import ReadingListRenderer from './renderers/ReadingListRenderer';
+import MusicListRenderer from './renderers/MusicListRenderer';
 
 const ERDTileRenderer = lazy(() => import('./renderers/ERDTileRenderer'));
 
@@ -87,6 +91,18 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
           <ContactLinksRenderer
             content={block.content as ContactLinksContent}
             title={block.title}
+          />
+        );
+      case 'reading-list':
+        return (
+          <ReadingListRenderer
+            content={block.content as ReadingListContent}
+          />
+        );
+      case 'music-list':
+        return (
+          <MusicListRenderer
+            content={block.content as MusicListContent}
           />
         );
       default:

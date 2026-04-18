@@ -70,6 +70,21 @@ const ContactLinksContentSchema = z.object({
   links: z.array(ContactLinkSchema).min(1),
 });
 
+const ReadingListContentSchema = z.object({
+  current: z.string(),
+  next: z.array(z.string()),
+  recent: z.array(z.string()),
+});
+
+const MusicAlbumSchema = z.object({
+  title: z.string(),
+  artist: z.string(),
+});
+
+const MusicListContentSchema = z.object({
+  albums: z.array(MusicAlbumSchema).min(1),
+});
+
 export const BentoBlockSchema = z.discriminatedUnion('type', [
   z.object({
     slug: z.string(),
@@ -118,6 +133,22 @@ export const BentoBlockSchema = z.discriminatedUnion('type', [
     order: z.number().int().nonnegative(),
     visible: z.boolean(),
     content: ContactLinksContentSchema,
+  }),
+  z.object({
+    slug: z.string(),
+    type: z.literal('reading-list'),
+    title: z.string(),
+    order: z.number().int().nonnegative(),
+    visible: z.boolean(),
+    content: ReadingListContentSchema,
+  }),
+  z.object({
+    slug: z.string(),
+    type: z.literal('music-list'),
+    title: z.string(),
+    order: z.number().int().nonnegative(),
+    visible: z.boolean(),
+    content: MusicListContentSchema,
   }),
 ]);
 

@@ -284,6 +284,71 @@
     }
   },
   {
+    "slug": "reading-list",
+    "type": "reading-list",
+    "title": "Reading List",
+    "order": 11,
+    "visible": true,
+    "content": {
+      "current": "The Count of Monte Cristo",
+      "next": [
+        "The Brothers Karamazov",
+        "The Stand",
+        "Anxious People",
+        "Point Blank",
+        "The Well of Ascension"
+      ],
+      "recent": [
+        "Ego is the Enemy",
+        "The Obstacle is the Way",
+        "Dune",
+        "All That Matters",
+        "Meditations",
+        "Mornings Without Mii",
+        "The Will to Keep Winning",
+        "Stormbreaker",
+        "Mistborn",
+        "A Song of Ice and Fire",
+        "A Knight of the Seven Kingdoms"
+      ]
+    }
+  },
+  {
+    "slug": "music-list",
+    "type": "music-list",
+    "title": "Favorite Albums",
+    "order": 12,
+    "visible": true,
+    "content": {
+      "albums": [
+        { "title": "Toxicity", "artist": "System of a Down" },
+        { "title": "Steal This Album!", "artist": "System of a Down" },
+        { "title": "Vulgar Display of Power", "artist": "Pantera" },
+        { "title": "Infinite Granite", "artist": "Deafheaven" },
+        { "title": "In Rainbows", "artist": "Radiohead" },
+        { "title": "OK Computer", "artist": "Radiohead" },
+        { "title": "Black Holes and Revelations", "artist": "Muse" },
+        { "title": "Wolfgang Amadeus Phoenix", "artist": "Phoenix" },
+        { "title": "Discovery", "artist": "Daft Punk" },
+        { "title": "Random Access Memories", "artist": "Daft Punk" },
+        { "title": "channel ORANGE", "artist": "Frank Ocean" },
+        { "title": "Blonde", "artist": "Frank Ocean" },
+        { "title": "Flower Boy", "artist": "Tyler, the Creator" },
+        { "title": "Swimming", "artist": "Mac Miller" },
+        { "title": "Circles", "artist": "Mac Miller" },
+        { "title": "Illmatic", "artist": "Nas" },
+        { "title": "Stillmatic", "artist": "Nas" },
+        { "title": "An Evening With Silk Sonic", "artist": "Silk Sonic" },
+        { "title": "Songs About Jane", "artist": "Maroon 5" },
+        { "title": "Room On Fire", "artist": "The Strokes" },
+        { "title": "Manners", "artist": "Passion Pit" },
+        { "title": "Echoes, Silence, Patience & Grace", "artist": "Foo Fighters" },
+        { "title": "Grow", "artist": "Chon" },
+        { "title": "Timely!!", "artist": "Ahmad" }
+      ]
+    }
+  },
+  {
     "slug": "contact",
     "type": "contact-links",
     "title": "Contact",
