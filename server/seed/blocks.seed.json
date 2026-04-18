@@ -253,6 +253,7 @@
     "order": 8,
     "visible": true,
     "content": {
+      "image": "/images/lombardi.png",
       "description": "This portfolio. Bento-terminal hybrid built with React, Vite, TypeScript, and Express. Content served from MongoDB Atlas via a seeded JSON pipeline. Dual-column timeline, animated ERD, terminal chrome on every tile. Deployed on Railway.",
       "stack": ["React", "TypeScript", "Vite", "Node.js", "Express", "MongoDB"],
       "links": [
@@ -283,7 +284,7 @@
     "visible": true,
     "content": {
       "description": "Melee coaching and content — ~400 Patreon members, 100+ Savestates episodes. Deep-dives on improving your Falco, matchup breakdowns, and software walkthroughs. Published on Patreon and YouTube.",
-      "image": "/images/lombardi.png",
+      "image": "/images/falco.png",
       "stack": ["Patreon", "YouTube"],
       "links": [
         { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" },
