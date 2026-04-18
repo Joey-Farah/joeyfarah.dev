@@ -1,0 +1,12 @@
+<svg viewBox="0 0 240 110" xmlns="http://www.w3.org/2000/svg">
+  <rect width="240" height="110" fill="#0a0a0a" rx="6"/>
+  <text x="12" y="16" font-family="monospace" font-size="8" fill="#06b6d4" opacity="0.5">// biometrics</text>
+  <line x1="24" y1="24" x2="24" y2="90" stroke="#06b6d4" stroke-width="0.5" stroke-opacity="0.25"/>
+  <line x1="24" y1="90" x2="228" y2="90" stroke="#06b6d4" stroke-width="0.5" stroke-opacity="0.25"/>
+  <line x1="24" y1="57" x2="228" y2="57" stroke="#06b6d4" stroke-width="0.5" stroke-opacity="0.1" stroke-dasharray="3,3"/>
+  <polyline points="24,72 44,72 54,35 64,80 74,72 94,72 104,32 114,76 124,72 144,72 154,36 164,74 174,70 194,70 204,38 214,72 228,70" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <polyline points="24,60 54,52 84,62 114,48 144,60 174,46 204,56 228,50" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-opacity="0.6" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="26" y="102" font-family="monospace" font-size="7" fill="#3b82f6" opacity="0.6">HRV</text>
+  <text x="66" y="102" font-family="monospace" font-size="7" fill="#06b6d4" opacity="0.7">heart rate</text>
+  <text x="148" y="102" font-family="monospace" font-size="7" fill="#e2e8f0" opacity="0.3">SpO₂  sleep</text>
+</svg>

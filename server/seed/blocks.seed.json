@@ -49,7 +49,7 @@
         },
         {
           "year": "2024",
-          "label": "Oracle Database Mapper",
+          "label": "Oracle Cloud Database Explorer",
           "detail": "Complete Oracle Cloud schema — extract any table's connections",
           "slug": "oracle-db-mapper"
         },
@@ -166,7 +166,7 @@
   {
     "slug": "oracle-db-mapper",
     "type": "erd-tile",
-    "title": "Oracle Database Mapper",
+    "title": "Oracle Cloud Database Explorer",
     "order": 3,
     "visible": true,
     "content": {
@@ -197,7 +197,8 @@
       "description": "Python toolkit for Oracle Cloud data conversions. Supports HDL, FBDI, and REST API upload methods — extracts from legacy sources, maps fields to Fusion schemas, validates, and populates upload templates. Covers the three main Oracle Cloud data loading approaches in one toolkit, used across live client engagements.",
       "stack": ["Oracle Cloud", "Python", "SQL", "FBDI", "HDL", "REST APIs"],
       "links": [],
-      "status": "in-development"
+      "status": "in-development",
+      "image": "/images/conversion-automation.svg"
     }
   },
   {
@@ -210,7 +211,8 @@
       "description": "Desktop app that connects directly to an Oracle Cloud environment and acts as a SQL query tool — enter a query, get records back. A faster alternative to BI Publisher's in-browser tooling without the overhead of building a full report.",
       "stack": ["Tauri", "Oracle Cloud", "SQL", "REST APIs"],
       "links": [],
-      "status": "live"
+      "status": "live",
+      "image": "/images/fusion-query.svg"
     }
   },
   {
@@ -226,7 +228,8 @@
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats" },
         { "label": "Download", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats/releases/latest" }
       ],
-      "status": "live"
+      "status": "live",
+      "image": "/images/slippi-logo.svg"
     }
   },
   {
@@ -239,7 +242,8 @@
       "description": "Fitness biometric dashboard. Visualizes sleep architecture, HRV trends, SpO\u2082 dips, and resting heart rate with interactive time-series charts. Supports CSV import for offline analysis.",
       "stack": ["Python", "Streamlit", "Plotly", "pandas"],
       "links": [],
-      "status": "in-development"
+      "status": "in-development",
+      "image": "/images/rc-analytics.svg"
     }
   },
   {
@@ -279,6 +283,7 @@
     "visible": true,
     "content": {
       "description": "Melee coaching and content — ~400 Patreon members, 100+ Savestates episodes. Deep-dives on improving your Falco, matchup breakdowns, and software walkthroughs. Published on Patreon and YouTube.",
+      "image": "/images/lombardi.png",
       "stack": ["Patreon", "YouTube"],
       "links": [
         { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" },

@@ -59,6 +59,7 @@ const ProjectCardContentSchema = z.object({
   stack: z.array(z.string()),
   links: z.array(ProjectLinkSchema),
   status: z.enum(['live', 'in-development']),
+  image: z.string().optional(),
 });
 
 const ContactLinkSchema = z.object({

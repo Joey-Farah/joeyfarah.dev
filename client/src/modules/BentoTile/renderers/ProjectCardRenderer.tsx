@@ -42,8 +42,8 @@ const StatusBadge: React.FC<{ status: 'live' | 'in-development' }> = ({ status }
 
 // ─── ProjectCardRenderer ──────────────────────────────────────────────────────
 
-const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, slug }) => {
-  const { description, stack, links, status } = content;
+const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, title, slug }) => {
+  const { description, stack, links, status, image } = content;
   const isHabitat = slug === 'habitat';
 
   return (
@@ -51,6 +51,17 @@ const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, slug
       data-testid="project-card-renderer"
       className="flex flex-col flex-1 p-4 gap-3 font-mono text-brand-text text-sm overflow-auto"
     >
+      {/* Project image */}
+      {image && (
+        <div className="w-full flex items-center justify-center bg-black/20 rounded overflow-hidden shrink-0" style={{ height: '100px' }}>
+          <img
+            src={image}
+            alt={title}
+            className="max-h-full max-w-full object-contain"
+          />
+        </div>
+      )}
+
       {/* Status badge */}
       <div className="shrink-0">
         <StatusBadge status={status} />

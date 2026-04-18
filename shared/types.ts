@@ -67,6 +67,7 @@ export interface ProjectCardContent {
   stack: string[];
   links: ProjectLink[];
   status: 'live' | 'in-development';
+  image?: string;
 }
 
 export interface ContactLink {
