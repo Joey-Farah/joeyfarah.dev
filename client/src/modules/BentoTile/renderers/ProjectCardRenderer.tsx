@@ -1,49 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import type { ProjectCardContent } from 'shared/types';
 import HabitatAnimation from '../../../assets/HabitatAnimation';
-
-interface SlippiStats {
-  rating: number;
-  wins: number;
-  losses: number;
-  globalRank: number | null;
-}
-
-const SlippiLiveStats: React.FC = () => {
-  const [stats, setStats] = useState<SlippiStats | null>(null);
-
-  useEffect(() => {
-    fetch('/api/slippi')
-      .then((r) => r.json())
-      .then((d) => { if (d.rating) setStats(d); })
-      .catch(() => {});
-  }, []);
-
-  if (!stats) return null;
-
-  return (
-    <div className="flex items-center gap-4 border border-brand-primary/20 rounded px-3 py-2 bg-brand-primary/5 shrink-0">
-      <div className="flex flex-col">
-        <span className="font-mono text-xs text-brand-text/40">// live rating</span>
-        <span className="font-mono text-sm font-bold text-brand-primary">{stats.rating.toLocaleString()}</span>
-      </div>
-      {stats.globalRank && (
-        <div className="flex flex-col">
-          <span className="font-mono text-xs text-brand-text/40">global rank</span>
-          <span className="font-mono text-sm font-bold text-brand-text">#{stats.globalRank}</span>
-        </div>
-      )}
-      <div className="flex flex-col ml-auto">
-        <span className="font-mono text-xs text-brand-text/40">W / L</span>
-        <span className="font-mono text-xs text-brand-text/70">
-          <span className="text-green-400">{stats.wins}</span>
-          {' / '}
-          <span className="text-red-400">{stats.losses}</span>
-        </span>
-      </div>
-    </div>
-  );
-};
 
 export interface ProjectCardRendererProps {
   content: ProjectCardContent;
@@ -104,9 +61,6 @@ const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, titl
           />
         </div>
       )}
-
-      {/* Live Slippi stats */}
-      {slug === 'slippi-ranked-stats' && <SlippiLiveStats />}
 
       {/* Status badge */}
       <div className="shrink-0">
