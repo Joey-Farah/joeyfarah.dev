@@ -66,8 +66,8 @@ const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'joeyfarah-dev':         { colSpan: 1, rowSpan: 1 },
   'habitat':               { colSpan: 1, rowSpan: 1 },
   'lombardi-project':      { colSpan: 1, rowSpan: 1 },
-  'reading-list':          { colSpan: 1, rowSpan: 2 },
-  'music-list':            { colSpan: 1, rowSpan: 2 },
+  'reading-list':          { colSpan: 3, rowSpan: 1 },
+  'music-list':            { colSpan: 3, rowSpan: 1 },
   'contact':               { colSpan: 3, rowSpan: 1 },
 };
 
