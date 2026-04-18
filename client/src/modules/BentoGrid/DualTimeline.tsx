@@ -5,35 +5,10 @@ interface DualTimelineProps {
   content: DualTimelineContent;
 }
 
-const scrollToTile = (slug: string) => {
-  const el = document.getElementById(slug);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-};
-
 const Entry: React.FC<{ entry: DualTimelineEntry; side: 'left' | 'right' }> = ({ entry, side }) => {
   const isRight = side === 'right';
-  const linkClass = 'font-mono text-xs md:text-sm text-brand-primary hover:text-white transition-colors leading-snug';
 
-  const label = entry.href ? (
-    <a
-      href={entry.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={linkClass}
-    >
-      {entry.label}
-      <span className="ml-1 text-brand-primary/40 text-xs">↗</span>
-    </a>
-  ) : entry.slug ? (
-    <button
-      type="button"
-      onClick={() => scrollToTile(entry.slug!)}
-      className={`${linkClass} text-left`}
-    >
-      {entry.label}
-      <span className="ml-1 text-brand-primary/40 text-xs">↓</span>
-    </button>
-  ) : (
+  const label = (
     <span className="font-mono text-xs md:text-sm text-brand-text/80 leading-snug">
       {entry.label}
     </span>
