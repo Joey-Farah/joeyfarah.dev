@@ -27,7 +27,9 @@
           "role": "Oracle Cloud Technical Consultant",
           "start": "2019",
           "end": "present",
-          "accomplishments": []
+          "accomplishments": [
+            "Oracle Cloud Financials implementations — data conversions, reporting, and custom automation across multi-client engagements."
+          ]
         }
       ]
     }
@@ -37,7 +39,7 @@
     "type": "erd-tile",
     "title": "Oracle Database Mapper",
     "order": 2,
-    "visible": true,
+    "visible": false,
     "content": {
       "description": "Interactive ERD explorer for Oracle Fusion. Visualizes foreign-key chains across Financials tables (AP, PO, GL, AR) to cut schema trial-and-error when writing reports and conversion queries.",
       "nodes": [
@@ -63,10 +65,10 @@
     "order": 3,
     "visible": false,
     "content": {
-      "description": "Python automation engine for Oracle Cloud FBDI conversions. Extracts legacy data, maps to Fusion schema, validates accuracy, and auto-populates templates. Cuts conversion prep from 5+ days per object to 2–4 hours. Used across 6+ Fortune 500 migrations.",
+      "description": "Python toolkit that automates data conversions into Oracle Cloud via FBDI — extracts from legacy sources, maps to Fusion schemas, validates, and populates templates. In active development; converters stabilizing one object at a time.",
       "stack": ["Oracle Cloud", "SQL", "Python", "FBDI Templates"],
       "links": [],
-      "status": "live"
+      "status": "in-development"
     }
   },
   {
@@ -76,10 +78,10 @@
     "order": 4,
     "visible": false,
     "content": {
-      "description": "Curated SQL toolkit for Oracle Fusion reporting & reconciliation. 50+ reusable queries, OTBI subject areas, and BIP templates covering AP, AR, GL, PO, and Assets. Battle-tested across 8+ client implementations. Slashes ad-hoc report turnaround from days to hours.",
+      "description": "Curated Oracle Fusion SQL library for reporting and reconciliation — reusable queries, OTBI subject-area references, and BIP templates across AP, AR, GL, PO, and Assets. Ongoing collection, added to with each engagement.",
       "stack": ["Oracle SQL", "PL/SQL", "OTBI", "BIP"],
       "links": [],
-      "status": "live"
+      "status": "in-development"
     }
   },
   {
@@ -87,7 +89,7 @@
     "type": "project-card",
     "title": "Slippi Ranked Stats",
     "order": 5,
-    "visible": true,
+    "visible": false,
     "content": {
       "description": "Windows desktop app for Slippi ranked Melee players. Scans your replay folder and surfaces matchup win rates, stage stats, session-by-session momentum, and live in-session rating deltas. Signed auto-updates, local-only storage. Free for everyone, with a premium tier supported by paying subscribers.",
       "stack": ["Tauri", "TypeScript", "Svelte", "Rust"],
@@ -103,7 +105,7 @@
     "type": "project-card",
     "title": "Fitness Ring Analytics",
     "order": 6,
-    "visible": true,
+    "visible": false,
     "content": {
       "description": "RingConn biometric dashboard. Visualizes sleep architecture, HRV trends, SpO2 dips, and resting heart rate with interactive time-series charts. Supports CSV import for offline analysis. Built for biohackers tracking long-term health signals.",
       "stack": ["Python", "Streamlit", "Plotly", "pandas"],
@@ -119,7 +121,7 @@
     "type": "project-card",
     "title": "Habitat",
     "order": 7,
-    "visible": true,
+    "visible": false,
     "content": {
       "description": "Plant care companion — schedules waterings, logs growth milestones, sends reminders. Full-stack playground for MongoDB schema design and React component patterns. Status: Early prototype, growing fast.",
       "stack": ["React", "Node.js", "MongoDB"],
@@ -132,7 +134,7 @@
     "type": "project-card",
     "title": "The Lombardi Project",
     "order": 8,
-    "visible": true,
+    "visible": false,
     "content": {
       "description": "Premium Melee coaching curriculum — advanced neutral theory, character-specific matchups, frame-perfect breakdowns, and personalized VOD reviews. Mentoring Diamond+ players toward Grandmaster. Transitioning to bespoke platform in 2026.",
       "stack": ["Patreon", "Video Production"],
