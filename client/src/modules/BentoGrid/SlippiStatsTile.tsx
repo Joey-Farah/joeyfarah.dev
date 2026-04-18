@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface SlippiStats {
   rating: number;
@@ -22,7 +23,11 @@ const SlippiStatsTile: React.FC = () => {
   }, []);
 
   return (
-    <div className="rounded-lg border border-brand-primary/20 bg-brand-bg overflow-hidden font-mono text-sm w-fit">
+    <motion.div
+      className="rounded-lg border border-brand-primary/20 bg-brand-bg overflow-hidden font-mono text-sm w-fit"
+      whileHover={{ borderColor: 'rgba(6,182,212,0.5)', boxShadow: '0 0 16px rgba(6,182,212,0.08)' }}
+      transition={{ duration: 0.2 }}
+    >
       <div className="flex items-center gap-1.5 px-3 py-2 bg-white/5 border-b border-brand-primary/10">
         <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
         <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
@@ -77,7 +82,7 @@ const SlippiStatsTile: React.FC = () => {
           </>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
