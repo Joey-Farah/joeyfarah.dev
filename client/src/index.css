@@ -9,6 +9,16 @@
   --brand-text: #e2e8f0;
 }
 
+html {
+  font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 18px;
+  }
+}
+
 html,
 body {
   background-color: var(--brand-bg);

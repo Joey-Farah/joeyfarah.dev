@@ -40,25 +40,31 @@
         {
           "year": "2019",
           "label": "Oracle Cloud Technical Consultant",
-          "detail": "Elire — present",
+          "detail": "Elire, Inc. — present",
           "href": "/api/resume"
         },
         {
           "year": "2020",
           "label": "Oracle Cloud implementations",
-          "detail": "ERP & HCM across 8 clients"
+          "detail": "HCM & ERP across 8 clients — reporting, conversions & integrations"
+        },
+        {
+          "year": "2024",
+          "label": "Oracle Database Mapper",
+          "detail": "Complete Oracle Cloud schema — extract any table's connections",
+          "slug": "oracle-db-mapper"
+        },
+        {
+          "year": "2025",
+          "label": "Conversion Automation",
+          "detail": "HDL, FBDI & REST API toolkit",
+          "slug": "conversion-automation"
         },
         {
           "year": "2026",
           "label": "Fusion Query Tool",
-          "detail": "Oracle reporting library",
+          "detail": "Oracle Cloud SQL desktop app",
           "slug": "fusion-sql-developer"
-        },
-        {
-          "year": "2026",
-          "label": "Conversion Automation",
-          "detail": "Python FBDI toolkit",
-          "slug": "conversion-automation"
         },
         {
           "year": "2026",
@@ -97,8 +103,8 @@
         },
         {
           "year": "2026",
-          "label": "Fitness Ring Analytics",
-          "detail": "RingConn biometric dashboard",
+          "label": "RC Analytics",
+          "detail": "Fitness biometric dashboard",
           "slug": "fitness-ring-analytics"
         },
         {
@@ -160,7 +166,7 @@
     "order": 3,
     "visible": true,
     "content": {
-      "description": "Interactive ERD explorer for Oracle Cloud. Maps foreign-key relationships across all modules — HCM, Payroll, Financials, Procurement, and more — to eliminate schema guesswork when writing reports, conversions, and cross-module queries.",
+      "description": "Interactive ERD explorer with the entire Oracle Cloud database mapped. Select any table and extract a diagram of every table it connects to — across HCM, Payroll, Financials, Procurement, and more. Eliminates schema guesswork when writing reports, conversions, and cross-module queries.",
       "nodes": [
         { "id": "per_people", "label": "PER_ALL_PEOPLE_F", "x": 50, "y": 30 },
         { "id": "per_assign", "label": "PER_ALL_ASSIGNMENTS_M", "x": 50, "y": 160 },
@@ -183,7 +189,7 @@
     "order": 4,
     "visible": true,
     "content": {
-      "description": "Python toolkit for Oracle Cloud data conversions via FBDI and HDL. Extracts from legacy sources, maps fields to Fusion schemas, validates, and populates upload templates — replacing hours of manual spreadsheet work per object. Used across live client engagements.",
+      "description": "Python toolkit for Oracle Cloud data conversions. Supports HDL, FBDI, and REST API upload methods — extracts from legacy sources, maps fields to Fusion schemas, validates, and populates upload templates. Covers the three main Oracle Cloud data loading approaches in one toolkit, used across live client engagements.",
       "stack": ["Oracle Cloud", "Python", "SQL", "FBDI", "HDL", "REST APIs"],
       "links": [],
       "status": "in-development"
@@ -196,8 +202,8 @@
     "order": 5,
     "visible": true,
     "content": {
-      "description": "Curated library of Oracle Fusion SQL for reporting and reconciliation. Reusable queries covering AP, AR, GL, PO, and Assets; OTBI subject-area references and BIP report templates. Built from real client work — added to with each engagement.",
-      "stack": ["Oracle SQL", "PL/SQL", "OTBI", "BIP"],
+      "description": "Desktop app that connects directly to an Oracle Cloud environment and acts as a SQL query tool — enter a query, get records back. A faster alternative to BI Publisher's in-browser tooling without the overhead of building a full report.",
+      "stack": ["Tauri", "Oracle Cloud", "SQL", "REST APIs"],
       "links": [],
       "status": "in-development"
     }
@@ -209,7 +215,7 @@
     "order": 6,
     "visible": true,
     "content": {
-      "description": "Windows desktop app for competitive Melee players. Points at your local replay folder and surfaces matchup win rates, stage stats, session momentum, set grades, and rating history. Live session tracking and full grade breakdowns for Patreon supporters. Signed auto-updates, all data stored locally. v1.3.8 — 26 releases.",
+      "description": "Windows desktop app for competitive Melee players. Analysis of online ranked sets and performance grading — points at your local replay folder and surfaces matchup win rates, stage stats, session momentum, and rating history. Live session tracking and full set grade breakdowns for Patreon supporters. Signed auto-updates, all data stored locally. v1.3.8 — 26 releases.",
       "stack": ["Tauri", "TypeScript", "Svelte", "Python", "Rust"],
       "links": [
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats" },
@@ -221,11 +227,11 @@
   {
     "slug": "fitness-ring-analytics",
     "type": "project-card",
-    "title": "Fitness Ring Analytics",
+    "title": "RC Analytics",
     "order": 7,
     "visible": true,
     "content": {
-      "description": "RingConn biometric dashboard. Visualizes sleep architecture, HRV trends, SpO\u2082 dips, and resting heart rate with interactive time-series charts. Supports CSV import for offline analysis.",
+      "description": "Fitness biometric dashboard. Visualizes sleep architecture, HRV trends, SpO\u2082 dips, and resting heart rate with interactive time-series charts. Supports CSV import for offline analysis.",
       "stack": ["Python", "Streamlit", "Plotly", "pandas"],
       "links": [],
       "status": "in-development"
