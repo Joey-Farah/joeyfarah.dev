@@ -273,7 +273,7 @@
     "order": 9,
     "visible": true,
     "content": {
-      "description": "Savestates and software — 386 Patreon members. Melee coaching content, software deep-dives, and tournament organization. Ran the Minnesota Monthly Melee series and Parks and Tech weeklies for years. Multi-platform: Twitch streams, YouTube videos.",
+      "description": "Melee coaching and content — ~400 Patreon members, 100+ Savestates episodes. Deep-dives on improving your Falco, matchup breakdowns, and software walkthroughs. Published on Patreon and YouTube.",
       "stack": ["Patreon", "Twitch", "YouTube"],
       "links": [
         { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" },
