@@ -20,7 +20,7 @@ const SlippiStatsTile: React.FC = () => {
   }, []);
 
   return (
-    <div className="rounded-lg border border-brand-primary/20 bg-brand-bg overflow-hidden font-mono text-sm">
+    <div className="rounded-lg border border-brand-primary/20 bg-brand-bg overflow-hidden font-mono text-sm w-fit">
       {/* Terminal title bar */}
       <div className="flex items-center gap-1.5 px-3 py-2 bg-white/5 border-b border-brand-primary/10">
         <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
