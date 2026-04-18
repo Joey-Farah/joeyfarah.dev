@@ -356,7 +356,7 @@
     "visible": true,
     "content": {
       "links": [
-        { "platform": "LinkedIn", "url": "https://linkedin.com/in/joeyfarah", "display": "linkedin.com/in/joeyfarah" },
+        { "platform": "LinkedIn", "url": "https://www.linkedin.com/in/joey-farah/", "display": "linkedin.com/in/joey-farah" },
         { "platform": "GitHub", "url": "https://github.com/Joey-Farah", "display": "github.com/Joey-Farah" },
         { "platform": "Email", "url": "mailto:joey@joeyfarah.dev", "display": "joey@joeyfarah.dev" },
         { "platform": "Twitter", "url": "https://x.com/DoeyJonuts", "display": "x.com/DoeyJonuts" },
