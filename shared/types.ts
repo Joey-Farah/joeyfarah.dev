@@ -79,10 +79,15 @@ export interface ContactLinksContent {
   links: ContactLink[];
 }
 
+export interface ReadingListBook {
+  title: string;
+  author: string;
+}
+
 export interface ReadingListContent {
-  current: string;
-  next: string[];
-  recent: string[];
+  current: ReadingListBook;
+  next: ReadingListBook[];
+  recent: ReadingListBook[];
 }
 
 export interface MusicAlbum {

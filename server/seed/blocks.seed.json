@@ -295,26 +295,26 @@
     "order": 11,
     "visible": true,
     "content": {
-      "current": "The Count of Monte Cristo",
+      "current": { "title": "The Count of Monte Cristo", "author": "Alexandre Dumas" },
       "next": [
-        "The Brothers Karamazov",
-        "The Stand",
-        "Anxious People",
-        "Point Blank",
-        "The Well of Ascension"
+        { "title": "The Brothers Karamazov", "author": "Fyodor Dostoevsky" },
+        { "title": "The Stand", "author": "Stephen King" },
+        { "title": "Anxious People", "author": "Fredrik Backman" },
+        { "title": "Point Blank", "author": "Anthony Horowitz" },
+        { "title": "The Well of Ascension", "author": "Brandon Sanderson" }
       ],
       "recent": [
-        "Ego is the Enemy",
-        "The Obstacle is the Way",
-        "Dune",
-        "All That Matters",
-        "Meditations",
-        "Mornings Without Mii",
-        "The Will to Keep Winning",
-        "Stormbreaker",
-        "Mistborn",
-        "A Song of Ice and Fire",
-        "A Knight of the Seven Kingdoms"
+        { "title": "Ego is the Enemy", "author": "Ryan Holiday" },
+        { "title": "The Obstacle is the Way", "author": "Ryan Holiday" },
+        { "title": "Dune", "author": "Frank Herbert" },
+        { "title": "All That Matters", "author": "?" },
+        { "title": "Meditations", "author": "Marcus Aurelius" },
+        { "title": "Mornings Without Mii", "author": "?" },
+        { "title": "The Will to Keep Winning", "author": "Daigo Umehara" },
+        { "title": "Stormbreaker", "author": "Anthony Horowitz" },
+        { "title": "Mistborn", "author": "Brandon Sanderson" },
+        { "title": "A Song of Ice and Fire", "author": "George R.R. Martin" },
+        { "title": "A Knight of the Seven Kingdoms", "author": "George R.R. Martin" }
       ]
     }
   },

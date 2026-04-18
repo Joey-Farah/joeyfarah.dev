@@ -71,10 +71,15 @@ const ContactLinksContentSchema = z.object({
   links: z.array(ContactLinkSchema).min(1),
 });
 
+const ReadingListBookSchema = z.object({
+  title: z.string(),
+  author: z.string(),
+});
+
 const ReadingListContentSchema = z.object({
-  current: z.string(),
-  next: z.array(z.string()),
-  recent: z.array(z.string()),
+  current: ReadingListBookSchema,
+  next: z.array(ReadingListBookSchema),
+  recent: z.array(ReadingListBookSchema),
 });
 
 const MusicAlbumSchema = z.object({

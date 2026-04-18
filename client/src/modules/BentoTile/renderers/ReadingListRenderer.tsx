@@ -16,7 +16,8 @@ const ReadingListRenderer: React.FC<ReadingListRendererProps> = ({ content }) =>
       {/* Currently reading */}
       <div className="md:w-1/4 shrink-0">
         <p className="text-brand-text/40 text-xs mb-1">// currently reading</p>
-        <p className="text-brand-primary text-sm font-semibold leading-snug">{current}</p>
+        <p className="text-brand-primary text-sm font-semibold leading-snug">{current.title}</p>
+        <p className="text-brand-text/40 text-xs mt-0.5">{current.author}</p>
       </div>
 
       {/* Divider */}
@@ -25,11 +26,14 @@ const ReadingListRenderer: React.FC<ReadingListRendererProps> = ({ content }) =>
       {/* Up next */}
       <div className="md:w-1/4 shrink-0">
         <p className="text-brand-text/40 text-xs mb-2">// up next</p>
-        <ol className="space-y-1.5">
+        <ol className="space-y-2">
           {next.map((book, i) => (
-            <li key={book} className="flex gap-2 text-xs text-brand-text/80 leading-snug">
-              <span className="text-brand-primary/40 shrink-0 w-4">{i + 1}.</span>
-              {book}
+            <li key={book.title} className="flex gap-2 leading-snug">
+              <span className="text-brand-primary/40 shrink-0 w-4 text-xs">{i + 1}.</span>
+              <span className="flex flex-col">
+                <span className="text-xs text-brand-text/80">{book.title}</span>
+                <span className="text-xs text-brand-text/40">{book.author}</span>
+              </span>
             </li>
           ))}
         </ol>
@@ -44,10 +48,11 @@ const ReadingListRenderer: React.FC<ReadingListRendererProps> = ({ content }) =>
         <div className="flex flex-wrap gap-1.5">
           {recent.map((book) => (
             <span
-              key={book}
-              className="text-xs text-brand-text/60 border border-brand-primary/15 px-2 py-0.5 rounded"
+              key={book.title}
+              className="flex flex-col border border-brand-primary/15 px-2 py-1 rounded"
             >
-              {book}
+              <span className="text-xs text-brand-text/60">{book.title}</span>
+              <span className="text-xs text-brand-text/30">{book.author}</span>
             </span>
           ))}
         </div>
