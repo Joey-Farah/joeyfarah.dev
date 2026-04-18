@@ -1,118 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import type { BentoBlock, HeroContent } from 'shared/types';
 import Hero from '../Hero/Hero';
 import BentoGrid from '../BentoGrid/BentoGrid';
 
-/** Scroll threshold in pixels — crossing this hides the Hero and shows the BentoGrid */
+/** Scroll threshold in pixels — used by App.tsx to flip NavBar visibility */
 export const SCROLL_THRESHOLD_PX = 80;
 
-/** Stagger delay between BentoGrid appearing and its content animating in */
-const BENTO_STAGGER_DELAY_S = 0.15;
+/** Fraction of viewport height over which the Hero fades out (0.6 = faded by 60vh of scroll) */
+const FADE_RANGE = 0.6;
 
 export interface ScrollTransitionOrchestratorProps {
   heroBlock: BentoBlock & { content: HeroContent };
   blocks: BentoBlock[];
-  /**
-   * Optional external showHero control — when provided the orchestrator
-   * uses this value directly and does NOT register its own scroll listener.
-   * This allows App.tsx to lift the state and share it with NavBar.
-   */
+  /** Unused — kept for backward-compat with existing callers */
   showHero?: boolean;
 }
 
 /**
- * ScrollTransitionOrchestrator — Option B implementation.
+ * ScrollTransitionOrchestrator — scroll-linked fade.
  *
- * Uses AnimatePresence to coordinate:
- *   - Hero exits with opacity/translateY when scroll threshold crossed
- *   - BentoGrid staggers in with a coordinated delay after Hero exits
+ * Hero sits in normal document flow (h-screen) above BentoGrid. As the user
+ * scrolls, Hero's opacity is tied directly to scrollY via useTransform, so
+ * every pixel of wheel/trackpad delta produces a proportional visual change.
+ * No state flip, no momentum-induced jumps past the first grid section.
  *
- * No layoutId is used — this is intentional per architecture spec.
- * Respects prefers-reduced-motion via Framer Motion useReducedMotion().
+ * Reduced-motion users skip the fade and see BentoGrid directly.
  */
 const ScrollTransitionOrchestrator: React.FC<ScrollTransitionOrchestratorProps> = ({
   heroBlock,
   blocks,
-  showHero: externalShowHero,
 }) => {
-  const [internalShowHero, setInternalShowHero] = useState(true);
   const prefersReducedMotion = useReducedMotion();
+  const { scrollY } = useScroll();
 
-  // Only manage scroll internally if no external showHero is provided
-  const isExternallyControlled = externalShowHero !== undefined;
-  const showHero = isExternallyControlled ? externalShowHero : internalShowHero;
-
-  // Scroll listener — only registered when not externally controlled
+  const [vh, setVh] = useState(() =>
+    typeof window === 'undefined' ? 800 : window.innerHeight,
+  );
   useEffect(() => {
-    if (isExternallyControlled) return;
+    const onResize = () => setVh(window.innerHeight);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
-    const handleScroll = () => {
-      const pastThreshold = window.scrollY > SCROLL_THRESHOLD_PX;
-      setInternalShowHero(!pastThreshold);
-    };
+  const opacity = useTransform(scrollY, [0, vh * FADE_RANGE], [1, 0]);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    // Run once on mount in case the page loads already scrolled
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isExternallyControlled]);
-
-  // When reduced-motion is active, skip all transitions — render both directly
   if (prefersReducedMotion) {
-    return (
-      <div>
-        {showHero ? (
-          <Hero data={heroBlock} />
-        ) : (
-          <BentoGrid blocks={blocks} />
-        )}
-      </div>
-    );
+    return <BentoGrid blocks={blocks} />;
   }
 
   return (
-    <div className="relative bg-brand-bg min-h-screen">
-      <AnimatePresence mode="sync">
-        {showHero ? (
-          // Hero — visible while user is at top of page
-          <motion.div
-            key="hero"
-            initial={{ opacity: 1, y: 0 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{
-              opacity: 0,
-              y: -40,
-              transition: { duration: 0.4, ease: 'easeOut' },
-            }}
-          >
-            <Hero data={heroBlock} />
-            {/* Scroll affordance — gives the page enough height to scroll past the threshold */}
-            <div className="h-24 bg-brand-bg" />
-          </motion.div>
-        ) : (
-          // BentoGrid — staggers in after Hero exits
-          <motion.div
-            key="bento-grid"
-            initial={{ opacity: 0, y: 32 }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              transition: {
-                duration: 0.4,
-                ease: 'easeOut',
-                delay: BENTO_STAGGER_DELAY_S,
-              },
-            }}
-            exit={{ opacity: 0, y: 16, transition: { duration: 0.2 } }}
-          >
-            <BentoGrid blocks={blocks} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <div className="relative bg-brand-bg">
+      <motion.div style={{ opacity }}>
+        <Hero data={heroBlock} />
+      </motion.div>
+      <BentoGrid blocks={blocks} />
     </div>
   );
 };

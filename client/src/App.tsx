@@ -47,7 +47,8 @@ const App: React.FC = () => {
       });
   }, []);
 
-  // Scroll listener — lifted to App so NavBar and Orchestrator share the same state
+  // Scroll listener — tracks whether the hero has been scrolled past so NavBar
+  // can appear. Hero's own opacity fade is handled inside ScrollTransitionOrchestrator.
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > SCROLL_THRESHOLD_PX) {

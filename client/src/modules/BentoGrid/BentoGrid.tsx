@@ -1,6 +1,47 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import type { BentoBlock, LayoutConfig } from 'shared/types';
 import BentoTile from '../BentoTile/BentoTile';
+
+/**
+ * ScrollFadeSection — wraps a <section> with scroll-linked opacity so it
+ * fades in as it enters the viewport and fades out as it leaves. Mirrors
+ * the hero's fade-out behavior for a continuous, momentum-friendly feel.
+ */
+interface ScrollFadeSectionProps {
+  id: string;
+  ariaLabel: string;
+  children: React.ReactNode;
+}
+const ScrollFadeSection: React.FC<ScrollFadeSectionProps> = ({ id, ariaLabel, children }) => {
+  const ref = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+  if (prefersReducedMotion) {
+    return (
+      <section id={id} aria-label={ariaLabel} className="scroll-mt-16">
+        {children}
+      </section>
+    );
+  }
+
+  return (
+    <motion.section
+      ref={ref}
+      id={id}
+      aria-label={ariaLabel}
+      className="scroll-mt-16"
+      style={{ opacity }}
+    >
+      {children}
+    </motion.section>
+  );
+};
 
 export interface BentoGridProps {
   blocks: BentoBlock[];
@@ -69,7 +110,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       data-testid="bento-grid"
     >
       {/* Professional section */}
-      <section id="professional" aria-label="Professional experience" className="scroll-mt-16">
+      <ScrollFadeSection id="professional" ariaLabel="Professional experience">
         <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
           {'// professional'}
         </h2>
@@ -78,10 +119,10 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
             <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
           ))}
         </div>
-      </section>
+      </ScrollFadeSection>
 
       {/* Enterprise section */}
-      <section id="enterprise" aria-label="Enterprise projects" className="scroll-mt-16">
+      <ScrollFadeSection id="enterprise" ariaLabel="Enterprise projects">
         <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
           {'// enterprise'}
         </h2>
@@ -90,10 +131,10 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
             <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
           ))}
         </div>
-      </section>
+      </ScrollFadeSection>
 
       {/* Projects section */}
-      <section id="projects" aria-label="Personal projects" className="scroll-mt-16">
+      <ScrollFadeSection id="projects" ariaLabel="Personal projects">
         <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
           {'// projects'}
         </h2>
@@ -102,10 +143,10 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
             <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
           ))}
         </div>
-      </section>
+      </ScrollFadeSection>
 
       {/* Contact section */}
-      <section id="contact" aria-label="Contact information" className="scroll-mt-16">
+      <ScrollFadeSection id="contact" ariaLabel="Contact information">
         <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
           {'// contact'}
         </h2>
@@ -114,7 +155,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
             <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
           ))}
         </div>
-      </section>
+      </ScrollFadeSection>
     </div>
   );
 };
