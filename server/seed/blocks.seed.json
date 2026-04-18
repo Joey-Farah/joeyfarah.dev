@@ -192,7 +192,7 @@
     "slug": "conversion-automation",
     "type": "project-card",
     "title": "Conversion Automation",
-    "order": 4,
+    "order": 5,
     "visible": true,
     "content": {
       "description": "Python toolkit for Oracle Cloud data conversions. Supports HDL, FBDI, and REST API upload methods — extracts from legacy sources, maps fields to Fusion schemas, validates, and populates upload templates. Covers the three main Oracle Cloud data loading approaches in one toolkit, used across live client engagements.",
@@ -205,7 +205,7 @@
     "slug": "fusion-sql-developer",
     "type": "project-card",
     "title": "Fusion Query Tool",
-    "order": 5,
+    "order": 4,
     "visible": true,
     "content": {
       "description": "Desktop app that connects directly to an Oracle Cloud environment and acts as a SQL query tool — enter a query, get records back. A faster alternative to BI Publisher's in-browser tooling without the overhead of building a full report.",
@@ -234,7 +234,7 @@
     "slug": "fitness-ring-analytics",
     "type": "project-card",
     "title": "RC Analytics",
-    "order": 7,
+    "order": 9,
     "visible": true,
     "content": {
       "description": "Fitness biometric dashboard. Visualizes sleep architecture, HRV trends, SpO\u2082 dips, and resting heart rate with interactive time-series charts. Supports CSV import for offline analysis.",
@@ -276,7 +276,7 @@
     "slug": "lombardi-project",
     "type": "project-card",
     "title": "The Lombardi Project",
-    "order": 9,
+    "order": 7,
     "visible": true,
     "content": {
       "description": "Melee coaching and content — ~400 Patreon members, 100+ Savestates episodes. Deep-dives on improving your Falco, matchup breakdowns, and software walkthroughs. Published on Patreon and YouTube.",
