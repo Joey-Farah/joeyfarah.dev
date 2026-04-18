@@ -53,11 +53,11 @@ const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, titl
     >
       {/* Project image */}
       {image && (
-        <div className="w-full flex items-center justify-center bg-black/20 rounded overflow-hidden shrink-0" style={{ height: '100px' }}>
+        <div className="w-full flex items-center justify-center shrink-0">
           <img
             src={image}
             alt={title}
-            className="max-h-full max-w-full object-contain"
+            className="max-h-[100px] max-w-full object-contain"
           />
         </div>
       )}
