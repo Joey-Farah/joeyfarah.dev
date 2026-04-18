@@ -12,6 +12,9 @@ const QUERY = `
         wins
         losses
         dailyGlobalPlacement
+        season {
+          id
+        }
       }
     }
   }
@@ -22,6 +25,7 @@ interface SlippiData {
   wins: number;
   losses: number;
   globalRank: number | null;
+  season: string | null;
   fetchedAt: number;
 }
 
@@ -53,11 +57,15 @@ slippiRouter.get('/slippi', async (_req, res) => {
       return;
     }
 
+    const rawSeason: string | null = profile.season?.id ?? null;
+    const season = rawSeason ? rawSeason.replace('season-', 'Season ') : null;
+
     cache = {
       rating: Math.round(profile.ratingOrdinal),
       wins: profile.wins ?? 0,
       losses: profile.losses ?? 0,
       globalRank: profile.dailyGlobalPlacement ?? null,
+      season,
       fetchedAt: Date.now(),
     };
 

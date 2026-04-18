@@ -5,6 +5,7 @@ interface SlippiStats {
   wins: number;
   losses: number;
   globalRank: number | null;
+  season: string | null;
 }
 
 const SlippiStatsTile: React.FC = () => {
@@ -21,19 +22,19 @@ const SlippiStatsTile: React.FC = () => {
 
   return (
     <div className="rounded-lg border border-brand-primary/20 bg-brand-bg overflow-hidden font-mono text-sm w-fit">
-      {/* Terminal title bar */}
       <div className="flex items-center gap-1.5 px-3 py-2 bg-white/5 border-b border-brand-primary/10">
         <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
         <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
         <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-        <span className="ml-2 text-xs text-brand-text/40">slippi ranked</span>
+        <span className="ml-2 text-xs text-brand-text/40">
+          slippi ranked{stats?.season ? ` — ${stats.season}` : ''}
+        </span>
         <span className="ml-auto flex items-center gap-1.5 text-xs text-green-400">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
           live
         </span>
       </div>
 
-      {/* Stats body */}
       <div className="px-4 py-3 flex items-center gap-6 flex-wrap">
         {loading && (
           <span className="text-xs text-brand-text/30 animate-pulse">fetching...</span>
@@ -65,7 +66,7 @@ const SlippiStatsTile: React.FC = () => {
                 <span className="text-red-400 font-bold">{stats.losses}</span>
               </span>
             </div>
-            <div className="flex flex-col ml-auto">
+            <div className="flex flex-col">
               <span className="text-xs text-brand-text/40">win rate</span>
               <span className="text-sm font-bold text-brand-text/70 leading-tight">
                 {Math.round((stats.wins / (stats.wins + stats.losses)) * 100)}%
