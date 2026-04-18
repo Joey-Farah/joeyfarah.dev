@@ -57,10 +57,10 @@ export interface BentoGridProps {
  */
 const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'professional-timeline': { colSpan: 2, rowSpan: 3 },
-  'oracle-db-mapper':      { colSpan: 1, rowSpan: 2 },
+  'oracle-db-mapper':      { colSpan: 2, rowSpan: 2 },
   'conversion-automation': { colSpan: 1, rowSpan: 1 },
   'fusion-sql-developer':  { colSpan: 1, rowSpan: 1 },
-  'slippi-ranked-stats':   { colSpan: 1, rowSpan: 1 },
+  'slippi-ranked-stats':   { colSpan: 2, rowSpan: 1 },
   'fitness-ring-analytics':{ colSpan: 1, rowSpan: 1 },
   'habitat':               { colSpan: 1, rowSpan: 1 },
   'lombardi-project':      { colSpan: 1, rowSpan: 1 },
@@ -106,56 +106,52 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
 
   return (
     <div
-      className="w-full max-w-6xl lg:max-w-7xl mx-auto px-4 md:px-6 pt-8 md:pt-24 pb-6 md:pb-12 space-y-16"
+      className="w-full max-w-6xl lg:max-w-7xl mx-auto px-4 md:px-6 pt-8 md:pt-24 pb-6 md:pb-12 space-y-4"
       data-testid="bento-grid"
     >
       {/* Professional section */}
-      <ScrollFadeSection id="professional" ariaLabel="Professional experience">
-        <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
-          {'// professional'}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {professionalBlocks.map((block) => (
-            <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
-          ))}
-        </div>
-      </ScrollFadeSection>
+      {professionalBlocks.length > 0 && (
+        <ScrollFadeSection id="professional" ariaLabel="Professional experience">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
+            {professionalBlocks.map((block) => (
+              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+            ))}
+          </div>
+        </ScrollFadeSection>
+      )}
 
       {/* Enterprise section */}
-      <ScrollFadeSection id="enterprise" ariaLabel="Enterprise projects">
-        <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
-          {'// enterprise'}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {enterpriseBlocks.map((block) => (
-            <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
-          ))}
-        </div>
-      </ScrollFadeSection>
+      {enterpriseBlocks.length > 0 && (
+        <ScrollFadeSection id="enterprise" ariaLabel="Enterprise projects">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
+            {enterpriseBlocks.map((block) => (
+              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+            ))}
+          </div>
+        </ScrollFadeSection>
+      )}
 
       {/* Projects section */}
-      <ScrollFadeSection id="projects" ariaLabel="Personal projects">
-        <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
-          {'// projects'}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {projectBlocks.map((block) => (
-            <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
-          ))}
-        </div>
-      </ScrollFadeSection>
+      {projectBlocks.length > 0 && (
+        <ScrollFadeSection id="projects" ariaLabel="Personal projects">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
+            {projectBlocks.map((block) => (
+              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+            ))}
+          </div>
+        </ScrollFadeSection>
+      )}
 
       {/* Contact section */}
-      <ScrollFadeSection id="contact" ariaLabel="Contact information">
-        <h2 className="font-mono text-brand-primary text-sm mb-3 md:mb-6 select-none">
-          {'// contact'}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {contactBlocks.map((block) => (
-            <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
-          ))}
-        </div>
-      </ScrollFadeSection>
+      {contactBlocks.length > 0 && (
+        <ScrollFadeSection id="contact" ariaLabel="Contact information">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
+            {contactBlocks.map((block) => (
+              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+            ))}
+          </div>
+        </ScrollFadeSection>
+      )}
     </div>
   );
 };
