@@ -26,7 +26,30 @@ interface SlippiData {
   losses: number;
   globalRank: number | null;
   season: string | null;
+  rankName: string;
   fetchedAt: number;
+}
+
+function getRankName(rating: number, globalRank: number | null): string {
+  if (globalRank !== null && globalRank <= 300) return 'Grandmaster';
+  if (rating >= 2275.12) return 'Master III';
+  if (rating >= 2217.96) return 'Master II';
+  if (rating >= 2172.55) return 'Master I';
+  if (rating >= 2119.84) return 'Diamond III';
+  if (rating >= 2059.86) return 'Diamond II';
+  if (rating >= 1992.44) return 'Diamond I';
+  if (rating >= 1917.58) return 'Platinum III';
+  if (rating >= 1835.25) return 'Platinum II';
+  if (rating >= 1745.44) return 'Platinum I';
+  if (rating >= 1648.22) return 'Gold III';
+  if (rating >= 1543.67) return 'Gold II';
+  if (rating >= 1431.97) return 'Gold I';
+  if (rating >= 1313.19) return 'Silver III';
+  if (rating >= 1188.19) return 'Silver II';
+  if (rating >= 1054.86) return 'Silver I';
+  if (rating >= 913.71) return 'Bronze III';
+  if (rating >= 765.43) return 'Bronze II';
+  return 'Bronze I';
 }
 
 let cache: SlippiData | null = null;
@@ -59,13 +82,16 @@ slippiRouter.get('/slippi', async (_req, res) => {
 
     const rawSeason: string | null = profile.season?.id ?? null;
     const season = rawSeason ? rawSeason.replace('season-', 'Season ') : null;
+    const globalRank: number | null = profile.dailyGlobalPlacement ?? null;
+    const rating = Math.round(profile.ratingOrdinal);
 
     cache = {
-      rating: Math.round(profile.ratingOrdinal),
+      rating,
       wins: profile.wins ?? 0,
       losses: profile.losses ?? 0,
-      globalRank: profile.dailyGlobalPlacement ?? null,
+      globalRank,
       season,
+      rankName: getRankName(rating, globalRank),
       fetchedAt: Date.now(),
     };
 

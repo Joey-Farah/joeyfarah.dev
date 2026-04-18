@@ -6,6 +6,7 @@ interface SlippiStats {
   losses: number;
   globalRank: number | null;
   season: string | null;
+  rankName: string;
 }
 
 const SlippiStatsTile: React.FC = () => {
@@ -49,6 +50,7 @@ const SlippiStatsTile: React.FC = () => {
               <span className="text-lg font-bold text-brand-primary leading-tight">
                 {stats.rating.toLocaleString()}
               </span>
+              <span className="text-xs text-brand-text/50 leading-tight">{stats.rankName}</span>
             </div>
             {stats.globalRank && (
               <div className="flex flex-col">
