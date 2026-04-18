@@ -280,7 +280,7 @@
     "visible": true,
     "content": {
       "description": "Melee coaching and content — ~400 Patreon members, 100+ Savestates episodes. Deep-dives on improving your Falco, matchup breakdowns, and software walkthroughs. Published on Patreon and YouTube.",
-      "stack": ["Patreon", "Twitch", "YouTube"],
+      "stack": ["Patreon", "YouTube"],
       "links": [
         { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" },
         { "label": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm" }
