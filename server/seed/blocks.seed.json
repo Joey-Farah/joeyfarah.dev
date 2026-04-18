@@ -358,8 +358,7 @@
       "links": [
         { "platform": "LinkedIn", "url": "https://www.linkedin.com/in/joey-farah/", "display": "linkedin.com/in/joey-farah" },
         { "platform": "GitHub", "url": "https://github.com/Joey-Farah", "display": "github.com/Joey-Farah" },
-        { "platform": "Email", "url": "mailto:joey@joeyfarah.dev", "display": "joey@joeyfarah.dev" },
-{ "platform": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm", "display": "youtube.com/@joeydonutsssbm" },
+        { "platform": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm", "display": "youtube.com/@joeydonutsssbm" },
         { "platform": "Twitch", "url": "https://twitch.tv/joeydonuts", "display": "twitch.tv/joeydonuts" }
       ]
     }
