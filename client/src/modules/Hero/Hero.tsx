@@ -66,7 +66,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
     <div
       role="region"
       aria-label="Introduction"
-      className="h-screen flex flex-col items-center justify-center bg-brand-bg px-6 relative"
+      className="h-[100dvh] flex flex-col items-center justify-center bg-brand-bg px-6 relative"
       data-testid="hero"
     >
       <div className="font-mono text-brand-text w-full max-w-2xl space-y-1">
@@ -102,7 +102,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="absolute bottom-10 flex flex-col items-center gap-2 select-none"
+          className="absolute bottom-16 md:bottom-10 flex flex-col items-center gap-2 select-none"
           aria-hidden="true"
         >
           <span className="font-mono text-sm text-brand-primary tracking-widest">
