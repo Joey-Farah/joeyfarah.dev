@@ -58,7 +58,7 @@ export interface BentoGridProps {
  */
 const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'professional-timeline': { colSpan: 2, rowSpan: 3 },
-  'oracle-db-mapper':      { colSpan: 2, rowSpan: 2 },
+  'oracle-db-mapper':      { colSpan: 1, rowSpan: 2 },
   'conversion-automation': { colSpan: 1, rowSpan: 1 },
   'fusion-sql-developer':  { colSpan: 1, rowSpan: 1 },
   'slippi-ranked-stats':   { colSpan: 1, rowSpan: 1 },
@@ -89,13 +89,11 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
 
   const dualTimelineBlock = renderable.find((b) => b.type === 'dual-timeline');
 
-  const professionalBlocks = renderable.filter(
-    (b) => b.type === 'timeline' || b.type === 'erd-tile',
-  );
+  const professionalBlocks = renderable.filter((b) => b.type === 'timeline');
 
   const enterpriseBlocks = renderable.filter(() => false);
 
-  const projectBlocks = renderable.filter((b) => b.type === 'project-card');
+  const projectBlocks = renderable.filter((b) => b.type === 'project-card' || b.type === 'erd-tile');
 
   const contactBlocks = renderable.filter((b) => b.type === 'contact-links');
 
@@ -108,17 +106,6 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       {dualTimelineBlock && (
         <ScrollFadeSection id="professional-timeline" ariaLabel="Career timeline">
           <DualTimeline content={dualTimelineBlock.content as DualTimelineContent} />
-        </ScrollFadeSection>
-      )}
-
-      {/* Professional section */}
-      {professionalBlocks.length > 0 && (
-        <ScrollFadeSection id="professional" ariaLabel="Professional experience">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
-            {professionalBlocks.map((block) => (
-              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
-            ))}
-          </div>
         </ScrollFadeSection>
       )}
 
@@ -137,9 +124,20 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       {/* Projects section */}
       {projectBlocks.length > 0 && (
         <ScrollFadeSection id="projects" ariaLabel="Personal projects">
-          <p className="font-mono text-xs text-brand-text/40 px-1 mb-3">// work &amp; projects</p>
+          <p className="font-mono text-xs text-brand-text/40 px-1 mb-3">// projects</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
             {projectBlocks.map((block) => (
+              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+            ))}
+          </div>
+        </ScrollFadeSection>
+      )}
+
+      {/* Resume section */}
+      {professionalBlocks.length > 0 && (
+        <ScrollFadeSection id="professional" ariaLabel="Professional experience">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
+            {professionalBlocks.map((block) => (
               <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
             ))}
           </div>
