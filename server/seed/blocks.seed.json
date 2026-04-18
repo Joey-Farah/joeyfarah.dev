@@ -277,7 +277,7 @@
       "stack": ["Patreon", "Twitch", "YouTube"],
       "links": [
         { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" },
-        { "label": "YouTube", "url": "https://youtube.com/@JoeyDonuts" },
+        { "label": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm" },
         { "label": "Twitch", "url": "https://twitch.tv/joeydonuts" }
       ],
       "status": "live"
@@ -359,8 +359,7 @@
         { "platform": "LinkedIn", "url": "https://www.linkedin.com/in/joey-farah/", "display": "linkedin.com/in/joey-farah" },
         { "platform": "GitHub", "url": "https://github.com/Joey-Farah", "display": "github.com/Joey-Farah" },
         { "platform": "Email", "url": "mailto:joey@joeyfarah.dev", "display": "joey@joeyfarah.dev" },
-        { "platform": "Twitter", "url": "https://x.com/DoeyJonuts", "display": "x.com/DoeyJonuts" },
-        { "platform": "YouTube", "url": "https://youtube.com/@JoeyDonuts", "display": "youtube.com/@JoeyDonuts" },
+{ "platform": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm", "display": "youtube.com/@joeydonutsssbm" },
         { "platform": "Twitch", "url": "https://twitch.tv/joeydonuts", "display": "twitch.tv/joeydonuts" }
       ]
     }
