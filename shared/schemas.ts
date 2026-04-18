@@ -46,6 +46,7 @@ const ErdTileContentSchema = z.object({
   description: z.string(),
   nodes: z.array(ErdNodeSchema).min(1),
   edges: z.array(ErdEdgeSchema),
+  status: z.enum(['live', 'in-development']).optional(),
 });
 
 const ProjectLinkSchema = z.object({

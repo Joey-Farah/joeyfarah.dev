@@ -92,7 +92,7 @@
         {
           "year": "2022",
           "label": "Married!",
-          "detail": "(I'm as surprised as you are)"
+          "detail": "(Baby on the way!)"
         },
         {
           "year": "2025",
@@ -171,6 +171,7 @@
     "order": 3,
     "visible": true,
     "content": {
+      "status": "in-development",
       "description": "Interactive ERD explorer with the entire Oracle Cloud database mapped. Select any table and extract a diagram of every table it connects to — across HCM, Payroll, Financials, Procurement, and more. Eliminates schema guesswork when writing reports, conversions, and cross-module queries.",
       "nodes": [
         { "id": "per_people", "label": "PER_ALL_PEOPLE_F", "x": 50, "y": 30 },
@@ -210,7 +211,7 @@
       "description": "Desktop app that connects directly to an Oracle Cloud environment and acts as a SQL query tool — enter a query, get records back. A faster alternative to BI Publisher's in-browser tooling without the overhead of building a full report.",
       "stack": ["Tauri", "Oracle Cloud", "SQL", "REST APIs"],
       "links": [],
-      "status": "in-development"
+      "status": "live"
     }
   },
   {
@@ -282,8 +283,7 @@
       "stack": ["Patreon", "Twitch", "YouTube"],
       "links": [
         { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" },
-        { "label": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm" },
-        { "label": "Twitch", "url": "https://twitch.tv/joeydonuts" }
+        { "label": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm" }
       ],
       "status": "live"
     }

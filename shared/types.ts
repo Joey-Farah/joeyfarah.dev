@@ -54,6 +54,7 @@ export interface ErdTileContent {
   description: string;
   nodes: ErdNode[];
   edges: ErdEdge[];
+  status?: 'live' | 'in-development';
 }
 
 export interface ProjectLink {

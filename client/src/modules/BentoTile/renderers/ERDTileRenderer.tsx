@@ -49,7 +49,7 @@ function edgeMidpoint(
 // ─── ERDTileRenderer ─────────────────────────────────────────────────────────
 
 const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
-  const { description, nodes, edges } = content;
+  const { description, nodes, edges, status } = content;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-60px' });
@@ -74,6 +74,23 @@ const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
       ref={containerRef}
       className="flex flex-col flex-1 p-4 gap-3 font-mono text-brand-text text-sm overflow-auto min-h-0"
     >
+      {/* Status badge */}
+      {status && (
+        <div className="shrink-0">
+          {status === 'live' ? (
+            <span className="inline-flex items-center gap-1.5 text-xs font-mono">
+              <span className="inline-block w-2 h-2 rounded-full bg-green-500" aria-hidden="true" />
+              <span className="text-green-400">Live</span>
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 text-xs font-mono">
+              <span className="inline-block w-2 h-2 rounded-full bg-yellow-400" aria-hidden="true" />
+              <span className="text-yellow-300">In Development</span>
+            </span>
+          )}
+        </div>
+      )}
+
       {/* Description */}
       <p className="text-brand-text/70 text-xs leading-relaxed shrink-0">
         {description}
