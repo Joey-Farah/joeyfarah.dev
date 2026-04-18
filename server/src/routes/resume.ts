@@ -5,7 +5,7 @@ const router = Router();
 const RESUME_TEXT = `
 JOEY FARAH
 Oracle Cloud Technical Consultant
-joeyefarah@gmail.com | linkedin.com/in/joeyfarah | github.com/Joey-Farah | joeyfarah.dev
+linkedin.com/in/joey-farah | github.com/Joey-Farah | joeyfarah.dev
 
 Driven, process-oriented professional with strength in translating technology to integrate
 with key stakeholder needs while developing engaging relationships to support an

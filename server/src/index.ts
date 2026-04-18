@@ -11,6 +11,7 @@ import { createBlocksRouter } from './routes/blocks';
 import { resumeRouter } from './routes/resume';
 import { createSitemapRouter } from './routes/sitemap';
 import { healthRouter } from './routes/health';
+import { slippiRouter } from './routes/slippi';
 import { MongoBlockRepository } from './repositories/MongoBlockRepository';
 
 const app = express();
@@ -64,6 +65,7 @@ const repo = new MongoBlockRepository();
 
 // Mount API routes
 app.use('/api/blocks', apiLimiter, createBlocksRouter(repo));
+app.use('/api', apiLimiter, slippiRouter);
 app.use('/api', apiLimiter, resumeRouter);
 app.use('/', createSitemapRouter(repo));
 app.use('/', healthRouter);
