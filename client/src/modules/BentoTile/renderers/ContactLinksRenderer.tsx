@@ -6,8 +6,6 @@ export interface ContactLinksRendererProps {
   title: string;
 }
 
-const BUILD_DATE = __BUILD_DATE__;
-
 const ContactLinksRenderer: React.FC<ContactLinksRendererProps> = ({ content }) => {
   const [copiedPlatform, setCopiedPlatform] = useState<string | null>(null);
 
@@ -88,12 +86,7 @@ const ContactLinksRenderer: React.FC<ContactLinksRendererProps> = ({ content }) 
         </div>
       </div>
 
-      {/* Build date footer */}
-      <p className="font-mono text-xs text-brand-text/25 mt-4 select-none">
-        {'// last updated '}{BUILD_DATE}
-      </p>
-
-      {content.links.length === 0 && (
+{content.links.length === 0 && (
         <span className="text-brand-text/40 text-xs">{'// no links configured'}</span>
       )}
     </div>
