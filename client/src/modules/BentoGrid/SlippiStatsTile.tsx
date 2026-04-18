@@ -24,7 +24,7 @@ const SlippiStatsTile: React.FC = () => {
 
   return (
     <motion.div
-      className="rounded-2xl border border-brand-primary/20 bg-brand-bg overflow-hidden font-mono text-sm w-fit"
+      className="rounded-xl border border-brand-primary/20 bg-brand-bg overflow-hidden font-mono text-sm w-fit"
       whileHover={{ borderColor: 'rgba(6,182,212,0.5)', boxShadow: '0 0 16px rgba(6,182,212,0.08)' }}
       transition={{ duration: 0.2 }}
     >
