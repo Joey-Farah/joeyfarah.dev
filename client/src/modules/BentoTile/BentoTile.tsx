@@ -110,7 +110,7 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
       style={gridStyle}
       aria-label={block.title}
       role="region"
-      className="flex flex-col bg-brand-bg border border-brand-primary/20 rounded overflow-hidden min-h-[120px] scroll-mt-16"
+      className="flex flex-col bg-brand-bg border border-brand-primary/20 rounded-2xl overflow-hidden min-h-[120px] scroll-mt-16"
       whileHover={{ borderColor: 'rgba(6,182,212,0.5)', boxShadow: '0 0 16px rgba(6,182,212,0.08)' }}
       transition={{ duration: 0.2 }}
     >
