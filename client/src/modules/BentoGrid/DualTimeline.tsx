@@ -18,7 +18,18 @@ const Entry: React.FC<{ entry: DualTimelineEntry; side: 'left' | 'right' }> = ({
     <div className={`flex flex-col gap-0.5 ${isRight ? 'items-start' : 'items-end'}`}>
       {label}
       {entry.detail && (
-        <span className="font-mono text-xs text-brand-text/40 leading-snug">{entry.detail}</span>
+        entry.href ? (
+          <a
+            href={entry.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs text-brand-primary/60 hover:text-brand-primary leading-snug transition-colors"
+          >
+            {entry.detail} ↗
+          </a>
+        ) : (
+          <span className="font-mono text-xs text-brand-text/40 leading-snug">{entry.detail}</span>
+        )
       )}
     </div>
   );
