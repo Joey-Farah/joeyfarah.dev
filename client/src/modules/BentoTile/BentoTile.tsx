@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import type {
   BentoBlock,
@@ -42,22 +42,10 @@ export interface BentoTileProps {
 const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
   const colSpan = layout.colSpan ?? 1;
   const rowSpan = layout.rowSpan ?? 1;
-  const [copied, setCopied] = useState(false);
 
   const gridStyle: React.CSSProperties = {
     gridColumn: `span ${colSpan}`,
     gridRow: `span ${rowSpan}`,
-  };
-
-  const handleCopyLink = async () => {
-    const url = `${window.location.origin}/#${block.slug}`;
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // clipboard unavailable — no-op
-    }
   };
 
   const renderContent = () => {
@@ -126,13 +114,10 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
       whileHover={{ borderColor: 'rgba(6,182,212,0.5)', boxShadow: '0 0 16px rgba(6,182,212,0.08)' }}
       transition={{ duration: 0.2 }}
     >
-      {/* Terminal chrome: title bar — click to copy deep link */}
-      <button
-        type="button"
-        onClick={handleCopyLink}
+      {/* Terminal chrome: title bar */}
+      <div
         data-testid="title-bar"
-        aria-label={copied ? `Link to ${block.title} copied` : `Copy link to ${block.title}`}
-        className="flex items-center gap-2 px-3 py-2 bg-black/40 border-b border-brand-primary/10 shrink-0 text-left cursor-pointer hover:bg-black/60 transition-colors w-full"
+        className="flex items-center gap-2 px-3 py-2 bg-black/40 border-b border-brand-primary/10 shrink-0"
       >
         {/* Window control circles */}
         <span
@@ -156,7 +141,7 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
 
         {/* Title text */}
         <span className="ml-2 font-mono text-brand-text text-xs truncate select-none flex-1">
-          {copied ? `✓ copied #${block.slug}` : block.title}
+          {block.title}
         </span>
 
         {/* Prompt glyph and blinking cursor */}
@@ -172,7 +157,7 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
           aria-hidden="true"
           className="inline-block w-1 md:w-1.5 h-3 md:h-3.5 bg-brand-primary animate-pulse shrink-0"
         />
-      </button>
+      </div>
 
       {/* Sub-renderer content area */}
       <div className="flex flex-col flex-1 min-h-0">
