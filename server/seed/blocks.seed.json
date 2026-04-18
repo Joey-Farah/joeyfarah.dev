@@ -283,7 +283,7 @@
     "order": 7,
     "visible": true,
     "content": {
-      "description": "Melee coaching and content — ~400 Patreon members, 100+ Savestates episodes. Deep-dives on improving your Falco, matchup breakdowns, and software walkthroughs. Published on Patreon and YouTube.",
+      "description": "Melee coaching and content — ~400 Patreon members, 100+ Savestates and Premium Access to Slippi Ranked Stats. Deep-dives on improving your Falco, matchup breakdowns, and gameplay analysis.",
       "image": "/images/falco.png",
       "stack": ["Patreon", "YouTube"],
       "links": [
