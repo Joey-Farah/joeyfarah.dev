@@ -15,11 +15,106 @@
     }
   },
   {
+    "slug": "dual-timeline",
+    "type": "dual-timeline",
+    "title": "Timeline",
+    "order": 1,
+    "visible": true,
+    "content": {
+      "left": [
+        {
+          "year": "2017",
+          "label": "Talent Management & Training Intern",
+          "detail": "University of Saint Thomas"
+        },
+        {
+          "year": "2018",
+          "label": "System Administrator",
+          "detail": "LifeSource"
+        },
+        {
+          "year": "2019",
+          "label": "Graduated — University of Saint Thomas",
+          "detail": "B.A. Business Administration"
+        },
+        {
+          "year": "2019",
+          "label": "Oracle Cloud Technical Consultant",
+          "detail": "Elire — present",
+          "href": "/api/resume"
+        },
+        {
+          "year": "2020",
+          "label": "Oracle Cloud implementations",
+          "detail": "ERP & HCM across 8 clients"
+        },
+        {
+          "year": "2026",
+          "label": "Fusion Query Tool",
+          "detail": "Oracle reporting library",
+          "slug": "fusion-sql-developer"
+        },
+        {
+          "year": "2026",
+          "label": "Conversion Automation",
+          "detail": "Python FBDI toolkit",
+          "slug": "conversion-automation"
+        },
+        {
+          "year": "2026",
+          "label": "joeyfarah.dev",
+          "detail": "This site",
+          "slug": "joeyfarah-dev"
+        }
+      ],
+      "right": [
+        {
+          "year": "2019",
+          "label": "First Minnesota Power Ranking appearance"
+        },
+        {
+          "year": "2020",
+          "label": "The Lombardi Project",
+          "detail": "Savestates and software",
+          "slug": "lombardi-project"
+        },
+        {
+          "year": "2021",
+          "label": "MN Power Rankings — #1",
+          "detail": "Winter 2021"
+        },
+        {
+          "year": "2025",
+          "label": "SSBMRank 2025 — #61 globally",
+          "detail": "Career high — Top 100 debut",
+          "href": "https://blog.start.gg/ssbmrank-2025-61-70-605622e0acb3"
+        },
+        {
+          "year": "2026",
+          "label": "Slippi Ranked Stats",
+          "detail": "Desktop app for competitive Melee",
+          "slug": "slippi-ranked-stats"
+        },
+        {
+          "year": "2026",
+          "label": "Fitness Ring Analytics",
+          "detail": "RingConn biometric dashboard",
+          "slug": "fitness-ring-analytics"
+        },
+        {
+          "year": "2025",
+          "label": "Retired from Competition",
+          "detail": "(baby on the way!)"
+        }
+      ]
+    }
+  },
+  {
     "slug": "professional-timeline",
     "type": "timeline",
-    "title": "Professional Timeline",
-    "order": 1,
-    "visible": false,
+    "title": "Resume",
+    "order": 2,
+    "visible": true,
     "content": {
       "entries": [
         {
@@ -28,7 +123,31 @@
           "start": "2019",
           "end": "present",
           "accomplishments": [
-            "Oracle Cloud Financials implementations — data conversions, reporting, and custom automation across multi-client engagements."
+            "Data conversions using FBDI, HDL, and REST APIs — scripting extract-transform-load pipelines from legacy systems into Oracle Cloud.",
+            "Report development in BIP and OTBI for client financial and HR analytics.",
+            "Built and maintained integration queries connecting Oracle Cloud to third-party systems.",
+            "HCM configuration across Recruiting, Performance, and Payroll modules; Page Composer and Design Studio customizations.",
+            "Developed Fast Formulas to satisfy government regulation requirements."
+          ]
+        },
+        {
+          "employer": "LifeSource",
+          "role": "Learning Management System Administrator",
+          "start": "2018",
+          "end": "2019",
+          "accomplishments": [
+            "Led migration of instructor-led and paper training to a cloud LMS; became primary subject matter expert.",
+            "Liaison between three department educators and the LMS platform, translating technical constraints into workflow changes."
+          ]
+        },
+        {
+          "employer": "University of Saint Thomas",
+          "role": "Talent Management & Training Intern",
+          "start": "2017",
+          "end": "2019",
+          "accomplishments": [
+            "Built eLearning courses deployed university-wide.",
+            "Reporting and design work for The Leadership Academy and New Employee Orientation programs."
           ]
         }
       ]
@@ -38,23 +157,22 @@
     "slug": "oracle-db-mapper",
     "type": "erd-tile",
     "title": "Oracle Database Mapper",
-    "order": 2,
-    "visible": false,
+    "order": 3,
+    "visible": true,
     "content": {
-      "description": "Interactive ERD explorer for Oracle Fusion. Visualizes foreign-key chains across Financials tables (AP, PO, GL, AR) to cut schema trial-and-error when writing reports and conversion queries.",
+      "description": "Interactive ERD explorer for Oracle Cloud. Maps foreign-key relationships across all modules — HCM, Payroll, Financials, Procurement, and more — to eliminate schema guesswork when writing reports, conversions, and cross-module queries.",
       "nodes": [
-        { "id": "ap_invoices", "label": "AP_INVOICES", "x": 50, "y": 50 },
-        { "id": "po_vendors", "label": "PO_VENDORS", "x": 300, "y": 50 },
-        { "id": "ap_inv_dist", "label": "AP_INVOICE_DISTRIBUTIONS", "x": 50, "y": 220 },
-        { "id": "po_lines", "label": "PO_LINES", "x": 300, "y": 220 },
-        { "id": "gl_cc", "label": "GL_CODE_COMBINATIONS", "x": 175, "y": 370 }
+        { "id": "per_people", "label": "PER_ALL_PEOPLE_F", "x": 50, "y": 30 },
+        { "id": "per_assign", "label": "PER_ALL_ASSIGNMENTS_M", "x": 50, "y": 160 },
+        { "id": "pay_payroll", "label": "PAY_ALL_PAYROLLS_F", "x": 50, "y": 290 },
+        { "id": "ap_invoices", "label": "AP_INVOICES_ALL", "x": 310, "y": 160 },
+        { "id": "gl_cc", "label": "GL_CODE_COMBINATIONS", "x": 180, "y": 390 }
       ],
       "edges": [
-        { "from": "ap_invoices", "to": "po_vendors", "label": "VENDOR_ID" },
-        { "from": "ap_invoices", "to": "ap_inv_dist", "label": "INVOICE_ID" },
-        { "from": "ap_inv_dist", "to": "gl_cc", "label": "DIST_CODE_COMBINATION_ID" },
-        { "from": "po_lines", "to": "po_vendors", "label": "PO_HEADER_ID" },
-        { "from": "ap_inv_dist", "to": "po_lines", "label": "PO_LINE_LOCATION_ID" }
+        { "from": "per_people", "to": "per_assign", "label": "PERSON_ID" },
+        { "from": "per_assign", "to": "pay_payroll", "label": "PAYROLL_ID" },
+        { "from": "pay_payroll", "to": "gl_cc", "label": "COST_CENTER_SEG" },
+        { "from": "ap_invoices", "to": "gl_cc", "label": "CODE_COMBINATION_ID" }
       ]
     }
   },
@@ -62,11 +180,11 @@
     "slug": "conversion-automation",
     "type": "project-card",
     "title": "Conversion Automation",
-    "order": 3,
-    "visible": false,
+    "order": 4,
+    "visible": true,
     "content": {
-      "description": "Python toolkit that automates data conversions into Oracle Cloud via FBDI — extracts from legacy sources, maps to Fusion schemas, validates, and populates templates. In active development; converters stabilizing one object at a time.",
-      "stack": ["Oracle Cloud", "SQL", "Python", "FBDI Templates"],
+      "description": "Python toolkit for Oracle Cloud data conversions via FBDI and HDL. Extracts from legacy sources, maps fields to Fusion schemas, validates, and populates upload templates — replacing hours of manual spreadsheet work per object. Used across live client engagements.",
+      "stack": ["Oracle Cloud", "Python", "SQL", "FBDI", "HDL", "REST APIs"],
       "links": [],
       "status": "in-development"
     }
@@ -74,11 +192,11 @@
   {
     "slug": "fusion-sql-developer",
     "type": "project-card",
-    "title": "Fusion SQL Developer",
-    "order": 4,
-    "visible": false,
+    "title": "Fusion Query Tool",
+    "order": 5,
+    "visible": true,
     "content": {
-      "description": "Curated Oracle Fusion SQL library for reporting and reconciliation — reusable queries, OTBI subject-area references, and BIP templates across AP, AR, GL, PO, and Assets. Ongoing collection, added to with each engagement.",
+      "description": "Curated library of Oracle Fusion SQL for reporting and reconciliation. Reusable queries covering AP, AR, GL, PO, and Assets; OTBI subject-area references and BIP report templates. Built from real client work — added to with each engagement.",
       "stack": ["Oracle SQL", "PL/SQL", "OTBI", "BIP"],
       "links": [],
       "status": "in-development"
@@ -88,11 +206,11 @@
     "slug": "slippi-ranked-stats",
     "type": "project-card",
     "title": "Slippi Ranked Stats",
-    "order": 5,
-    "visible": false,
+    "order": 6,
+    "visible": true,
     "content": {
-      "description": "Windows desktop app for Slippi ranked Melee players. Scans your replay folder and surfaces matchup win rates, stage stats, session-by-session momentum, and live in-session rating deltas. Signed auto-updates, local-only storage. Free for everyone, with a premium tier supported by paying subscribers.",
-      "stack": ["Tauri", "TypeScript", "Svelte", "Rust"],
+      "description": "Windows desktop app for competitive Melee players. Points at your local replay folder and surfaces matchup win rates, stage stats, session momentum, set grades, and rating history. Live session tracking and full grade breakdowns for Patreon supporters. Signed auto-updates, all data stored locally. v1.3.8 — 26 releases.",
+      "stack": ["Tauri", "TypeScript", "Svelte", "Python", "Rust"],
       "links": [
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats" },
         { "label": "Download", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats/releases/latest" }
@@ -104,14 +222,27 @@
     "slug": "fitness-ring-analytics",
     "type": "project-card",
     "title": "Fitness Ring Analytics",
-    "order": 6,
-    "visible": false,
+    "order": 7,
+    "visible": true,
     "content": {
-      "description": "RingConn biometric dashboard. Visualizes sleep architecture, HRV trends, SpO2 dips, and resting heart rate with interactive time-series charts. Supports CSV import for offline analysis. Built for biohackers tracking long-term health signals.",
+      "description": "RingConn biometric dashboard. Visualizes sleep architecture, HRV trends, SpO\u2082 dips, and resting heart rate with interactive time-series charts. Supports CSV import for offline analysis.",
       "stack": ["Python", "Streamlit", "Plotly", "pandas"],
+      "links": [],
+      "status": "in-development"
+    }
+  },
+  {
+    "slug": "joeyfarah-dev",
+    "type": "project-card",
+    "title": "joeyfarah.dev",
+    "order": 8,
+    "visible": true,
+    "content": {
+      "description": "This portfolio. Bento-terminal hybrid built with React, Vite, TypeScript, and Express. Content served from MongoDB Atlas via a seeded JSON pipeline. Dual-column timeline, animated ERD, terminal chrome on every tile. Deployed on Railway.",
+      "stack": ["React", "TypeScript", "Vite", "Node.js", "Express", "MongoDB"],
       "links": [
-        { "label": "Live App", "url": "https://ringconn-dashboard.up.railway.app" },
-        { "label": "GitHub", "url": "https://github.com/Joey-Farah/ringconn-dashboard" }
+        { "label": "Live site", "url": "https://joeyfarah.dev" },
+        { "label": "GitHub", "url": "https://github.com/Joey-Farah/joeyfarah.dev" }
       ],
       "status": "live"
     }
@@ -120,10 +251,10 @@
     "slug": "habitat",
     "type": "project-card",
     "title": "Habitat",
-    "order": 7,
+    "order": 8,
     "visible": false,
     "content": {
-      "description": "Plant care companion — schedules waterings, logs growth milestones, sends reminders. Full-stack playground for MongoDB schema design and React component patterns. Status: Early prototype, growing fast.",
+      "description": "Plant care companion — schedules waterings, logs growth milestones, sends reminders. Full-stack playground for MongoDB schema design and React component patterns.",
       "stack": ["React", "Node.js", "MongoDB"],
       "links": [],
       "status": "in-development"
@@ -133,13 +264,15 @@
     "slug": "lombardi-project",
     "type": "project-card",
     "title": "The Lombardi Project",
-    "order": 8,
-    "visible": false,
+    "order": 9,
+    "visible": true,
     "content": {
-      "description": "Premium Melee coaching curriculum — advanced neutral theory, character-specific matchups, frame-perfect breakdowns, and personalized VOD reviews. Mentoring Diamond+ players toward Grandmaster. Transitioning to bespoke platform in 2026.",
-      "stack": ["Patreon", "Video Production"],
+      "description": "Savestates and software — 386 Patreon members. Melee coaching content, software deep-dives, and tournament organization. Ran the Minnesota Monthly Melee series and Parks and Tech weeklies for years. Multi-platform: Twitch streams, YouTube videos.",
+      "stack": ["Patreon", "Twitch", "YouTube"],
       "links": [
-        { "label": "Access on Patreon", "url": "https://www.patreon.com/joeydonuts" }
+        { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" },
+        { "label": "YouTube", "url": "https://youtube.com/@JoeyDonuts" },
+        { "label": "Twitch", "url": "https://twitch.tv/joeydonuts" }
       ],
       "status": "live"
     }
@@ -148,7 +281,7 @@
     "slug": "contact",
     "type": "contact-links",
     "title": "Contact",
-    "order": 9,
+    "order": 10,
     "visible": true,
     "content": {
       "links": [

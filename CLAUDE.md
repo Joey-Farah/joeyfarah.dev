@@ -19,23 +19,33 @@ Personal portfolio site for Joey Farah — Oracle Cloud ERP Architect and indepe
 
 ---
 
-## Current State (as of 2026-04-14)
+## Current State (as of 2026-04-17)
 
-The site is **fully built and visually polished**. All 40 user stories from the PRD are implemented. Manual browser validation passed (Lighthouse 100, mobile boot timing, scroll transition).
+The site is **fully built and visually polished**, but is in a **pre-launch stripped state** pending real content. All 40 user stories from the PRD are implemented. Manual browser validation passed (Lighthouse 100, mobile boot timing, scroll transition).
 
-### What exists
+### What's visible to visitors (live)
+- `hero` — terminal boot sequence with name + tagline lines
+- `contact` — social links (LinkedIn, GitHub, Email, Twitter, YouTube, Twitch)
+
+### What's built but hidden (`visible: false` in seed)
+- `professional-timeline` — simplified to single Elire entry; placeholder accomplishment text
+- `oracle-db-mapper` — ERD tile with SVG pathLength draw animation
+- `conversion-automation` — enterprise project card, marked in-development
+- `fusion-sql-developer` — enterprise project card, marked in-development
+- `slippi-ranked-stats` — personal project card, links to GitHub + releases
+- `fitness-ring-analytics` — personal project card, links to live Railway app + GitHub
+- `habitat` — personal project card, marked in-development
+- `lombardi-project` — personal project card, links to Patreon
+
+### Infrastructure
 - Terminal boot sequence hero → bento grid scroll transition
-- Professional timeline (Deloitte, Accenture, Grant Thornton) with scroll-animated entries
-- Oracle Database Mapper ERD tile with SVG pathLength draw animation
-- Enterprise suite tiles (Conversion Automation, Fusion SQL Developer)
-- Personal project tiles (Slippi, Fitness Ring, Habitat, Lombardi)
-- Contact tile with copy-to-clipboard email, resume download, build date footer
-- Sticky NavBar with smooth entrance animation
+- Sticky NavBar (trimmed to `// contact` only while tiles are hidden)
 - Cyan scroll progress bar fixed at top of viewport
-- `GET /api/resume` — downloadable plain-text resume
+- `GET /api/resume` — downloadable plain-text resume (minimal placeholder)
 - Custom 404 page (terminal-themed)
 - SEO: OG tags, Twitter Card, Schema.org JSON-LD, robots.txt
 - Favicon: `>_` SVG glyph
+- Deployed on Railway + MongoDB Atlas; domain joeyfarah.dev live
 
 ### Build
 ```bash

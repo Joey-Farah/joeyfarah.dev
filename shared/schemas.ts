@@ -16,6 +16,19 @@ const TimelineContentSchema = z.object({
   entries: z.array(TimelineEntrySchema).min(1),
 });
 
+const DualTimelineEntrySchema = z.object({
+  year: z.string(),
+  label: z.string(),
+  detail: z.string().optional(),
+  slug: z.string().optional(),
+  href: z.string().optional(),
+});
+
+const DualTimelineContentSchema = z.object({
+  left: z.array(DualTimelineEntrySchema),
+  right: z.array(DualTimelineEntrySchema),
+});
+
 const ErdNodeSchema = z.object({
   id: z.string(),
   label: z.string(),
@@ -73,6 +86,14 @@ export const BentoBlockSchema = z.discriminatedUnion('type', [
     order: z.number().int().nonnegative(),
     visible: z.boolean(),
     content: TimelineContentSchema,
+  }),
+  z.object({
+    slug: z.string(),
+    type: z.literal('dual-timeline'),
+    title: z.string(),
+    order: z.number().int().nonnegative(),
+    visible: z.boolean(),
+    content: DualTimelineContentSchema,
   }),
   z.object({
     slug: z.string(),

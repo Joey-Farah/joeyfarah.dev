@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
-import type { BentoBlock, LayoutConfig } from 'shared/types';
+import type { BentoBlock, LayoutConfig, DualTimelineContent } from 'shared/types';
 import BentoTile from '../BentoTile/BentoTile';
+import DualTimeline from './DualTimeline';
 
 /**
  * ScrollFadeSection — wraps a <section> with scroll-linked opacity so it
@@ -60,8 +61,9 @@ const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'oracle-db-mapper':      { colSpan: 2, rowSpan: 2 },
   'conversion-automation': { colSpan: 1, rowSpan: 1 },
   'fusion-sql-developer':  { colSpan: 1, rowSpan: 1 },
-  'slippi-ranked-stats':   { colSpan: 2, rowSpan: 1 },
+  'slippi-ranked-stats':   { colSpan: 1, rowSpan: 1 },
   'fitness-ring-analytics':{ colSpan: 1, rowSpan: 1 },
+  'joeyfarah-dev':         { colSpan: 1, rowSpan: 1 },
   'habitat':               { colSpan: 1, rowSpan: 1 },
   'lombardi-project':      { colSpan: 1, rowSpan: 1 },
   'contact':               { colSpan: 3, rowSpan: 1 },
@@ -85,22 +87,15 @@ function getLayout(slug: string): LayoutConfig {
 const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
   const renderable = blocks.filter((b) => b.visible);
 
+  const dualTimelineBlock = renderable.find((b) => b.type === 'dual-timeline');
+
   const professionalBlocks = renderable.filter(
     (b) => b.type === 'timeline' || b.type === 'erd-tile',
   );
 
-  const enterpriseBlocks = renderable.filter(
-    (b) =>
-      b.type === 'project-card' &&
-      (b.slug === 'conversion-automation' || b.slug === 'fusion-sql-developer'),
-  );
+  const enterpriseBlocks = renderable.filter(() => false);
 
-  const projectBlocks = renderable.filter(
-    (b) =>
-      b.type === 'project-card' &&
-      b.slug !== 'conversion-automation' &&
-      b.slug !== 'fusion-sql-developer',
-  );
+  const projectBlocks = renderable.filter((b) => b.type === 'project-card');
 
   const contactBlocks = renderable.filter((b) => b.type === 'contact-links');
 
@@ -109,6 +104,13 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       className="w-full max-w-6xl lg:max-w-7xl mx-auto px-4 md:px-6 pt-8 md:pt-24 pb-6 md:pb-12 space-y-4"
       data-testid="bento-grid"
     >
+      {/* Dual timeline — full-width overview section */}
+      {dualTimelineBlock && (
+        <ScrollFadeSection id="professional-timeline" ariaLabel="Career timeline">
+          <DualTimeline content={dualTimelineBlock.content as DualTimelineContent} />
+        </ScrollFadeSection>
+      )}
+
       {/* Professional section */}
       {professionalBlocks.length > 0 && (
         <ScrollFadeSection id="professional" ariaLabel="Professional experience">
@@ -123,6 +125,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       {/* Enterprise section */}
       {enterpriseBlocks.length > 0 && (
         <ScrollFadeSection id="enterprise" ariaLabel="Enterprise projects">
+          <p className="font-mono text-xs text-brand-text/40 px-1 mb-3">// enterprise</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
             {enterpriseBlocks.map((block) => (
               <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
@@ -134,6 +137,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       {/* Projects section */}
       {projectBlocks.length > 0 && (
         <ScrollFadeSection id="projects" ariaLabel="Personal projects">
+          <p className="font-mono text-xs text-brand-text/40 px-1 mb-3">// work &amp; projects</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
             {projectBlocks.map((block) => (
               <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />

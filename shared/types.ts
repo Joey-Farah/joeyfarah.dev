@@ -1,11 +1,11 @@
 // Envelope — every block the API returns has this shape
 export interface BentoBlock {
   slug: string;
-  type: 'hero' | 'timeline' | 'erd-tile' | 'project-card' | 'contact-links';
+  type: 'hero' | 'timeline' | 'dual-timeline' | 'erd-tile' | 'project-card' | 'contact-links';
   title: string;
   order: number;
   visible: boolean;
-  content: HeroContent | TimelineContent | ErdTileContent | ProjectCardContent | ContactLinksContent;
+  content: HeroContent | TimelineContent | DualTimelineContent | ErdTileContent | ProjectCardContent | ContactLinksContent;
 }
 
 export interface HeroContent {
@@ -22,6 +22,19 @@ export interface TimelineEntry {
 
 export interface TimelineContent {
   entries: TimelineEntry[];
+}
+
+export interface DualTimelineEntry {
+  year: string;
+  label: string;
+  detail?: string;
+  slug?: string;
+  href?: string;
+}
+
+export interface DualTimelineContent {
+  left: DualTimelineEntry[];
+  right: DualTimelineEntry[];
 }
 
 export interface ErdNode {
