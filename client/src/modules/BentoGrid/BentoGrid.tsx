@@ -4,7 +4,6 @@ import type { BentoBlock, LayoutConfig, DualTimelineContent } from 'shared/types
 import BentoTile from '../BentoTile/BentoTile';
 import DualTimeline from './DualTimeline';
 import SlippiStatsTile from './SlippiStatsTile';
-import TerminalTile from './TerminalTile';
 
 /**
  * ScrollFadeSection — wraps a <section> with scroll-linked opacity so it
@@ -155,10 +154,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
         <ScrollFadeSection id="personal" ariaLabel="Personal interests">
           <p className="font-mono text-xs text-brand-text/40 px-1 mb-3">// personal</p>
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col md:flex-row gap-4">
-              <SlippiStatsTile />
-              <TerminalTile />
-            </div>
+            <SlippiStatsTile />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
               {personalBlocks.map((block) => (
                 <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
