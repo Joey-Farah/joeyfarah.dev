@@ -195,7 +195,7 @@
     "visible": true,
     "content": {
       "description": "Python toolkit for Oracle Cloud data conversions. Supports HDL, FBDI, and REST API upload methods — extracts from legacy sources, maps fields to Fusion schemas, validates, and populates upload templates. Covers the three main Oracle Cloud data loading approaches in one toolkit, used across live client engagements.",
-      "stack": ["Oracle Cloud", "Python", "SQL", "FBDI", "HDL", "REST APIs"],
+      "stack": ["Python", "SQL", "FBDI", "HDL", "REST APIs"],
       "links": [],
       "status": "in-development",
       "image": "/images/conversion-automation.svg"
