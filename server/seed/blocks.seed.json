@@ -176,13 +176,13 @@
         { "id": "per_people",  "label": "PER_ALL_PEOPLE_F",      "x": 200, "y": 20  },
         { "id": "per_assign",  "label": "PER_ALL_ASSIGNMENTS_M",  "x": 200, "y": 160 },
         { "id": "per_grades",  "label": "PER_GRADES_F",           "x": 430, "y": 160 },
-        { "id": "pay_payroll", "label": "PAY_ALL_PAYROLLS_F",     "x": 50,  "y": 300 },
+        { "id": "hr_org",      "label": "HR_ALL_ORGANIZATION_UNITS_F", "x": 30,  "y": 300 },
         { "id": "per_jobs",    "label": "PER_JOBS_F",             "x": 260, "y": 300 }
       ],
       "edges": [
         { "from": "per_people", "to": "per_assign",  "label": "PERSON_ID"  },
         { "from": "per_assign", "to": "per_grades",  "label": "GRADE_ID"   },
-        { "from": "per_assign", "to": "pay_payroll", "label": "PAYROLL_ID" },
+        { "from": "per_assign", "to": "hr_org",      "label": "ORGANIZATION_ID" },
         { "from": "per_assign", "to": "per_jobs",    "label": "JOB_ID"     }
       ]
     }
