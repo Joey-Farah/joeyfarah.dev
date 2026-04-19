@@ -124,7 +124,7 @@
     "type": "timeline",
     "title": "Resume",
     "order": 2,
-    "visible": true,
+    "visible": false,
     "content": {
       "entries": [
         {
