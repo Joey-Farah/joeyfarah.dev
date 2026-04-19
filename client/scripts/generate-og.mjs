@@ -32,20 +32,18 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <rect x="60" y="100" width="1080" height="470" fill="#0d0d0d" stroke="#06b6d4" stroke-opacity="0.2"/>
 
   <!-- Prompt line -->
-  <text x="100" y="180" font-family="JetBrains Mono, monospace" font-size="22" fill="#06b6d4">$ whoami</text>
+  <text x="100" y="180" font-family="JetBrains Mono, monospace" font-size="22" fill="#06b6d4">$ ./boot</text>
 
   <!-- Name -->
-  <text x="100" y="270" font-family="JetBrains Mono, monospace" font-size="72" font-weight="700" fill="#e2e8f0">Joey Farah</text>
+  <text x="100" y="275" font-family="JetBrains Mono, monospace" font-size="72" font-weight="700" fill="#e2e8f0">Joey Farah</text>
 
-  <!-- Role -->
-  <text x="100" y="330" font-family="JetBrains Mono, monospace" font-size="28" fill="#06b6d4">Oracle Cloud ERP Architect &amp; Developer</text>
-
-  <!-- Stats row -->
-  <text x="100" y="420" font-family="JetBrains Mono, monospace" font-size="18" fill="#e2e8f0" fill-opacity="0.6">// 200K+ invoice migrations  //  Fortune 500 deployments</text>
-  <text x="100" y="450" font-family="JetBrains Mono, monospace" font-size="18" fill="#e2e8f0" fill-opacity="0.6">// open-source data tools     //  built with react + express</text>
+  <!-- Taglines -->
+  <text x="100" y="335" font-family="JetBrains Mono, monospace" font-size="26" fill="#06b6d4">Oracle Cloud Technical Consultant</text>
+  <text x="100" y="378" font-family="JetBrains Mono, monospace" font-size="26" fill="#06b6d4">Independent Developer</text>
+  <text x="100" y="421" font-family="JetBrains Mono, monospace" font-size="26" fill="#06b6d4">Globally Ranked Gamer</text>
 
   <!-- URL -->
-  <text x="100" y="530" font-family="JetBrains Mono, monospace" font-size="20" fill="#06b6d4">→ joeyfarah.dev</text>
+  <text x="100" y="530" font-family="JetBrains Mono, monospace" font-size="20" fill="#e2e8f0" fill-opacity="0.4">→ joeyfarah.dev</text>
 </svg>`;
 
 const resvg = new Resvg(svg, {
