@@ -26,6 +26,16 @@ const SECTION_IDS = NAV_LINKS.map((l) => l.id);
 const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
   const activeId = useActiveSection(SECTION_IDS);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    history.pushState(null, '', `#${id}`);
+  };
+
   return (
     <AnimatePresence>
       {!showHero && (
@@ -47,6 +57,7 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
                 <li key={href}>
                   <a
                     href={href}
+                    onClick={(e) => handleNavClick(e, id)}
                     aria-label={`Navigate to ${label} section`}
                     aria-current={isActive ? 'true' : undefined}
                     className={

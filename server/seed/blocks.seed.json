@@ -285,7 +285,7 @@
     "content": {
       "description": "Melee coaching and content — ~400 Patreon members, 100+ Savestates and Premium Access to Slippi Ranked Stats. Deep-dives on improving your Falco, matchup breakdowns, and gameplay analysis.",
       "image": "/images/falco.png",
-      "stack": ["Patreon", "YouTube"],
+      "stack": [],
       "links": [
         { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" },
         { "label": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm" }
@@ -368,6 +368,7 @@
       "links": [
         { "platform": "LinkedIn", "url": "https://www.linkedin.com/in/joey-farah/", "display": "linkedin.com/in/joey-farah" },
         { "platform": "GitHub", "url": "https://github.com/Joey-Farah", "display": "github.com/Joey-Farah" },
+        { "platform": "Discord", "url": "https://discord.com/users/101538614428602368", "display": "discord: joeydonuts" },
         { "platform": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm", "display": "youtube.com/@joeydonutsssbm" }
       ]
     }

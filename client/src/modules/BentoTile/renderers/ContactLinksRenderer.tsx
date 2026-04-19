@@ -52,7 +52,7 @@ const ContactLinksRenderer: React.FC<ContactLinksRendererProps> = ({ content }) 
               <a
                 href={link.url}
                 aria-label={isCopied ? `${link.platform} — copied!` : link.platform}
-                className="text-brand-text hover:text-brand-primary transition-colors duration-150 underline-offset-2 hover:underline"
+                className="text-brand-primary underline underline-offset-2 decoration-brand-primary/40 hover:decoration-brand-primary transition-colors duration-150"
                 {...(isEmail
                   ? { onClick: (e) => handleEmailClick(e, link) }
                   : { target: '_blank', rel: 'noopener noreferrer' })}
@@ -78,7 +78,7 @@ const ContactLinksRenderer: React.FC<ContactLinksRendererProps> = ({ content }) 
           <a
             href="/api/resume"
             download="joey-farah-resume.txt"
-            className="text-brand-text hover:text-brand-primary transition-colors duration-150 underline-offset-2 hover:underline"
+            className="text-brand-primary underline underline-offset-2 decoration-brand-primary/40 hover:decoration-brand-primary transition-colors duration-150"
             aria-label="Download resume"
           >
             joey-farah-resume.txt
