@@ -17,20 +17,8 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{"query":"{ me { projects { edges { node { environments { edges { node { id } } } services { edges { node { id } } } } } } } }"}')
 
-          SERVICE_ID=$(echo "$RESPONSE" | python3 -c '
-import json,sys
-d=json.load(sys.stdin)
-if not d.get("data") or not d["data"].get("me"):
-    print("ERROR: Railway API auth failed. Response:", d, file=sys.stderr); sys.exit(1)
-print(d["data"]["me"]["projects"]["edges"][0]["node"]["services"]["edges"][0]["node"]["id"])
-')
-          ENV_ID=$(echo "$RESPONSE" | python3 -c '
-import json,sys
-d=json.load(sys.stdin)
-if not d.get("data") or not d["data"].get("me"):
-    print("ERROR: Railway API auth failed. Response:", d, file=sys.stderr); sys.exit(1)
-print(d["data"]["me"]["projects"]["edges"][0]["node"]["environments"]["edges"][0]["node"]["id"])
-')
+          SERVICE_ID=$(echo "$RESPONSE" | python3 -c 'import json,sys; d=json.load(sys.stdin); print(d["data"]["me"]["projects"]["edges"][0]["node"]["services"]["edges"][0]["node"]["id"])')
+          ENV_ID=$(echo "$RESPONSE" | python3 -c 'import json,sys; d=json.load(sys.stdin); print(d["data"]["me"]["projects"]["edges"][0]["node"]["environments"]["edges"][0]["node"]["id"])')
 
           curl -sf -X POST https://backboard.railway.app/graphql/v2 \
             -H "Authorization: Bearer $RAILWAY_TOKEN" \
