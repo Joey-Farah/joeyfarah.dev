@@ -12,25 +12,13 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
-          # Discover service + environment IDs from the API
           RESPONSE=$(curl -sf -X POST https://backboard.railway.app/graphql/v2 \
             -H "Authorization: Bearer $RAILWAY_TOKEN" \
             -H "Content-Type: application/json" \
             -d '{"query":"{ me { projects { edges { node { environments { edges { node { id } } } services { edges { node { id } } } } } } } }"}')
 
-          SERVICE_ID=$(echo "$RESPONSE" | python3 -c "
-import json, sys
-d = json.load(sys.stdin)
-proj = d['data']['me']['projects']['edges'][0]['node']
-print(proj['services']['edges'][0]['node']['id'])
-")
-
-          ENV_ID=$(echo "$RESPONSE" | python3 -c "
-import json, sys
-d = json.load(sys.stdin)
-proj = d['data']['me']['projects']['edges'][0]['node']
-print(proj['environments']['edges'][0]['node']['id'])
-")
+          SERVICE_ID=$(echo "$RESPONSE" | python3 -c 'import json,sys; d=json.load(sys.stdin); print(d["data"]["me"]["projects"]["edges"][0]["node"]["services"]["edges"][0]["node"]["id"])')
+          ENV_ID=$(echo "$RESPONSE" | python3 -c 'import json,sys; d=json.load(sys.stdin); print(d["data"]["me"]["projects"]["edges"][0]["node"]["environments"]["edges"][0]["node"]["id"])')
 
           curl -sf -X POST https://backboard.railway.app/graphql/v2 \
             -H "Authorization: Bearer $RAILWAY_TOKEN" \
