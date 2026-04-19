@@ -72,10 +72,10 @@ const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
     <div
       data-testid="erd-tile-renderer"
       ref={containerRef}
-      className="flex flex-row flex-1 p-4 gap-4 font-mono text-brand-text text-sm overflow-hidden min-h-0 items-start"
+      className="flex flex-col md:flex-row flex-1 p-4 gap-4 font-mono text-brand-text text-sm overflow-hidden min-h-0 items-start"
     >
       {/* Left: text content */}
-      <div className="flex flex-col gap-3 w-2/5 shrink-0">
+      <div className="flex flex-col gap-3 w-full md:w-2/5 md:shrink-0">
         {/* Status badge */}
         {status && (
           <div className="shrink-0">
@@ -99,7 +99,7 @@ const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
 
       {/* Right: ERD diagram */}
       {nodes.length > 0 && (
-        <div className="flex-1 min-h-0 min-w-0 flex items-start -mt-8">
+        <div className="flex-1 min-h-0 min-w-0 flex items-start md:-mt-8">
           <svg
             viewBox={viewBox}
             className="w-full h-full"
