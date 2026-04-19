@@ -173,17 +173,17 @@
       "status": "in-development",
       "description": "Interactive ERD explorer with the entire Oracle Cloud database mapped. Select any table and extract a diagram of every table it connects to — across HCM, Payroll, Financials, Procurement, and more. Eliminates schema guesswork when writing reports, conversions, and cross-module queries.",
       "nodes": [
-        { "id": "per_people", "label": "PER_ALL_PEOPLE_F", "x": 50, "y": 30 },
-        { "id": "per_assign", "label": "PER_ALL_ASSIGNMENTS_M", "x": 50, "y": 160 },
-        { "id": "pay_payroll", "label": "PAY_ALL_PAYROLLS_F", "x": 50, "y": 290 },
-        { "id": "ap_invoices", "label": "AP_INVOICES_ALL", "x": 310, "y": 160 },
-        { "id": "gl_cc", "label": "GL_CODE_COMBINATIONS", "x": 180, "y": 390 }
+        { "id": "per_people",  "label": "PER_ALL_PEOPLE_F",      "x": 200, "y": 20  },
+        { "id": "per_assign",  "label": "PER_ALL_ASSIGNMENTS_M",  "x": 200, "y": 160 },
+        { "id": "per_grades",  "label": "PER_GRADES_F",           "x": 430, "y": 160 },
+        { "id": "pay_payroll", "label": "PAY_ALL_PAYROLLS_F",     "x": 50,  "y": 300 },
+        { "id": "per_jobs",    "label": "PER_JOBS_F",             "x": 260, "y": 300 }
       ],
       "edges": [
-        { "from": "per_people", "to": "per_assign", "label": "PERSON_ID" },
+        { "from": "per_people", "to": "per_assign",  "label": "PERSON_ID"  },
+        { "from": "per_assign", "to": "per_grades",  "label": "GRADE_ID"   },
         { "from": "per_assign", "to": "pay_payroll", "label": "PAYROLL_ID" },
-        { "from": "pay_payroll", "to": "gl_cc", "label": "COST_CENTER_SEG" },
-        { "from": "ap_invoices", "to": "gl_cc", "label": "CODE_COMBINATION_ID" }
+        { "from": "per_assign", "to": "per_jobs",    "label": "JOB_ID"     }
       ]
     }
   },
