@@ -77,6 +77,19 @@ function getLayout(slug: string): LayoutConfig {
   return LAYOUT_MAP[slug] ?? { colSpan: 1, rowSpan: 1 };
 }
 
+function splitLastPartialRow(
+  blocks: BentoBlock[],
+  gridCols: number
+): { mainBlocks: BentoBlock[]; lastRowBlocks: BentoBlock[] } {
+  let colCount = 0;
+  let lastFullEnd = 0;
+  blocks.forEach((block, i) => {
+    colCount += getLayout(block.slug).colSpan ?? 1;
+    if (colCount % gridCols === 0) lastFullEnd = i + 1;
+  });
+  return { mainBlocks: blocks.slice(0, lastFullEnd), lastRowBlocks: blocks.slice(lastFullEnd) };
+}
+
 /**
  * BentoGrid — lays out BentoTile components in a responsive CSS grid.
  *
@@ -97,6 +110,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
   const enterpriseBlocks = renderable.filter(() => false);
 
   const projectBlocks = renderable.filter((b) => b.type === 'project-card' || b.type === 'erd-tile');
+  const { mainBlocks: mainProjectBlocks, lastRowBlocks: lastProjectRow } = splitLastPartialRow(projectBlocks, 3);
 
   const personalBlocks = renderable.filter((b) => b.type === 'reading-list' || b.type === 'music-list');
 
@@ -130,10 +144,25 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       {projectBlocks.length > 0 && (
         <ScrollFadeSection id="projects" ariaLabel="Personal projects">
           <p className="font-mono text-xs text-brand-text/40 px-1 mb-3">// projects</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
-            {projectBlocks.map((block) => (
-              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
-            ))}
+          <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
+              {mainProjectBlocks.map((block) => (
+                <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+              ))}
+            </div>
+            {lastProjectRow.length > 0 && (
+              <div
+                className={`grid grid-cols-1 gap-4 ${
+                  lastProjectRow.length === 1
+                    ? 'md:grid-cols-1 lg:w-1/3 lg:mx-auto'
+                    : 'md:grid-cols-2 lg:w-2/3 lg:mx-auto'
+                }`}
+              >
+                {lastProjectRow.map((block) => (
+                  <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+                ))}
+              </div>
+            )}
           </div>
         </ScrollFadeSection>
       )}

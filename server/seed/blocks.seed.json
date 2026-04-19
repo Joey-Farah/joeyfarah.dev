@@ -175,7 +175,7 @@
       "nodes": [
         { "id": "per_people",  "label": "PER_ALL_PEOPLE_F",      "x": 200, "y": 20  },
         { "id": "per_assign",  "label": "PER_ALL_ASSIGNMENTS_M",  "x": 200, "y": 160 },
-        { "id": "per_grades",  "label": "PER_GRADES_F",           "x": 430, "y": 160 },
+        { "id": "per_grades",  "label": "PER_GRADES_F",           "x": 500, "y": 160 },
         { "id": "hr_org",      "label": "HR_ALL_ORGANIZATION_UNITS_F", "x": 30,  "y": 300 },
         { "id": "per_jobs",    "label": "PER_JOBS_F",             "x": 260, "y": 300 }
       ],

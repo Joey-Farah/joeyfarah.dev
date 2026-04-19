@@ -9,8 +9,8 @@ export interface ERDTileRendererProps {
 
 // ─── Layout constants ────────────────────────────────────────────────────────
 
-const NODE_WIDTH = 160;
-const NODE_HEIGHT = 36;
+const NODE_WIDTH = 200;
+const NODE_HEIGHT = 44;
 const PADDING = 48;
 const BRAND_PRIMARY = '#06b6d4';
 
@@ -72,7 +72,7 @@ const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
     <div
       data-testid="erd-tile-renderer"
       ref={containerRef}
-      className="flex flex-row flex-1 p-4 gap-4 font-mono text-brand-text text-sm overflow-hidden min-h-0"
+      className="flex flex-row flex-1 p-4 gap-4 font-mono text-brand-text text-sm overflow-hidden min-h-0 items-start"
     >
       {/* Left: text content */}
       <div className="flex flex-col gap-3 w-2/5 shrink-0">
@@ -99,13 +99,13 @@ const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
 
       {/* Right: ERD diagram */}
       {nodes.length > 0 && (
-        <div className="flex-1 min-h-0 min-w-0">
+        <div className="flex-1 min-h-0 min-w-0 flex items-start -mt-8">
           <svg
             viewBox={viewBox}
             className="w-full h-full"
             aria-label="Entity Relationship Diagram"
             role="img"
-            style={{ minHeight: 'max(150px, 30vh)' }}
+            style={{ minHeight: '280px', maxHeight: '380px' }}
           >
             {/* ── Edges ── */}
             {edges.map((edge, i) => {
@@ -145,7 +145,7 @@ const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
                     textAnchor="middle"
                     fill={BRAND_PRIMARY}
                     fillOpacity={0.8}
-                    fontSize={8}
+                    fontSize={11}
                     fontFamily="JetBrains Mono, monospace"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: shouldAnimate || prefersReducedMotion ? 1 : 0 }}
@@ -183,7 +183,7 @@ const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
                   textAnchor="middle"
                   dominantBaseline="middle"
                   fill={BRAND_PRIMARY}
-                  fontSize={9}
+                  fontSize={12}
                   fontFamily="JetBrains Mono, monospace"
                   fontWeight="600"
                 >
