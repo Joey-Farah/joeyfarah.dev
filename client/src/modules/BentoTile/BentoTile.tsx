@@ -39,14 +39,26 @@ export interface BentoTileProps {
  * Single-column on mobile (grid-column/row span are effectively ignored at 1-col layout),
  * proper spans kick in at md/lg breakpoints set by BentoGrid.
  */
+const COL_SPAN_CLASS: Record<number, string> = {
+  1: 'col-span-1',
+  2: 'col-span-1 md:col-span-2',
+  3: 'col-span-1 md:col-span-2 lg:col-span-3',
+};
+
+const ROW_SPAN_CLASS: Record<number, string> = {
+  1: '',
+  2: 'md:row-span-2',
+  3: 'md:row-span-3',
+};
+
 const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
   const colSpan = layout.colSpan ?? 1;
   const rowSpan = layout.rowSpan ?? 1;
 
-  const gridStyle: React.CSSProperties = {
-    gridColumn: `span ${colSpan}`,
-    gridRow: `span ${rowSpan}`,
-  };
+  const spanClasses = [
+    COL_SPAN_CLASS[colSpan] ?? 'col-span-1',
+    ROW_SPAN_CLASS[rowSpan] ?? '',
+  ].join(' ');
 
   const renderContent = () => {
     switch (block.type) {
@@ -107,10 +119,9 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
       data-testid="bento-tile"
       data-slug={block.slug}
       id={block.slug}
-      style={gridStyle}
       aria-label={block.title}
       role="region"
-      className="flex flex-col bg-brand-bg border border-brand-primary/20 rounded-xl overflow-hidden min-h-[120px] scroll-mt-16"
+      className={`flex flex-col bg-brand-bg border border-brand-primary/20 rounded-xl overflow-hidden min-h-[120px] scroll-mt-16 ${spanClasses}`}
       whileHover={{ borderColor: 'rgba(6,182,212,0.5)', boxShadow: '0 0 16px rgba(6,182,212,0.08)' }}
       transition={{ duration: 0.2 }}
     >
