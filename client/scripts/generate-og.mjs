@@ -52,6 +52,6 @@ const resvg = new Resvg(svg, {
 });
 const png = resvg.render().asPng();
 
-const out = resolve(__dirname, '..', 'public', 'og.png');
+const out = resolve(__dirname, '..', 'public', 'og-v2.png');
 writeFileSync(out, png);
 console.log(`[og] wrote ${out} (${png.length} bytes)`);
