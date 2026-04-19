@@ -59,7 +59,7 @@ export interface BentoGridProps {
  */
 const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'professional-timeline': { colSpan: 3, rowSpan: 1 },
-  'oracle-db-mapper':      { colSpan: 1, rowSpan: 1 },
+  'oracle-db-mapper':      { colSpan: 2, rowSpan: 1 },
   'conversion-automation': { colSpan: 1, rowSpan: 1 },
   'fusion-sql-developer':  { colSpan: 1, rowSpan: 1 },
   'slippi-ranked-stats':   { colSpan: 1, rowSpan: 1 },
