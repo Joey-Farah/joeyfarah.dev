@@ -2,6 +2,10 @@
 
 Read this file before writing any code. It describes the current project state, what has been built, and what comes next.
 
+## Security
+
+Never read `.env`, `.env.*`, or any file containing secrets or credentials. If a task requires a secret value, ask Joey to supply it directly.
+
 ---
 
 ## Project
