@@ -188,6 +188,23 @@ Pick **one** or skip. Both are a single `<script>` tag in `client/index.html` �
 
 ---
 
+## Immediate Next Steps (pick up here next session)
+
+1. **Cloudflare email routing** — set up forwarding from `joey@joeyfarah.dev` → `joeyefarah@gmail.com` in the Cloudflare dashboard (~2 min). Then add email back to the contact tile in `server/seed/blocks.seed.json` and re-seed:
+   ```json
+   { "platform": "Email", "url": "mailto:joey@joeyfarah.dev", "display": "joey@joeyfarah.dev" }
+   ```
+
+2. **Spotify-to-MP3 `.env`** — the repo at `C:\Users\joeyf\Documents\GitHub\ClaudeCoding\spotify-to-mp3` has `.env.example` and dotenv support in place but the actual `.env` hasn't been created yet. Run:
+   ```bash
+   cat ~/.spotdl/config.json | grep -E "client_id|client_secret"
+   ```
+   Then create `.env` in the project root with `SPOTIFY_CLIENT_ID=` and `SPOTIFY_CLIENT_SECRET=`.
+
+3. **Spotify-to-MP3 portfolio tile** — once the repo has real content, add a `project-card` tile for it in `server/seed/blocks.seed.json` (see slippi-ranked-stats as a template) and seed to prod.
+
+---
+
 ## Ideas Backlog
 
 ### Not yet done — needs Joey's content or a judgment call
