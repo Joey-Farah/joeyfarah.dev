@@ -1,0 +1,42 @@
+<svg viewBox="0 0 240 110" xmlns="http://www.w3.org/2000/svg">
+  <rect width="240" height="110" fill="#0a0a0a" rx="6"/>
+  <text x="12" y="16" font-family="monospace" font-size="8" fill="#06b6d4" opacity="0.5">// timeline</text>
+
+  <text x="58" y="28" font-family="monospace" font-size="7" fill="#06b6d4" opacity="0.7" text-anchor="middle">work</text>
+  <text x="182" y="28" font-family="monospace" font-size="7" fill="#3b82f6" opacity="0.7" text-anchor="middle">play</text>
+
+  <line x1="120" y1="32" x2="120" y2="102" stroke="#06b6d4" stroke-width="0.5" stroke-opacity="0.35" stroke-dasharray="2,2"/>
+
+  <g font-family="monospace" font-size="6.5" fill="#e2e8f0">
+    <line x1="118" y1="42" x2="108" y2="42" stroke="#06b6d4" stroke-width="0.6" stroke-opacity="0.55"/>
+    <circle cx="120" cy="42" r="2" fill="#06b6d4"/>
+    <text x="105" y="44" text-anchor="end" opacity="0.75">2019 · Elire</text>
+
+    <line x1="118" y1="60" x2="108" y2="60" stroke="#06b6d4" stroke-width="0.6" stroke-opacity="0.55"/>
+    <circle cx="120" cy="60" r="2" fill="#06b6d4"/>
+    <text x="105" y="62" text-anchor="end" opacity="0.7">2024 · DB Mapper</text>
+
+    <line x1="118" y1="78" x2="108" y2="78" stroke="#06b6d4" stroke-width="0.6" stroke-opacity="0.55"/>
+    <circle cx="120" cy="78" r="2" fill="#06b6d4"/>
+    <text x="105" y="80" text-anchor="end" opacity="0.7">2025 · Conv. Auto</text>
+
+    <line x1="118" y1="96" x2="108" y2="96" stroke="#06b6d4" stroke-width="0.7" stroke-opacity="0.8"/>
+    <circle cx="120" cy="96" r="2.6" fill="#06b6d4"/>
+    <circle cx="120" cy="96" r="5" fill="none" stroke="#06b6d4" stroke-width="0.5" stroke-opacity="0.5"/>
+    <text x="105" y="98" text-anchor="end" fill="#06b6d4" opacity="0.95">2026 · this site</text>
+  </g>
+
+  <g font-family="monospace" font-size="6.5" fill="#e2e8f0">
+    <line x1="122" y1="51" x2="132" y2="51" stroke="#3b82f6" stroke-width="0.6" stroke-opacity="0.55"/>
+    <circle cx="120" cy="51" r="2" fill="#3b82f6"/>
+    <text x="135" y="53" opacity="0.7">2020 · Lombardi</text>
+
+    <line x1="122" y1="69" x2="132" y2="69" stroke="#3b82f6" stroke-width="0.6" stroke-opacity="0.55"/>
+    <circle cx="120" cy="69" r="2" fill="#3b82f6"/>
+    <text x="135" y="71" opacity="0.7">2021 · MN PR #1</text>
+
+    <line x1="122" y1="87" x2="132" y2="87" stroke="#3b82f6" stroke-width="0.6" stroke-opacity="0.55"/>
+    <circle cx="120" cy="87" r="2" fill="#3b82f6"/>
+    <text x="135" y="89" opacity="0.7">2025 · SSBMRank</text>
+  </g>
+</svg>
