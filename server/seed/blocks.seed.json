@@ -112,6 +112,12 @@
           "slug": "fitness-ring-analytics"
         },
         {
+          "year": "2026",
+          "label": "Spotify to MP3",
+          "detail": "Windows desktop downloader",
+          "slug": "spotify-to-mp3"
+        },
+        {
           "year": "2025",
           "label": "Retired from Competition",
           "detail": "(Baby on the way!)"
@@ -261,6 +267,23 @@
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/joeyfarah.dev" }
       ],
       "status": "live"
+    }
+  },
+  {
+    "slug": "spotify-to-mp3",
+    "type": "project-card",
+    "title": "Spotify to MP3",
+    "order": 9,
+    "visible": true,
+    "content": {
+      "description": "Windows desktop app that downloads Spotify playlists and albums as 320 kbps MP3s with embedded metadata. Paste a link, queue multiple URLs, and download into named folders. Electron + Python wrapper around spotDL with bundled FFmpeg integration.",
+      "stack": ["Electron", "Python", "spotDL", "PyInstaller"],
+      "links": [
+        { "label": "GitHub", "url": "https://github.com/Joey-Farah/spotify-to-mp3" },
+        { "label": "Download", "url": "https://github.com/Joey-Farah/spotify-to-mp3/releases/latest" }
+      ],
+      "status": "live",
+      "image": "/images/spotify-to-mp3.svg"
     }
   },
   {
