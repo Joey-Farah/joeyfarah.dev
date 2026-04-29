@@ -22,7 +22,7 @@ const ScrollFadeSection: React.FC<ScrollFadeSectionProps> = ({ id, ariaLabel, ch
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.15, 1], [0, 1, 1]);
 
   if (prefersReducedMotion) {
     return (
