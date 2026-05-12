@@ -66,24 +66,6 @@ const ContactLinksRenderer: React.FC<ContactLinksRendererProps> = ({ content }) 
             </div>
           );
         })}
-
-        {/* Resume download */}
-        <div className="flex items-center gap-2 py-2 md:py-1.5" role="listitem">
-          <span className="select-none shrink-0" style={{ color: '#06b6d4' }} aria-hidden="true">
-            {'$'}
-          </span>
-          <span className="text-brand-text/50 select-none shrink-0" aria-hidden="true">
-            {'open'}
-          </span>
-          <a
-            href="/api/resume"
-            download="joey-farah-resume.txt"
-            className="text-brand-primary underline underline-offset-2 decoration-brand-primary/40 hover:decoration-brand-primary transition-colors duration-150"
-            aria-label="Download resume"
-          >
-            joey-farah-resume.txt
-          </a>
-        </div>
       </div>
 
 {content.links.length === 0 && (

@@ -45,7 +45,6 @@ The site is **fully built and visually polished**, but is in a **pre-launch stri
 - Terminal boot sequence hero → bento grid scroll transition
 - Sticky NavBar (trimmed to `// contact` only while tiles are hidden)
 - Cyan scroll progress bar fixed at top of viewport
-- `GET /api/resume` — downloadable plain-text resume (minimal placeholder)
 - Custom 404 page (terminal-themed)
 - SEO: OG tags, Twitter Card, Schema.org JSON-LD, robots.txt
 - Favicon: `>_` SVG glyph
@@ -202,6 +201,14 @@ Pick **one** or skip. Both are a single `<script>` tag in `client/index.html` �
    Then create `.env` in the project root with `SPOTIFY_CLIENT_ID=` and `SPOTIFY_CLIENT_SECRET=`.
 
 3. **Spotify-to-MP3 portfolio tile** — once the repo has real content, add a `project-card` tile for it in `server/seed/blocks.seed.json` (see slippi-ranked-stats as a template) and seed to prod.
+
+4. **Verify Cloudflare proxy state for `joeyfarah.dev`** — Cloudflare dashboard is showing real edge analytics (29 uniques / 1.27k requests in 24h on 2026-05-12), which means at least one DNS record is **proxied (orange cloud)**, contradicting the "DNS only (grey cloud)" assumption baked into §2 of this file. Open Cloudflare → DNS and note the proxy state of the `@` and `www` records, then update §2 here to match reality.
+
+5. **Confirm TLS mode is Full (strict)** — if records are proxied, the TLS chain is browser → Cloudflare → Railway. In Cloudflare → SSL/TLS → Overview, verify the mode is **Full (strict)**. Anything else (especially "Flexible") leaves the Cloudflare↔Railway leg unencrypted and must be fixed before doing anything else.
+
+6. **Wire up Cloudflare Analytics API access for Claude** — once proxy state is confirmed, create a Cloudflare API token at [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens) scoped to *Zone → Analytics → Read* + *Zone → Zone → Read* for the `joeyfarah.dev` zone. Also grab the zone ID (right sidebar of the Cloudflare overview). With those two values, Claude can pull traffic, top paths, bot vs human, country breakdown, and status codes via the GraphQL Analytics API — same data as the dashboard plus per-path detail the free UI hides.
+
+7. **Refresh site content** — the site is still in the "pre-launch stripped state" described in the Current State section: only `hero` and `contact` tiles are visible, everything else is `visible: false` in `server/seed/blocks.seed.json`. Real content (Elire timeline from resume, finalized project cards, Habitat/RingConn copy) needs to land soon so the bento grid can be flipped back on. Edit the seed JSON → `npm run seed` against prod Atlas → commit + push.
 
 ---
 

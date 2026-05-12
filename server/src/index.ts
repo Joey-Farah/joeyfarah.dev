@@ -8,7 +8,6 @@ import compression from 'compression';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { createBlocksRouter } from './routes/blocks';
-import { resumeRouter } from './routes/resume';
 import { createSitemapRouter } from './routes/sitemap';
 import { healthRouter } from './routes/health';
 import { slippiRouter } from './routes/slippi';
@@ -66,7 +65,6 @@ const repo = new MongoBlockRepository();
 // Mount API routes
 app.use('/api/blocks', apiLimiter, createBlocksRouter(repo));
 app.use('/api', apiLimiter, slippiRouter);
-app.use('/api', apiLimiter, resumeRouter);
 app.use('/', createSitemapRouter(repo));
 app.use('/', healthRouter);
 
