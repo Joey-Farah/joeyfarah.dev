@@ -222,8 +222,7 @@
       "stack": ["Tauri", "TypeScript", "Svelte", "Python", "Rust"],
       "links": [
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats" },
-        { "label": "Download", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats/releases/latest" },
-        { "label": "Slippi Profile", "url": "https://slippi.gg/user/joey-870" }
+        { "label": "Download", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats/releases/latest" }
       ],
       "status": "live",
       "image": "/images/slippi-logo.svg"

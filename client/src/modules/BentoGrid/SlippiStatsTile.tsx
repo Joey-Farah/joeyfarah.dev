@@ -23,8 +23,12 @@ const SlippiStatsTile: React.FC = () => {
   }, []);
 
   return (
-    <motion.div
-      className="rounded-xl border border-brand-primary/20 bg-brand-bg overflow-hidden font-mono text-sm w-fit"
+    <motion.a
+      href="https://slippi.gg/user/joey-870"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="View Slippi profile (joey-870)"
+      className="block rounded-xl border border-brand-primary/20 bg-brand-bg overflow-hidden font-mono text-sm w-fit"
       whileHover={{ borderColor: 'rgba(6,182,212,0.5)', boxShadow: '0 0 16px rgba(6,182,212,0.08)' }}
       transition={{ duration: 0.2 }}
     >
@@ -35,6 +39,7 @@ const SlippiStatsTile: React.FC = () => {
         <span className="ml-2 text-xs text-brand-text/40">
           slippi ranked{stats?.season ? ` — ${stats.season}` : ''}
         </span>
+        <span className="ml-2 text-xs text-brand-primary/60" aria-hidden="true">↗</span>
         <span className="ml-auto flex items-center gap-1.5 text-xs text-green-400">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
           live
@@ -82,7 +87,7 @@ const SlippiStatsTile: React.FC = () => {
           </>
         )}
       </div>
-    </motion.div>
+    </motion.a>
   );
 };
 
