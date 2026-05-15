@@ -53,17 +53,17 @@ export interface BentoGridProps {
  * LayoutConfig per slug — derived from ARCHITECTURE.md Bento Grid Layout Spec.
  *
  * professional-timeline: colSpan 2, rowSpan 3
- * oracle-db-mapper:      colSpan 1, rowSpan 2
+ * oracle-db-diagram:     colSpan 1, rowSpan 2
  * all other project/contact tiles: colSpan 1, rowSpan 1 (default)
  * contact:               colSpan 3, rowSpan 1
  */
 const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'professional-timeline': { colSpan: 3, rowSpan: 1 },
-  'oracle-db-mapper':      { colSpan: 2, rowSpan: 1 },
-  'conversion-automation': { colSpan: 1, rowSpan: 1 },
+  'oracle-db-diagram':     { colSpan: 2, rowSpan: 1 },
+  'conversion-assistant':  { colSpan: 1, rowSpan: 1 },
   'fusion-sql-developer':  { colSpan: 1, rowSpan: 1 },
   'slippi-ranked-stats':   { colSpan: 1, rowSpan: 1 },
-  'fitness-ring-analytics':{ colSpan: 1, rowSpan: 1 },
+  'trendarc':              { colSpan: 1, rowSpan: 1 },
   'joeyfarah-dev':         { colSpan: 1, rowSpan: 1 },
   'habitat':               { colSpan: 1, rowSpan: 1 },
   'lombardi-project':      { colSpan: 1, rowSpan: 1 },

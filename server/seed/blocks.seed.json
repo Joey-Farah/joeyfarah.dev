@@ -49,15 +49,15 @@
         },
         {
           "year": "2024",
-          "label": "Oracle Cloud Database Explorer",
+          "label": "Oracle Cloud Database Diagram",
           "detail": "Complete Oracle Cloud schema — extract any table's connections",
-          "slug": "oracle-db-mapper"
+          "slug": "oracle-db-diagram"
         },
         {
           "year": "2025",
-          "label": "Conversion Automation",
+          "label": "Conversion Assistant Tool",
           "detail": "HDL, FBDI & REST API toolkit",
-          "slug": "conversion-automation"
+          "slug": "conversion-assistant"
         },
         {
           "year": "2026",
@@ -107,9 +107,9 @@
         },
         {
           "year": "2026",
-          "label": "RC Analytics",
+          "label": "TrendArc",
           "detail": "Fitness biometric dashboard",
-          "slug": "fitness-ring-analytics"
+          "slug": "trendarc"
         },
         {
           "year": "2026",
@@ -170,33 +170,23 @@
     }
   },
   {
-    "slug": "oracle-db-mapper",
-    "type": "erd-tile",
-    "title": "Oracle Cloud Database Explorer",
+    "slug": "oracle-db-diagram",
+    "type": "project-card",
+    "title": "Oracle Cloud Database Diagram",
     "order": 3,
     "visible": true,
     "content": {
-      "status": "in-development",
       "description": "Interactive ERD explorer with the entire Oracle Cloud database mapped. Select any table and extract a diagram of every table it connects to — across HCM, Payroll, Financials, Procurement, and more. Eliminates schema guesswork when writing reports, conversions, and cross-module queries.",
-      "nodes": [
-        { "id": "per_people",  "label": "PER_ALL_PEOPLE_F",      "x": 200, "y": 20  },
-        { "id": "per_assign",  "label": "PER_ALL_ASSIGNMENTS_M",  "x": 200, "y": 160 },
-        { "id": "per_grades",  "label": "PER_GRADES_F",           "x": 500, "y": 160 },
-        { "id": "hr_org",      "label": "HR_ALL_ORGANIZATION_UNITS_F", "x": 30,  "y": 300 },
-        { "id": "per_jobs",    "label": "PER_JOBS_F",             "x": 260, "y": 300 }
-      ],
-      "edges": [
-        { "from": "per_people", "to": "per_assign",  "label": "PERSON_ID"  },
-        { "from": "per_assign", "to": "per_grades",  "label": "GRADE_ID"   },
-        { "from": "per_assign", "to": "hr_org",      "label": "ORGANIZATION_ID" },
-        { "from": "per_assign", "to": "per_jobs",    "label": "JOB_ID"     }
-      ]
+      "stack": ["Python", "Dash", "Cytoscape", "NetworkX", "Oracle Cloud"],
+      "links": [],
+      "status": "live",
+      "image": "/images/oracle-db-diagram.png"
     }
   },
   {
-    "slug": "conversion-automation",
+    "slug": "conversion-assistant",
     "type": "project-card",
-    "title": "Conversion Automation",
+    "title": "Conversion Assistant Tool",
     "order": 5,
     "visible": true,
     "content": {
@@ -204,7 +194,7 @@
       "stack": ["Python", "SQL", "FBDI", "HDL", "REST APIs"],
       "links": [],
       "status": "in-development",
-      "image": "/images/conversion-automation.svg"
+      "image": "/images/conversion-assistant.svg"
     }
   },
   {
@@ -232,24 +222,27 @@
       "stack": ["Tauri", "TypeScript", "Svelte", "Python", "Rust"],
       "links": [
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats" },
-        { "label": "Download", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats/releases/latest" }
+        { "label": "Download", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats/releases/latest" },
+        { "label": "Slippi Profile", "url": "https://slippi.gg/user/joey-870" }
       ],
       "status": "live",
       "image": "/images/slippi-logo.svg"
     }
   },
   {
-    "slug": "fitness-ring-analytics",
+    "slug": "trendarc",
     "type": "project-card",
-    "title": "RC Analytics",
+    "title": "TrendArc",
     "order": 9,
     "visible": true,
     "content": {
       "description": "Fitness biometric dashboard. Visualizes sleep architecture, HRV trends, SpO\u2082 dips, and resting heart rate with interactive time-series charts. Supports CSV import for offline analysis.",
       "stack": ["Python", "Streamlit", "Plotly", "pandas"],
-      "links": [],
-      "status": "in-development",
-      "image": "/images/rc-analytics.svg"
+      "links": [
+        { "label": "Live site", "url": "https://trendarc.app" }
+      ],
+      "status": "live",
+      "image": "/images/trendarc.svg"
     }
   },
   {

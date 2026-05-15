@@ -33,11 +33,11 @@ The site is **fully built and visually polished**, but is in a **pre-launch stri
 
 ### What's built but hidden (`visible: false` in seed)
 - `professional-timeline` — simplified to single Elire entry; placeholder accomplishment text
-- `oracle-db-mapper` — ERD tile with SVG pathLength draw animation
-- `conversion-automation` — enterprise project card, marked in-development
+- `oracle-db-diagram` — project card with full Cytoscape ERD screenshot from the live app
+- `conversion-assistant` — enterprise project card (Conversion Assistant Tool), marked in-development
 - `fusion-sql-developer` — enterprise project card, marked in-development
 - `slippi-ranked-stats` — personal project card, links to GitHub + releases
-- `fitness-ring-analytics` — personal project card, links to live Railway app + GitHub
+- `trendarc` — personal project card (TrendArc fitness biometric dashboard), live at trendarc.app
 - `habitat` — personal project card, marked in-development
 - `lombardi-project` — personal project card, links to Patreon
 

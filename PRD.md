@@ -26,7 +26,7 @@ A modern, dark-mode, single-page portfolio application built on the MERN stack, 
 14. As a visitor, I want the Database Mapper tile to visually draw an ERD diagram as I scroll into view, so that the animation itself demonstrates frontend engineering skill.
 15. As a visitor, I want the ERD animation to be driven by real node/edge data from the seed, so that it reflects an actual schema rather than a decorative placeholder.
 16. As a visitor, I want each enterprise tool tile to show the tool name, a short description, and the technical problem it solves, so that I understand its business value.
-17. As a visitor, I want the Conversion Automation Tool tile to describe what it automates and why, so that I can appreciate the scope of the work.
+17. As a visitor, I want the Conversion Assistant Tool tile to describe what it automates and why, so that I can appreciate the scope of the work.
 18. As a visitor, I want the Fusion SQL Developer tile to convey the depth of the SQL tooling built, so that I understand the owner's database engineering capabilities.
 19. As an enterprise client, I want each tile to have a terminal-chrome visual wrapper (title bar, prompt glyph), so that the aesthetic communicates professional-grade engineering.
 20. As a visitor, I want a section dedicated to personal projects, so that I can see the owner's range beyond enterprise consulting.

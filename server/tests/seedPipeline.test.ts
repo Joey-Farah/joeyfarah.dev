@@ -61,7 +61,7 @@ describe('seedPipeline — valid fixture seed (5 blocks)', () => {
 // End-to-end: production blocks.seed.json → InMemoryBlockRepository
 // ---------------------------------------------------------------------------
 
-describe('seedPipeline — production blocks.seed.json (10 blocks)', () => {
+describe('seedPipeline — production blocks.seed.json (15 blocks)', () => {
   let repo: InMemoryBlockRepository;
 
   beforeAll(async () => {
@@ -70,9 +70,9 @@ describe('seedPipeline — production blocks.seed.json (10 blocks)', () => {
     await repo.upsertBlocks(blocks);
   });
 
-  it('getBlocks() returns 10 blocks', async () => {
+  it('getBlocks() returns 15 blocks', async () => {
     const result = await repo.getBlocks();
-    expect(result.length).toBe(10);
+    expect(result.length).toBe(15);
   });
 
   it('all blocks have required envelope fields', async () => {
@@ -91,11 +91,11 @@ describe('seedPipeline — production blocks.seed.json (10 blocks)', () => {
     const expectedSlugs = [
       'hero',
       'professional-timeline',
-      'oracle-db-mapper',
-      'conversion-automation',
+      'oracle-db-diagram',
+      'conversion-assistant',
       'fusion-sql-developer',
       'slippi-ranked-stats',
-      'fitness-ring-analytics',
+      'trendarc',
       'habitat',
       'lombardi-project',
       'contact',

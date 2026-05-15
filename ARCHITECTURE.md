@@ -270,11 +270,11 @@ The CSS grid is a 3-column layout on desktop (â‰¥1024px), 2-column on tablet (â‰
 |---|---|---|---|---|
 | `hero` | `hero` | 3 | 2 | Full-width; handled by `ScrollTransitionOrchestrator`, not `BentoGrid` |
 | `professional-timeline` | `timeline` | 2 | 3 | Tall left tile in Professional section |
-| `oracle-db-mapper` | `erd-tile` | 1 | 2 | ERD draw animation tile |
-| `conversion-automation` | `project-card` | 1 | 1 | Enterprise suite tile |
+| `oracle-db-diagram` | `project-card` | 1 | 2 | Oracle Cloud DB Diagram screenshot |
+| `conversion-assistant` | `project-card` | 1 | 1 | Enterprise suite tile |
 | `fusion-sql-developer` | `project-card` | 1 | 1 | Enterprise suite tile |
 | `slippi-ranked-stats` | `project-card` | 1 | 1 | Personal projects tile |
-| `fitness-ring-analytics` | `project-card` | 1 | 1 | Personal projects tile |
+| `trendarc` | `project-card` | 1 | 1 | Personal projects tile |
 | `habitat` | `project-card` | 1 | 1 | `status: 'in-development'`; Rive animation |
 | `lombardi-project` | `project-card` | 1 | 1 | Storefront aesthetic; Patreon link |
 | `contact` | `contact-links` | 3 | 1 | Full-width footer tile |

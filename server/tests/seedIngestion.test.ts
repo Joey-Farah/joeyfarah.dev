@@ -75,9 +75,9 @@ describe('ingestSeed — valid seed', () => {
 // ---------------------------------------------------------------------------
 
 describe('ingestSeed — production blocks.seed.json', () => {
-  it('loads all 10 blocks without error', async () => {
+  it('loads all 15 blocks without error', async () => {
     const blocks = await ingestSeed(BLOCKS_SEED);
-    expect(blocks.length).toBe(10);
+    expect(blocks.length).toBe(15);
   });
 
   it('all required slugs are present', async () => {
@@ -85,11 +85,11 @@ describe('ingestSeed — production blocks.seed.json', () => {
     const slugs = blocks.map((b) => b.slug);
     expect(slugs).toContain('hero');
     expect(slugs).toContain('professional-timeline');
-    expect(slugs).toContain('oracle-db-mapper');
-    expect(slugs).toContain('conversion-automation');
+    expect(slugs).toContain('oracle-db-diagram');
+    expect(slugs).toContain('conversion-assistant');
     expect(slugs).toContain('fusion-sql-developer');
     expect(slugs).toContain('slippi-ranked-stats');
-    expect(slugs).toContain('fitness-ring-analytics');
+    expect(slugs).toContain('trendarc');
     expect(slugs).toContain('habitat');
     expect(slugs).toContain('lombardi-project');
     expect(slugs).toContain('contact');
