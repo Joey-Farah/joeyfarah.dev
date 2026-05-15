@@ -277,7 +277,7 @@ The CSS grid is a 3-column layout on desktop (â‰¥1024px), 2-column on tablet (â‰
 | `trendarc` | `project-card` | 1 | 1 | Personal projects tile |
 | `habitat` | `project-card` | 1 | 1 | `status: 'in-development'`; Rive animation |
 | `lombardi-project` | `project-card` | 1 | 1 | Storefront aesthetic; Patreon link |
-| `contact` | `contact-links` | 3 | 1 | Full-width footer tile |
+| `contact` | `contact-links` | 1 | 1 | Footer tile, rendered in its own max-w-md centered section |
 
 ---
 

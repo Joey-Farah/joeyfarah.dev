@@ -55,7 +55,7 @@ export interface BentoGridProps {
  * professional-timeline: colSpan 2, rowSpan 3
  * oracle-db-diagram:     colSpan 1, rowSpan 2
  * all other project/contact tiles: colSpan 1, rowSpan 1 (default)
- * contact:               colSpan 3, rowSpan 1
+ * contact:               colSpan 1, rowSpan 1 (rendered in its own narrow centered section)
  */
 const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'professional-timeline': { colSpan: 3, rowSpan: 1 },
@@ -69,7 +69,7 @@ const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'lombardi-project':      { colSpan: 1, rowSpan: 1 },
   'reading-list':          { colSpan: 3, rowSpan: 1 },
   'music-list':            { colSpan: 3, rowSpan: 1 },
-  'contact':               { colSpan: 3, rowSpan: 1 },
+  'contact':               { colSpan: 1, rowSpan: 1 },
 };
 
 /** Returns the LayoutConfig for a given slug, falling back to 1×1. */
@@ -196,7 +196,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       {/* Contact section */}
       {contactBlocks.length > 0 && (
         <ScrollFadeSection id="contact" ariaLabel="Contact information">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
+          <div className="grid grid-cols-1 gap-4 max-w-md mx-auto">
             {contactBlocks.map((block) => (
               <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
             ))}
