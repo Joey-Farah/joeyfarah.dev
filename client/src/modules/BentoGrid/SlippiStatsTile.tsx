@@ -28,8 +28,8 @@ const SlippiStatsTile: React.FC = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="View Slippi profile (joey-870)"
-      className="block rounded-xl border border-brand-primary/20 bg-brand-bg overflow-hidden font-mono text-sm w-fit"
-      whileHover={{ borderColor: 'rgba(6,182,212,0.5)', boxShadow: '0 0 16px rgba(6,182,212,0.08)' }}
+      className="group block rounded-xl border border-brand-primary/30 bg-brand-bg overflow-hidden font-mono text-sm w-fit cursor-pointer hover:bg-brand-primary/5 transition-colors"
+      whileHover={{ borderColor: 'rgba(6,182,212,0.7)', boxShadow: '0 0 22px rgba(6,182,212,0.18)' }}
       transition={{ duration: 0.2 }}
     >
       <div className="flex items-center gap-1.5 px-3 py-2 bg-white/5 border-b border-brand-primary/10">
@@ -39,7 +39,6 @@ const SlippiStatsTile: React.FC = () => {
         <span className="ml-2 text-xs text-brand-text/40">
           slippi ranked{stats?.season ? ` — ${stats.season}` : ''}
         </span>
-        <span className="ml-2 text-xs text-brand-primary/60" aria-hidden="true">↗</span>
         <span className="ml-auto flex items-center gap-1.5 text-xs text-green-400">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
           live
@@ -86,6 +85,14 @@ const SlippiStatsTile: React.FC = () => {
             </div>
           </>
         )}
+      </div>
+
+      <div className="flex items-center justify-between px-4 py-2 border-t border-brand-primary/15 bg-brand-primary/[0.04] text-xs">
+        <span className="text-brand-text/50">slippi.gg/user/joey-870</span>
+        <span className="inline-flex items-center gap-1 text-brand-primary font-bold transition-transform group-hover:translate-x-0.5">
+          view profile
+          <span aria-hidden="true">↗</span>
+        </span>
       </div>
     </motion.a>
   );
