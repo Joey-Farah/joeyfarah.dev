@@ -196,7 +196,8 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       {/* Contact section */}
       {contactBlocks.length > 0 && (
         <ScrollFadeSection id="contact" ariaLabel="Contact information">
-          <div className="grid grid-cols-1 gap-4 max-w-md mx-auto">
+          <p className="font-mono text-xs text-brand-text/40 px-1 mb-3">// contact</p>
+          <div className="grid grid-cols-1 gap-4 max-w-md">
             {contactBlocks.map((block) => (
               <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
             ))}
