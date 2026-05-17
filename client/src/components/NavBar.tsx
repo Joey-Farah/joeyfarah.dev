@@ -11,6 +11,7 @@ export interface NavBarProps {
 const NAV_LINKS = [
   { label: 'timeline', href: '#professional-timeline', id: 'professional-timeline' },
   { label: 'projects', href: '#slippi-ranked-stats', id: 'slippi-ranked-stats' },
+  { label: 'personal', href: '#personal', id: 'personal' },
   { label: 'contact', href: '#contact', id: 'contact' },
 ] as const;
 
