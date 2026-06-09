@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  color-scheme: dark;
   --brand-primary: #06b6d4;
   --brand-secondary: #3b82f6;
   --brand-bg: #0d0d0d;
