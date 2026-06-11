@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-06-11
+
+### /work — dev-for-hire services page
+- **`/work` route** (`modules/WorkPage`): dedicated services page — Spine headline, own-work proof, single email CTA. Rendered via a minimal pathname branch in `main.tsx`; no router dependency.
+- **NavBar `$ work` link**: page links are `$ commands`, section anchors are `// comments`. Mobile fit: `// ` prefix hidden below `sm`, tighter gaps, nowrap.
+- **Sitemap**: `/work` added at 0.9 priority.
+
+### Ops
+- **Railway watch paths removed**: client-only commits were being silently SKIPPED (service watched `server/` only). Every push to `main` now deploys.
+
 ## 2026-04-15
 
 ### Backend hardening
