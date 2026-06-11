@@ -178,7 +178,9 @@
     "content": {
       "description": "Interactive ERD explorer with the entire Oracle Cloud database mapped. Select any table and extract a diagram of every table it connects to — across HCM, Payroll, Financials, Procurement, and more. Eliminates schema guesswork when writing reports, conversions, and cross-module queries.",
       "stack": ["Python", "Dash", "Cytoscape", "NetworkX", "Oracle Cloud"],
-      "links": [],
+      "links": [
+        { "label": "Live site", "url": "https://ocdd.vercel.app" }
+      ],
       "status": "live",
       "image": "/images/oracle-db-diagram.png"
     }
@@ -270,10 +272,7 @@
     "content": {
       "description": "Windows desktop app that downloads Spotify playlists and albums as 320 kbps MP3s with embedded metadata. Paste a link, queue multiple URLs, and download into named folders. Electron + Python wrapper around spotDL with bundled FFmpeg integration.",
       "stack": ["Electron", "Python", "spotDL", "PyInstaller"],
-      "links": [
-        { "label": "GitHub", "url": "https://github.com/Joey-Farah/spotify-to-mp3" },
-        { "label": "Download", "url": "https://github.com/Joey-Farah/spotify-to-mp3/releases/latest" }
-      ],
+      "links": [],
       "status": "live",
       "image": "/images/spotify-to-mp3.svg"
     }
