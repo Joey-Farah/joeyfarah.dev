@@ -306,7 +306,7 @@ const WorkPage: React.FC = () => {
         <a
           href="/"
           aria-label="Back to joeyfarah.dev home"
-          className="text-xs text-brand-text/50 hover:text-brand-primary transition-colors duration-150"
+          className="text-xs text-brand-text/75 hover:text-brand-primary transition-colors duration-150"
         >
           {'$ cd ~'}
         </a>
@@ -328,7 +328,7 @@ const WorkPage: React.FC = () => {
             <span className="text-brand-primary">all of it.</span>
           </motion.h1>
           <motion.p
-            className="mt-5 text-brand-text/70 text-sm md:text-base leading-relaxed max-w-xl"
+            className="mt-5 text-brand-text/85 text-sm md:text-base leading-relaxed max-w-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.5 }}
@@ -346,7 +346,7 @@ const WorkPage: React.FC = () => {
             Credentials
           </h2>
           <Item>
-            <p className="text-brand-primary/60 text-xs mb-4" aria-hidden="true">
+            <p className="text-brand-primary/80 text-xs mb-4" aria-hidden="true">
               {'$ stats --joey'}
             </p>
           </Item>
@@ -356,7 +356,7 @@ const WorkPage: React.FC = () => {
                 <div className="text-2xl md:text-3xl font-bold text-brand-primary">
                   <CountUp target={s.value} prefix={'prefix' in s ? s.prefix : ''} suffix={'suffix' in s ? s.suffix : ''} />
                 </div>
-                <div className="mt-1 text-[11px] leading-snug text-brand-text/50">{s.label}</div>
+                <div className="mt-1 text-[11px] leading-snug text-brand-text/75">{s.label}</div>
               </Item>
             ))}
           </div>
@@ -380,7 +380,7 @@ const WorkPage: React.FC = () => {
                       <span className="w-2 h-2 rounded-full bg-brand-text/15" />
                       <span className="w-2 h-2 rounded-full bg-brand-primary/40" />
                     </span>
-                    <span className="text-xs text-brand-text/40" aria-hidden="true">
+                    <span className="text-xs text-brand-text/65" aria-hidden="true">
                       {'$ '}
                       {log.cmd}
                     </span>
@@ -403,12 +403,12 @@ const WorkPage: React.FC = () => {
                     <h3 className="text-base md:text-lg font-bold text-brand-text">{log.name}</h3>
                     <dl className="mt-3 space-y-2.5 text-sm leading-relaxed">
                       <div className="flex gap-3">
-                        <dt className="shrink-0 text-brand-primary/70 w-16 text-xs pt-0.5 uppercase tracking-wider">problem</dt>
-                        <dd className="text-brand-text/75">{log.problem}</dd>
+                        <dt className="shrink-0 text-brand-primary/90 w-16 text-xs pt-0.5 uppercase tracking-wider">problem</dt>
+                        <dd className="text-brand-text/90">{log.problem}</dd>
                       </div>
                       <div className="flex gap-3">
-                        <dt className="shrink-0 text-brand-primary/70 w-16 text-xs pt-0.5 uppercase tracking-wider">built</dt>
-                        <dd className="text-brand-text/75">{log.built}</dd>
+                        <dt className="shrink-0 text-brand-primary/90 w-16 text-xs pt-0.5 uppercase tracking-wider">built</dt>
+                        <dd className="text-brand-text/90">{log.built}</dd>
                       </div>
                       <div className="flex gap-3">
                         <dt className="shrink-0 text-brand-primary w-16 text-xs pt-0.5 uppercase tracking-wider">result</dt>
@@ -419,7 +419,7 @@ const WorkPage: React.FC = () => {
                       {log.stack.map((t) => (
                         <span
                           key={t}
-                          className="text-[10px] uppercase tracking-wider text-brand-text/40 border border-brand-text/10 rounded px-1.5 py-0.5"
+                          className="text-[10px] uppercase tracking-wider text-brand-text/65 border border-brand-text/10 rounded px-1.5 py-0.5"
                         >
                           {t}
                         </span>
@@ -445,7 +445,7 @@ const WorkPage: React.FC = () => {
 
           {/* compact proof */}
           <Item className="mt-6">
-            <p className="text-brand-primary/60 text-xs mb-3" aria-hidden="true">
+            <p className="text-brand-primary/80 text-xs mb-3" aria-hidden="true">
               {'$ ls also-shipped/'}
             </p>
             <ul className="space-y-1.5 text-sm">
@@ -459,14 +459,14 @@ const WorkPage: React.FC = () => {
                   >
                     {p.name}
                   </a>
-                  <span className="text-brand-text/50">— {p.line}</span>
+                  <span className="text-brand-text/75">— {p.line}</span>
                 </li>
               ))}
             </ul>
           </Item>
 
           <Item>
-            <p className="mt-6 text-xs text-brand-text/40 leading-relaxed">
+            <p className="mt-6 text-xs text-brand-text/65 leading-relaxed">
               {'// day job: Oracle Cloud technical consultant, 7 years. '}
               {'that work stays at work — everything above was built on my own time, '}
               {'mostly past a reasonable bedtime.'}
@@ -487,7 +487,7 @@ const WorkPage: React.FC = () => {
                 <div className="h-full border border-brand-primary/20 rounded-lg p-4 transition-all duration-200 hover:border-brand-primary/50 hover:-translate-y-0.5">
                   <div className="text-brand-primary text-sm font-bold">{s.flag}</div>
                   <div className="mt-1.5 text-sm font-bold text-brand-text">{s.title}</div>
-                  <p className="mt-2 text-xs leading-relaxed text-brand-text/60">{s.line}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-brand-text/80">{s.line}</p>
                 </div>
               </Item>
             ))}
@@ -510,7 +510,7 @@ const WorkPage: React.FC = () => {
                   </span>
                   <span className="pt-1">
                     <span className="text-brand-primary font-bold">{s.cmd}</span>
-                    <span className="text-brand-text/75"> — {s.line}</span>
+                    <span className="text-brand-text/90"> — {s.line}</span>
                   </span>
                 </li>
               </Item>
@@ -525,7 +525,7 @@ const WorkPage: React.FC = () => {
           </h2>
           <Item>
             <div className="border border-brand-primary/30 rounded-lg p-6 md:p-8 text-center bg-brand-primary/[0.03]">
-              <p className="text-brand-text/70 text-sm mb-5">
+              <p className="text-brand-text/85 text-sm mb-5">
                 Have a problem that needs a finished thing?
               </p>
               <a
@@ -545,12 +545,12 @@ const WorkPage: React.FC = () => {
                   </>
                 )}
               </a>
-              <p className="mt-4 text-[11px] text-brand-text/35">
+              <p className="mt-4 text-[11px] text-brand-text/60">
                 one email. no forms, no calendly maze.
               </p>
               {/* full contact surface — this page is the site's one contact destination */}
               <div className="mt-6 pt-5 border-t border-brand-primary/15 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-                <span className="text-xs text-brand-text/40 select-none" aria-hidden="true">
+                <span className="text-xs text-brand-text/65 select-none" aria-hidden="true">
                   {'$ ls elsewhere/'}
                 </span>
                 {CONTACT_LINKS.map((c) => (
