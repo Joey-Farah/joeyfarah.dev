@@ -28,6 +28,8 @@ const ContactLinksRenderer: React.FC<ContactLinksRendererProps> = ({ content }) 
       <div>
         {content.links.map((link: ContactLink) => {
           const isEmail = link.url.startsWith('mailto:');
+          // Internal routes (e.g. /work) navigate in the same tab
+          const isInternal = link.url.startsWith('/');
           const isCopied = copiedPlatform === link.platform;
 
           return (
@@ -55,7 +57,9 @@ const ContactLinksRenderer: React.FC<ContactLinksRendererProps> = ({ content }) 
                 className="text-brand-primary underline underline-offset-2 decoration-brand-primary/40 hover:decoration-brand-primary transition-colors duration-150"
                 {...(isEmail
                   ? { onClick: (e) => handleEmailClick(e, link) }
-                  : { target: '_blank', rel: 'noopener noreferrer' })}
+                  : isInternal
+                    ? {}
+                    : { target: '_blank', rel: 'noopener noreferrer' })}
               >
                 {isCopied ? (
                   <span className="text-green-400">✓ copied!</span>

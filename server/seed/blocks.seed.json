@@ -380,10 +380,7 @@
     "visible": true,
     "content": {
       "links": [
-        { "platform": "LinkedIn", "url": "https://www.linkedin.com/in/joey-farah/", "display": "linkedin.com/in/joey-farah" },
-        { "platform": "GitHub", "url": "https://github.com/Joey-Farah", "display": "github.com/Joey-Farah" },
-        { "platform": "Discord", "url": "https://discord.com/users/101538614428602368", "display": "discord: joeydonuts" },
-        { "platform": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm", "display": "youtube.com/@joeydonutsssbm" }
+        { "platform": "Work with me", "url": "/work", "display": "./work --with joey" }
       ]
     }
   }

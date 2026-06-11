@@ -35,6 +35,11 @@ const SHIP_LOGS = [
       'You’re looking at it. ~92 kB over the wire, WCAG AA, Lighthouse CI on ' +
       'every push. The site is its own receipt.',
     stack: ['React', 'TypeScript', 'Express', 'MongoDB', 'Railway'],
+    image: {
+      src: '/images/joeyfarah-dev-screenshot.png',
+      alt: 'joeyfarah.dev project grid with terminal-styled tiles and the live ERD explorer',
+      fit: 'cover',
+    },
     links: [
       { label: 'view source', href: 'https://github.com/Joey-Farah/joeyfarah.dev', external: true },
     ],
@@ -52,6 +57,11 @@ const SHIP_LOGS = [
       'Shipped, free, in the scene’s hands. Built it for my own ranked grind ' +
       'before retiring at #61 in the world.',
     stack: ['Desktop', 'Data pipeline', 'Shipped'],
+    image: {
+      src: '/images/slippi-ranked-stats-logo.png',
+      alt: 'Slippi Ranked Stats logo',
+      fit: 'contain',
+    },
     links: [
       { label: 'GitHub', href: 'https://github.com/Joey-Farah/Slippi-Ranked-Stats', external: true },
       { label: 'download', href: 'https://github.com/Joey-Farah/Slippi-Ranked-Stats/releases/latest', external: true },
@@ -65,6 +75,30 @@ const ALSO_SHIPPED = [
   { name: 'TrendArc', line: 'fitness biometrics, made legible — live app', href: 'https://trendarc.app', external: true },
   { name: 'Oracle Cloud tooling', line: 'ERD explorer (live) + conversion & SQL toolkits', href: 'https://ocdd.vercel.app', external: true },
   { name: 'Spotify to MP3', line: 'Windows desktop downloader', href: '/#spotify-to-mp3', external: false },
+] as const;
+
+/** Screenshot gallery — real product UI, each linking to the live thing. */
+const GALLERY = [
+  {
+    src: '/images/oracle-db-diagram.png',
+    alt: 'Oracle Cloud ERD explorer showing a table relationship diagram',
+    caption: 'Oracle Cloud ERD explorer',
+    href: 'https://ocdd.vercel.app',
+  },
+  {
+    src: '/images/trendarc.png',
+    alt: 'TrendArc fitness dashboard with biometric trend charts',
+    caption: 'TrendArc biometrics dashboard',
+    href: 'https://trendarc.app',
+  },
+] as const;
+
+/** Full contact surface — /work is the site's single contact destination. */
+const CONTACT_LINKS = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/joey-farah/' },
+  { label: 'GitHub', href: 'https://github.com/Joey-Farah' },
+  { label: 'Discord', href: 'https://discord.com/users/101538614428602368' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@joeydonutsssbm' },
 ] as const;
 
 const SHAPES = [
@@ -318,6 +352,20 @@ const WorkPage: React.FC = () => {
                       {log.cmd}
                     </span>
                   </div>
+                  {log.image && (
+                    <div className="border-b border-brand-primary/15 bg-black/40">
+                      <img
+                        src={log.image.src}
+                        alt={log.image.alt}
+                        loading="lazy"
+                        className={
+                          log.image.fit === 'cover'
+                            ? 'w-full h-44 md:h-56 object-cover object-top'
+                            : 'w-full h-28 md:h-32 object-contain p-4'
+                        }
+                      />
+                    </div>
+                  )}
                   <div className="p-5">
                     <h3 className="text-base md:text-lg font-bold text-brand-text">{log.name}</h3>
                     <dl className="mt-3 space-y-2.5 text-sm leading-relaxed">
@@ -382,6 +430,36 @@ const WorkPage: React.FC = () => {
                 </li>
               ))}
             </ul>
+          </Item>
+
+          {/* screenshot gallery — show the finish, don't describe it */}
+          <Item className="mt-8">
+            <p className="text-brand-primary/60 text-xs mb-3" aria-hidden="true">
+              {'$ open screenshots/'}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {GALLERY.map((g) => (
+                <a
+                  key={g.src}
+                  href={g.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/shot block border border-brand-primary/20 rounded-lg overflow-hidden
+                             transition-colors duration-200 hover:border-brand-primary/50"
+                >
+                  <img
+                    src={g.src}
+                    alt={g.alt}
+                    loading="lazy"
+                    className="w-full h-40 object-cover object-top"
+                  />
+                  <div className="px-3 py-2 border-t border-brand-primary/15 text-xs text-brand-text/60
+                                  group-hover/shot:text-brand-primary transition-colors duration-150">
+                    {g.caption} {'→'}
+                  </div>
+                </a>
+              ))}
+            </div>
           </Item>
 
           <Item>
@@ -466,6 +544,25 @@ const WorkPage: React.FC = () => {
               <p className="mt-4 text-[11px] text-brand-text/35">
                 one email. no forms, no calendly maze.
               </p>
+              {/* full contact surface — this page is the site's one contact destination */}
+              <div className="mt-6 pt-5 border-t border-brand-primary/15 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+                <span className="text-xs text-brand-text/40 select-none" aria-hidden="true">
+                  {'$ ls elsewhere/'}
+                </span>
+                {CONTACT_LINKS.map((c) => (
+                  <a
+                    key={c.label}
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-brand-primary underline underline-offset-2
+                               decoration-brand-primary/40 hover:decoration-brand-primary
+                               transition-colors duration-150"
+                  >
+                    {c.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </Item>
         </Reveal>

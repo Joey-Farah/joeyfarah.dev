@@ -64,7 +64,11 @@ const ProjectCardContentSchema = z.object({
 
 const ContactLinkSchema = z.object({
   platform: z.string(),
-  url: z.string().url(),
+  // Absolute URL, or a site-relative path (e.g. /work)
+  url: z.string().refine(
+    (u) => u.startsWith('/') || z.string().url().safeParse(u).success,
+    { message: 'must be an absolute URL or a site-relative path starting with /' },
+  ),
   display: z.string(),
 });
 
