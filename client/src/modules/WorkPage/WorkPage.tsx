@@ -292,8 +292,9 @@ const WorkPage: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.5 }}
           >
-            I take a real problem and{' '}
-            <span className="text-brand-primary">ship the finished thing.</span>
+            I design, build, and ship{' '}
+            <span className="text-brand-primary">complete software</span> — solo,
+            from first sketch to production.
           </motion.h1>
           <motion.p
             className="mt-5 text-brand-text/70 text-sm md:text-base leading-relaxed max-w-xl"
@@ -301,7 +302,6 @@ const WorkPage: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.5 }}
           >
-            End to end, solo — design, frontend, backend, data, deploy.
             Generating code is easy now; everyone's doing it. The expensive
             part is still the last 20%: the installer that works on someone
             else's machine, the edge case at 2 a.m., the deploy nobody has
