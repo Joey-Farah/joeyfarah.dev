@@ -21,27 +21,55 @@ const STATS = [
   { value: 1, label: 'person, every layer' },
 ] as const;
 
-/** Deep proof — ship-log format: problem → built → result. */
+/** Deep proof — ship-log format: problem → built → result.
+    Order is deliberate: rarest/most enterprise-credible work first,
+    the meta-site last. */
 const SHIP_LOGS = [
   {
-    cmd: 'open joeyfarah.dev',
-    name: 'joeyfarah.dev',
-    problem: 'A resume PDF can’t prove someone ships. A link list can’t either.',
+    cmd: 'open ocdd.vercel.app',
+    name: 'Oracle Cloud Database Mapper + SQL query tool',
+    problem:
+      'Writing reports against Oracle Cloud means guessing how tens of ' +
+      'thousands of tables connect. The docs tell you what a table is — ' +
+      'not what it touches.',
     built:
-      'Full-stack visual resume — terminal boot, bento grid, scroll-driven ERD ' +
-      'drawn from real backend data. React, Express, MongoDB, typed end to end, ' +
-      'content validated at ingest so a bad edit can’t reach production.',
+      'An interactive explorer with the entire Oracle Cloud schema mapped — ' +
+      'pick any table, get a diagram of everything it connects to, across HCM, ' +
+      'Payroll, Financials, Procurement. Plus a companion desktop SQL tool for ' +
+      'querying environments directly.',
     result:
-      'You’re looking at it. ~92 kB over the wire, WCAG AA, Lighthouse CI on ' +
-      'every push. The site is its own receipt.',
-    stack: ['React', 'TypeScript', 'Express', 'MongoDB', 'Railway'],
+      'Schema guesswork that used to eat an afternoon now takes a minute. ' +
+      'The whole schema is live on the internet, clickable.',
+    stack: ['Python', 'Dash', 'Cytoscape', 'NetworkX'],
     image: {
-      src: '/images/joeyfarah-dev-screenshot.png',
-      alt: 'joeyfarah.dev project grid with terminal-styled tiles and the live ERD explorer',
+      src: '/images/oracle-db-diagram.png',
+      alt: 'Oracle Cloud ERD explorer showing a table relationship diagram',
       fit: 'cover',
     },
     links: [
-      { label: 'view source', href: 'https://github.com/Joey-Farah/joeyfarah.dev', external: true },
+      { label: 'live site', href: 'https://ocdd.vercel.app', external: true },
+    ],
+  },
+  {
+    cmd: 'open trendarc.app',
+    name: 'TrendArc',
+    problem:
+      'Wearables collect a mountain of biometrics and bury the trends that ' +
+      'actually matter under today’s score.',
+    built:
+      'A fitness dashboard that turns raw wearable data into legible trends — ' +
+      'weeks and months of HRV, sleep, and recovery, not just this morning’s number.',
+    result:
+      'Live at trendarc.app. It says things like “your HRV is +7 ms over your ' +
+      'prior 45 days” — the sentence your watch should have said.',
+    stack: ['Web app', 'Charts', 'Live'],
+    image: {
+      src: '/images/trendarc.png',
+      alt: 'TrendArc fitness dashboard with biometric trend charts',
+      fit: 'cover',
+    },
+    links: [
+      { label: 'live site', href: 'https://trendarc.app', external: true },
     ],
   },
   {
@@ -67,30 +95,34 @@ const SHIP_LOGS = [
       { label: 'download', href: 'https://github.com/Joey-Farah/Slippi-Ranked-Stats/releases/latest', external: true },
     ],
   },
+  {
+    cmd: 'open joeyfarah.dev',
+    name: 'joeyfarah.dev',
+    problem: 'A resume PDF can’t prove someone ships. A link list can’t either.',
+    built:
+      'Full-stack visual resume — terminal boot, bento grid, scroll-driven ERD ' +
+      'drawn from real backend data. React, Express, MongoDB, typed end to end, ' +
+      'content validated at ingest so a bad edit can’t reach production.',
+    result:
+      'You’re looking at it. ~92 kB over the wire, WCAG AA, Lighthouse CI on ' +
+      'every push. The site is its own receipt.',
+    stack: ['React', 'TypeScript', 'Express', 'MongoDB', 'Railway'],
+    image: {
+      src: '/images/joeyfarah-dev-timeline.png',
+      alt: 'joeyfarah.dev dual timeline — professional career beside competitive Melee milestones',
+      fit: 'cover',
+    },
+    links: [
+      { label: 'view source', href: 'https://github.com/Joey-Farah/joeyfarah.dev', external: true },
+    ],
+  },
 ] as const;
 
 /** Compact proof — `ls` style. */
 const ALSO_SHIPPED = [
   // External where a public artifact exists; home anchors otherwise — never a dead link.
-  { name: 'TrendArc', line: 'fitness biometrics, made legible — live app', href: 'https://trendarc.app', external: true },
-  { name: 'Oracle Cloud tooling', line: 'ERD explorer (live) + conversion & SQL toolkits', href: 'https://ocdd.vercel.app', external: true },
+  { name: 'Conversion Assistant', line: 'Oracle Cloud data-loading toolkit (HDL, FBDI, REST)', href: '/#conversion-assistant', external: false },
   { name: 'Spotify to MP3', line: 'Windows desktop downloader', href: '/#spotify-to-mp3', external: false },
-] as const;
-
-/** Screenshot gallery — real product UI, each linking to the live thing. */
-const GALLERY = [
-  {
-    src: '/images/oracle-db-diagram.png',
-    alt: 'Oracle Cloud ERD explorer showing a table relationship diagram',
-    caption: 'Oracle Cloud ERD explorer',
-    href: 'https://ocdd.vercel.app',
-  },
-  {
-    src: '/images/trendarc.png',
-    alt: 'TrendArc fitness dashboard with biometric trend charts',
-    caption: 'TrendArc biometrics dashboard',
-    href: 'https://trendarc.app',
-  },
 ] as const;
 
 /** Full contact surface — /work is the site's single contact destination. */
@@ -431,36 +463,6 @@ const WorkPage: React.FC = () => {
                 </li>
               ))}
             </ul>
-          </Item>
-
-          {/* screenshot gallery — show the finish, don't describe it */}
-          <Item className="mt-8">
-            <p className="text-brand-primary/60 text-xs mb-3" aria-hidden="true">
-              {'$ open screenshots/'}
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {GALLERY.map((g) => (
-                <a
-                  key={g.src}
-                  href={g.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group/shot block border border-brand-primary/20 rounded-lg overflow-hidden
-                             transition-colors duration-200 hover:border-brand-primary/50"
-                >
-                  <img
-                    src={g.src}
-                    alt={g.alt}
-                    loading="lazy"
-                    className="w-full h-40 object-cover object-top"
-                  />
-                  <div className="px-3 py-2 border-t border-brand-primary/15 text-xs text-brand-text/60
-                                  group-hover/shot:text-brand-primary transition-colors duration-150">
-                    {g.caption} {'→'}
-                  </div>
-                </a>
-              ))}
-            </div>
           </Item>
 
           <Item>
