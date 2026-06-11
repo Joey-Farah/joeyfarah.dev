@@ -292,9 +292,8 @@ const WorkPage: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.5 }}
           >
-            I design, build, and ship{' '}
-            <span className="text-brand-primary">complete software</span> — solo,
-            from first sketch to production.
+            I design, build, and ship software —{' '}
+            <span className="text-brand-primary">all of it, solo.</span>
           </motion.h1>
           <motion.p
             className="mt-5 text-brand-text/70 text-sm md:text-base leading-relaxed max-w-xl"
