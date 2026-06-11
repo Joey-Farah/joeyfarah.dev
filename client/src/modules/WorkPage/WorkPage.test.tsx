@@ -27,6 +27,23 @@ describe('WorkPage', () => {
     expect(ctas[0]).toHaveAttribute('href', expect.stringContaining('mailto:'));
   });
 
+  it('proof links to real, verifiable artifacts (source, releases, live apps)', () => {
+    render(<WorkPage />);
+    const external = screen
+      .getAllByRole('link')
+      .filter((a) => a.getAttribute('href')?.startsWith('https://'));
+    // At minimum: site source, Slippi repo + download, TrendArc live app
+    expect(external.length).toBeGreaterThanOrEqual(4);
+    // Every external link opens safely in a new tab
+    external.forEach((a) => {
+      expect(a).toHaveAttribute('target', '_blank');
+      expect(a).toHaveAttribute('rel', expect.stringContaining('noopener'));
+    });
+    expect(
+      external.some((a) => a.getAttribute('href')?.includes('github.com/Joey-Farah/joeyfarah.dev')),
+    ).toBe(true);
+  });
+
   it('links back to the home page', () => {
     render(<WorkPage />);
     const home = screen.getByRole('link', { name: /back to joeyfarah\.dev home/i });

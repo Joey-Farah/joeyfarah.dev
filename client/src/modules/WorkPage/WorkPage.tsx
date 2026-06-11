@@ -33,8 +33,9 @@ const SHIP_LOGS = [
       'You’re looking at it. ~92 kB over the wire, WCAG AA, Lighthouse CI on ' +
       'every push. The site is its own receipt.',
     stack: ['React', 'TypeScript', 'Express', 'MongoDB', 'Railway'],
-    href: '/',
-    linkLabel: 'view it live',
+    links: [
+      { label: 'view source', href: 'https://github.com/Joey-Farah/joeyfarah.dev', external: true },
+    ],
   },
   {
     cmd: 'open slippi-ranked-stats',
@@ -49,16 +50,19 @@ const SHIP_LOGS = [
       'Shipped, free, in the scene’s hands. Built it for my own ranked grind ' +
       'before retiring at #61 in the world.',
     stack: ['Desktop', 'Data pipeline', 'Shipped'],
-    href: '/#slippi-ranked-stats',
-    linkLabel: 'see the project',
+    links: [
+      { label: 'GitHub', href: 'https://github.com/Joey-Farah/Slippi-Ranked-Stats', external: true },
+      { label: 'download', href: 'https://github.com/Joey-Farah/Slippi-Ranked-Stats/releases/latest', external: true },
+    ],
   },
 ] as const;
 
 /** Compact proof — `ls` style. */
 const ALSO_SHIPPED = [
-  { name: 'TrendArc', line: 'fitness biometrics, made legible', href: '/#trendarc' },
-  { name: 'Oracle Cloud tooling', line: 'ERD explorer + conversion & SQL toolkits', href: '/#oracle-db-diagram' },
-  { name: 'Spotify to MP3', line: 'Windows desktop downloader', href: '/#spotify-to-mp3' },
+  // External where a public artifact exists; home anchors otherwise — never a dead link.
+  { name: 'TrendArc', line: 'fitness biometrics, made legible — live app', href: 'https://trendarc.app', external: true },
+  { name: 'Oracle Cloud tooling', line: 'ERD explorer + conversion & SQL toolkits', href: '/#oracle-db-diagram', external: false },
+  { name: 'Spotify to MP3', line: 'Windows desktop downloader', href: '/#spotify-to-mp3', external: false },
 ] as const;
 
 const SHAPES = [
@@ -337,12 +341,18 @@ const WorkPage: React.FC = () => {
                           {t}
                         </span>
                       ))}
-                      <a
-                        href={log.href}
-                        className="ml-auto text-xs text-brand-primary underline underline-offset-2 decoration-brand-primary/40 group-hover:decoration-brand-primary transition-colors duration-150"
-                      >
-                        {log.linkLabel} {'→'}
-                      </a>
+                      <span className="ml-auto flex items-center gap-3">
+                        {log.links.map((l) => (
+                          <a
+                            key={l.href}
+                            href={l.href}
+                            {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                            className="text-xs text-brand-primary underline underline-offset-2 decoration-brand-primary/40 group-hover:decoration-brand-primary transition-colors duration-150"
+                          >
+                            {l.label} {'→'}
+                          </a>
+                        ))}
+                      </span>
                     </div>
                   </div>
                 </article>
@@ -361,6 +371,7 @@ const WorkPage: React.FC = () => {
                   <span className="text-brand-primary select-none" aria-hidden="true">{'>'}</span>
                   <a
                     href={p.href}
+                    {...(p.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     className="text-brand-primary underline underline-offset-2 decoration-brand-primary/30 hover:decoration-brand-primary transition-colors duration-150"
                   >
                     {p.name}
