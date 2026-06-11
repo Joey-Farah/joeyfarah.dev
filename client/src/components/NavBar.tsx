@@ -42,16 +42,22 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
       {!showHero && (
         <motion.nav
           aria-label="Page sections"
-          className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center
-                     bg-brand-bg/80 backdrop-blur-sm border-b border-brand-primary/20
-                     px-3 md:px-6 py-3"
+          className="fixed top-0 left-0 right-0 z-50
+                     bg-brand-bg/80 backdrop-blur-sm border-b border-brand-primary/20"
           data-testid="navbar"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
         >
-          <ul className="flex items-center gap-4 md:gap-6 list-none m-0 p-0">
+          {/* Scroll wrapper: `w-max mx-auto` centers the list when it fits and
+              scrolls when it doesn't. A centered flex container would clip both
+              edges on narrow phones with no way to reach the cut-off links. */}
+          <div
+            className="overflow-x-auto [&::-webkit-scrollbar]:hidden"
+            style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+          >
+            <ul className="flex items-center gap-4 md:gap-6 w-max mx-auto list-none px-4 md:px-6 py-3">
             {NAV_LINKS.map(({ label, href, id }) => {
               const isActive = activeId === id;
               return (
@@ -92,6 +98,7 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
               </a>
             </li>
           </ul>
+          </div>
         </motion.nav>
       )}
     </AnimatePresence>
