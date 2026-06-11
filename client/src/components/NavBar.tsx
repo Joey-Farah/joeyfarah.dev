@@ -44,14 +44,14 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
           aria-label="Page sections"
           className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center
                      bg-brand-bg/80 backdrop-blur-sm border-b border-brand-primary/20
-                     px-6 py-3"
+                     px-3 md:px-6 py-3"
           data-testid="navbar"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
         >
-          <ul className="flex items-center gap-6 list-none m-0 p-0">
+          <ul className="flex items-center gap-4 md:gap-6 list-none m-0 p-0">
             {NAV_LINKS.map(({ label, href, id }) => {
               const isActive = activeId === id;
               return (
@@ -62,7 +62,7 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
                     aria-label={`Navigate to ${label} section`}
                     aria-current={isActive ? 'true' : undefined}
                     className={
-                      'font-mono text-xs transition-colors duration-150 select-none ' +
+                      'font-mono text-xs whitespace-nowrap transition-colors duration-150 select-none ' +
                       'border-b border-transparent pb-0.5 ' +
                       (isActive
                         ? 'text-brand-primary border-brand-primary'
@@ -70,12 +70,27 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
                     }
                     data-testid={`nav-link-${label}`}
                   >
-                    {'// '}
+                    {/* `// ` prefix hidden on phones — the 5 items don't fit at 390px with it */}
+                    <span className="hidden sm:inline">{'// '}</span>
                     {label}
                   </a>
                 </li>
               );
             })}
+            {/* Page link, not a scroll anchor — sections are `// comments`,
+                page jumps are `$ commands`. Plain navigation, no intercept. */}
+            <li>
+              <a
+                href="/work"
+                aria-label="Work with me — services page"
+                className="font-mono text-xs whitespace-nowrap select-none text-brand-primary
+                           border border-brand-primary/40 rounded px-2 py-1
+                           hover:bg-brand-primary/10 transition-colors duration-150"
+                data-testid="nav-link-work"
+              >
+                {'$ work'}
+              </a>
+            </li>
           </ul>
         </motion.nav>
       )}
