@@ -6,7 +6,9 @@ import {
   animate,
 } from 'framer-motion';
 
-const CONTACT_EMAIL = 'joeyefarah@gmail.com';
+// Cloudflare Email Routing alias — forwards to the real inbox. Disposable by
+// design: if it ever draws spam, rotate the alias and redeploy.
+const CONTACT_EMAIL = 'hello@joeyfarah.dev';
 
 /* ────────────────────────────────────────────────────────────────────────────
    Content — own work only. Never Elire client detail (NDA).
