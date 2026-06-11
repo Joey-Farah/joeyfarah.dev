@@ -13,8 +13,8 @@ describe('WorkPage', () => {
   it('shows own-work proof only — never Elire client detail', () => {
     render(<WorkPage />);
     // Own work is cited as evidence
-    expect(screen.getByText(/slippi ranked stats/i)).toBeInTheDocument();
-    expect(screen.getByText(/joeyfarah\.dev/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/slippi ranked stats/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/joeyfarah\.dev/i).length).toBeGreaterThan(0);
     // Day job may be named as background, but no client work language
     expect(screen.queryByText(/client engagement/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/case study/i)).not.toBeInTheDocument();
