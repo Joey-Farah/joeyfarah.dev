@@ -105,24 +105,24 @@ const SHAPES = [
   {
     flag: '--mvp',
     title: 'Idea → deployed product',
-    line: 'Design, build, ship. A real MVP users can touch — not a prototype, not a handoff doc.',
+    line: 'Design, build, ship. A real MVP your users can touch — not a prototype that only works in the demo video.',
   },
   {
     flag: '--tool',
     title: 'Desktop & internal tools',
-    line: 'The data-heavy workhorses a team opens every day. Installer included, finish included.',
+    line: 'The data-heavy workhorses a team opens every day and never thinks about. That’s the compliment. Installer included.',
   },
   {
     flag: '--dashboard',
     title: 'Dashboards & pipelines',
-    line: 'Scattered data made legible and live — ingest, transform, visualize, deploy.',
+    line: 'Your scattered data, made legible and live. I do the plumbing and the pretty part.',
   },
 ] as const;
 
 const STEPS = [
-  { cmd: 'scope', line: 'We define the problem and the smallest finished thing that solves it.' },
-  { cmd: 'build', line: 'I design and build it end to end — frontend, backend, data, deploy.' },
-  { cmd: 'ship', line: 'You get a live, working product. Then we decide what’s next.' },
+  { cmd: 'scope', line: 'We define the problem and the smallest finished thing that solves it. It’s usually smaller than you think — that’s a feature, not a discount.' },
+  { cmd: 'build', line: 'I design and build it end to end. You get links to click, not status meetings to sit through.' },
+  { cmd: 'ship', line: 'You get a live, working product. Not a prototype. Not a handoff doc. Not a Figma with ambitions.' },
 ] as const;
 
 /* ────────────────────────────────────────────────────────────────────────────
@@ -301,9 +301,11 @@ const WorkPage: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.5 }}
           >
-            End to end, solo — design, frontend, backend, data, deploy. Anyone
-            can generate code. The rare part is the finish: a polished, live
-            product someone actually uses.
+            End to end, solo — design, frontend, backend, data, deploy.
+            Generating code is easy now; everyone's doing it. The expensive
+            part is still the last 20%: the installer that works on someone
+            else's machine, the edge case at 2 a.m., the deploy nobody has
+            to apologize for.
           </motion.p>
         </header>
 
@@ -465,7 +467,8 @@ const WorkPage: React.FC = () => {
           <Item>
             <p className="mt-6 text-xs text-brand-text/40 leading-relaxed">
               {'// day job: Oracle Cloud technical consultant, 7 years. '}
-              {'that work stays at work — everything above is my own.'}
+              {'that work stays at work — everything above was built on my own time, '}
+              {'mostly past a reasonable bedtime.'}
             </p>
           </Item>
         </Reveal>
