@@ -61,7 +61,7 @@ const SHIP_LOGS = [
 const ALSO_SHIPPED = [
   // External where a public artifact exists; home anchors otherwise — never a dead link.
   { name: 'TrendArc', line: 'fitness biometrics, made legible — live app', href: 'https://trendarc.app', external: true },
-  { name: 'Oracle Cloud tooling', line: 'ERD explorer + conversion & SQL toolkits', href: '/#oracle-db-diagram', external: false },
+  { name: 'Oracle Cloud tooling', line: 'ERD explorer (live) + conversion & SQL toolkits', href: 'https://ocdd.vercel.app', external: true },
   { name: 'Spotify to MP3', line: 'Windows desktop downloader', href: '/#spotify-to-mp3', external: false },
 ] as const;
 
