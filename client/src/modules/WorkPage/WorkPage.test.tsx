@@ -7,7 +7,7 @@ describe('WorkPage', () => {
     render(<WorkPage />);
     expect(
       screen.getByRole('heading', { level: 1 }),
-    ).toHaveTextContent(/design, build, and ship software — all of it, solo/i);
+    ).toHaveTextContent(/design, build, and ship software — all of it\./i);
   });
 
   it('shows own-work proof only — never Elire client detail', () => {

@@ -293,7 +293,7 @@ const WorkPage: React.FC = () => {
             transition={{ delay: 1.2, duration: 0.5 }}
           >
             I design, build, and ship software —{' '}
-            <span className="text-brand-primary">all of it, solo.</span>
+            <span className="text-brand-primary">all of it.</span>
           </motion.h1>
           <motion.p
             className="mt-5 text-brand-text/70 text-sm md:text-base leading-relaxed max-w-xl"
