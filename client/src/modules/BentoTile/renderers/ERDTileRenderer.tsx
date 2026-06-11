@@ -92,7 +92,7 @@ const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
             )}
           </div>
         )}
-        <p className="text-brand-text/70 text-xs leading-relaxed">
+        <p className="text-brand-text/85 text-xs leading-relaxed">
           {description}
         </p>
       </div>
@@ -196,7 +196,7 @@ const ERDTileRenderer: React.FC<ERDTileRendererProps> = ({ content }) => {
       )}
 
       {nodes.length === 0 && (
-        <p className="text-brand-text/30 text-xs mt-2">{'// no nodes defined'}</p>
+        <p className="text-brand-text/60 text-xs mt-2">{'// no nodes defined'}</p>
       )}
     </div>
 

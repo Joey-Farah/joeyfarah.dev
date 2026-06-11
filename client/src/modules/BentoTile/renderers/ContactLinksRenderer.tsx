@@ -46,7 +46,7 @@ const ContactLinksRenderer: React.FC<ContactLinksRendererProps> = ({ content }) 
                 {'$'}
               </span>
               <span
-                className="text-brand-text/50 select-none shrink-0"
+                className="text-brand-text/75 select-none shrink-0"
                 aria-hidden="true"
               >
                 {'open'}
@@ -73,7 +73,7 @@ const ContactLinksRenderer: React.FC<ContactLinksRendererProps> = ({ content }) 
       </div>
 
 {content.links.length === 0 && (
-        <span className="text-brand-text/40 text-xs">{'// no links configured'}</span>
+        <span className="text-brand-text/70 text-xs">{'// no links configured'}</span>
       )}
     </div>
   );

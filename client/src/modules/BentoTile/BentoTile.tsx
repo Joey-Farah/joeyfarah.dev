@@ -19,7 +19,7 @@ import MusicListRenderer from './renderers/MusicListRenderer';
 const ERDTileRenderer = lazy(() => import('./renderers/ERDTileRenderer'));
 
 const ERDFallback: React.FC = () => (
-  <div className="flex-1 p-4 font-mono text-brand-text/40 text-sm">
+  <div className="flex-1 p-4 font-mono text-brand-text/70 text-sm">
     {'// loading erd...'}
   </div>
 );
@@ -107,7 +107,7 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
         );
       default:
         return (
-          <div className="flex-1 p-4 font-mono text-brand-text/40 text-sm">
+          <div className="flex-1 p-4 font-mono text-brand-text/70 text-sm">
             {'// unknown block type'}
           </div>
         );

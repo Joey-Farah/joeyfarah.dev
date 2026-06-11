@@ -9,7 +9,7 @@ const Entry: React.FC<{ entry: DualTimelineEntry; side: 'left' | 'right' }> = ({
   const isRight = side === 'right';
 
   const label = (
-    <span className="font-mono text-xs md:text-sm text-brand-text/80 leading-snug">
+    <span className="font-mono text-xs md:text-sm text-brand-text/90 leading-snug">
       {entry.label}
     </span>
   );
@@ -28,7 +28,7 @@ const Entry: React.FC<{ entry: DualTimelineEntry; side: 'left' | 'right' }> = ({
             {entry.detail} ↗
           </a>
         ) : (
-          <span className="font-mono text-xs text-brand-text/40 leading-snug">{entry.detail}</span>
+          <span className="font-mono text-xs text-brand-text/70 leading-snug">{entry.detail}</span>
         )
       )}
     </div>
@@ -53,9 +53,9 @@ const DualTimeline: React.FC<DualTimelineProps> = ({ content }) => {
     <div className="w-full px-2 md:px-4 py-6">
       {/* Column headers */}
       <div className="grid grid-cols-[1fr_56px_1fr] md:grid-cols-[1fr_72px_1fr] gap-2 mb-6">
-        <p className="font-mono text-xs text-brand-text/40 text-right">// professional</p>
+        <p className="font-mono text-xs text-brand-text/70 text-right">// professional</p>
         <div />
-        <p className="font-mono text-xs text-brand-text/40">// personal</p>
+        <p className="font-mono text-xs text-brand-text/70">// personal</p>
       </div>
 
       {/* Timeline */}

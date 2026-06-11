@@ -86,7 +86,7 @@ const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, titl
         )}
 
         {/* Description */}
-        <p className="text-brand-text/80 text-xs leading-relaxed">
+        <p className="text-brand-text/90 text-xs leading-relaxed">
           {description}
         </p>
 

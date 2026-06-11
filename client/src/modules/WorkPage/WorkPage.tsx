@@ -487,7 +487,7 @@ const WorkPage: React.FC = () => {
                 <div className="h-full border border-brand-primary/20 rounded-lg p-4 transition-all duration-200 hover:border-brand-primary/50 hover:-translate-y-0.5">
                   <div className="text-brand-primary text-sm font-bold">{s.flag}</div>
                   <div className="mt-1.5 text-sm font-bold text-brand-text">{s.title}</div>
-                  <p className="mt-2 text-xs leading-relaxed text-brand-text/80">{s.line}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-brand-text/90">{s.line}</p>
                 </div>
               </Item>
             ))}
@@ -545,7 +545,7 @@ const WorkPage: React.FC = () => {
                   </>
                 )}
               </a>
-              <p className="mt-4 text-[11px] text-brand-text/60">
+              <p className="mt-4 text-[11px] text-brand-text/80">
                 one email. no forms, no calendly maze.
               </p>
               {/* full contact surface — this page is the site's one contact destination */}

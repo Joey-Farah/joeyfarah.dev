@@ -127,7 +127,7 @@ const TimelineRenderer: React.FC<TimelineRendererProps> = ({ content }) => {
       className="flex-1 p-4 overflow-hidden"
     >
       {content.entries.length === 0 ? (
-        <p className="font-mono text-xs text-brand-text/40">
+        <p className="font-mono text-xs text-brand-text/70">
           {'// no timeline entries'}
         </p>
       ) : (
