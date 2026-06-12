@@ -5,25 +5,21 @@ import { motion, useInView, useReducedMotion, animate } from 'framer-motion';
 // design: if it ever draws spam, rotate the alias and redeploy.
 const CONTACT_EMAIL = 'hello@joeyfarah.dev';
 
-// Ranking goes last — it matters less than the shipping stats, and the quip
-// works better as a closer.
+// Ranking goes last — it matters less than the shipping stats.
 const STATS: ReadonlyArray<{
   value: number;
   label: string;
   prefix?: string;
   suffix?: string;
-  quip?: string;
 }> = [
   { value: 7, suffix: 'yrs', label: 'enterprise Oracle Cloud' },
   { value: 6, suffix: '+', label: 'products shipped' },
   { value: 1, label: 'person, every layer' },
-  {
-    value: 61,
-    prefix: '#',
-    label: 'world ranking, SSBMRank 2025',
-    quip: '(being globally ranked at anything has to be impressive, right?)',
-  },
+  { value: 61, prefix: '#', label: 'world ranking, SSBMRank 2025' },
 ];
+
+// Full-width caption under the grid — inside a cell it wrecked the row heights.
+const STATS_QUIP = '(being globally ranked at anything has to be impressive, right?)';
 
 const SHAPES = [
   { flag: '--mvp', line: 'Idea → deployed product. Not a demo.' },
@@ -125,12 +121,12 @@ const WorkSection: React.FC = () => {
               <CountUp target={s.value} prefix={'prefix' in s ? s.prefix : ''} suffix={'suffix' in s ? s.suffix : ''} />
             </div>
             <div className="mt-1 text-[11px] leading-snug text-brand-text/75">{s.label}</div>
-            {s.quip && (
-              <div className="mt-1 text-[10px] leading-snug italic text-brand-text/60">{s.quip}</div>
-            )}
           </div>
         ))}
       </div>
+      <p className="mt-2 text-right font-mono text-[11px] italic text-brand-text/60">
+        {STATS_QUIP}
+      </p>
 
       {/* shapes */}
       <div className="mt-8 grid md:grid-cols-3 gap-3 font-mono">
