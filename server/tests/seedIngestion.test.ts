@@ -99,7 +99,7 @@ describe('ingestSeed — production blocks.seed.json', () => {
     const blocks = await ingestSeed(BLOCKS_SEED);
     const hero = blocks.find((b) => b.slug === 'hero');
     const content = hero!.content as { lines: string[] };
-    expect(content.lines.some((l) => l.includes('Gamer'))).toBe(true);
+    expect(content.lines.some((l) => l.includes('SSBM'))).toBe(true);
   });
 
   it('hero lines reference Oracle Cloud role (Story 32)', async () => {
