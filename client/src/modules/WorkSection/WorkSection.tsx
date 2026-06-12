@@ -110,8 +110,8 @@ const WorkSection: React.FC = () => {
       </h2>
       <p className="mt-4 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
         Generating code is easy now. The hard parts moved upstream — discovery,
-        requirements, design: knowing what to build before anything gets built.
-        That, and the last 20%, where it actually ships.
+        requirements, design: understanding the problem before trying to solve
+        it. That, and the last 20%, where it actually ships.
       </p>
       <p className="mt-3 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
         So I work in vertical slices — thin, end-to-end pieces that run. You
