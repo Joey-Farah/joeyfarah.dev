@@ -109,8 +109,14 @@ const WorkSection: React.FC = () => {
         <span className="text-brand-primary">all of it.</span>
       </h2>
       <p className="mt-4 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        Generating code is easy now. The expensive part is the last 20% —
-        where it actually ships. Everything above is my own work, end to end.
+        Generating code is easy now. The hard parts moved upstream — discovery,
+        requirements, design: knowing what to build before anything gets built.
+        That, and the last 20%, where it actually ships.
+      </p>
+      <p className="mt-3 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
+        So I work in vertical slices — thin, end-to-end pieces that run. You
+        get something usable early, real software to react to, not a plan and
+        a long wait. Everything above is my own work, built that way.
       </p>
 
       {/* stats */}
@@ -172,9 +178,6 @@ const WorkSection: React.FC = () => {
             </>
           )}
         </a>
-        <p className="mt-3 text-[11px] text-brand-text/60">
-          one email. no forms, no calendly maze.
-        </p>
       </div>
 
       {/* contact — the old contact tile lives here now */}
