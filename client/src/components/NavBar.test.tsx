@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 describe('NavBar — work page link', () => {
   it('links to the hire section once the hero has exited', () => {
     render(<NavBar showHero={false} />);
-    const workLink = screen.getByRole('link', { name: /work with me/i });
+    const workLink = screen.getByTestId('nav-link-hire');
     expect(workLink).toHaveAttribute('href', '#hire');
   });
 

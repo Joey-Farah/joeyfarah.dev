@@ -12,8 +12,7 @@ const NAV_LINKS = [
   { label: 'timeline', href: '#professional-timeline', id: 'professional-timeline' },
   { label: 'projects', href: '#slippi-ranked-stats', id: 'slippi-ranked-stats' },
   { label: 'personal', href: '#personal', id: 'personal' },
-  // 'contact' removed — the contact tile is now a single pointer to /work,
-  // and the navbar's `$ work` link is the direct door.
+  { label: 'hire', href: '#hire', id: 'hire' },
 ] as const;
 
 const SECTION_IDS = NAV_LINKS.map((l) => l.id);
@@ -84,21 +83,6 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
                 </li>
               );
             })}
-            {/* The work section is the page's close — styled as a `$ command`
-                to stand apart from the `// comment` section links. */}
-            <li>
-              <a
-                href="#hire"
-                onClick={(e) => handleNavClick(e, 'hire')}
-                aria-label="Work with me — jump to the hire section"
-                className="font-mono text-xs whitespace-nowrap select-none text-brand-primary
-                           border border-brand-primary/40 rounded px-2 py-1
-                           hover:bg-brand-primary/10 transition-colors duration-150"
-                data-testid="nav-link-hire"
-              >
-                {'$ hire'}
-              </a>
-            </li>
           </ul>
           </div>
         </motion.nav>
