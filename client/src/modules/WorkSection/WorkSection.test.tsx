@@ -7,7 +7,7 @@ describe('WorkSection', () => {
     render(<WorkSection />);
     expect(
       screen.getByRole('heading', { level: 2 }),
-    ).toHaveTextContent(/design, build, and ship software — all of it\./i);
+    ).toHaveTextContent(/design, build, and ship software\./i);
   });
 
   it('has exactly one primary CTA (email)', () => {

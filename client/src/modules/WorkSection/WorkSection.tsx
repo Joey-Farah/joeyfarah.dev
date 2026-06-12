@@ -105,8 +105,7 @@ const WorkSection: React.FC = () => {
         id="hire-heading"
         className="font-mono text-2xl md:text-4xl font-bold leading-tight tracking-tight"
       >
-        I design, build, and ship software —{' '}
-        <span className="text-brand-primary">all of it.</span>
+        I design, build, and <span className="text-brand-primary">ship</span> software.
       </h2>
       <p className="mt-4 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
         Generating code is easy now. The hard parts moved upstream — discovery,
@@ -158,9 +157,6 @@ const WorkSection: React.FC = () => {
 
       {/* CTA */}
       <div className="mt-10 border border-brand-primary/30 rounded-lg p-6 md:p-8 text-center bg-brand-primary/[0.03] font-mono">
-        <p className="text-brand-text/85 text-sm mb-5">
-          Have a problem that needs a finished thing?
-        </p>
         <a
           href={`mailto:${CONTACT_EMAIL}`}
           onClick={handleEmailClick}
