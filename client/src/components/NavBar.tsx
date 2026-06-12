@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { label: 'timeline', href: '#professional-timeline', id: 'professional-timeline' },
   { label: 'projects', href: '#projects', id: 'projects' },
   { label: 'personal', href: '#personal', id: 'personal' },
-  { label: 'hire', href: '#hire', id: 'hire' },
+  { label: 'build', href: '#build', id: 'build' },
 ] as const;
 
 const SECTION_IDS = NAV_LINKS.map((l) => l.id);

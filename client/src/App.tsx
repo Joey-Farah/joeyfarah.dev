@@ -48,7 +48,7 @@ const App: React.FC = () => {
       });
   }, []);
 
-  // Honor deep links (e.g. the /work → /#work redirect): content renders
+  // Honor deep links (e.g. the /work → /#build redirect): content renders
   // after the async fetch, so the browser's native hash-scroll misses it.
   useEffect(() => {
     if (loading || !window.location.hash) return;

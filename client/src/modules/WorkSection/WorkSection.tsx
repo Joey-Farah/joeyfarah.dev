@@ -74,7 +74,7 @@ const CountUp: React.FC<{ target: number; prefix?: string; suffix?: string }> = 
 /**
  * WorkSection — the dev-for-hire close at the bottom of the single-page site.
  * The bento grid above it is the proof; this section only frames the offer
- * and lands the CTA. /work redirects here.
+ * and lands the CTA. /work, /hire, and /build all redirect here.
  */
 const WorkSection: React.FC = () => {
   const reduce = useReducedMotion();
@@ -90,8 +90,8 @@ const WorkSection: React.FC = () => {
 
   return (
     <motion.section
-      id="hire"
-      aria-labelledby="hire-heading"
+      id="build"
+      aria-labelledby="build-heading"
       className="max-w-3xl mx-auto px-6 py-16 md:py-24"
       initial={reduce ? undefined : { opacity: 0, y: 20 }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -99,10 +99,10 @@ const WorkSection: React.FC = () => {
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <p className="text-brand-primary text-sm mb-4 font-mono" aria-hidden="true">
-        {'$ ./hire --joey'}
+        {'$ ./build --with-me'}
       </p>
       <h2
-        id="hire-heading"
+        id="build-heading"
         className="font-mono text-2xl md:text-4xl font-bold leading-tight tracking-tight"
       >
         I design, build, and <span className="text-brand-primary">ship</span> software.
@@ -155,8 +155,14 @@ const WorkSection: React.FC = () => {
         ))}
       </p>
 
+      {/* warm invite — collaborator framing, not a "for hire" pitch */}
+      <p className="mt-10 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
+        Got something you want built — a product, a tool, an idea you keep
+        wishing existed? Tell me about it.
+      </p>
+
       {/* CTA */}
-      <div className="mt-10 border border-brand-primary/30 rounded-lg p-6 md:p-8 text-center bg-brand-primary/[0.03] font-mono">
+      <div className="mt-5 border border-brand-primary/30 rounded-lg p-6 md:p-8 text-center bg-brand-primary/[0.03] font-mono">
         <a
           href={`mailto:${CONTACT_EMAIL}`}
           onClick={handleEmailClick}

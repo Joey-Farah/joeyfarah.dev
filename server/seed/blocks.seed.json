@@ -381,7 +381,7 @@
     "visible": false,
     "content": {
       "links": [
-        { "platform": "Work with me", "url": "/work", "display": "./work --with joey" }
+        { "platform": "Build with me", "url": "/build", "display": "./build --with-me" }
       ]
     }
   }
