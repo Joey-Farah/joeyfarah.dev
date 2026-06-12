@@ -5,12 +5,25 @@ import { motion, useInView, useReducedMotion, animate } from 'framer-motion';
 // design: if it ever draws spam, rotate the alias and redeploy.
 const CONTACT_EMAIL = 'hello@joeyfarah.dev';
 
-const STATS = [
-  { value: 61, prefix: '#', label: 'world ranking, SSBMRank 2025' },
+// Ranking goes last — it matters less than the shipping stats, and the quip
+// works better as a closer.
+const STATS: ReadonlyArray<{
+  value: number;
+  label: string;
+  prefix?: string;
+  suffix?: string;
+  quip?: string;
+}> = [
   { value: 7, suffix: 'yrs', label: 'enterprise Oracle Cloud' },
   { value: 6, suffix: '+', label: 'products shipped' },
   { value: 1, label: 'person, every layer' },
-] as const;
+  {
+    value: 61,
+    prefix: '#',
+    label: 'world ranking, SSBMRank 2025',
+    quip: '(being globally ranked at anything has to be impressive, right?)',
+  },
+];
 
 const SHAPES = [
   { flag: '--mvp', line: 'Idea → deployed product. Not a demo.' },
@@ -24,11 +37,12 @@ const STEPS = [
   { cmd: 'ship', line: 'a live product. Not a prototype.' },
 ] as const;
 
+// The old contact tile, absorbed — same `$ open <display>` rows it had.
 const CONTACT_LINKS = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/joey-farah/' },
-  { label: 'GitHub', href: 'https://github.com/Joey-Farah' },
-  { label: 'Discord', href: 'https://discord.com/users/101538614428602368' },
-  { label: 'YouTube', href: 'https://www.youtube.com/@joeydonutsssbm' },
+  { platform: 'LinkedIn', display: 'linkedin.com/in/joey-farah', href: 'https://www.linkedin.com/in/joey-farah/' },
+  { platform: 'GitHub', display: 'github.com/Joey-Farah', href: 'https://github.com/Joey-Farah' },
+  { platform: 'Discord', display: 'discord: joeydonuts', href: 'https://discord.com/users/101538614428602368' },
+  { platform: 'YouTube', display: 'youtube.com/@joeydonutsssbm', href: 'https://www.youtube.com/@joeydonutsssbm' },
 ] as const;
 
 /** Counts up to `target` when scrolled into view; static under reduced motion. */
@@ -80,8 +94,8 @@ const WorkSection: React.FC = () => {
 
   return (
     <motion.section
-      id="work"
-      aria-labelledby="work-heading"
+      id="hire"
+      aria-labelledby="hire-heading"
       className="max-w-3xl mx-auto px-6 py-16 md:py-24"
       initial={reduce ? undefined : { opacity: 0, y: 20 }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -89,10 +103,10 @@ const WorkSection: React.FC = () => {
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <p className="text-brand-primary text-sm mb-4 font-mono" aria-hidden="true">
-        {'$ ./work --with joey'}
+        {'$ ./hire --joey'}
       </p>
       <h2
-        id="work-heading"
+        id="hire-heading"
         className="font-mono text-2xl md:text-4xl font-bold leading-tight tracking-tight"
       >
         I design, build, and ship software —{' '}
@@ -111,6 +125,9 @@ const WorkSection: React.FC = () => {
               <CountUp target={s.value} prefix={'prefix' in s ? s.prefix : ''} suffix={'suffix' in s ? s.suffix : ''} />
             </div>
             <div className="mt-1 text-[11px] leading-snug text-brand-text/75">{s.label}</div>
+            {s.quip && (
+              <div className="mt-1 text-[10px] leading-snug italic text-brand-text/60">{s.quip}</div>
+            )}
           </div>
         ))}
       </div>
@@ -145,7 +162,7 @@ const WorkSection: React.FC = () => {
         <a
           href={`mailto:${CONTACT_EMAIL}`}
           onClick={handleEmailClick}
-          data-testid="work-cta"
+          data-testid="hire-cta"
           aria-label={copied ? 'Email copied to clipboard' : `Email ${CONTACT_EMAIL}`}
           className="inline-block border border-brand-primary/50 rounded px-6 py-3 text-sm text-brand-primary
                      hover:bg-brand-primary/10 hover:shadow-[0_0_24px_rgba(6,182,212,0.25)]
@@ -162,21 +179,27 @@ const WorkSection: React.FC = () => {
         <p className="mt-3 text-[11px] text-brand-text/60">
           one email. no forms, no calendly maze.
         </p>
-        <div className="mt-5 pt-4 border-t border-brand-primary/15 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-          {CONTACT_LINKS.map((c) => (
+      </div>
+
+      {/* contact — the old contact tile lives here now */}
+      <div className="mt-8 font-mono text-sm" role="list" aria-label="Contact links">
+        {CONTACT_LINKS.map((c) => (
+          <div key={c.platform} className="flex items-center gap-2 py-1.5" role="listitem">
+            <span className="text-brand-primary select-none shrink-0" aria-hidden="true">{'$'}</span>
+            <span className="text-brand-text/75 select-none shrink-0" aria-hidden="true">{'open'}</span>
             <a
-              key={c.label}
               href={c.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-brand-primary underline underline-offset-2
+              aria-label={c.platform}
+              className="text-brand-primary underline underline-offset-2
                          decoration-brand-primary/40 hover:decoration-brand-primary
                          transition-colors duration-150"
             >
-              {c.label}
+              {c.display}
             </a>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </motion.section>
   );

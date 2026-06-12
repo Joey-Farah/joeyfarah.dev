@@ -14,7 +14,7 @@ export function createSitemapRouter(repo: IBlockRepository): Router {
 
     const urls: string[] = [];
     urls.push(urlEntry(SITE_URL + '/', today, '1.0'));
-    urls.push(urlEntry(SITE_URL + '/#work', today, '0.9'));
+    urls.push(urlEntry(SITE_URL + '/#hire', today, '0.9'));
     for (const section of SECTION_ANCHORS) {
       urls.push(urlEntry(`${SITE_URL}/#${section}`, today, '0.8'));
     }

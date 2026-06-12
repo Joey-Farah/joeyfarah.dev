@@ -12,7 +12,7 @@ describe('WorkSection', () => {
 
   it('has exactly one primary CTA (email)', () => {
     render(<WorkSection />);
-    const ctas = screen.getAllByTestId('work-cta');
+    const ctas = screen.getAllByTestId('hire-cta');
     expect(ctas).toHaveLength(1);
     expect(ctas[0]).toHaveAttribute('href', expect.stringContaining('mailto:'));
   });

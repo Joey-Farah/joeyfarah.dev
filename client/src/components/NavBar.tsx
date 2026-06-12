@@ -88,15 +88,15 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
                 to stand apart from the `// comment` section links. */}
             <li>
               <a
-                href="#work"
-                onClick={(e) => handleNavClick(e, 'work')}
-                aria-label="Work with me — jump to the work section"
+                href="#hire"
+                onClick={(e) => handleNavClick(e, 'hire')}
+                aria-label="Work with me — jump to the hire section"
                 className="font-mono text-xs whitespace-nowrap select-none text-brand-primary
                            border border-brand-primary/40 rounded px-2 py-1
                            hover:bg-brand-primary/10 transition-colors duration-150"
-                data-testid="nav-link-work"
+                data-testid="nav-link-hire"
               >
-                {'$ work'}
+                {'$ hire'}
               </a>
             </li>
           </ul>
