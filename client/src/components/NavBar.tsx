@@ -84,12 +84,13 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
                 </li>
               );
             })}
-            {/* Page link, not a scroll anchor — sections are `// comments`,
-                page jumps are `$ commands`. Plain navigation, no intercept. */}
+            {/* The work section is the page's close — styled as a `$ command`
+                to stand apart from the `// comment` section links. */}
             <li>
               <a
-                href="/work"
-                aria-label="Work with me — services page"
+                href="#work"
+                onClick={(e) => handleNavClick(e, 'work')}
+                aria-label="Work with me — jump to the work section"
                 className="font-mono text-xs whitespace-nowrap select-none text-brand-primary
                            border border-brand-primary/40 rounded px-2 py-1
                            hover:bg-brand-primary/10 transition-colors duration-150"

@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react';
 import NavBar from './NavBar';
 
 describe('NavBar — work page link', () => {
-  it('links to the /work page once the hero has exited', () => {
+  it('links to the work section once the hero has exited', () => {
     render(<NavBar showHero={false} />);
     const workLink = screen.getByRole('link', { name: /work with me/i });
-    expect(workLink).toHaveAttribute('href', '/work');
+    expect(workLink).toHaveAttribute('href', '#work');
   });
 
   it('renders nothing while the hero is showing', () => {

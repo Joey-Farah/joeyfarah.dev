@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import type { BentoBlock, HeroContent } from 'shared/types';
 import { HttpBlockDataClient } from './adapters/BlockDataClient';
 import ScrollTransitionOrchestrator from './modules/ScrollTransition/ScrollTransitionOrchestrator';
+import WorkSection from './modules/WorkSection/WorkSection';
 import NavBar from './components/NavBar';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import ScrollToTopButton from './components/ScrollToTopButton';
@@ -46,6 +47,18 @@ const App: React.FC = () => {
         setLoading(false);
       });
   }, []);
+
+  // Honor deep links (e.g. the /work → /#work redirect): content renders
+  // after the async fetch, so the browser's native hash-scroll misses it.
+  useEffect(() => {
+    if (loading || !window.location.hash) return;
+    const el = document.getElementById(window.location.hash.slice(1));
+    if (!el) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Let the grid lay out first
+    const t = setTimeout(() => el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }), 100);
+    return () => clearTimeout(t);
+  }, [loading]);
 
   // Scroll listener — tracks whether the hero has been scrolled past so NavBar
   // can appear. Hero's own opacity fade is handled inside ScrollTransitionOrchestrator.
@@ -108,6 +121,8 @@ const App: React.FC = () => {
           blocks={allBlocks}
           showHero={showHero}
         />
+        {/* Dev-for-hire close — the grid above is the proof, this lands the CTA */}
+        <WorkSection />
       </main>
     </div>
   );

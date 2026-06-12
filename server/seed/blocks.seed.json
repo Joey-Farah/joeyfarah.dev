@@ -377,7 +377,7 @@
     "type": "contact-links",
     "title": "Contact",
     "order": 10,
-    "visible": true,
+    "visible": false,
     "content": {
       "links": [
         { "platform": "Work with me", "url": "/work", "display": "./work --with joey" }
