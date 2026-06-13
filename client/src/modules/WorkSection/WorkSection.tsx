@@ -14,7 +14,7 @@ const STATS: ReadonlyArray<{
 }> = [
   { value: 7, suffix: 'yrs', label: 'enterprise Oracle Cloud' },
   { value: 6, suffix: '+', label: 'products shipped' },
-  { value: 1, label: 'person, every layer' },
+  { value: 50, suffix: '+', label: 'paid Patreon supporters' },
   { value: 61, prefix: '#', label: 'world ranking, SSBMRank 2025' },
 ];
 
