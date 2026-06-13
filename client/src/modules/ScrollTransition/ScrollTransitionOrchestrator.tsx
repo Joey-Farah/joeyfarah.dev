@@ -13,6 +13,8 @@ const FADE_RANGE = 0.6;
 export interface ScrollTransitionOrchestratorProps {
   heroBlock: BentoBlock & { content: HeroContent };
   blocks: BentoBlock[];
+  /** Rendered between the hero and the bento grid — e.g. the orientation intro */
+  afterHero?: React.ReactNode;
   /** Unused — kept for backward-compat with existing callers */
   showHero?: boolean;
 }
@@ -30,6 +32,7 @@ export interface ScrollTransitionOrchestratorProps {
 const ScrollTransitionOrchestrator: React.FC<ScrollTransitionOrchestratorProps> = ({
   heroBlock,
   blocks,
+  afterHero,
 }) => {
   const prefersReducedMotion = useReducedMotion();
   const { scrollY } = useScroll();
@@ -46,7 +49,12 @@ const ScrollTransitionOrchestrator: React.FC<ScrollTransitionOrchestratorProps> 
   const opacity = useTransform(scrollY, [0, vh * FADE_RANGE], [1, 0]);
 
   if (prefersReducedMotion) {
-    return <BentoGrid blocks={blocks} />;
+    return (
+      <>
+        {afterHero}
+        <BentoGrid blocks={blocks} />
+      </>
+    );
   }
 
   return (
@@ -54,6 +62,7 @@ const ScrollTransitionOrchestrator: React.FC<ScrollTransitionOrchestratorProps> 
       <motion.div style={{ opacity }}>
         <Hero data={heroBlock} />
       </motion.div>
+      {afterHero}
       <BentoGrid blocks={blocks} />
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import type { BentoBlock, HeroContent } from 'shared/types';
 import { HttpBlockDataClient } from './adapters/BlockDataClient';
 import ScrollTransitionOrchestrator from './modules/ScrollTransition/ScrollTransitionOrchestrator';
+import IntroSection from './modules/IntroSection/IntroSection';
 import WorkSection from './modules/WorkSection/WorkSection';
 import NavBar from './components/NavBar';
 import ScrollProgressBar from './components/ScrollProgressBar';
@@ -120,8 +121,9 @@ const App: React.FC = () => {
           heroBlock={heroBlock}
           blocks={allBlocks}
           showHero={showHero}
+          afterHero={<IntroSection />}
         />
-        {/* Dev-for-hire close — the grid above is the proof, this lands the CTA */}
+        {/* Collaborator close — the intro + grid above are orientation & proof; this lands the CTA */}
         <WorkSection />
       </main>
     </div>

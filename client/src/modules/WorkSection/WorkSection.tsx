@@ -27,12 +27,6 @@ const SHAPES = [
   { flag: '--dashboard', line: 'Scattered data, made legible and live.' },
 ] as const;
 
-const STEPS = [
-  { cmd: 'scope', line: 'the smallest finished thing that solves it.' },
-  { cmd: 'build', line: 'end to end. Links to click, not status meetings.' },
-  { cmd: 'ship', line: 'a live product. Not a prototype.' },
-] as const;
-
 // The old contact tile, absorbed — same `$ open <display>` rows it had.
 const CONTACT_LINKS = [
   { platform: 'LinkedIn', display: 'linkedin.com/in/joey-farah', href: 'https://www.linkedin.com/in/joey-farah/' },
@@ -72,9 +66,10 @@ const CountUp: React.FC<{ target: number; prefix?: string; suffix?: string }> = 
 };
 
 /**
- * WorkSection — the dev-for-hire close at the bottom of the single-page site.
- * The bento grid above it is the proof; this section only frames the offer
- * and lands the CTA. /work, /hire, and /build all redirect here.
+ * WorkSection — the collaborator close at the bottom of the single-page site.
+ * Orientation now lives up top in IntroSection; everything above this is the
+ * proof. This section makes the invite and lands the CTA. /work, /hire, and
+ * /build all redirect here.
  */
 const WorkSection: React.FC = () => {
   const reduce = useReducedMotion();
@@ -101,25 +96,29 @@ const WorkSection: React.FC = () => {
       <p className="text-brand-primary text-sm mb-4 font-mono" aria-hidden="true">
         {'$ ./build --with-me'}
       </p>
+      {/* The warm invite is the heading now — collaborator framing, not a pitch. */}
       <h2
         id="build-heading"
         className="font-mono text-2xl md:text-4xl font-bold leading-tight tracking-tight"
       >
-        I design, build, and <span className="text-brand-primary">ship</span> software.
+        Got something you want <span className="text-brand-primary">built</span>?
       </h2>
       <p className="mt-4 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        Generating code is easy now. The hard parts moved upstream — discovery,
-        requirements, design: understanding the problem before trying to solve
-        it. That, and the last 20%, where it actually ships.
-      </p>
-      <p className="mt-3 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        So I work in vertical slices — thin, end-to-end pieces that run. You
-        get something usable early, real software to react to, not a plan and
-        a long wait. Everything above is my own work, built that way.
+        A product, a tool, an idea you keep wishing existed — tell me about it.
       </p>
 
-      {/* stats */}
-      <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-brand-primary/15 border border-brand-primary/15 rounded overflow-hidden font-mono">
+      {/* shapes — the kinds of things I build */}
+      <div className="mt-8 grid md:grid-cols-3 gap-3 font-mono">
+        {SHAPES.map((s) => (
+          <div key={s.flag} className="border border-brand-primary/20 rounded-lg p-3.5 hover:border-brand-primary/50 transition-colors duration-200">
+            <span className="text-brand-primary text-sm font-bold">{s.flag}</span>
+            <p className="mt-1.5 text-xs leading-relaxed text-brand-text/85">{s.line}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* stats — the proof I deliver */}
+      <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-px bg-brand-primary/15 border border-brand-primary/15 rounded overflow-hidden font-mono">
         {STATS.map((s) => (
           <div key={s.label} className="bg-brand-bg p-4">
             <div className="text-2xl md:text-3xl font-bold text-brand-primary">
@@ -133,36 +132,8 @@ const WorkSection: React.FC = () => {
         {STATS_QUIP}
       </p>
 
-      {/* shapes */}
-      <div className="mt-8 grid md:grid-cols-3 gap-3 font-mono">
-        {SHAPES.map((s) => (
-          <div key={s.flag} className="border border-brand-primary/20 rounded-lg p-3.5 hover:border-brand-primary/50 transition-colors duration-200">
-            <span className="text-brand-primary text-sm font-bold">{s.flag}</span>
-            <p className="mt-1.5 text-xs leading-relaxed text-brand-text/85">{s.line}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* process — one line */}
-      <p className="mt-8 font-mono text-sm text-brand-text/85">
-        {STEPS.map((s, i) => (
-          <span key={s.cmd}>
-            <span className="text-brand-primary font-bold">{s.cmd}</span>
-            {' — '}
-            {s.line}
-            {i < STEPS.length - 1 ? ' ' : ''}
-          </span>
-        ))}
-      </p>
-
-      {/* warm invite — collaborator framing, not a "for hire" pitch */}
-      <p className="mt-10 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        Got something you want built — a product, a tool, an idea you keep
-        wishing existed? Tell me about it.
-      </p>
-
       {/* CTA */}
-      <div className="mt-5 border border-brand-primary/30 rounded-lg p-6 md:p-8 text-center bg-brand-primary/[0.03] font-mono">
+      <div className="mt-10 border border-brand-primary/30 rounded-lg p-6 md:p-8 text-center bg-brand-primary/[0.03] font-mono">
         <a
           href={`mailto:${CONTACT_EMAIL}`}
           onClick={handleEmailClick}

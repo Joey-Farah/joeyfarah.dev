@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import WorkSection from './WorkSection';
 
 describe('WorkSection', () => {
-  it('renders the craft-statement heading', () => {
+  it('renders the collaborator invite as its heading', () => {
     render(<WorkSection />);
     expect(
       screen.getByRole('heading', { level: 2 }),
-    ).toHaveTextContent(/design, build, and ship software\./i);
+    ).toHaveTextContent(/got something you want built\?/i);
   });
 
   it('has exactly one primary CTA (email)', () => {
