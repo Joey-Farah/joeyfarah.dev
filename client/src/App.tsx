@@ -117,14 +117,18 @@ const App: React.FC = () => {
 
       {/* ScrollTransitionOrchestrator — Hero → BentoGrid animated transition */}
       <main id="main-content">
+        {/* Page order matches the nav: joey (intro) → build → projects/timeline/personal (grid) */}
         <ScrollTransitionOrchestrator
           heroBlock={heroBlock}
           blocks={allBlocks}
           showHero={showHero}
-          afterHero={<IntroSection />}
+          afterHero={
+            <>
+              <IntroSection />
+              <WorkSection />
+            </>
+          }
         />
-        {/* Collaborator close — the intro + grid above are orientation & proof; this lands the CTA */}
-        <WorkSection />
       </main>
     </div>
   );

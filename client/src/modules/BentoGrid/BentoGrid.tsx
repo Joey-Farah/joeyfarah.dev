@@ -121,26 +121,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       className="w-full max-w-6xl lg:max-w-7xl mx-auto px-4 md:px-6 pt-8 md:pt-24 pb-6 md:pb-12 space-y-4"
       data-testid="bento-grid"
     >
-      {/* Dual timeline — full-width overview section */}
-      {dualTimelineBlock && (
-        <ScrollFadeSection id="professional-timeline" ariaLabel="Career timeline">
-          <DualTimeline content={dualTimelineBlock.content as DualTimelineContent} />
-        </ScrollFadeSection>
-      )}
-
-      {/* Enterprise section */}
-      {enterpriseBlocks.length > 0 && (
-        <ScrollFadeSection id="enterprise" ariaLabel="Enterprise projects">
-          <p className="font-mono text-xs text-brand-text/70 px-1 mb-3">// enterprise</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
-            {enterpriseBlocks.map((block) => (
-              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
-            ))}
-          </div>
-        </ScrollFadeSection>
-      )}
-
-      {/* Projects section */}
+      {/* Projects section — first in the grid, to match the nav order */}
       {projectBlocks.length > 0 && (
         <ScrollFadeSection id="projects" ariaLabel="Personal projects">
           <p className="font-mono text-xs text-brand-text/70 px-1 mb-3">// projects</p>
@@ -163,6 +144,25 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
                 ))}
               </div>
             )}
+          </div>
+        </ScrollFadeSection>
+      )}
+
+      {/* Dual timeline — full-width overview section */}
+      {dualTimelineBlock && (
+        <ScrollFadeSection id="professional-timeline" ariaLabel="Career timeline">
+          <DualTimeline content={dualTimelineBlock.content as DualTimelineContent} />
+        </ScrollFadeSection>
+      )}
+
+      {/* Enterprise section */}
+      {enterpriseBlocks.length > 0 && (
+        <ScrollFadeSection id="enterprise" ariaLabel="Enterprise projects">
+          <p className="font-mono text-xs text-brand-text/70 px-1 mb-3">// enterprise</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
+            {enterpriseBlocks.map((block) => (
+              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+            ))}
           </div>
         </ScrollFadeSection>
       )}

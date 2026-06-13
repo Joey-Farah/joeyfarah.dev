@@ -66,10 +66,10 @@ const CountUp: React.FC<{ target: number; prefix?: string; suffix?: string }> = 
 };
 
 /**
- * WorkSection — the collaborator close at the bottom of the single-page site.
- * Orientation now lives up top in IntroSection; everything above this is the
- * proof. This section makes the invite and lands the CTA. /work, /hire, and
- * /build all redirect here.
+ * WorkSection — the "build" section. Sits second (right after IntroSection) so
+ * the page order matches the nav; orientation lives up top in IntroSection and
+ * the proof (projects, timeline, personal) follows below. This section makes the
+ * invite and lands the CTA. /work, /hire, and /build all redirect here.
  */
 const WorkSection: React.FC = () => {
   const reduce = useReducedMotion();
