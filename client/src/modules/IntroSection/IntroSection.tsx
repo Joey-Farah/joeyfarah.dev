@@ -20,8 +20,8 @@ const IntroSection: React.FC = () => {
 
   return (
     <motion.section
-      id="intro"
-      aria-labelledby="intro-heading"
+      id="joey"
+      aria-labelledby="joey-heading"
       className="max-w-3xl mx-auto px-6 py-16 md:py-24"
       initial={reduce ? undefined : { opacity: 0, y: 20 }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -32,7 +32,7 @@ const IntroSection: React.FC = () => {
         {'$ joey'}
       </p>
       <h2
-        id="intro-heading"
+        id="joey-heading"
         className="font-mono text-2xl md:text-4xl font-bold leading-tight tracking-tight"
       >
         I design, build, and <span className="text-brand-primary">ship</span> software.
