@@ -4,6 +4,7 @@ import { HttpBlockDataClient } from './adapters/BlockDataClient';
 import ScrollTransitionOrchestrator from './modules/ScrollTransition/ScrollTransitionOrchestrator';
 import IntroSection from './modules/IntroSection/IntroSection';
 import WorkSection from './modules/WorkSection/WorkSection';
+import ClosingCTA from './components/ClosingCTA';
 import NavBar from './components/NavBar';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import ScrollToTopButton from './components/ScrollToTopButton';
@@ -129,6 +130,8 @@ const App: React.FC = () => {
             </>
           }
         />
+        {/* Closing ask — build's CTA sits high, so leave one at the very bottom */}
+        <ClosingCTA />
       </main>
     </div>
   );
