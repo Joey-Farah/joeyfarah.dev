@@ -127,8 +127,8 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
           <p className="font-mono text-xs text-brand-text/70 px-1 mb-3">// projects</p>
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
-              {mainProjectBlocks.map((block) => (
-                <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+              {mainProjectBlocks.map((block, i) => (
+                <BentoTile key={block.slug} index={i} layout={getLayout(block.slug)} block={block} />
               ))}
             </div>
             {lastProjectRow.length > 0 && (
@@ -139,8 +139,8 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
                     : 'md:grid-cols-2 lg:w-2/3 lg:mx-auto'
                 }`}
               >
-                {lastProjectRow.map((block) => (
-                  <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+                {lastProjectRow.map((block, i) => (
+                  <BentoTile key={block.slug} index={i} layout={getLayout(block.slug)} block={block} />
                 ))}
               </div>
             )}
@@ -160,8 +160,8 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
         <ScrollFadeSection id="enterprise" ariaLabel="Enterprise projects">
           <p className="font-mono text-xs text-brand-text/70 px-1 mb-3">// enterprise</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
-            {enterpriseBlocks.map((block) => (
-              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+            {enterpriseBlocks.map((block, i) => (
+              <BentoTile key={block.slug} index={i} layout={getLayout(block.slug)} block={block} />
             ))}
           </div>
         </ScrollFadeSection>
@@ -171,8 +171,8 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       {professionalBlocks.length > 0 && (
         <ScrollFadeSection id="professional" ariaLabel="Professional experience">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
-            {professionalBlocks.map((block) => (
-              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+            {professionalBlocks.map((block, i) => (
+              <BentoTile key={block.slug} index={i} layout={getLayout(block.slug)} block={block} />
             ))}
           </div>
         </ScrollFadeSection>
@@ -185,8 +185,8 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
           <div className="flex flex-col gap-4">
             <SlippiStatsTile />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
-              {personalBlocks.map((block) => (
-                <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+              {personalBlocks.map((block, i) => (
+                <BentoTile key={block.slug} index={i} layout={getLayout(block.slug)} block={block} />
               ))}
             </div>
           </div>
@@ -198,8 +198,8 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
         <ScrollFadeSection id="contact" ariaLabel="Contact information">
           <p className="font-mono text-xs text-brand-text/70 px-1 mb-3">// contact</p>
           <div className="grid grid-cols-1 gap-4 max-w-md">
-            {contactBlocks.map((block) => (
-              <BentoTile key={block.slug} layout={getLayout(block.slug)} block={block} />
+            {contactBlocks.map((block, i) => (
+              <BentoTile key={block.slug} index={i} layout={getLayout(block.slug)} block={block} />
             ))}
           </div>
         </ScrollFadeSection>

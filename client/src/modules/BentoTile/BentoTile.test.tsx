@@ -127,18 +127,21 @@ describe('BentoTile — sub-renderer dispatch', () => {
 
 // ─── Layout / grid span tests ────────────────────────────────────────────────
 
-describe('BentoTile — grid span via inline style', () => {
-  it('applies gridColumn span from layout.colSpan', () => {
+describe('BentoTile — grid span via utility classes', () => {
+  it('applies col/row span classes from layout', () => {
     const block = baseBlock({ type: 'timeline', content: { entries: [] } });
     render(<BentoTile layout={{ colSpan: 2, rowSpan: 3 }} block={block} />);
     const tile = screen.getByTestId('bento-tile');
-    expect(tile).toHaveStyle({ gridColumn: 'span 2', gridRow: 'span 3' });
+    expect(tile.className).toContain('md:col-span-2');
+    expect(tile.className).toContain('md:row-span-3');
   });
 
-  it('defaults to span 1 when layout omits colSpan/rowSpan', () => {
+  it('defaults to a single-column span when layout omits colSpan/rowSpan', () => {
     const block = baseBlock({ type: 'timeline', content: { entries: [] } });
     render(<BentoTile layout={{}} block={block} />);
     const tile = screen.getByTestId('bento-tile');
-    expect(tile).toHaveStyle({ gridColumn: 'span 1', gridRow: 'span 1' });
+    expect(tile.className).toContain('col-span-1');
+    expect(tile.className).not.toContain('md:col-span-2');
+    expect(tile.className).not.toContain('row-span');
   });
 });

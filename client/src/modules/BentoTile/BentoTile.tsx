@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type {
   BentoBlock,
   LayoutConfig,
@@ -27,6 +27,8 @@ const ERDFallback: React.FC = () => (
 export interface BentoTileProps {
   layout: LayoutConfig;
   block: BentoBlock;
+  /** Position within its section — drives a small staggered entrance delay. */
+  index?: number;
 }
 
 /**
@@ -51,9 +53,13 @@ const ROW_SPAN_CLASS: Record<number, string> = {
   3: 'md:row-span-3',
 };
 
-const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
+const BentoTile: React.FC<BentoTileProps> = ({ layout, block, index = 0 }) => {
+  const reduce = useReducedMotion();
   const colSpan = layout.colSpan ?? 1;
   const rowSpan = layout.rowSpan ?? 1;
+  // Staggered entrance: tiles slide up into place as their section enters.
+  // y-only (no opacity) so it composes cleanly with the section's scroll fade.
+  const entranceDelay = Math.min(index * 0.06, 0.3);
 
   const spanClasses = [
     COL_SPAN_CLASS[colSpan] ?? 'col-span-1',
@@ -122,8 +128,19 @@ const BentoTile: React.FC<BentoTileProps> = ({ layout, block }) => {
       aria-label={block.title}
       role="region"
       className={`flex flex-col bg-brand-bg border border-brand-primary/20 rounded-xl overflow-hidden min-h-[120px] scroll-mt-16 ${spanClasses}`}
-      whileHover={{ borderColor: 'rgba(6,182,212,0.5)', boxShadow: '0 0 16px rgba(6,182,212,0.08)' }}
-      transition={{ duration: 0.2 }}
+      initial={reduce ? false : { y: 16 }}
+      whileInView={reduce ? undefined : { y: 0, transition: { duration: 0.35, ease: 'easeOut', delay: entranceDelay } }}
+      viewport={{ once: true, margin: '-40px' }}
+      whileHover={
+        reduce
+          ? { borderColor: 'rgba(6,182,212,0.6)' }
+          : {
+              y: -4,
+              borderColor: 'rgba(6,182,212,0.6)',
+              boxShadow: '0 10px 30px rgba(6,182,212,0.15)',
+              transition: { duration: 0.2, ease: 'easeOut' },
+            }
+      }
     >
       {/* Terminal chrome: title bar */}
       <div
