@@ -114,9 +114,9 @@ const CardFront: React.FC<{
     <div className="shrink-0">
       <StatusBadge status={status} />
     </div>
-    <div className="flex flex-1 items-center justify-center min-h-[90px]">
+    <div className="flex flex-1 items-center justify-center min-h-[180px]">
       {image ? (
-        <img src={image} alt={title} className="max-w-full max-h-[130px] object-contain" />
+        <img src={image} alt={title} className="w-full max-h-[260px] object-contain" />
       ) : (
         <GlyphFallback label={fallbackLabel} />
       )}
