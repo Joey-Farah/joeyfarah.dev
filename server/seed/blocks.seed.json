@@ -191,7 +191,7 @@
     "type": "project-card",
     "title": "Conversion Assistant Tool",
     "order": 5,
-    "visible": true,
+    "visible": false,
     "content": {
       "description": "Python toolkit for Oracle Cloud data conversions. Supports HDL, FBDI, and REST API upload methods — extracts from legacy sources, maps fields to Fusion schemas, validates, and populates upload templates. Covers the three main Oracle Cloud data loading approaches in one toolkit, used across live client engagements.",
       "stack": ["Python", "SQL", "FBDI", "HDL", "REST APIs"],
@@ -218,7 +218,7 @@
     "slug": "slippi-ranked-stats",
     "type": "project-card",
     "title": "Slippi Ranked Stats",
-    "order": 6,
+    "order": 5,
     "visible": true,
     "content": {
       "description": "Windows desktop app for competitive Melee players. Analysis of online ranked sets and performance grading — points at your local replay folder and surfaces matchup win rates, stage stats, session momentum, and rating history. Live session tracking and full set grade breakdowns for Patreon supporters. Signed auto-updates, all data stored locally.",
@@ -235,7 +235,7 @@
     "slug": "rslp",
     "type": "project-card",
     "title": "rslp — Database Engine",
-    "order": 7,
+    "order": 6,
     "visible": true,
     "content": {
       "description": "A relational database engine built from scratch in Go — on-disk page storage, a hand-written B+tree index, and a recursive-descent SQL parser, no database libraries. The goal: a queryable companion to Slippi Ranked Stats that lets power users run their own SQL against a ~200k-replay Melee dataset, answering questions the app's UI doesn't surface. A ground-up study of how databases actually work.",
@@ -251,7 +251,7 @@
     "slug": "trendarc",
     "type": "project-card",
     "title": "TrendArc",
-    "order": 9,
+    "order": 7,
     "visible": true,
     "content": {
       "description": "Fitness biometric dashboard. Visualizes sleep architecture, HRV trends, SpO\u2082 dips, and resting heart rate with interactive time-series charts. Supports CSV import for offline analysis.",
@@ -267,7 +267,7 @@
     "slug": "joeyfarah-dev",
     "type": "project-card",
     "title": "joeyfarah.dev",
-    "order": 8,
+    "order": 9,
     "visible": true,
     "content": {
       "image": "/images/joeyfarah-dev.svg",
@@ -284,7 +284,7 @@
     "slug": "spotify-to-mp3",
     "type": "project-card",
     "title": "Spotify to MP3",
-    "order": 9,
+    "order": 10,
     "visible": true,
     "content": {
       "description": "Windows desktop app that downloads Spotify playlists and albums as 320 kbps MP3s with embedded metadata. Paste a link, queue multiple URLs, and download into named folders. Electron + Python wrapper around spotDL with bundled FFmpeg integration.",
@@ -311,7 +311,7 @@
     "slug": "lombardi-project",
     "type": "project-card",
     "title": "The Lombardi Project",
-    "order": 7,
+    "order": 8,
     "visible": true,
     "content": {
       "description": "Melee coaching and content — ~400 Patreon members, 100+ Savestates and Premium Access to Slippi Ranked Stats. Deep-dives on improving your Falco, matchup breakdowns, and gameplay analysis.",
