@@ -75,9 +75,9 @@ describe('ingestSeed — valid seed', () => {
 // ---------------------------------------------------------------------------
 
 describe('ingestSeed — production blocks.seed.json', () => {
-  it('loads all 15 blocks without error', async () => {
+  it('loads all 16 blocks without error', async () => {
     const blocks = await ingestSeed(BLOCKS_SEED);
-    expect(blocks.length).toBe(15);
+    expect(blocks.length).toBe(16);
   });
 
   it('all required slugs are present', async () => {

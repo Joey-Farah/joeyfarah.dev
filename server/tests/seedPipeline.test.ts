@@ -61,7 +61,7 @@ describe('seedPipeline — valid fixture seed (5 blocks)', () => {
 // End-to-end: production blocks.seed.json → InMemoryBlockRepository
 // ---------------------------------------------------------------------------
 
-describe('seedPipeline — production blocks.seed.json (15 blocks)', () => {
+describe('seedPipeline — production blocks.seed.json (16 blocks)', () => {
   let repo: InMemoryBlockRepository;
 
   beforeAll(async () => {
@@ -70,9 +70,9 @@ describe('seedPipeline — production blocks.seed.json (15 blocks)', () => {
     await repo.upsertBlocks(blocks);
   });
 
-  it('getBlocks() returns 15 blocks', async () => {
+  it('getBlocks() returns 16 blocks', async () => {
     const result = await repo.getBlocks();
-    expect(result.length).toBe(15);
+    expect(result.length).toBe(16);
   });
 
   it('all blocks have required envelope fields', async () => {
