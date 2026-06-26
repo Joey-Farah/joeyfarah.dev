@@ -23,32 +23,40 @@ Personal portfolio site for Joey Farah — Oracle Cloud ERP Architect and indepe
 
 ---
 
-## Current State (as of 2026-04-17)
+## Current State (as of 2026-06-26)
 
-The site is **fully built and visually polished**, but is in a **pre-launch stripped state** pending real content. All 40 user stories from the PRD are implemented. Manual browser validation passed (Lighthouse 100, mobile boot timing, scroll transition).
+The site is **live at https://joeyfarah.dev** — past the old "pre-launch stripped" phase. It is a **single page** (the former `/work` route was collapsed into an in-page `#build` section; there is no router). Deployed on Railway + MongoDB Atlas.
 
-### What's visible to visitors (live)
-- `hero` — terminal boot sequence with name + tagline lines
-- `contact` — social links (LinkedIn, GitHub, Email, Twitter, YouTube, Twitch)
+### Page composition (top → bottom, `App.tsx`)
+Hero boot sequence → scroll transition → `IntroSection` (`#joey`) → `WorkSection` (`#build`) → `BentoGrid` (projects / timeline / personal) → `ClosingCTA`.
 
-### What's built but hidden (`visible: false` in seed)
-- `professional-timeline` — simplified to single Elire entry; placeholder accomplishment text
-- `oracle-db-diagram` — project card with full Cytoscape ERD screenshot from the live app
-- `conversion-assistant` — enterprise project card (Conversion Assistant Tool), marked in-development
-- `fusion-sql-developer` — enterprise project card, marked in-development
-- `slippi-ranked-stats` — personal project card, links to GitHub + releases
-- `trendarc` — personal project card (TrendArc fitness biometric dashboard), live at trendarc.app
-- `habitat` — personal project card, marked in-development
-- `lombardi-project` — personal project card, links to Patreon
+- **NavBar order:** `// joey` · `// build` · `// projects` · `// timeline` · `// personal` (anchors, not pages — `NavBar.tsx`).
+- **Hero** (`hero` tile) — boot lines: *Joey Farah · Father & Husband · Developer · Cloud Consultant · Globally Ranked Gamer*.
+- **`IntroSection`** (`#joey`, hardcoded component) — "$ joey", how-I-work / scope→build→ship methodology.
+- **`WorkSection`** (`#build`, hardcoded component) — collaborator-framed "got something you want built?", a single email CTA (`hello@joeyfarah.dev`, click-to-copy), the stats grid (7 yrs Oracle, 6+ products, 50+ paid Patreon supporters, #61 SSBMRank 2025), and contact links (LinkedIn, GitHub, Discord). Contact rows live **here**, not in a tile.
+- **`ClosingCTA`** (hardcoded component) — closing email ask at the very bottom (`hello@joeyfarah.dev`).
+
+### Visible tiles (live, served from Atlas via `/api/blocks`)
+- `hero`, `dual-timeline` (career overview, `#professional-timeline`)
+- Project cards (`#projects`): `oracle-db-diagram`, `fusion-sql-developer`, `conversion-assistant`, `slippi-ranked-stats`, `lombardi-project`, `joeyfarah-dev`, `spotify-to-mp3`, `trendarc`
+- Personal (`#personal`): `SlippiStatsTile` (hardcoded live-rating tile) + `reading-list` + `music-list`
+
+### Hidden tiles (`visible: false` in seed)
+- `professional-timeline` (old single-entry `timeline` type — superseded by `dual-timeline`)
+- `habitat` — project card, in-development
+- `contact` (`contact-links` type) — **deprecated**; contact was absorbed into `WorkSection`. Only holds a "Build with me" link.
+
+### Tile types in use
+`hero`, `dual-timeline`, `timeline`, `project-card` (×9), `reading-list`, `music-list`, `contact-links`.
 
 ### Infrastructure
-- Terminal boot sequence hero → bento grid scroll transition
-- Sticky NavBar (trimmed to `// contact` only while tiles are hidden)
-- Cyan scroll progress bar fixed at top of viewport
+- Terminal boot sequence hero → bento grid scroll transition (`ScrollTransitionOrchestrator`)
+- Sticky NavBar (hidden while hero shows; 5 section anchors once scrolled)
+- Cyan scroll progress bar, scroll-to-top button, keyboard section nav (j/k, arrows)
 - Custom 404 page (terminal-themed)
-- SEO: OG tags, Twitter Card, Schema.org JSON-LD, robots.txt
-- Favicon: `>_` SVG glyph
-- Deployed on Railway + MongoDB Atlas; domain joeyfarah.dev live
+- SEO: OG tags, Twitter Card, Schema.org JSON-LD, robots.txt; favicon `>_` SVG glyph
+- **Email:** `hello@joeyfarah.dev` via Cloudflare Email Routing → Gmail (confirmed working). Wired into `WorkSection` + `ClosingCTA`. *(Not `joey@` — older notes in this file reference that; `hello@` is the live alias.)*
+- Known: `BentoTile.test.tsx` has 2 pre-existing failures (gridColumn/gridRow inline-style assertions) on clean `main`.
 
 ### Build
 ```bash
@@ -81,7 +89,9 @@ Checklist when editing a tile: (1) edit JSON, (2) run `npm run seed` against pro
 
 ## What Still Needs To Be Done
 
-These require Joey's input (accounts, payment, external setup). Do them in order — each step unblocks the next. Total time if nothing goes wrong: **~45 min**.
+> ✅ **Mostly historical.** §1 (Deploy to Railway) and §2 (buy domain + DNS) are **done** — the site is live at https://joeyfarah.dev on Railway + Atlas. Kept below as reference for the deploy/DNS topology and the re-seed commands. The only items that may still be open are §3 (analytics — optional) and the Cloudflare proxy/TLS/analytics-token follow-ups in *Immediate Next Steps* §4–6.
+
+These required Joey's input (accounts, payment, external setup). Original estimate: **~45 min**.
 
 ### 0. Before you start — checklist
 
@@ -189,10 +199,7 @@ Pick **one** or skip. Both are a single `<script>` tag in `client/index.html` �
 
 ## Immediate Next Steps (pick up here next session)
 
-1. **Cloudflare email routing** — set up forwarding from `joey@joeyfarah.dev` → `joeyefarah@gmail.com` in the Cloudflare dashboard (~2 min). Then add email back to the contact tile in `server/seed/blocks.seed.json` and re-seed:
-   ```json
-   { "platform": "Email", "url": "mailto:joey@joeyfarah.dev", "display": "joey@joeyfarah.dev" }
-   ```
+1. ~~**Cloudflare email routing**~~ — ✅ **DONE.** `hello@joeyfarah.dev` → `joeyefarah@gmail.com` routing is live and confirmed (MX/SPF/DKIM present; round-trip tested). The alias is wired into `WorkSection` + `ClosingCTA` as the email CTA, not into a tile. Note: the live alias is `hello@`, **not** `joey@` as earlier drafts assumed.
 
 2. **Spotify-to-MP3 `.env`** — the repo at `C:\Users\joeyf\Documents\GitHub\ClaudeCoding\spotify-to-mp3` has `.env.example` and dotenv support in place but the actual `.env` hasn't been created yet. Run:
    ```bash
@@ -208,7 +215,7 @@ Pick **one** or skip. Both are a single `<script>` tag in `client/index.html` �
 
 6. **Wire up Cloudflare Analytics API access for Claude** — once proxy state is confirmed, create a Cloudflare API token at [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens) scoped to *Zone → Analytics → Read* + *Zone → Zone → Read* for the `joeyfarah.dev` zone. Also grab the zone ID (right sidebar of the Cloudflare overview). With those two values, Claude can pull traffic, top paths, bot vs human, country breakdown, and status codes via the GraphQL Analytics API — same data as the dashboard plus per-path detail the free UI hides.
 
-7. **Refresh site content** — the site is still in the "pre-launch stripped state" described in the Current State section: only `hero` and `contact` tiles are visible, everything else is `visible: false` in `server/seed/blocks.seed.json`. Real content (Elire timeline from resume, finalized project cards, Habitat/RingConn copy) needs to land soon so the bento grid can be flipped back on. Edit the seed JSON → `npm run seed` against prod Atlas → commit + push.
+7. ~~**Refresh site content**~~ — ✅ **DONE.** The site is no longer stripped: the bento grid is live with the full project set, dual-timeline, reading-list, and music-list. Remaining hidden-by-design: `professional-timeline` (superseded by `dual-timeline`), `habitat` (in-development), and the deprecated `contact` tile. To flip `habitat` on later: set `visible: true` in the seed → `npm run seed` against prod Atlas → commit + push.
 
 ---
 
