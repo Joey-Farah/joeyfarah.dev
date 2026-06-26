@@ -22,7 +22,7 @@ describe('WorkSection', () => {
     const external = screen
       .getAllByRole('link')
       .filter((a) => a.getAttribute('href')?.startsWith('https://'));
-    expect(external.length).toBeGreaterThanOrEqual(4);
+    expect(external.length).toBeGreaterThanOrEqual(3);
     external.forEach((a) => {
       expect(a).toHaveAttribute('target', '_blank');
       expect(a).toHaveAttribute('rel', expect.stringContaining('noopener'));

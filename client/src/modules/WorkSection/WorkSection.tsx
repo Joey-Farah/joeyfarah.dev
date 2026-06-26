@@ -32,7 +32,6 @@ const CONTACT_LINKS = [
   { platform: 'LinkedIn', display: 'linkedin.com/in/joey-farah', href: 'https://www.linkedin.com/in/joey-farah/' },
   { platform: 'GitHub', display: 'github.com/Joey-Farah', href: 'https://github.com/Joey-Farah' },
   { platform: 'Discord', display: 'discord: joeydonuts', href: 'https://discord.com/users/101538614428602368' },
-  { platform: 'YouTube', display: 'youtube.com/@joeydonutsssbm', href: 'https://www.youtube.com/@joeydonutsssbm' },
 ] as const;
 
 /** Counts up to `target` when scrolled into view; static under reduced motion. */
