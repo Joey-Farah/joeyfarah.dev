@@ -225,6 +225,7 @@ Pick **one** or skip. Both are a single `<script>` tag in `client/index.html` �
 - **`prefers-color-scheme` light mode** — CSS variable swap + localStorage persistence. Held off because it could break the terminal-dark brand; decide whether you want this.
 - **Testimonial tile** — new `testimonial` tile type with a short quote carousel. Blocked on getting 2–3 quotes from colleagues.
 - **Blog/writing tile** — links to dev.to or Medium posts. Blocked on picking a platform and writing at least one post.
+- **rslp preview image** — the `rslp` project card has no image, so its flip-card front uses the terminal-glyph fallback. Replace with a real preview — ideally a rendered sample of a DB table the engine will hold (e.g. a `games` table with a few Melee rows). Add as `/images/rslp.*`, set `content.image` in the seed, re-seed.
 
 ### Not yet done — autonomous-safe, pick any time
 - **Self-host JetBrains Mono** — removes Google Fonts roundtrip (privacy + perf win). Trade-off: adds ~50 kB WOFF2 to repo.

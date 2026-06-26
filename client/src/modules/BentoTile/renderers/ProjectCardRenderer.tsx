@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useReducedMotion, useInView, animate } from 'framer-motion';
 import type { ProjectCardContent } from 'shared/types';
 import HabitatAnimation from '../../../assets/HabitatAnimation';
+import FlipCard from '../../../components/FlipCard';
 
 export interface ProjectCardRendererProps {
   content: ProjectCardContent;
@@ -88,96 +89,119 @@ const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => {
   );
 };
 
-// ─── ProjectCardRenderer ──────────────────────────────────────────────────────
+// ─── Glyph fallback (front face for imageless cards) ──────────────────────────
 
-const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, title, slug }) => {
-  const { description, stack, links, status, image, progress } = content;
-  const isHabitat = slug === 'habitat';
-  // Wide tiles (colSpan 2) get side-by-side media + text on md+ screens.
-  const isWideMedia = slug === 'oracle-db-diagram';
+const GlyphFallback: React.FC<{ label: string }> = ({ label }) => (
+  <div
+    className="flex flex-col items-center justify-center gap-2 select-none text-brand-primary/80"
+    aria-hidden="true"
+  >
+    <span className="text-4xl font-bold tracking-tight">{'>_'}</span>
+    <span className="font-mono text-sm text-brand-text/75">{label}</span>
+    <span className="font-mono text-xs tracking-tighter text-brand-primary/40">{'▓▓▓░░░ db'}</span>
+  </div>
+);
 
+// ─── Card faces ───────────────────────────────────────────────────────────────
+
+const CardFront: React.FC<{
+  title: string;
+  status: 'live' | 'in-development';
+  image?: string;
+  fallbackLabel: string;
+}> = ({ title, status, image, fallbackLabel }) => (
+  <div className="flex flex-col flex-1 p-4 gap-3 font-mono text-brand-text">
+    <div className="shrink-0">
+      <StatusBadge status={status} />
+    </div>
+    <div className="flex flex-1 items-center justify-center min-h-[90px]">
+      {image ? (
+        <img src={image} alt={title} className="max-w-full max-h-[130px] object-contain" />
+      ) : (
+        <GlyphFallback label={fallbackLabel} />
+      )}
+    </div>
+    <div className="shrink-0 flex items-center gap-1.5 text-[11px] text-brand-primary/70">
+      <span aria-hidden="true">↻</span>
+      <span>details</span>
+    </div>
+  </div>
+);
+
+const CardBack: React.FC<{
+  content: ProjectCardContent;
+  isHabitat: boolean;
+}> = ({ content, isHabitat }) => {
+  const { description, stack, links, status, progress } = content;
   return (
-    <div
-      data-testid="project-card-renderer"
-      className={`flex flex-1 p-4 gap-3 font-mono text-brand-text text-sm overflow-auto ${
-        isWideMedia ? 'flex-col md:flex-row md:gap-5 md:items-stretch' : 'flex-col'
-      }`}
-    >
-      {/* Project image */}
-      {image && (
-        <div
-          className={`flex items-center justify-center shrink-0 ${
-            isWideMedia ? 'w-full md:w-2/5' : 'w-full'
-          }`}
-        >
-          <img
-            src={image}
-            alt={title}
-            className={`max-w-full object-contain ${
-              isWideMedia ? 'max-h-[140px] md:max-h-none md:w-full md:h-full' : 'max-h-[100px]'
-            }`}
-          />
+    <div className="flex flex-col flex-1 p-4 gap-3 font-mono text-brand-text text-sm overflow-auto">
+      <div className="shrink-0 pr-12">
+        <StatusBadge status={status} />
+      </div>
+
+      {status === 'in-development' && progress !== undefined && (
+        <ProgressBar progress={progress} />
+      )}
+
+      {isHabitat && (
+        <div className="flex justify-center shrink-0 py-1" aria-label="Plant growth visualization">
+          <HabitatAnimation />
         </div>
       )}
 
-      <div className={`flex flex-col gap-3 min-w-0 ${isWideMedia ? 'md:flex-1' : 'flex-1'}`}>
-        {/* Status badge */}
-        <div className="shrink-0">
-          <StatusBadge status={status} />
+      <p className="text-brand-text/90 text-xs leading-relaxed">{description}</p>
+
+      {stack.length > 0 && (
+        <div className="flex flex-wrap gap-1 md:gap-1.5 shrink-0">
+          {stack.map((tech) => (
+            <span
+              key={tech}
+              data-testid="stack-badge"
+              className="px-2 py-0.5 rounded-full text-xs font-mono text-white"
+              style={{ backgroundColor: '#3b82f6' }}
+            >
+              {tech}
+            </span>
+          ))}
         </div>
+      )}
 
-        {/* Progress bar — only for in-development cards that declare a % */}
-        {status === 'in-development' && progress !== undefined && (
-          <ProgressBar progress={progress} />
-        )}
+      {links.length > 0 && (
+        <div className="flex flex-wrap gap-2 shrink-0 mt-auto pt-1">
+          {links.map((link) => (
+            <a
+              key={link.url}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="project-link"
+              className="inline-flex items-center gap-1 px-2 md:px-3 py-1 rounded border border-brand-primary/40 text-brand-primary text-xs font-mono hover:bg-brand-primary/10 transition-colors"
+            >
+              {link.label}
+              <span aria-hidden="true" className="text-brand-primary/60">↗</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
-        {/* Habitat plant growth animation (Lottie v1 fallback) */}
-        {isHabitat && (
-          <div className="flex justify-center shrink-0 py-1" aria-label="Plant growth visualization">
-            <HabitatAnimation />
-          </div>
-        )}
+// ─── ProjectCardRenderer ──────────────────────────────────────────────────────
 
-        {/* Description */}
-        <p className="text-brand-text/90 text-xs leading-relaxed">
-          {description}
-        </p>
+const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, title, slug }) => {
+  const { image, status } = content;
+  const isHabitat = slug === 'habitat';
 
-        {/* Stack badges */}
-        {stack.length > 0 && (
-          <div className="flex flex-wrap gap-1 md:gap-1.5 shrink-0">
-            {stack.map((tech) => (
-              <span
-                key={tech}
-                data-testid="stack-badge"
-                className="px-2 py-0.5 rounded-full text-xs font-mono text-white"
-                style={{ backgroundColor: '#3b82f6' }}
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Links */}
-        {links.length > 0 && (
-          <div className="flex flex-wrap gap-2 shrink-0 mt-auto pt-1">
-            {links.map((link) => (
-              <a
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="project-link"
-                className="inline-flex items-center gap-1 px-2 md:px-3 py-1 rounded border border-brand-primary/40 text-brand-primary text-xs font-mono hover:bg-brand-primary/10 transition-colors"
-              >
-                {link.label}
-                <span aria-hidden="true" className="text-brand-primary/60">↗</span>
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
+  return (
+    <div data-testid="project-card-renderer" className="flex flex-1">
+      <FlipCard
+        title={title}
+        front={
+          <CardFront title={title} status={status} image={image} fallbackLabel={slug ?? title} />
+        }
+        back={<CardBack content={content} isHabitat={isHabitat} />}
+      />
     </div>
   );
 };
