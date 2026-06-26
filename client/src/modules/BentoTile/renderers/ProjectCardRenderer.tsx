@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useReducedMotion, useInView, animate } from 'framer-motion';
 import type { ProjectCardContent } from 'shared/types';
 import HabitatAnimation from '../../../assets/HabitatAnimation';
 
@@ -46,10 +47,28 @@ const PROGRESS_CELLS = 20;
 
 const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => {
   const pct = Math.round(Math.max(0, Math.min(100, progress)));
-  const filled = Math.round((pct / 100) * PROGRESS_CELLS);
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+  // Fills from 0 → pct when scrolled into view (mirrors the stats CountUp).
+  // aria-valuenow stays pinned to the real target so the value is always correct.
+  const [display, setDisplay] = useState(reduce ? pct : 0);
+
+  useEffect(() => {
+    if (reduce || !inView) return;
+    const controls = animate(0, pct, {
+      duration: 0.9,
+      ease: 'easeOut',
+      onUpdate: (v) => setDisplay(Math.round(v)),
+    });
+    return () => controls.stop();
+  }, [inView, pct, reduce]);
+
+  const filled = Math.round((display / 100) * PROGRESS_CELLS);
 
   return (
     <div
+      ref={ref}
       data-testid="progress-bar"
       className="flex items-center gap-2 text-xs font-mono shrink-0"
       role="progressbar"
@@ -64,7 +83,7 @@ const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => {
         <span className="text-brand-text/25">{'░'.repeat(PROGRESS_CELLS - filled)}</span>
         <span className="text-brand-primary/60">]</span>
       </span>
-      <span className="text-brand-text/70">{pct}%</span>
+      <span className="text-brand-text/70 tabular-nums">{display}%</span>
     </div>
   );
 };
