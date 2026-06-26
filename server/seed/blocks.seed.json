@@ -268,7 +268,7 @@
     "type": "project-card",
     "title": "joeyfarah.dev",
     "order": 9,
-    "visible": true,
+    "visible": false,
     "content": {
       "image": "/images/joeyfarah-dev.svg",
       "description": "This portfolio. Bento-terminal hybrid built with React, Vite, TypeScript, and Express. Content served from MongoDB Atlas via a seeded JSON pipeline. Dual-column timeline, animated ERD, terminal chrome on every tile. Deployed on Railway.",
