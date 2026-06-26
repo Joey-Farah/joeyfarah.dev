@@ -285,7 +285,7 @@
     "type": "project-card",
     "title": "Spotify to MP3",
     "order": 10,
-    "visible": true,
+    "visible": false,
     "content": {
       "description": "Windows desktop app that downloads Spotify playlists and albums as 320 kbps MP3s with embedded metadata. Paste a link, queue multiple URLs, and download into named folders. Electron + Python wrapper around spotDL with bundled FFmpeg integration.",
       "stack": ["Electron", "Python", "spotDL", "PyInstaller"],
@@ -318,8 +318,7 @@
       "image": "/images/falco.png",
       "stack": [],
       "links": [
-        { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" },
-        { "label": "YouTube", "url": "https://www.youtube.com/@joeydonutsssbm" }
+        { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" }
       ],
       "status": "live"
     }
