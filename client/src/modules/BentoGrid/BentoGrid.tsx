@@ -53,13 +53,13 @@ export interface BentoGridProps {
  * LayoutConfig per slug — derived from ARCHITECTURE.md Bento Grid Layout Spec.
  *
  * professional-timeline: colSpan 2, rowSpan 3
- * oracle-db-diagram:     colSpan 1, rowSpan 2
- * all other project/contact tiles: colSpan 1, rowSpan 1 (default)
+ * all project/contact tiles: colSpan 1, rowSpan 1 (default) — the ERD diagram
+ *   is now a single tile too, since the flip card reveals it on demand.
  * contact:               colSpan 1, rowSpan 1 (rendered in its own narrow centered section)
  */
 const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'professional-timeline': { colSpan: 3, rowSpan: 1 },
-  'oracle-db-diagram':     { colSpan: 2, rowSpan: 1 },
+  'oracle-db-diagram':     { colSpan: 1, rowSpan: 1 },
   'conversion-assistant':  { colSpan: 1, rowSpan: 1 },
   'fusion-sql-developer':  { colSpan: 1, rowSpan: 1 },
   'slippi-ranked-stats':   { colSpan: 1, rowSpan: 1 },
