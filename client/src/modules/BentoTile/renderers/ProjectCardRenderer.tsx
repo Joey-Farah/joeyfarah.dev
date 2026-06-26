@@ -40,10 +40,39 @@ const StatusBadge: React.FC<{ status: 'live' | 'in-development' }> = ({ status }
   );
 };
 
+// ─── Progress bar (in-development cards) ──────────────────────────────────────
+
+const PROGRESS_CELLS = 20;
+
+const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => {
+  const pct = Math.round(Math.max(0, Math.min(100, progress)));
+  const filled = Math.round((pct / 100) * PROGRESS_CELLS);
+
+  return (
+    <div
+      data-testid="progress-bar"
+      className="flex items-center gap-2 text-xs font-mono shrink-0"
+      role="progressbar"
+      aria-valuenow={pct}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-label={`Progress: ${pct}% complete`}
+    >
+      <span className="tracking-tighter" aria-hidden="true">
+        <span className="text-brand-primary/60">[</span>
+        <span className="text-brand-primary">{'█'.repeat(filled)}</span>
+        <span className="text-brand-text/25">{'░'.repeat(PROGRESS_CELLS - filled)}</span>
+        <span className="text-brand-primary/60">]</span>
+      </span>
+      <span className="text-brand-text/70">{pct}%</span>
+    </div>
+  );
+};
+
 // ─── ProjectCardRenderer ──────────────────────────────────────────────────────
 
 const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, title, slug }) => {
-  const { description, stack, links, status, image } = content;
+  const { description, stack, links, status, image, progress } = content;
   const isHabitat = slug === 'habitat';
   // Wide tiles (colSpan 2) get side-by-side media + text on md+ screens.
   const isWideMedia = slug === 'oracle-db-diagram';
@@ -77,6 +106,11 @@ const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, titl
         <div className="shrink-0">
           <StatusBadge status={status} />
         </div>
+
+        {/* Progress bar — only for in-development cards that declare a % */}
+        {status === 'in-development' && progress !== undefined && (
+          <ProgressBar progress={progress} />
+        )}
 
         {/* Habitat plant growth animation (Lottie v1 fallback) */}
         {isHabitat && (

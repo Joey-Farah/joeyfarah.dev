@@ -60,6 +60,8 @@ const ProjectCardContentSchema = z.object({
   links: z.array(ProjectLinkSchema),
   status: z.enum(['live', 'in-development']),
   image: z.string().optional(),
+  // 0–100 completion, rendered as a progress bar on in-development cards.
+  progress: z.number().min(0).max(100).optional(),
 });
 
 const ContactLinkSchema = z.object({

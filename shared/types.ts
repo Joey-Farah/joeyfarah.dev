@@ -68,6 +68,8 @@ export interface ProjectCardContent {
   links: ProjectLink[];
   status: 'live' | 'in-development';
   image?: string;
+  /** 0–100 completion, rendered as a progress bar on in-development cards. */
+  progress?: number;
 }
 
 export interface ContactLink {
