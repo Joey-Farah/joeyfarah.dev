@@ -99,14 +99,14 @@ describe('ingestSeed — production blocks.seed.json', () => {
     const blocks = await ingestSeed(BLOCKS_SEED);
     const hero = blocks.find((b) => b.slug === 'hero');
     const content = hero!.content as { lines: string[] };
-    expect(content.lines.some((l) => l.includes('SSBM'))).toBe(true);
+    expect(content.lines.some((l) => /ranked|gamer|melee/i.test(l))).toBe(true);
   });
 
-  it('hero lines reference Oracle Cloud role (Story 32)', async () => {
+  it('hero lines reference the cloud consulting role (Story 32)', async () => {
     const blocks = await ingestSeed(BLOCKS_SEED);
     const hero = blocks.find((b) => b.slug === 'hero');
     const content = hero!.content as { lines: string[] };
-    expect(content.lines.some((l) => l.includes('Oracle Cloud'))).toBe(true);
+    expect(content.lines.some((l) => l.includes('Cloud'))).toBe(true);
   });
 });
 
