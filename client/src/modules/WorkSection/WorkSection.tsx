@@ -21,10 +21,11 @@ const STATS: ReadonlyArray<{
 // Full-width caption under the grid — inside a cell it wrecked the row heights.
 const STATS_QUIP = '(being globally ranked at anything has to be impressive, right?)';
 
+// Not a services menu — the kinds of things I genuinely enjoy building.
 const SHAPES = [
-  { flag: '--mvp', line: 'Idea → deployed product. Not a demo.' },
-  { flag: '--tool', line: 'Desktop & internal tools. Installer included.' },
-  { flag: '--dashboard', line: 'Scattered data, made legible and live.' },
+  { flag: '--mvp', line: 'Taking an idea from zero to a real, deployed product.' },
+  { flag: '--tool', line: 'Desktop and internal tools that make a workflow click.' },
+  { flag: '--dashboard', line: 'Turning scattered data into something legible and live.' },
 ] as const;
 
 // The old contact tile, absorbed — same `$ open <display>` rows it had.
@@ -95,19 +96,21 @@ const WorkSection: React.FC = () => {
       <p className="text-brand-primary text-sm mb-4 font-mono" aria-hidden="true">
         {'$ ./build --with-me'}
       </p>
-      {/* The warm invite is the heading now — collaborator framing, not a pitch. */}
+      {/* Collaboration invite, peer-framed — an offer to build together, not a pitch for hire. */}
       <h2
         id="build-heading"
         className="font-mono text-2xl md:text-4xl font-bold leading-tight tracking-tight"
       >
-        Got something you want <span className="text-brand-primary">built</span>?
+        Let&apos;s <span className="text-brand-primary">make</span> something.
       </h2>
       <p className="mt-4 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        A product, a tool, an idea you keep wishing existed — tell me about it.
+        Working on a project or kicking around an idea? I like collaborating with
+        people building things — reach out.
       </p>
 
-      {/* shapes — the kinds of things I build */}
-      <div className="mt-8 grid md:grid-cols-3 gap-3 font-mono">
+      {/* shapes — the kinds of things I love building (not a services menu) */}
+      <p className="mt-8 font-mono text-xs text-brand-text/60">{'// things I love building'}</p>
+      <div className="mt-3 grid md:grid-cols-3 gap-3 font-mono">
         {SHAPES.map((s) => (
           <div key={s.flag} className="border border-brand-primary/20 rounded-lg p-3.5 hover:border-brand-primary/50 transition-colors duration-200">
             <span className="text-brand-primary text-sm font-bold">{s.flag}</span>
@@ -116,7 +119,7 @@ const WorkSection: React.FC = () => {
         ))}
       </div>
 
-      {/* stats — the proof I deliver */}
+      {/* stats — a bit of range, not a sales pitch */}
       <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-px bg-brand-primary/15 border border-brand-primary/15 rounded overflow-hidden font-mono">
         {STATS.map((s) => (
           <div key={s.label} className="bg-brand-bg p-4">
