@@ -193,12 +193,16 @@ const ProjectCardRenderer: React.FC<ProjectCardRendererProps> = ({ content, titl
   const { image, status } = content;
   const isHabitat = slug === 'habitat';
 
+  // Glyph fallback shows a short name — the title's first segment (before the em
+  // dash), so it tracks the display title rather than the internal slug.
+  const fallbackLabel = title.split('—')[0].trim() || title;
+
   return (
     <div data-testid="project-card-renderer" className="flex flex-1">
       <FlipCard
         title={title}
         front={
-          <CardFront title={title} status={status} image={image} fallbackLabel={slug ?? title} />
+          <CardFront title={title} status={status} image={image} fallbackLabel={fallbackLabel} />
         }
         back={<CardBack content={content} isHabitat={isHabitat} />}
       />

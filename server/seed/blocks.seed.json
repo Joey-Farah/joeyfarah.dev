@@ -234,7 +234,7 @@
   {
     "slug": "rslp",
     "type": "project-card",
-    "title": "rslp — Database Engine",
+    "title": "srsdb — Database Engine",
     "order": 6,
     "visible": true,
     "content": {
