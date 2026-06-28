@@ -57,8 +57,7 @@
         {
           "year": "2025",
           "label": "Conversion Assistant Tool",
-          "detail": "HDL, FBDI & REST API toolkit",
-          "slug": "conversion-assistant"
+          "detail": "HDL, FBDI & REST API toolkit"
         },
         {
           "year": "2026",
@@ -69,8 +68,7 @@
         {
           "year": "2026",
           "label": "joeyfarah.dev",
-          "detail": "This site",
-          "slug": "joeyfarah-dev"
+          "detail": "This site"
         }
       ],
       "right": [
@@ -108,6 +106,12 @@
         },
         {
           "year": "2026",
+          "label": "srsdb",
+          "detail": "Relational DB engine for Slippi data",
+          "slug": "rslp"
+        },
+        {
+          "year": "2026",
           "label": "TrendArc",
           "detail": "Fitness biometric dashboard",
           "slug": "trendarc"
@@ -115,8 +119,7 @@
         {
           "year": "2026",
           "label": "Spotify to MP3",
-          "detail": "Windows desktop downloader",
-          "slug": "spotify-to-mp3"
+          "detail": "Windows desktop downloader"
         },
         {
           "year": "2025",
