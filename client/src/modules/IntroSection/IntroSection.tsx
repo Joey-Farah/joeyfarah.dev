@@ -36,11 +36,8 @@ const IntroSection: React.FC = () => {
         from scratch — usually just to see how something works.
       </p>
       <p className="mt-3 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        And for years, near the top of{' '}
-        <span className="italic">Super Smash Bros. Melee</span> — #61 in the world.
-      </p>
-      <p className="mt-6 font-mono text-sm text-brand-text/70 max-w-xl">
-        Different lanes, one throughline: understanding hard things and making them real.
+        And, for years, a top-ranked{' '}
+        <span className="italic">Super Smash Bros. Melee</span> player — #61 in the world.
       </p>
     </motion.section>
   );
