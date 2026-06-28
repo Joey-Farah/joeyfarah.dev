@@ -55,11 +55,6 @@
           "slug": "oracle-db-diagram"
         },
         {
-          "year": "2025",
-          "label": "Conversion Assistant Tool",
-          "detail": "HDL, FBDI & REST API toolkit"
-        },
-        {
           "year": "2026",
           "label": "Fusion Query Tool",
           "detail": "Oracle Cloud SQL desktop app",
