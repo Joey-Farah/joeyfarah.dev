@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import WorkSection from './WorkSection';
 
 describe('WorkSection', () => {
-  it('renders the collaborator invite as its heading', () => {
+  it('renders the contact heading', () => {
     render(<WorkSection />);
     expect(
       screen.getByRole('heading', { level: 2 }),
-    ).toHaveTextContent(/let's make something/i);
+    ).toHaveTextContent(/get in touch/i);
   });
 
   it('has exactly one primary CTA (email)', () => {

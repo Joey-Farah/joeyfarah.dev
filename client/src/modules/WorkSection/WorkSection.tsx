@@ -18,16 +18,6 @@ const STATS: ReadonlyArray<{
   { value: 61, prefix: '#', label: 'world ranking, SSBMRank 2025' },
 ];
 
-// Full-width caption under the grid — inside a cell it wrecked the row heights.
-const STATS_QUIP = '(being globally ranked at anything has to be impressive, right?)';
-
-// Not a services menu — the kinds of things I genuinely enjoy building.
-const SHAPES = [
-  { flag: '--mvp', line: 'Taking an idea from zero to a real, deployed product.' },
-  { flag: '--tool', line: 'Desktop and internal tools that make a workflow click.' },
-  { flag: '--dashboard', line: 'Turning scattered data into something legible and live.' },
-] as const;
-
 // The old contact tile, absorbed — same `$ open <display>` rows it had.
 const CONTACT_LINKS = [
   { platform: 'LinkedIn', display: 'linkedin.com/in/joey-farah', href: 'https://www.linkedin.com/in/joey-farah/' },
@@ -94,30 +84,19 @@ const WorkSection: React.FC = () => {
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <p className="text-brand-primary text-sm mb-4 font-mono" aria-hidden="true">
-        {'$ ./build --with-me'}
+        {'$ ./contact'}
       </p>
-      {/* Collaboration invite, peer-framed — an offer to build together, not a pitch for hire. */}
+      {/* Resume-style contact close — understated, not a pitch. */}
       <h2
         id="build-heading"
         className="font-mono text-2xl md:text-4xl font-bold leading-tight tracking-tight"
       >
-        Let&apos;s <span className="text-brand-primary">make</span> something.
+        Get in <span className="text-brand-primary">touch</span>.
       </h2>
       <p className="mt-4 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        Working on a project or kicking around an idea? I like collaborating with
-        people building things — reach out.
+        Always glad to talk shop — about a project, an idea, or just the work
+        itself. Here&apos;s where to find me.
       </p>
-
-      {/* shapes — the kinds of things I love building (not a services menu) */}
-      <p className="mt-8 font-mono text-xs text-brand-text/60">{'// things I love building'}</p>
-      <div className="mt-3 grid md:grid-cols-3 gap-3 font-mono">
-        {SHAPES.map((s) => (
-          <div key={s.flag} className="border border-brand-primary/20 rounded-lg p-3.5 hover:border-brand-primary/50 transition-colors duration-200">
-            <span className="text-brand-primary text-sm font-bold">{s.flag}</span>
-            <p className="mt-1.5 text-xs leading-relaxed text-brand-text/85">{s.line}</p>
-          </div>
-        ))}
-      </div>
 
       {/* stats — a bit of range, not a sales pitch */}
       <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-px bg-brand-primary/15 border border-brand-primary/15 rounded overflow-hidden font-mono">
@@ -130,9 +109,6 @@ const WorkSection: React.FC = () => {
           </div>
         ))}
       </div>
-      <p className="mt-2 text-right font-mono text-[11px] italic text-brand-text/60">
-        {STATS_QUIP}
-      </p>
 
       {/* CTA */}
       <div className="mt-10 border border-brand-primary/30 rounded-lg p-6 md:p-8 text-center bg-brand-primary/[0.03] font-mono">
