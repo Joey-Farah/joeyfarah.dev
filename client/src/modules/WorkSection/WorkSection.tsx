@@ -1,22 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useReducedMotion, animate } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 // Cloudflare Email Routing alias — forwards to the real inbox. Disposable by
 // design: if it ever draws spam, rotate the alias and redeploy.
 const CONTACT_EMAIL = 'hello@joeyfarah.dev';
-
-// Ranking goes last — it matters less than the shipping stats.
-const STATS: ReadonlyArray<{
-  value: number;
-  label: string;
-  prefix?: string;
-  suffix?: string;
-}> = [
-  { value: 7, suffix: 'yrs', label: 'enterprise Oracle Cloud' },
-  { value: 6, suffix: '+', label: 'products shipped' },
-  { value: 50, suffix: '+', label: 'Patreon supporters' },
-  { value: 61, prefix: '#', label: 'world ranking, SSBMRank 2025' },
-];
 
 // The old contact tile, absorbed — same `$ open <display>` rows it had.
 const CONTACT_LINKS = [
@@ -25,41 +12,10 @@ const CONTACT_LINKS = [
   { platform: 'Discord', display: 'discord: joeydonuts', href: 'https://discord.com/users/101538614428602368' },
 ] as const;
 
-/** Counts up to `target` when scrolled into view; static under reduced motion. */
-const CountUp: React.FC<{ target: number; prefix?: string; suffix?: string }> = ({
-  target,
-  prefix = '',
-  suffix = '',
-}) => {
-  const reduce = useReducedMotion();
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-40px' });
-  const [value, setValue] = useState(reduce ? target : 0);
-
-  useEffect(() => {
-    if (reduce || !inView) return;
-    const controls = animate(0, target, {
-      duration: 1.1,
-      ease: 'easeOut',
-      onUpdate: (v) => setValue(Math.round(v)),
-    });
-    return () => controls.stop();
-  }, [inView, target, reduce]);
-
-  return (
-    <span ref={ref}>
-      {prefix}
-      {value}
-      {suffix}
-    </span>
-  );
-};
-
 /**
- * WorkSection — the "build" section. Sits second (right after IntroSection) so
- * the page order matches the nav; orientation lives up top in IntroSection and
- * the proof (projects, timeline, personal) follows below. This section makes the
- * invite and lands the CTA. /work, /hire, and /build all redirect here.
+ * WorkSection — the contact close. Sits last (after the bento grid) so the page
+ * reads like a resume: intro → work → contact. Holds the email CTA and the
+ * social links. /work, /hire, and /build all redirect to this section (#build).
  */
 const WorkSection: React.FC = () => {
   const reduce = useReducedMotion();
@@ -98,20 +54,8 @@ const WorkSection: React.FC = () => {
         itself. Here&apos;s where to find me.
       </p>
 
-      {/* stats — a bit of range, not a sales pitch */}
-      <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-px bg-brand-primary/15 border border-brand-primary/15 rounded overflow-hidden font-mono">
-        {STATS.map((s) => (
-          <div key={s.label} className="bg-brand-bg p-4">
-            <div className="text-2xl md:text-3xl font-bold text-brand-primary">
-              <CountUp target={s.value} prefix={'prefix' in s ? s.prefix : ''} suffix={'suffix' in s ? s.suffix : ''} />
-            </div>
-            <div className="mt-1 text-[11px] leading-snug text-brand-text/75">{s.label}</div>
-          </div>
-        ))}
-      </div>
-
       {/* CTA */}
-      <div className="mt-10 border border-brand-primary/30 rounded-lg p-6 md:p-8 text-center bg-brand-primary/[0.03] font-mono">
+      <div className="mt-8 border border-brand-primary/30 rounded-lg p-6 md:p-8 text-center bg-brand-primary/[0.03] font-mono">
         <a
           href={`mailto:${CONTACT_EMAIL}`}
           onClick={handleEmailClick}
