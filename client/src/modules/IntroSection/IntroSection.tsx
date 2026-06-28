@@ -20,7 +20,7 @@ const IntroSection: React.FC = () => {
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <p className="text-brand-primary text-sm mb-4 font-mono" aria-hidden="true">
-        {'$ whoami'}
+        {'$ me'}
       </p>
       <h2
         id="joey-heading"

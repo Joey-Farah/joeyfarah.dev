@@ -10,7 +10,7 @@ export interface NavBarProps {
 /** Hardcoded anchor link targets — derived from BentoGrid section ids */
 const NAV_LINKS = [
   { label: 'joey', href: '#joey', id: 'joey' },
-  { label: 'build', href: '#build', id: 'build' },
+  { label: 'contact', href: '#build', id: 'build' },
   { label: 'projects', href: '#projects', id: 'projects' },
   { label: 'timeline', href: '#professional-timeline', id: 'professional-timeline' },
   { label: 'personal', href: '#personal', id: 'personal' },

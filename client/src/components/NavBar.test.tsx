@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react';
 import NavBar from './NavBar';
 
 describe('NavBar — work page link', () => {
-  it('links to the build section once the hero has exited', () => {
+  it('links to the contact section once the hero has exited', () => {
     render(<NavBar showHero={false} />);
-    const buildLink = screen.getByTestId('nav-link-build');
-    expect(buildLink).toHaveAttribute('href', '#build');
+    const contactLink = screen.getByTestId('nav-link-contact');
+    expect(contactLink).toHaveAttribute('href', '#build');
   });
 
   it('points the projects link at the top of the projects section, not a single card', () => {
