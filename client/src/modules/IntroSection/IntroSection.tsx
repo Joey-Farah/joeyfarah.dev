@@ -29,21 +29,18 @@ const IntroSection: React.FC = () => {
         One person, a few <span className="text-brand-primary">obsessions</span>.
       </h2>
       <p className="mt-6 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        By day, I&apos;m an Oracle Cloud consultant — seven years deep in enterprise
-        ERP, where the work rewards precision and seeing a whole system at once.
+        By day, an Oracle Cloud consultant — seven years in.
       </p>
       <p className="mt-3 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        Off the clock, I build my own things — desktop apps, internal tools, even a
-        database engine from scratch — usually to scratch an itch or figure out how
-        something really works underneath.
+        Off the clock, I build my own things: desktop apps, tools, a database engine
+        from scratch — usually just to see how something works.
       </p>
       <p className="mt-3 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        And for years I competed near the top of{' '}
-        <span className="italic">Super Smash Bros. Melee</span> — currently #61 in the world.
+        And for years, near the top of{' '}
+        <span className="italic">Super Smash Bros. Melee</span> — #61 in the world.
       </p>
       <p className="mt-6 font-mono text-sm text-brand-text/70 max-w-xl">
-        Different lanes, one throughline: I like understanding hard things and turning
-        them into something real.
+        Different lanes, one throughline: understanding hard things and making them real.
       </p>
     </motion.section>
   );
