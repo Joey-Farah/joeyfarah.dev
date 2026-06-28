@@ -107,8 +107,6 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
 
   const professionalBlocks = renderable.filter((b) => b.type === 'timeline');
 
-  const enterpriseBlocks = renderable.filter(() => false);
-
   const projectBlocks = renderable.filter((b) => b.type === 'project-card' || b.type === 'erd-tile');
   const { mainBlocks: mainProjectBlocks, lastRowBlocks: lastProjectRow } = splitLastPartialRow(projectBlocks, 3);
 
@@ -152,18 +150,6 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
       {dualTimelineBlock && (
         <ScrollFadeSection id="professional-timeline" ariaLabel="Career timeline">
           <DualTimeline content={dualTimelineBlock.content as DualTimelineContent} />
-        </ScrollFadeSection>
-      )}
-
-      {/* Enterprise section */}
-      {enterpriseBlocks.length > 0 && (
-        <ScrollFadeSection id="enterprise" ariaLabel="Enterprise projects">
-          <p className="font-mono text-xs text-brand-text/70 px-1 mb-3">// enterprise</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-4">
-            {enterpriseBlocks.map((block, i) => (
-              <BentoTile key={block.slug} index={i} layout={getLayout(block.slug)} block={block} />
-            ))}
-          </div>
         </ScrollFadeSection>
       )}
 
