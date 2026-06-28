@@ -3,17 +3,18 @@ import { render, screen } from '@testing-library/react';
 import IntroSection from './IntroSection';
 
 describe('IntroSection', () => {
-  it('leads with the craft-statement heading (the page opener)', () => {
+  it('leads with the multi-dimensional "who I am" heading', () => {
     render(<IntroSection />);
     expect(
       screen.getByRole('heading', { level: 2 }),
-    ).toHaveTextContent(/design, build, and ship software\./i);
+    ).toHaveTextContent(/one person, a few obsessions\./i);
   });
 
-  it('shows the how-I-work process steps', () => {
+  it('introduces the range across lanes (consulting, building, competing)', () => {
     render(<IntroSection />);
-    expect(screen.getByText(/smallest finished thing/i)).toBeInTheDocument();
-    expect(screen.getByText(/a live product\. not a prototype\./i)).toBeInTheDocument();
+    expect(screen.getByText(/oracle cloud consultant/i)).toBeInTheDocument();
+    expect(screen.getByText(/build my own things/i)).toBeInTheDocument();
+    expect(screen.getByText(/super smash bros\. melee/i)).toBeInTheDocument();
   });
 
   it('never leaks Elire client language', () => {
