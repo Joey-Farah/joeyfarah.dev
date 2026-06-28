@@ -116,7 +116,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ blocks }) => {
 
   return (
     <div
-      className="w-full max-w-6xl lg:max-w-7xl mx-auto px-4 md:px-6 pt-8 md:pt-24 pb-6 md:pb-12 space-y-4"
+      className="w-full max-w-6xl lg:max-w-7xl mx-auto px-4 md:px-6 pt-4 md:pt-8 pb-6 md:pb-12 space-y-4"
       data-testid="bento-grid"
     >
       {/* Projects section — first in the grid, to match the nav order */}

@@ -13,7 +13,7 @@ const IntroSection: React.FC = () => {
     <motion.section
       id="joey"
       aria-labelledby="joey-heading"
-      className="max-w-3xl mx-auto px-6 py-16 md:py-24"
+      className="max-w-3xl mx-auto px-6 py-12 md:py-16"
       initial={reduce ? undefined : { opacity: 0, y: 20 }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}

@@ -14,7 +14,7 @@ const STATS: ReadonlyArray<{
 }> = [
   { value: 7, suffix: 'yrs', label: 'enterprise Oracle Cloud' },
   { value: 6, suffix: '+', label: 'products shipped' },
-  { value: 50, suffix: '+', label: 'paid Patreon supporters' },
+  { value: 50, suffix: '+', label: 'Patreon supporters' },
   { value: 61, prefix: '#', label: 'world ranking, SSBMRank 2025' },
 ];
 
@@ -77,7 +77,7 @@ const WorkSection: React.FC = () => {
     <motion.section
       id="build"
       aria-labelledby="build-heading"
-      className="max-w-3xl mx-auto px-6 py-16 md:py-24"
+      className="max-w-3xl mx-auto px-6 py-12 md:py-16"
       initial={reduce ? undefined : { opacity: 0, y: 20 }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
