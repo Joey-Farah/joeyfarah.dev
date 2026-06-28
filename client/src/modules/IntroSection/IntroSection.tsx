@@ -32,8 +32,8 @@ const IntroSection: React.FC = () => {
         By day, an Oracle Cloud consultant — seven years in.
       </p>
       <p className="mt-3 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        Off the clock, I build my own things: desktop apps, tools, a database engine
-        from scratch — usually just to see how something works.
+        Off the clock, I build my own things — desktop apps, tools, a database engine
+        from scratch — mostly to understand how something works.
       </p>
       <p className="mt-3 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
         And, for years, a top-ranked{' '}
