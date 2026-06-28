@@ -3,18 +3,18 @@ import { render, screen } from '@testing-library/react';
 import IntroSection from './IntroSection';
 
 describe('IntroSection', () => {
-  it('leads with the multi-dimensional "who I am" heading', () => {
+  it('leads with the "Hi, I\'m Joey" heading', () => {
     render(<IntroSection />);
     expect(
       screen.getByRole('heading', { level: 2 }),
-    ).toHaveTextContent(/one person, a few obsessions\./i);
+    ).toHaveTextContent(/hi, i'm joey/i);
   });
 
   it('introduces the range across lanes (consulting, building, competing)', () => {
-    render(<IntroSection />);
-    expect(screen.getByText(/oracle cloud consultant/i)).toBeInTheDocument();
-    expect(screen.getByText(/build my own things/i)).toBeInTheDocument();
-    expect(screen.getByText(/super smash bros\. melee/i)).toBeInTheDocument();
+    const { container } = render(<IntroSection />);
+    expect(container.textContent).toMatch(/oracle cloud/i);
+    expect(container.textContent).toMatch(/database engine/i);
+    expect(container.textContent).toMatch(/super smash bros\. melee/i);
   });
 
   it('never leaks Elire client language', () => {

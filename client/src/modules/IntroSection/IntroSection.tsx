@@ -26,18 +26,12 @@ const IntroSection: React.FC = () => {
         id="joey-heading"
         className="font-mono text-2xl md:text-4xl font-bold leading-tight tracking-tight"
       >
-        One person, a few <span className="text-brand-primary">obsessions</span>.
+        Hi, I&apos;m <span className="text-brand-primary">Joey</span>
       </h2>
       <p className="mt-6 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        By day, an Oracle Cloud consultant — seven years in.
-      </p>
-      <p className="mt-3 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        Off the clock, I build my own things — desktop apps, tools, a database engine
-        from scratch — mostly to understand how something works.
-      </p>
-      <p className="mt-3 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        And, for years, a top-ranked{' '}
-        <span className="italic">Super Smash Bros. Melee</span> player — #61 in the world.
+        By day, Oracle Cloud consulting — seven years in. By night, my own software:
+        apps, tools, a database engine from scratch. And for years, competitive{' '}
+        <span className="italic">Super Smash Bros. Melee</span> — #61 in the world.
       </p>
     </motion.section>
   );
