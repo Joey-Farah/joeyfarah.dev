@@ -231,7 +231,7 @@
     "order": 6,
     "visible": true,
     "content": {
-      "description": "A relational database engine built from scratch in Go — on-disk page storage, a hand-written B+tree index, and a recursive-descent SQL parser, no database libraries. The goal: a queryable companion to Slippi Ranked Stats that lets power users run their own SQL against a ~200k-replay Melee dataset, answering questions the app's UI doesn't surface. A ground-up study of how databases actually work.",
+      "description": "A relational database engine built from scratch in Go — on-disk page storage, a hand-written B+tree index, and a recursive-descent SQL parser, no database libraries. The goal: a queryable companion to Slippi Ranked Stats that lets power users run their own SQL against a ~200k-replay Melee dataset, answering questions the app's UI doesn't surface.",
       "stack": ["Go", "slippi-js"],
       "links": [
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/srsdb" }
