@@ -65,6 +65,7 @@ const LAYOUT_MAP: Record<string, LayoutConfig> = {
   'slippi-ranked-stats':   { colSpan: 1, rowSpan: 1 },
   'trendarc':              { colSpan: 1, rowSpan: 1 },
   'joeyfarah-dev':         { colSpan: 1, rowSpan: 1 },
+  'mnmelee':               { colSpan: 1, rowSpan: 1 },
   'habitat':               { colSpan: 1, rowSpan: 1 },
   'lombardi-project':      { colSpan: 1, rowSpan: 1 },
   'reading-list':          { colSpan: 3, rowSpan: 1 },
