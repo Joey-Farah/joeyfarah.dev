@@ -73,7 +73,7 @@ const IntroSection: React.FC = () => {
         Hi, I&apos;m <span className="text-brand-primary">Joey</span>
       </h2>
       <p className="mt-6 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        By day, Oracle Cloud consulting — seven years in. By night, my own software:
+        By day, Oracle Cloud consulting. By night, my own software:
         apps, tools, a database engine from scratch. And for years, competitive{' '}
         <span className="italic">Super Smash Bros. Melee</span> — #61 in the world.
       </p>

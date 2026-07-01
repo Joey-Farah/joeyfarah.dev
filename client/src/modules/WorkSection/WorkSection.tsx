@@ -49,10 +49,6 @@ const WorkSection: React.FC = () => {
       >
         Get in <span className="text-brand-primary">touch</span>.
       </h2>
-      <p className="mt-4 font-mono text-sm md:text-base text-brand-text/85 max-w-xl">
-        Always glad to talk shop — about a project, an idea, or just the work
-        itself. Here&apos;s where to find me.
-      </p>
 
       {/* CTA */}
       <div className="mt-8 border border-brand-primary/30 rounded-lg p-6 md:p-8 text-center bg-brand-primary/[0.03] font-mono">
