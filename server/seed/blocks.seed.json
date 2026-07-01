@@ -63,7 +63,8 @@
         {
           "year": "2026",
           "label": "joeyfarah.dev",
-          "detail": "This site"
+          "detail": "This site",
+          "slug": "joeyfarah-dev"
         }
       ],
       "right": [
@@ -110,6 +111,12 @@
           "label": "TrendArc",
           "detail": "Fitness biometric dashboard",
           "slug": "trendarc"
+        },
+        {
+          "year": "2026",
+          "label": "MNMelee.com",
+          "detail": "Minnesota Melee community hub",
+          "slug": "mnmelee"
         },
         {
           "year": "2025",
@@ -327,9 +334,10 @@
       "description": "Community hub for competitive Super Smash Bros. Melee in Minnesota — panel-published power rankings by season, player profiles, head-to-head stats, recurring locals, and a live Slippi online leaderboard for the North Star scene. Built on real MN ranking data; start.gg tournament results and braacket H2H records wire in next.",
       "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
       "links": [
+        { "label": "Live site", "url": "https://mn-melee.vercel.app" },
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/MNMelee" }
       ],
-      "status": "in-development",
+      "status": "live",
       "progress": 55,
       "image": "/images/mnmelee.png"
     }
