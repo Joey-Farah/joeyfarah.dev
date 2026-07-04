@@ -9,8 +9,8 @@ const STATS: ReadonlyArray<{
   prefix?: string;
   suffix?: string;
 }> = [
-  { value: 7, suffix: 'yrs', label: 'enterprise Oracle Cloud' },
-  { value: 6, suffix: '+', label: 'products shipped' },
+  { value: 7, suffix: 'yrs', label: 'Oracle Cloud consulting' },
+  { value: 8, suffix: '+', label: 'tools & apps built' },
   { value: 50, suffix: '+', label: 'Patreon supporters' },
   { value: 61, prefix: '#', label: 'world ranking, SSBMRank 2025' },
 ];
