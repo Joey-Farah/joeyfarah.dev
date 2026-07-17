@@ -65,6 +65,12 @@
           "label": "joeyfarah.dev",
           "detail": "This site",
           "slug": "joeyfarah-dev"
+        },
+        {
+          "year": "2026",
+          "label": "SkyMap",
+          "detail": "Minneapolis Skyway navigation PWA",
+          "slug": "skymap"
         }
       ],
       "right": [
@@ -190,7 +196,7 @@
     "slug": "conversion-assistant",
     "type": "project-card",
     "title": "Conversion Assistant Tool",
-    "order": 5,
+    "order": 20,
     "visible": false,
     "content": {
       "description": "Python toolkit for Oracle Cloud data conversions. Supports HDL, FBDI, and REST API upload methods — extracts from legacy sources, maps fields to Fusion schemas, validates, and populates upload templates. Covers the three main Oracle Cloud data loading approaches in one toolkit, used across live client engagements.",
@@ -252,7 +258,7 @@
     "slug": "trendarc",
     "type": "project-card",
     "title": "TrendArc",
-    "order": 7,
+    "order": 10,
     "visible": true,
     "content": {
       "description": "Fitness biometric dashboard. Visualizes sleep architecture, HRV trends, SpO\u2082 dips, and resting heart rate with interactive time-series charts. Supports CSV import for offline analysis.",
@@ -268,7 +274,7 @@
     "slug": "joeyfarah-dev",
     "type": "project-card",
     "title": "joeyfarah.dev",
-    "order": 9,
+    "order": 11,
     "visible": true,
     "content": {
       "image": "/images/joeyfarah-dev.svg",
@@ -285,7 +291,7 @@
     "slug": "spotify-to-mp3",
     "type": "project-card",
     "title": "Spotify to MP3",
-    "order": 10,
+    "order": 21,
     "visible": false,
     "content": {
       "description": "Windows desktop app that downloads Spotify playlists and albums as 320 kbps MP3s with embedded metadata. Paste a link, queue multiple URLs, and download into named folders. Electron + Python wrapper around spotDL with bundled FFmpeg integration.",
@@ -299,7 +305,7 @@
     "slug": "habitat",
     "type": "project-card",
     "title": "Habitat",
-    "order": 8,
+    "order": 22,
     "visible": false,
     "content": {
       "description": "Plant care companion — schedules waterings, logs growth milestones, sends reminders. Full-stack playground for MongoDB schema design and React component patterns.",
@@ -312,7 +318,7 @@
     "slug": "lombardi-project",
     "type": "project-card",
     "title": "The Lombardi Project",
-    "order": 8,
+    "order": 7,
     "visible": true,
     "content": {
       "description": "Melee coaching and content — ~400 Patreon members, 100+ Savestates and Premium Access to Slippi Ranked Stats. Deep-dives on improving your Falco, matchup breakdowns, and gameplay analysis.",
@@ -328,13 +334,13 @@
     "slug": "mnmelee",
     "type": "project-card",
     "title": "MNMelee.com",
-    "order": 10,
+    "order": 8,
     "visible": true,
     "content": {
       "description": "Community hub for competitive Super Smash Bros. Melee in Minnesota — panel-published power rankings by season, player profiles, head-to-head stats, recurring locals, and a live Slippi online leaderboard for the North Star scene. Built on real MN ranking data; start.gg tournament results and braacket H2H records wire in next.",
       "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
       "links": [
-        { "label": "Live site", "url": "https://mn-melee.vercel.app" },
+        { "label": "Live site", "url": "https://mnmelee.com" },
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/MNMelee" }
       ],
       "status": "live",
@@ -346,7 +352,7 @@
     "slug": "skymap",
     "type": "project-card",
     "title": "SkyMap",
-    "order": 10,
+    "order": 9,
     "visible": true,
     "content": {
       "description": "PWA for navigating the Minneapolis Skyway — the largest contiguous skyway network in the world. Routes through 178 buildings and 200+ businesses with hours-aware pathfinding (closed buildings drop out of the graph), storefront-anchored turn-by-turn, stairs-free accessibility routing, and a 5/10/15-min indoor reach map. Fully offline after first load — no accounts, no tracking.",
