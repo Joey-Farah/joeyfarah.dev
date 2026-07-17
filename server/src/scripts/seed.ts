@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 import mongoose from 'mongoose';
 
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../.env'), quiet: true });
 import { ingestSeed } from '../modules/seedIngestion';
 import { SeedValidationError } from '../modules/seedIngestion.errors';
 import { MongoBlockRepository } from '../repositories/MongoBlockRepository';
