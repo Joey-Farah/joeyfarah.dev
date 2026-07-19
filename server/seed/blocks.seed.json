@@ -230,8 +230,8 @@
       "description": "Windows desktop app for competitive Melee players. Analysis of online ranked sets and performance grading — points at your local replay folder and surfaces matchup win rates, stage stats, session momentum, and rating history. Live session tracking and full set grade breakdowns for Patreon supporters. Signed auto-updates, all data stored locally.",
       "stack": ["Tauri", "TypeScript", "Svelte", "Python", "Rust"],
       "links": [
-        { "label": "GitHub", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats" },
-        { "label": "Download", "url": "https://slippirankedstats.com" }
+        { "label": "Live Site", "url": "https://slippirankedstats.com" },
+        { "label": "GitHub", "url": "https://github.com/Joey-Farah/Slippi-Ranked-Stats" }
       ],
       "status": "live",
       "image": "/images/slippi-logo.svg"
