@@ -278,10 +278,9 @@
     "visible": true,
     "content": {
       "image": "/images/joeyfarah-dev.svg",
-      "description": "This portfolio. Bento-terminal hybrid built with React, Vite, TypeScript, and Express. Content served from MongoDB Atlas via a seeded JSON pipeline. Dual-column timeline, animated ERD, terminal chrome on every tile. Deployed on Railway.",
+      "description": "This portfolio. Bento-terminal hybrid built with React, Vite, TypeScript, and Express. Content served from MongoDB Atlas via a seeded JSON pipeline. Dual-column timeline, animated ERD, terminal chrome on every tile. Deployed on Vercel.",
       "stack": ["React", "TypeScript", "Vite", "Node.js", "Express", "MongoDB"],
       "links": [
-        { "label": "Live site", "url": "https://joeyfarah.dev" },
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/joeyfarah.dev" }
       ],
       "status": "live"
@@ -334,7 +333,7 @@
     "slug": "mnmelee",
     "type": "project-card",
     "title": "MNMelee.com",
-    "order": 8,
+    "order": 9,
     "visible": true,
     "content": {
       "description": "Community hub for competitive Super Smash Bros. Melee in Minnesota — panel-published power rankings by season, player profiles, head-to-head stats, recurring locals, and a live Slippi online leaderboard for the North Star scene. Built on real MN ranking data; start.gg tournament results and braacket H2H records wire in next.",
@@ -352,7 +351,7 @@
     "slug": "skymap",
     "type": "project-card",
     "title": "SkyMap",
-    "order": 9,
+    "order": 8,
     "visible": true,
     "content": {
       "description": "PWA for navigating the Minneapolis Skyway — the largest contiguous skyway network in the world. Search-first navigation, Apple Maps style: search a building or business, get a place card, tap Directions. Routing is time-aware — it won't send you through a building that's closed and flags stairs or brief outdoor stretches — and live GPS tracks your progress turn-by-turn. Offline-first: the service worker precaches the full 178-building, 411-business dataset, so it keeps working with the network fully dead. No accounts, no tracking.",
