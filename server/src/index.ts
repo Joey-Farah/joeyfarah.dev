@@ -68,8 +68,9 @@ app.use('/api', apiLimiter, slippiRouter);
 app.use('/', createSitemapRouter(repo));
 app.use('/', healthRouter);
 
-// Serve Vite production build in production
-if (process.env.NODE_ENV === 'production') {
+// Serve Vite production build in production — skipped on Vercel, where
+// static output and SPA fallback are handled by vercel.json instead.
+if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
   const clientDist = path.resolve(__dirname, '../../client/dist');
   app.use(express.static(clientDist));
   app.get('*', (_req, res) => {
@@ -124,18 +125,30 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
   }
 });
 
-// Connect to MongoDB and start server
-const MONGODB_URI = process.env.MONGODB_URI;
-
-if (require.main === module) {
-  if (!MONGODB_URI) {
-    process.stderr.write('[server] ERROR: MONGODB_URI environment variable is not set.\n');
-    process.stderr.write('[server] Set MONGODB_URI to your MongoDB Atlas connection string and restart.\n');
-    process.exit(1);
+// Cached Mongo connection — reused across warm serverless invocations so a
+// Vercel function doesn't reconnect (and exhaust Atlas connections) on
+// every request.
+let dbConnection: Promise<typeof mongoose> | null = null;
+function connectDB(): Promise<typeof mongoose> {
+  if (mongoose.connection.readyState === 1) {
+    return Promise.resolve(mongoose);
   }
+  if (!dbConnection) {
+    const MONGODB_URI = process.env.MONGODB_URI;
+    if (!MONGODB_URI) {
+      dbConnection = null;
+      throw new Error('MONGODB_URI environment variable is not set.');
+    }
+    dbConnection = mongoose.connect(MONGODB_URI);
+  }
+  return dbConnection;
+}
 
-  mongoose
-    .connect(MONGODB_URI)
+// Standalone entrypoint (local dev, or any non-serverless host) — connects
+// then listens. Vercel instead imports { app, connectDB } from api/index.ts
+// and never reaches this branch.
+if (require.main === module) {
+  connectDB()
     .then(() => {
       app.listen(PORT, () => {
         process.stdout.write(`[server] Listening on port ${PORT}\n`);
@@ -147,4 +160,4 @@ if (require.main === module) {
     });
 }
 
-export { app };
+export { app, connectDB };
