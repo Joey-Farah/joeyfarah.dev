@@ -73,7 +73,15 @@ if (process.env.NODE_ENV === 'production') {
   const clientDist = path.resolve(__dirname, '../../client/dist');
   app.use(express.static(clientDist));
   app.get('*', (_req, res) => {
-    res.sendFile(path.join(clientDist, 'index.html'));
+    // acceptRanges: false — index.html is the SPA shell, never a ranged
+    // download; a client sending a Range header (e.g. a bad crawler)
+    // otherwise triggers a RangeNotSatisfiableError that isn't routed
+    // through Express's error handling and crashes the process.
+    res.sendFile(path.join(clientDist, 'index.html'), { acceptRanges: false }, (err) => {
+      if (err && !res.headersSent) {
+        res.status(500).end();
+      }
+    });
   });
 }
 
@@ -104,6 +112,16 @@ app.use((_req, res) => {
   </div>
 </body>
 </html>`);
+});
+
+// Final error-handling middleware — safety net so an unexpected error from
+// any route (e.g. a static-file send failure) returns a 500 instead of
+// crashing the whole process.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  if (!res.headersSent) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 // Connect to MongoDB and start server

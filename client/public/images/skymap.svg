@@ -1,28 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#1d4ed8"/>
-  <!-- two building blocks -->
-  <rect x="64" y="168" width="128" height="232" rx="16" fill="#eff6ff"/>
-  <rect x="320" y="112" width="128" height="288" rx="16" fill="#eff6ff"/>
-  <!-- skyway bridge -->
-  <rect x="176" y="216" width="160" height="64" rx="14" fill="#93c5fd"/>
-  <rect x="176" y="216" width="160" height="14" rx="7" fill="#eff6ff"/>
-  <!-- windows -->
-  <g fill="#93c5fd">
-    <rect x="88" y="196" width="24" height="24" rx="5"/>
-    <rect x="136" y="196" width="24" height="24" rx="5"/>
-    <rect x="88" y="248" width="24" height="24" rx="5"/>
-    <rect x="136" y="248" width="24" height="24" rx="5"/>
-    <rect x="88" y="300" width="24" height="24" rx="5"/>
-    <rect x="136" y="300" width="24" height="24" rx="5"/>
-    <rect x="344" y="144" width="24" height="24" rx="5"/>
-    <rect x="392" y="144" width="24" height="24" rx="5"/>
-    <rect x="344" y="196" width="24" height="24" rx="5"/>
-    <rect x="392" y="196" width="24" height="24" rx="5"/>
-    <rect x="344" y="248" width="24" height="24" rx="5"/>
-    <rect x="392" y="248" width="24" height="24" rx="5"/>
-    <rect x="344" y="300" width="24" height="24" rx="5"/>
-    <rect x="392" y="300" width="24" height="24" rx="5"/>
-  </g>
-  <!-- route dot walking across the bridge -->
-  <circle cx="256" cy="250" r="17" fill="#f59e0b"/>
+  <!-- "The Route": amber route threading between city blocks, start dot to
+       destination — chosen 2026-07-18 (design/icon-candidates has the
+       alternates). scripts/render-icons.mjs swaps rx="112" -> rx="0" for
+       the full-bleed apple-touch icon; the maskable/iOS pipeline keys on
+       the gradient id "bg". -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3a8a"/>
+      <stop offset="1" stop-color="#172554"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="52" y="52" width="150" height="150" rx="26" fill="#3b5bd6" opacity="0.85"/>
+  <rect x="310" y="52" width="150" height="150" rx="26" fill="#3b5bd6" opacity="0.55"/>
+  <rect x="52" y="310" width="150" height="150" rx="26" fill="#3b5bd6" opacity="0.55"/>
+  <rect x="310" y="310" width="150" height="150" rx="26" fill="#3b5bd6" opacity="0.85"/>
+  <path d="M120 400 H244 a24 24 0 0 0 24 -24 V136 a24 24 0 0 1 24 -24 H392"
+        fill="none" stroke="#0b1b45" stroke-width="58" stroke-linecap="round" opacity="0.35"/>
+  <path d="M120 400 H244 a24 24 0 0 0 24 -24 V136 a24 24 0 0 1 24 -24 H392"
+        fill="none" stroke="#f59e0b" stroke-width="44" stroke-linecap="round"/>
+  <circle cx="120" cy="400" r="34" fill="#f8fafc"/>
+  <circle cx="120" cy="400" r="16" fill="#f59e0b"/>
+  <circle cx="392" cy="112" r="34" fill="#f8fafc"/>
+  <circle cx="392" cy="112" r="16" fill="#1e40af"/>
 </svg>
