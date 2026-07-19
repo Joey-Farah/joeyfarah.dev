@@ -250,7 +250,7 @@
         { "label": "GitHub", "url": "https://github.com/Joey-Farah/srsdb" }
       ],
       "status": "in-development",
-      "progress": 15,
+      "progress": 30,
       "image": "/images/srsdb.svg"
     }
   },
