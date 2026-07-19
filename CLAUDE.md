@@ -12,7 +12,7 @@ Never read `.env`, `.env.*`, or any file containing secrets or credentials. If a
 
 Personal portfolio site for Joey Farah — Oracle Cloud ERP Architect and independent developer.
 
-**Stack:** React + Vite (client), Node.js + Express (server), MongoDB Atlas, shared Zod schemas. Monorepo deployed as a single Railway service.
+**Stack:** React + Vite (client), Node.js + Express (server), MongoDB Atlas, shared Zod schemas. Monorepo deployed on Vercel — `api/index.ts` wraps the Express app as a single serverless function; `vercel.json` serves the Vite build as static output and rewrites `/api/*`, `/healthz`, `/sitemap.xml` to the function, with an SPA fallback for everything else.
 
 **Design language:** Bento-Terminal hybrid. Dark mode (`#0d0d0d`), electric cyan (`#06b6d4`) accents, JetBrains Mono font, terminal chrome on every tile.
 
@@ -23,9 +23,13 @@ Personal portfolio site for Joey Farah — Oracle Cloud ERP Architect and indepe
 
 ---
 
-## Current State (as of 2026-06-26)
+## Current State (as of 2026-07-19)
 
-The site is **live at https://joeyfarah.dev** — past the old "pre-launch stripped" phase. It is a **single page** (the former `/work` route was collapsed into an in-page `#build` section; there is no router). Deployed on Railway + MongoDB Atlas.
+The site is **live at https://joeyfarah.dev** — past the old "pre-launch stripped" phase. It is a **single page** (the former `/work` route was collapsed into an in-page `#build` section; there is no router). Deployed on **Vercel** (project `joeyfarah-dev`, org `joey-farahs-projects`) + MongoDB Atlas.
+
+**Migrated off Railway on 2026-07-19** after Railway's trial expired mid-outage (a `RangeNotSatisfiableError` in the SPA fallback's `res.sendFile` crashed the whole process on a bad `Range` header — fixed regardless, but the trial expiry meant no redeploy without paying, so the project moved to Vercel to match every other project). Railway service is left untouched/paused as a rollback option; nothing there needs cleanup unless you want to formally delete it.
+
+**Known follow-up:** the Vercel project isn't Git-connected yet (`vercel git connect` failed — the Vercel GitHub App likely isn't granted access to this repo). Until that's fixed, code changes need a manual `vercel deploy --prod` after `git push` — see "Updating the live site" below.
 
 ### Page composition (top → bottom, `App.tsx`)
 Hero boot sequence → scroll transition → `IntroSection` (`#joey`) → `WorkSection` (`#build`) → `BentoGrid` (projects / timeline / personal) → `ClosingCTA`.
@@ -80,7 +84,7 @@ The seed script reads from `server/.env`. If seed fails with "MONGODB_URI not se
 
 Two independent paths — do not confuse them:
 
-- **Code changes** (React/Express/shared): `git push origin main` → Railway auto-builds + redeploys in ~2 min. No manual step.
+- **Code changes** (React/Express/shared): `git push origin main`, then `vercel deploy --prod` from repo root (Git auto-deploy isn't wired up yet — see Known follow-up above). Env vars (`MONGODB_URI`, `NODE_ENV`, `SITE_URL`) already live in the Vercel project; never re-add them by reading `server/.env`.
 - **Content changes** (`server/seed/blocks.seed.json`): `git push` does **not** update what visitors see. The live site reads tile content from MongoDB Atlas. You must run `MONGODB_URI="<prod-atlas-uri>" npm run seed` to push the JSON into the DB. Commit + push the JSON afterward to keep the repo as source of truth; otherwise the repo and live DB drift.
 
 Checklist when editing a tile: (1) edit JSON, (2) run `npm run seed` against prod, (3) verify on https://joeyfarah.dev, (4) commit + push.
@@ -89,7 +93,7 @@ Checklist when editing a tile: (1) edit JSON, (2) run `npm run seed` against pro
 
 ## What Still Needs To Be Done
 
-> ✅ **Mostly historical.** §1 (Deploy to Railway) and §2 (buy domain + DNS) are **done** — the site is live at https://joeyfarah.dev on Railway + Atlas. Kept below as reference for the deploy/DNS topology and the re-seed commands. The only items that may still be open are §3 (analytics — optional) and the Cloudflare proxy/TLS/analytics-token follow-ups in *Immediate Next Steps* §4–6.
+> ⚠️ **Fully historical / superseded.** §1 (Deploy to Railway) and its DNS instructions describe a topology that no longer exists — the site moved from Railway to **Vercel** on 2026-07-19 (see "Current State" above). Kept below only as an archive of what buying-the-domain and initial deploy looked like; do not follow §1's Railway steps or §2's "DNS only / grey cloud" instructions for future work. §3 (analytics — optional) is still accurate. The Cloudflare proxy/TLS follow-ups in *Immediate Next Steps* §4–6 are also stale now that Vercel (not Railway) is the origin behind Cloudflare's proxy — re-verify against Vercel's IP (`76.76.21.21`) instead of Railway's if you pick those back up.
 
 These required Joey's input (accounts, payment, external setup). Original estimate: **~45 min**.
 
