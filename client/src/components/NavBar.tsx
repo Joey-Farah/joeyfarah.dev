@@ -73,7 +73,11 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
               return (
                 <li
                   key={href}
-                  className="pl-2 md:pl-4 border-l border-brand-primary/20 first:pl-0 first:border-l-0"
+                  className={
+                    'pl-2 md:pl-4 first:pl-0 select-none ' +
+                    "before:content-['·'] before:mr-2 md:before:mr-4 before:text-brand-primary/40 " +
+                    'first:before:content-none'
+                  }
                 >
                   <a
                     href={href}

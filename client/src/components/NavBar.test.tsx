@@ -47,12 +47,25 @@ describe('NavBar — work page link', () => {
     expect(contactLink.className).toMatch(/text-\[13px\]/);
   });
 
-  it('separates links with a divider instead of a bare gap, so they read as distinct sections', () => {
+  it('separates links with a dot instead of a bare gap, so they read as distinct sections', () => {
     render(<NavBar showHero={false} />);
     const contactItem = screen.getByTestId('nav-link-contact').closest('li');
-    expect(contactItem?.className).toMatch(/\bborder-l\b/);
+    expect(contactItem?.className).toMatch(/before:content-\['·'\]/);
     const joeyItem = screen.getByTestId('nav-link-joey').closest('li');
-    // The first item has no divider to its left — there's nothing to separate it from.
-    expect(joeyItem?.className).toMatch(/first:border-l-0\b/);
+    // The first item has no dot before it — there's nothing to separate it from.
+    expect(joeyItem?.className).toMatch(/first:before:content-none\b/);
+  });
+
+  it('spaces every link the same amount, not just the ones with a dot before them', () => {
+    render(<NavBar showHero={false} />);
+    const items = ['joey', 'projects', 'timeline', 'personal', 'contact'].map(
+      (label) => screen.getByTestId(`nav-link-${label}`).closest('li'),
+    );
+    const [first, ...rest] = items;
+    expect(first?.className).toMatch(/\bfirst:pl-0\b/);
+    for (const item of rest) {
+      expect(item?.className).toMatch(/\bpl-2\b/);
+      expect(item?.className).toMatch(/\bmd:pl-4\b/);
+    }
   });
 });
