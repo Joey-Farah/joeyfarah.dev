@@ -8,11 +8,9 @@ import NavBar from './components/NavBar';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import { useKeyboardSectionNav } from './components/useKeyboardSectionNav';
+import { shouldHideHero } from './lib/heroScroll';
 
 const client = new HttpBlockDataClient();
-
-/** Scroll threshold mirrored from ScrollTransitionOrchestrator */
-const SCROLL_THRESHOLD_PX = 80;
 
 function isHeroBlock(block: BentoBlock): block is BentoBlock & { content: HeroContent } {
   return block.type === 'hero';
@@ -65,7 +63,7 @@ const App: React.FC = () => {
   // can appear. Hero's own opacity fade is handled inside ScrollTransitionOrchestrator.
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > SCROLL_THRESHOLD_PX) {
+      if (shouldHideHero(window.scrollY, window.innerHeight)) {
         hasTransitionedRef.current = true;
         setShowHero(false);
       } else if (!hasTransitionedRef.current) {

@@ -4,9 +4,6 @@ import type { BentoBlock, HeroContent } from 'shared/types';
 import Hero from '../Hero/Hero';
 import BentoGrid from '../BentoGrid/BentoGrid';
 
-/** Scroll threshold in pixels — used by App.tsx to flip NavBar visibility */
-export const SCROLL_THRESHOLD_PX = 80;
-
 /** Fraction of viewport height over which the Hero fades out (0.6 = faded by 60vh of scroll) */
 const FADE_RANGE = 0.6;
 

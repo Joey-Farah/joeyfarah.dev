@@ -51,14 +51,25 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
         >
-          {/* Scroll wrapper: `w-max mx-auto` centers the list when it fits and
-              scrolls when it doesn't. A centered flex container would clip both
-              edges on narrow phones with no way to reach the cut-off links. */}
+          {/* Scroll wrapper: plain `justify-center` (like `mx-auto` on the
+              list) computes overflow evenly on both sides when content is
+              wider than the container — but `scrollLeft` can never go
+              negative, so the left-side overflow (the first link) becomes
+              permanently unreachable on narrow phones. `safe center` is the
+              CSS-native fix: it centers when content fits and falls back to
+              start-alignment (scrollLeft 0, nothing cropped) when it doesn't.
+              Set via inline style, not a Tailwind class — Tailwind can't
+              generate arbitrary values for the `justify-` prefix because
+              it's ambiguous with justify-items/justify-self. */}
           <div
-            className="overflow-x-auto [&::-webkit-scrollbar]:hidden"
-            style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+            className="flex overflow-x-auto [&::-webkit-scrollbar]:hidden"
+            style={{
+              justifyContent: 'safe center',
+              scrollbarWidth: 'none',
+              WebkitOverflowScrolling: 'touch',
+            }}
           >
-            <ul className="flex items-center gap-4 md:gap-6 w-max mx-auto list-none px-4 md:px-6 py-3">
+            <ul className="flex items-center gap-4 md:gap-6 w-max list-none px-4 md:px-6 py-3">
             {NAV_LINKS.map(({ label, href, id }) => {
               const isActive = activeId === id;
               return (

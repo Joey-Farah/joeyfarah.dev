@@ -19,4 +19,19 @@ describe('NavBar — work page link', () => {
     render(<NavBar showHero={true} />);
     expect(screen.queryByTestId('navbar')).not.toBeInTheDocument();
   });
+
+  it('centers the link list safely so overflow never crops the first link off-screen', () => {
+    // mx-auto (or plain justify-center) on overflowing content computes even
+    // overflow on both sides, but scrollLeft can never go negative — so the
+    // first link becomes permanently unreachable on narrow phones. `safe
+    // center` centers when content fits and falls back to start-alignment
+    // (scrollLeft 0) when it overflows.
+    render(<NavBar showHero={false} />);
+    const list = screen.getByTestId('nav-link-contact').closest('ul');
+    expect(list?.className).not.toMatch(/\bmx-auto\b/);
+    expect(list?.parentElement?.className).not.toMatch(/justify-center\b/);
+    // Inline style, not a Tailwind class: Tailwind can't generate arbitrary
+    // values for the `justify-` prefix (ambiguous with justify-items/-self).
+    expect(list?.parentElement).toHaveStyle({ justifyContent: 'safe center' });
+  });
 });
