@@ -67,11 +67,14 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
               WebkitOverflowScrolling: 'touch',
             }}
           >
-            <ul className="flex items-center gap-2 md:gap-6 w-max list-none px-2 md:px-6 py-3">
+            <ul className="flex items-center w-max list-none px-2 md:px-6 py-3">
             {NAV_LINKS.map(({ label, href, id }) => {
               const isActive = activeId === id;
               return (
-                <li key={href}>
+                <li
+                  key={href}
+                  className="pl-2 md:pl-4 border-l border-brand-primary/20 first:pl-0 first:border-l-0"
+                >
                   <a
                     href={href}
                     onClick={(e) => handleNavClick(e, id)}

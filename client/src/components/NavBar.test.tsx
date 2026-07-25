@@ -36,16 +36,23 @@ describe('NavBar — work page link', () => {
   });
 
   it('uses tight mobile spacing/font-size so all 5 links fit on one row without scrolling', () => {
-    // gap-4/px-4/text-xs (the desktop-derived defaults) push total content
-    // width past ~390px, past what the narrowest phones can show on one
-    // row — the goal is no horizontal scroll needed at all on mobile.
+    // px-4/text-xs (the desktop-derived defaults) push total content width
+    // past ~390px, past what the narrowest phones can show on one row — the
+    // goal is no horizontal scroll needed at all on mobile.
     render(<NavBar showHero={false} />);
     const list = screen.getByTestId('nav-link-contact').closest('ul');
-    expect(list?.className).toMatch(/\bgap-2\b/);
-    expect(list?.className).not.toMatch(/\bgap-4\b/);
     expect(list?.className).toMatch(/\bpx-2\b/);
     expect(list?.className).not.toMatch(/\bpx-4\b/);
     const contactLink = screen.getByTestId('nav-link-contact');
     expect(contactLink.className).toMatch(/text-\[13px\]/);
+  });
+
+  it('separates links with a divider instead of a bare gap, so they read as distinct sections', () => {
+    render(<NavBar showHero={false} />);
+    const contactItem = screen.getByTestId('nav-link-contact').closest('li');
+    expect(contactItem?.className).toMatch(/\bborder-l\b/);
+    const joeyItem = screen.getByTestId('nav-link-joey').closest('li');
+    // The first item has no divider to its left — there's nothing to separate it from.
+    expect(joeyItem?.className).toMatch(/first:border-l-0\b/);
   });
 });
