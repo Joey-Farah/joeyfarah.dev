@@ -34,4 +34,18 @@ describe('NavBar — work page link', () => {
     // values for the `justify-` prefix (ambiguous with justify-items/-self).
     expect(list?.parentElement).toHaveStyle({ justifyContent: 'safe center' });
   });
+
+  it('uses tight mobile spacing/font-size so all 5 links fit on one row without scrolling', () => {
+    // gap-4/px-4/text-xs (the desktop-derived defaults) push total content
+    // width past ~390px, past what the narrowest phones can show on one
+    // row — the goal is no horizontal scroll needed at all on mobile.
+    render(<NavBar showHero={false} />);
+    const list = screen.getByTestId('nav-link-contact').closest('ul');
+    expect(list?.className).toMatch(/\bgap-2\b/);
+    expect(list?.className).not.toMatch(/\bgap-4\b/);
+    expect(list?.className).toMatch(/\bpx-2\b/);
+    expect(list?.className).not.toMatch(/\bpx-4\b/);
+    const contactLink = screen.getByTestId('nav-link-contact');
+    expect(contactLink.className).toMatch(/text-\[13px\]/);
+  });
 });

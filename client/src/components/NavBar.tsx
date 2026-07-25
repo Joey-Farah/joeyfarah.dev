@@ -51,16 +51,14 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
         >
-          {/* Scroll wrapper: plain `justify-center` (like `mx-auto` on the
-              list) computes overflow evenly on both sides when content is
-              wider than the container — but `scrollLeft` can never go
-              negative, so the left-side overflow (the first link) becomes
-              permanently unreachable on narrow phones. `safe center` is the
-              CSS-native fix: it centers when content fits and falls back to
-              start-alignment (scrollLeft 0, nothing cropped) when it doesn't.
-              Set via inline style, not a Tailwind class — Tailwind can't
-              generate arbitrary values for the `justify-` prefix because
-              it's ambiguous with justify-items/justify-self. */}
+          {/* Spacing/font-size are tightened at the base (mobile) breakpoint
+              so all 5 links fit on one row without needing to scroll — the
+              scroll wrapper below stays as a safety net for the narrowest
+              devices, not the primary mechanism. `safe center` (via inline
+              style — Tailwind can't generate arbitrary values for the
+              ambiguous `justify-` prefix) still guards against mx-auto's
+              failure mode of cropping the first link if content ever does
+              overflow. */}
           <div
             className="flex overflow-x-auto [&::-webkit-scrollbar]:hidden"
             style={{
@@ -69,7 +67,7 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
               WebkitOverflowScrolling: 'touch',
             }}
           >
-            <ul className="flex items-center gap-4 md:gap-6 w-max list-none px-4 md:px-6 py-3">
+            <ul className="flex items-center gap-2 md:gap-6 w-max list-none px-2 md:px-6 py-3">
             {NAV_LINKS.map(({ label, href, id }) => {
               const isActive = activeId === id;
               return (
@@ -80,7 +78,7 @@ const NavBar: React.FC<NavBarProps> = ({ showHero }) => {
                     aria-label={`Navigate to ${label} section`}
                     aria-current={isActive ? 'true' : undefined}
                     className={
-                      'font-mono text-xs whitespace-nowrap transition-colors duration-150 select-none ' +
+                      'font-mono text-[13px] sm:text-xs whitespace-nowrap transition-colors duration-150 select-none ' +
                       'border-b border-transparent pb-0.5 ' +
                       (isActive
                         ? 'text-brand-primary border-brand-primary'
