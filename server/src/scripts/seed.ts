@@ -3,6 +3,7 @@ import * as path from 'path';
 import mongoose from 'mongoose';
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env'), quiet: true });
+import { ensureSrvResolvable } from '../modules/dnsGuard';
 import { ingestSeed } from '../modules/seedIngestion';
 import { SeedValidationError } from '../modules/seedIngestion.errors';
 import { MongoBlockRepository } from '../repositories/MongoBlockRepository';
@@ -28,6 +29,7 @@ async function main(): Promise<void> {
     throw err; // unexpected errors bubble up
   }
 
+  await ensureSrvResolvable(MONGODB_URI);
   await mongoose.connect(MONGODB_URI);
   const repo = new MongoBlockRepository();
   await repo.upsertBlocks(blocks);

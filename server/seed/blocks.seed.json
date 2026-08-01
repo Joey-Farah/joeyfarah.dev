@@ -69,7 +69,7 @@
         {
           "year": "2026",
           "label": "SkyMap",
-          "detail": "Minneapolis Skyway navigation PWA",
+          "detail": "Minneapolis Skyway navigation app",
           "slug": "skymap"
         }
       ],
@@ -354,7 +354,7 @@
     "order": 8,
     "visible": true,
     "content": {
-      "description": "PWA for navigating the Minneapolis Skyway — the largest contiguous skyway network in the world. Search-first navigation, Apple Maps style: search a building or business, get a place card, tap Directions. Routing is time-aware — it won't send you through a building that's closed and flags stairs or brief outdoor stretches — and live GPS tracks your progress turn-by-turn. Offline-first: the service worker precaches the full 178-building, 411-business dataset, so it keeps working with the network fully dead. No accounts, no tracking.",
+      "description": "iOS app for navigating the Minneapolis Skyway — the largest contiguous skyway network in the world. Search-first navigation, Apple Maps style: search a building or business, get a place card, tap Directions. Routing is time-aware — it won't send you through a building that's closed and flags stairs or brief outdoor stretches — and live GPS tracks your progress turn-by-turn. The full 178-building, 411-business dataset ships on-device, so it keeps working with the network fully dead. No accounts, no tracking.",
       "stack": ["TypeScript", "Vite", "MapLibre GL", "Capacitor"],
       "links": [
         { "label": "App Store", "url": "https://apps.apple.com/us/app/skymap-minneapolis/id6792509326" },
