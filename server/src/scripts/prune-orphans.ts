@@ -3,6 +3,7 @@ import * as path from 'path';
 import mongoose from 'mongoose';
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env'), quiet: true });
+import { ensureSrvResolvable } from '../modules/dnsGuard';
 
 const ORPHAN_SLUGS = [
   'oracle-db-mapper',
@@ -17,6 +18,7 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
+  await ensureSrvResolvable(MONGODB_URI);
   await mongoose.connect(MONGODB_URI);
   const result = await mongoose.connection
     .collection('blocks')
