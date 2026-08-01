@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import * as fs from 'fs';
 import * as path from 'path';
 import { ingestSeed } from '../src/modules/seedIngestion';
 import { SeedValidationError } from '../src/modules/seedIngestion.errors';
@@ -75,9 +76,12 @@ describe('ingestSeed — valid seed', () => {
 // ---------------------------------------------------------------------------
 
 describe('ingestSeed — production blocks.seed.json', () => {
-  it('loads all 16 blocks without error', async () => {
+  // Counted from the file rather than hardcoded, so adding a tile doesn't
+  // fail the suite. The point is that ingest drops nothing.
+  it('loads every block in the file without error', async () => {
+    const raw = JSON.parse(fs.readFileSync(BLOCKS_SEED, 'utf-8')) as unknown[];
     const blocks = await ingestSeed(BLOCKS_SEED);
-    expect(blocks.length).toBe(16);
+    expect(blocks.length).toBe(raw.length);
   });
 
   it('all required slugs are present', async () => {

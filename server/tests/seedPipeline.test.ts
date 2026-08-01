@@ -61,18 +61,22 @@ describe('seedPipeline — valid fixture seed (5 blocks)', () => {
 // End-to-end: production blocks.seed.json → InMemoryBlockRepository
 // ---------------------------------------------------------------------------
 
-describe('seedPipeline — production blocks.seed.json (16 blocks)', () => {
+describe('seedPipeline — production blocks.seed.json', () => {
   let repo: InMemoryBlockRepository;
+  let seededCount: number;
 
   beforeAll(async () => {
     const blocks = await ingestSeed(BLOCKS_SEED);
+    seededCount = blocks.length;
     repo = new InMemoryBlockRepository();
     await repo.upsertBlocks(blocks);
   });
 
-  it('getBlocks() returns 16 blocks', async () => {
+  // Compared against what was ingested rather than a hardcoded count, so
+  // adding a tile doesn't fail the suite. The point is a lossless round-trip.
+  it('getBlocks() returns every seeded block', async () => {
     const result = await repo.getBlocks();
-    expect(result.length).toBe(16);
+    expect(result.length).toBe(seededCount);
   });
 
   it('all blocks have required envelope fields', async () => {
