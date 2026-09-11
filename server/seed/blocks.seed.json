@@ -324,6 +324,7 @@
       "image": "/images/falco.png",
       "stack": [],
       "links": [
+        { "label": "Live Site", "url": "https://thelombardiproject.com" },
         { "label": "Patreon", "url": "https://www.patreon.com/joeydonuts" }
       ],
       "status": "live"
