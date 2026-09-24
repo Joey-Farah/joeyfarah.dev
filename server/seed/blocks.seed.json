@@ -374,11 +374,11 @@
     "content": {
       "current": { "title": "The Count of Monte Cristo", "author": "Alexandre Dumas" },
       "next": [
+        { "title": "The Well of Ascension", "author": "Brandon Sanderson" },
         { "title": "The Brothers Karamazov", "author": "Fyodor Dostoevsky" },
         { "title": "The Stand", "author": "Stephen King" },
         { "title": "Anxious People", "author": "Fredrik Backman" },
-        { "title": "Point Blank", "author": "Anthony Horowitz" },
-        { "title": "The Well of Ascension", "author": "Brandon Sanderson" }
+        { "title": "Point Blank", "author": "Anthony Horowitz" }
       ],
       "recent": [
         { "title": "Ego is the Enemy", "author": "Ryan Holiday" },
