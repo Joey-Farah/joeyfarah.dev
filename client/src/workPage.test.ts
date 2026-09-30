@@ -27,8 +27,43 @@ describe('/work routing', () => {
 });
 
 describe('/work page', () => {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const text = doc.body.textContent ?? '';
+
   it('is a standalone HTML document with a noindex meta tag', () => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
     expect(doc.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex');
+  });
+
+  it('has one contact action: email joey@joeyfarah.dev', () => {
+    const mailtos = [...doc.querySelectorAll('a[href^="mailto:"]')].map((a) => a.getAttribute('href'));
+    expect(mailtos.length).toBeGreaterThan(0);
+    expect(new Set(mailtos)).toEqual(new Set(['mailto:joey@joeyfarah.dev']));
+    // No other outbound links: nothing competes with the email.
+    expect(doc.querySelectorAll('a:not([href^="mailto:"])')).toHaveLength(0);
+  });
+
+  it('names the company in the footer', () => {
+    expect(doc.querySelector('footer')?.textContent).toContain('JEF Consulting LLC · Minnesota');
+  });
+
+  it('carries none of the portfolio or employer content', () => {
+    for (const word of ['Oracle', 'Melee', 'Patreon', 'Elire', 'Slippi', 'SSBM', 'hello@']) {
+      expect(html).not.toContain(word);
+    }
+  });
+
+  it('ships no JavaScript and no external stylesheets or fonts', () => {
+    expect(doc.querySelectorAll('script')).toHaveLength(0);
+    expect(doc.querySelectorAll('link[rel="stylesheet"]')).toHaveLength(0);
+  });
+
+  it('has no Examples section until an example is cleared', () => {
+    expect(text).not.toMatch(/examples/i);
+  });
+
+  it('covers the brief: hero, what I do, how I work, close', () => {
+    expect(doc.querySelector('h1')?.textContent).toBe('Websites, and the systems behind them.');
+    const headings = [...doc.querySelectorAll('h2')].map((h) => h.textContent);
+    expect(headings).toEqual(['What I do', 'How I work', 'Got something that should work better?']);
   });
 });
