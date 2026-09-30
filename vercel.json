@@ -5,6 +5,11 @@
     { "source": "/api/(.*)", "destination": "/api" },
     { "source": "/healthz", "destination": "/api" },
     { "source": "/sitemap.xml", "destination": "/api" },
+    { "source": "/work", "destination": "/work/index.html" },
+    { "source": "/work/", "destination": "/work/index.html" },
     { "source": "/((?!api|healthz|sitemap.xml|assets|images|favicon|robots.txt).*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    { "source": "/work(/.*)?", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] }
   ]
 }

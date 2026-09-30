@@ -15,7 +15,7 @@ const CONTACT_LINKS = [
 /**
  * WorkSection — the contact close. Sits last (after the bento grid) so the page
  * reads like a resume: intro → work → contact. Holds the email CTA and the
- * social links. /work, /hire, and /build all redirect to this section (#build).
+ * social links. /hire and /build redirect to this section (#build).
  */
 const WorkSection: React.FC = () => {
   const reduce = useReducedMotion();
