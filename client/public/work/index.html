@@ -4,8 +4,124 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
+  <meta name="description" content="Joey Farah builds websites and the systems behind them for small businesses and organizations in Minnesota.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
   <title>Joey Farah · JEF Consulting</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e7490'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='15' font-weight='700' fill='%23fff' text-anchor='middle'%3EJF%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #111418;
+      --muted: #4b5563;
+      --line: #e5e7eb;
+      --accent: #0e7490;
+      --accent-dark: #155e75;
+      --tint: #ecfeff;
+      --bg: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+    }
+    main, footer { max-width: 40rem; margin: 0 auto; padding: 0 1.25rem; }
+    section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
+    .hero { border-top: 0; padding: 3.5rem 0 2.75rem; }
+    .eyebrow {
+      margin: 0 0 1rem;
+      color: var(--accent);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(2rem, 8vw, 2.75rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+    h2 { margin: 0 0 1.25rem; font-size: 1.375rem; line-height: 1.25; letter-spacing: -0.01em; }
+    p { margin: 0 0 1rem; }
+    .lead { color: var(--muted); font-size: 1.125rem; margin-bottom: 1.75rem; }
+    .button {
+      display: block;
+      padding: 0.95rem 1.25rem;
+      border-radius: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+    }
+    .button:hover { background: var(--accent-dark); }
+    .button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li { padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+    li:first-child { padding-top: 0; }
+    li:last-child { border-bottom: 0; padding-bottom: 0; }
+    li strong { display: block; margin-bottom: 0.15rem; }
+    li span { color: var(--muted); }
+    .note { margin: 1.75rem 0 0; padding-left: 1rem; border-left: 3px solid var(--accent); color: var(--muted); }
+    .close { padding-bottom: 3rem; }
+    .panel { padding: 1.75rem 1.25rem; border-radius: 0.75rem; background: var(--tint); }
+    .panel p { color: var(--muted); }
+    .panel .button { margin-top: 1.5rem; word-break: break-all; }
+    footer { padding-top: 1.5rem; padding-bottom: 2.5rem; color: var(--muted); font-size: 0.875rem; }
+    @media (min-width: 40rem) {
+      .hero { padding-top: 5rem; }
+      .button { display: inline-block; padding-left: 1.75rem; padding-right: 1.75rem; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
+      .grid li, .grid li:first-child, .grid li:last-child { padding: 0; border: 0; }
+      .panel { padding: 2.25rem 2rem; }
+    }
+  </style>
 </head>
 <body>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Joey Farah · JEF Consulting</p>
+      <h1>Websites, and the systems behind them.</h1>
+      <p class="lead">I'm Joey Farah. I build software for small businesses and organizations in Minnesota, for places that don't have an IT department and shouldn't need one.</p>
+      <a class="button" href="mailto:joey@joeyfarah.dev">Email me</a>
+    </section>
+
+    <section>
+      <h2>What I do</h2>
+      <ul>
+        <li><strong>Websites</strong> <span>Built around the business you actually run, and easy for you to update yourself.</span></li>
+        <li><strong>Connecting your tools</strong> <span>Your booking, payments, email list and website talking to each other, so nothing gets typed in twice.</span></li>
+        <li><strong>Dashboards</strong> <span>The numbers you check every week, in one place, updated on their own.</span></li>
+        <li><strong>Automations</strong> <span>The weekly chores that live in a spreadsheet and your inbox, handled.</span></li>
+        <li><strong>Custom tools</strong> <span>Maps, tours, sign-ups, small apps: whatever the job needs.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How I work</h2>
+      <ul class="grid">
+        <li><strong>Fixed price, agreed up front.</strong> <span>No hourly meter running.</span></li>
+        <li><strong>You own everything.</strong> <span>The code, the content, the accounts.</span></li>
+        <li><strong>Plain English.</strong> <span>Short updates, no jargon, one point of contact: me.</span></li>
+        <li><strong>Local.</strong> <span>I'm in the Twin Cities and happy to meet in person.</span></li>
+      </ul>
+      <p class="note">My day job is building enterprise systems for large companies. JEF Consulting brings that same work to organizations that are too small to hire a firm.</p>
+    </section>
+
+    <section class="close">
+      <div class="panel">
+        <h2>Got something that should work better?</h2>
+        <p>Tell me what's bugging you. I'll take a look and send a couple of ideas, no charge.</p>
+        <a class="button" href="mailto:joey@joeyfarah.dev">joey@joeyfarah.dev</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>JEF Consulting LLC · Minnesota</footer>
 </body>
 </html>
