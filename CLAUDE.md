@@ -25,7 +25,7 @@ Personal portfolio site for Joey Farah — Oracle Cloud ERP Architect and indepe
 
 ## Current State (as of 2026-07-19)
 
-The site is **live at https://joeyfarah.dev** — past the old "pre-launch stripped" phase. It is a **single page** (the former `/work` route was collapsed into an in-page `#build` section; there is no router). Deployed on **Vercel** (project `joeyfarah-dev`, org `joey-farahs-projects`) + MongoDB Atlas.
+The site is **live at https://joeyfarah.dev** — past the old "pre-launch stripped" phase. The portfolio is a **single page** (no router; `/hire` and `/build` redirect to the in-page `#build` section). **`/work` is separate:** a standalone, zero-JS, light-themed client page for JEF Consulting (business-card QR target, URL fixed) at `client/public/work/index.html` — see "Client page (`/work`)" below. Deployed on **Vercel** (project `joeyfarah-dev`, org `joey-farahs-projects`) + MongoDB Atlas.
 
 **Migrated off Railway on 2026-07-19** after Railway's trial expired mid-outage (a `RangeNotSatisfiableError` in the SPA fallback's `res.sendFile` crashed the whole process on a bad `Range` header — fixed regardless, but the trial expiry meant no redeploy without paying, so the project moved to Vercel to match every other project). Railway service is left untouched/paused as a rollback option; nothing there needs cleanup unless you want to formally delete it.
 
@@ -60,7 +60,12 @@ Hero boot sequence → scroll transition → `IntroSection` (`#joey`) → `WorkS
 - Custom 404 page (terminal-themed)
 - SEO: OG tags, Twitter Card, Schema.org JSON-LD, robots.txt; favicon `>_` SVG glyph
 - **Email:** `hello@joeyfarah.dev` via Cloudflare Email Routing → Gmail (confirmed working). Wired into `WorkSection` + `ClosingCTA`. *(Not `joey@` — older notes in this file reference that; `hello@` is the live alias.)*
-- Known: `BentoTile.test.tsx` has 2 pre-existing failures (gridColumn/gridRow inline-style assertions) on clean `main`.
+
+### Client page (`/work`)
+- Plain HTML + inline CSS, no React, no fonts, no JS — must stay fast on a phone scanning a business card. Served via `vercel.json` rewrites placed **before** the SPA catch-all.
+- Deliberately **not** portfolio-styled: white / ink `#111418` / teal `#0e7490`, no Oracle, Melee, Patreon, or employer content, no link back to the portfolio. One contact action: `joey@joeyfarah.dev`. Guarded by `client/src/workPage.test.ts`.
+- **noindex** (meta + `X-Robots-Tag` header). `lighthouserc.json` turns off the SEO gate for `/work` only; when dropping noindex, also restore that assertion.
+- Examples section omitted until an example is cleared (brief lives in the JEF Consulting HQ repo, `streams/tech-projects/client-page-brief.md`).
 
 ### Build
 ```bash
