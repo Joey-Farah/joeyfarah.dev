@@ -38,7 +38,7 @@
   a { color: inherit; }
   :focus-visible { outline: 3px solid var(--marigold); outline-offset: 3px; }
   
-  .bar { display: flex; justify-content: space-between; align-items: center; padding-block: 1.25rem; font-weight: 600; }
+  .bar { display: flex; flex-wrap: wrap; gap: .5rem 1rem; justify-content: space-between; align-items: center; padding-block: 1.25rem; font-weight: 600; }
   .bar span { font-stretch: 125%; font-weight: 800; letter-spacing: -.01em; }
   .bar a { color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 4px; }
   
@@ -72,12 +72,12 @@
   .plist { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1.75rem; }
   .plist li { border-top: 2px solid rgba(255,255,255,.35); padding-top: 1rem; }
   .plist b { display: block; font-stretch: 112%; font-size: 1.35rem; font-weight: 800; letter-spacing: -.01em; margin-bottom: .2rem; }
-  .plist span { color: #d3ecf1; }
+  .plist span { color: #eaf6f8; }
   .day { margin: 3rem 0 0; max-width: 40rem; font-size: 1.15rem; color: #eaf6f8; }
   
   .close { padding-block: 5rem 3rem; }
   .close p { color: var(--ink-soft); max-width: 32rem; margin: 0 0 2rem; font-size: 1.1rem; }
-  .big-mail { display: inline-block; font-stretch: 112%; font-weight: 900; font-size: clamp(1.6rem, 7.4vw, 4rem); letter-spacing: -.02em; line-height: 1.05; color: var(--ink); text-decoration: none; background: linear-gradient(var(--marigold), var(--marigold)) 0 92% / 100% .3em no-repeat; word-break: break-all; }
+  .big-mail { display: inline-block; font-stretch: 112%; font-weight: 900; font-size: clamp(1.45rem, 7.4vw, 4rem); letter-spacing: -.02em; line-height: 1.05; color: var(--ink); text-decoration: none; background: linear-gradient(var(--marigold), var(--marigold)) 0 92% / 100% .3em no-repeat; }
   .big-mail:hover { background-size: 100% 100%; }
   footer { padding-block: 2rem 2.5rem; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .9rem; }
   
@@ -188,7 +188,7 @@
   <section class="close">
     <h2>Got something that should work better?</h2>
     <p>Tell me what's bugging you. I'll take a look and send a couple of ideas, no charge.</p>
-    <a class="big-mail" href="mailto:joey@joeyfarah.dev">joey@joeyfarah.dev</a>
+    <a class="big-mail" href="mailto:joey@joeyfarah.dev">joey@<wbr>joeyfarah.dev</a>
   </section>
   <footer>JEF Consulting LLC · Minnesota</footer>
 </div>

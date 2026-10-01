@@ -47,8 +47,8 @@ describe('/work page', () => {
   });
 
   it('carries none of the portfolio or employer content', () => {
-    for (const word of ['Oracle', 'Melee', 'Patreon', 'Elire', 'Slippi', 'SSBM', 'hello@']) {
-      expect(html).not.toContain(word);
+    for (const word of ['oracle', 'melee', 'patreon', 'elire', 'slippi', 'ssbm', 'hello@']) {
+      expect(html.toLowerCase()).not.toContain(word);
     }
   });
 
@@ -69,6 +69,13 @@ describe('/work page', () => {
     const href = doc.querySelector('link[rel="preload"][as="font"]')?.getAttribute('href');
     expect(href).toMatch(/^\/work\/.+\.woff2$/);
     expect(existsSync(path.join(repoRoot, 'client/public', href!))).toBe(true);
+    // The preload only helps if @font-face asks for the same URL; otherwise the font downloads twice.
+    expect(html).toContain(`src: url("${href}")`);
+  });
+
+  it('keeps the closing email address in one piece on narrow phones', () => {
+    expect(html).not.toContain('break-all');
+    expect(doc.querySelector('.big-mail')?.innerHTML).toBe('joey@<wbr>joeyfarah.dev');
   });
 
   it('has no Examples section until an example is cleared', () => {
