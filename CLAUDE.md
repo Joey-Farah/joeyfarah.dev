@@ -62,8 +62,9 @@ Hero boot sequence → scroll transition → `IntroSection` (`#joey`) → `WorkS
 - **Email:** `hello@joeyfarah.dev` via Cloudflare Email Routing → Gmail (confirmed working). Wired into `WorkSection` + `ClosingCTA`. *(Not `joey@` — older notes in this file reference that; `hello@` is the live alias.)*
 
 ### Client page (`/work`)
-- Plain HTML + inline CSS, no React, no fonts, no JS — must stay fast on a phone scanning a business card. Served via `vercel.json` rewrites placed **before** the SPA catch-all.
-- Deliberately **not** portfolio-styled: white / ink `#111418` / teal `#0e7490`, no Oracle, Melee, Patreon, or employer content, no link back to the portfolio. One contact action: `joey@joeyfarah.dev`. Guarded by `client/src/workPage.test.ts`.
+- Plain HTML + inline CSS + inline SVG illustrations, no React, no JS, no third-party requests — must stay fast on a phone scanning a business card. Served via `vercel.json` rewrites placed **before** the SPA catch-all.
+- Magazine-style design (chosen 2026-09-30 over an interactive-demo concept; the first plain-text version was rejected as too boring to sell). Archivo variable font self-hosted as `client/public/work/archivo-v1.woff2` (instanced to wdth 100–125, wght 400–900, Latin subset, ~52 KB; cached immutable — bump the `-vN` suffix if the file changes).
+- Deliberately **not** portfolio-styled: white / ink / teal `#0e7490`, no Oracle, Melee, Patreon, or employer content, no link back to the portfolio. One contact action: `joey@joeyfarah.dev`. Guarded by `client/src/workPage.test.ts`.
 - **noindex** (meta + `X-Robots-Tag` header). `lighthouserc.json` turns off the SEO gate for `/work` only; when dropping noindex, also restore that assertion.
 - Examples section omitted until an example is cleared (brief lives in the JEF Consulting HQ repo, `streams/tech-projects/client-page-brief.md`).
 
