@@ -29,7 +29,7 @@ The site is **live at https://joeyfarah.dev** — past the old "pre-launch strip
 
 **Migrated off Railway on 2026-07-19** after Railway's trial expired mid-outage (a `RangeNotSatisfiableError` in the SPA fallback's `res.sendFile` crashed the whole process on a bad `Range` header — fixed regardless, but the trial expiry meant no redeploy without paying, so the project moved to Vercel to match every other project). Railway service is left untouched/paused as a rollback option; nothing there needs cleanup unless you want to formally delete it.
 
-**Known follow-up:** the Vercel project isn't Git-connected yet (`vercel git connect` failed — the Vercel GitHub App likely isn't granted access to this repo). Until that's fixed, code changes need a manual `vercel deploy --prod` after `git push` — see "Updating the live site" below.
+**Git auto-deploy is live** (confirmed 2026-10-01): pushing or merging to `main` triggers a Vercel production deploy, and every PR gets a preview deploy and a Vercel check. No manual `vercel deploy --prod` needed.
 
 ### Page composition (top → bottom, `App.tsx`)
 Hero boot sequence → scroll transition → `IntroSection` (`#joey`) → `WorkSection` (`#build`) → `BentoGrid` (projects / timeline / personal) → `ClosingCTA`.
@@ -90,7 +90,7 @@ The seed script reads from `server/.env`. If seed fails with "MONGODB_URI not se
 
 Two independent paths — do not confuse them:
 
-- **Code changes** (React/Express/shared): `git push origin main`, then `vercel deploy --prod` from repo root (Git auto-deploy isn't wired up yet — see Known follow-up above). Env vars (`MONGODB_URI`, `NODE_ENV`, `SITE_URL`) already live in the Vercel project; never re-add them by reading `server/.env`.
+- **Code changes** (React/Express/shared): push or merge to `main`; Vercel deploys production automatically. Watch it with `vercel ls joeyfarah-dev`, then verify on https://joeyfarah.dev. Env vars (`MONGODB_URI`, `NODE_ENV`, `SITE_URL`) already live in the Vercel project; never re-add them by reading `server/.env`.
 - **Content changes** (`server/seed/blocks.seed.json`): `git push` does **not** update what visitors see. The live site reads tile content from MongoDB Atlas. You must run `MONGODB_URI="<prod-atlas-uri>" npm run seed` to push the JSON into the DB. Commit + push the JSON afterward to keep the repo as source of truth; otherwise the repo and live DB drift.
 
 Checklist when editing a tile: (1) edit JSON, (2) run `npm run seed` against prod, (3) verify on https://joeyfarah.dev, (4) commit + push.
