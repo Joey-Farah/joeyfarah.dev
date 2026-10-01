@@ -8,120 +8,189 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light">
   <title>Joey Farah · JEF Consulting</title>
+  <link rel="preload" href="/work/archivo-v1.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e7490'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='15' font-weight='700' fill='%23fff' text-anchor='middle'%3EJF%3C/text%3E%3C/svg%3E">
   <style>
-    :root {
-      --ink: #111418;
-      --muted: #4b5563;
-      --line: #e5e7eb;
-      --accent: #0e7490;
-      --accent-dark: #155e75;
-      --tint: #ecfeff;
-      --bg: #ffffff;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      font-size: 1.0625rem;
-      line-height: 1.6;
-    }
-    main, footer { max-width: 40rem; margin: 0 auto; padding: 0 1.25rem; }
-    section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
-    .hero { border-top: 0; padding: 3.5rem 0 2.75rem; }
-    .eyebrow {
-      margin: 0 0 1rem;
-      color: var(--accent);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    h1 {
-      margin: 0 0 1rem;
-      font-size: clamp(2rem, 8vw, 2.75rem);
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-    }
-    h2 { margin: 0 0 1.25rem; font-size: 1.375rem; line-height: 1.25; letter-spacing: -0.01em; }
-    p { margin: 0 0 1rem; }
-    .lead { color: var(--muted); font-size: 1.125rem; margin-bottom: 1.75rem; }
-    .button {
-      display: block;
-      padding: 0.95rem 1.25rem;
-      border-radius: 0.5rem;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 600;
-      text-align: center;
-      text-decoration: none;
-    }
-    .button:hover { background: var(--accent-dark); }
-    .button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-    ul { list-style: none; margin: 0; padding: 0; }
-    li { padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
-    li:first-child { padding-top: 0; }
-    li:last-child { border-bottom: 0; padding-bottom: 0; }
-    li strong { display: block; margin-bottom: 0.15rem; }
-    li span { color: var(--muted); }
-    .note { margin: 1.75rem 0 0; padding-left: 1rem; border-left: 3px solid var(--accent); color: var(--muted); }
-    .close { padding-bottom: 3rem; }
-    .panel { padding: 1.75rem 1.25rem; border-radius: 0.75rem; background: var(--tint); }
-    .panel p { color: var(--muted); }
-    .panel .button { margin-top: 1.5rem; word-break: break-all; }
-    footer { padding-top: 1.5rem; padding-bottom: 2.5rem; color: var(--muted); font-size: 0.875rem; }
-    @media (min-width: 40rem) {
-      .hero { padding-top: 5rem; }
-      .button { display: inline-block; padding-left: 1.75rem; padding-right: 1.75rem; }
-      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
-      .grid li, .grid li:first-child, .grid li:last-child { padding: 0; border: 0; }
-      .panel { padding: 2.25rem 2rem; }
-    }
+  @font-face {
+    font-family: "Archivo";
+    src: url("/work/archivo-v1.woff2") format("woff2");
+    font-weight: 400 900;
+    font-stretch: 100% 125%;
+    font-display: swap;
+  }
+  /* Layout: a magazine feature. Oversized expanded headline over an illustrated Main Street, then before/after spreads per service, a solid teal band of promises, and the email set as the closing headline. */
+  :root {
+    --paper: #ffffff;
+    --ink: #111418;
+    --ink-soft: #4d5660;
+    --teal: #0e7490;
+    --spruce: #123c3a;
+    --sky: #d6edf2;
+    --marigold: #f4b740;
+    --brick: #c8553d;
+    --line: #e2e7ea;
+    --font: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); font-size: 1.0625rem; line-height: 1.55; font-stretch: 100%; }
+  .wrap { max-width: 70rem; margin: 0 auto; padding-inline: 1.25rem; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--marigold); outline-offset: 3px; }
+  
+  .bar { display: flex; justify-content: space-between; align-items: center; padding-block: 1.25rem; font-weight: 600; }
+  .bar span { font-stretch: 125%; font-weight: 800; letter-spacing: -.01em; }
+  .bar a { color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  
+  .hero { padding-block: 1.5rem 0; }
+  h1 { margin: 0; font-stretch: 125%; font-weight: 900; font-size: clamp(2.6rem, 11.5vw, 7.5rem); line-height: .9; letter-spacing: -.03em; text-wrap: balance; }
+  h1 .quiet { color: var(--teal); }
+  .hero p { font-size: 1.2rem; max-width: 33rem; color: var(--ink-soft); margin: 1.5rem 0 0; }
+  
+  .street { display: block; width: 100%; height: clamp(10rem, 22vw, 17rem); margin-top: 2.5rem; }
+  .street-wrap { background: linear-gradient(var(--paper) 0 60%, var(--sky) 60%); }
+  
+  h2 { font-stretch: 125%; font-weight: 900; font-size: clamp(2rem, 7vw, 3.6rem); line-height: .95; letter-spacing: -.025em; margin: 0 0 1rem; text-wrap: balance; }
+  .intro { padding-block: 4.5rem 1rem; }
+  .intro p { max-width: 36rem; color: var(--ink-soft); margin: 0; }
+  
+  .spread { display: grid; gap: 1.5rem; padding-block: 2.5rem; border-bottom: 1px solid var(--line); align-items: center; }
+  .spread:last-of-type { border-bottom: 0; }
+  .art { background: var(--sky); border-radius: 1.25rem; aspect-ratio: 4 / 3; max-width: 100%; display: grid; place-items: center; overflow: hidden; }
+  .art svg { width: 78%; height: auto; }
+  .spread h3 { font-stretch: 112%; font-weight: 800; font-size: 1.9rem; letter-spacing: -.02em; margin: 0 0 1rem; line-height: 1; }
+  .ba { display: grid; gap: .9rem; margin: 0; }
+  .ba div { display: grid; grid-template-columns: 4.2rem 1fr; gap: .75rem; align-items: baseline; }
+  .ba dt { font-weight: 700; font-size: .85rem; color: var(--ink-soft); }
+  .ba dd { margin: 0; }
+  .ba .after dt { color: var(--teal); }
+  .ba .after dd { font-weight: 600; }
+  
+  .promises { background: var(--teal); color: #fff; margin-top: 3rem; }
+  .promises .wrap { padding-block: 4.5rem; }
+  .promises h2 { color: #fff; }
+  .plist { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1.75rem; }
+  .plist li { border-top: 2px solid rgba(255,255,255,.35); padding-top: 1rem; }
+  .plist b { display: block; font-stretch: 112%; font-size: 1.35rem; font-weight: 800; letter-spacing: -.01em; margin-bottom: .2rem; }
+  .plist span { color: #d3ecf1; }
+  .day { margin: 3rem 0 0; max-width: 40rem; font-size: 1.15rem; color: #eaf6f8; }
+  
+  .close { padding-block: 5rem 3rem; }
+  .close p { color: var(--ink-soft); max-width: 32rem; margin: 0 0 2rem; font-size: 1.1rem; }
+  .big-mail { display: inline-block; font-stretch: 112%; font-weight: 900; font-size: clamp(1.6rem, 7.4vw, 4rem); letter-spacing: -.02em; line-height: 1.05; color: var(--ink); text-decoration: none; background: linear-gradient(var(--marigold), var(--marigold)) 0 92% / 100% .3em no-repeat; word-break: break-all; }
+  .big-mail:hover { background-size: 100% 100%; }
+  footer { padding-block: 2rem 2.5rem; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .9rem; }
+  
+  @media (min-width: 52rem) {
+    .spread { grid-template-columns: 1fr 1fr; gap: 4rem; padding-block: 3.5rem; }
+    .spread:nth-of-type(even) .art { order: 2; }
+    .plist { grid-template-columns: repeat(2, 1fr); gap: 2.25rem 3rem; }
+  }
   </style>
 </head>
 <body>
-  <main>
-    <section class="hero">
-      <p class="eyebrow">Joey Farah · JEF Consulting</p>
-      <h1>Websites, and the systems behind them.</h1>
-      <p class="lead">I'm Joey Farah. I build software for small businesses and organizations in Minnesota, for places that don't have an IT department and shouldn't need one.</p>
-      <a class="button" href="mailto:joey@joeyfarah.dev">Email me</a>
-    </section>
+<div class="wrap">
+  <header class="bar"><span>Joey Farah</span><a href="mailto:joey@joeyfarah.dev">joey@joeyfarah.dev</a></header>
+  <section class="hero">
+    <h1>Websites, <span class="quiet">and the systems behind them.</span></h1>
+    <p>I build software for small businesses and organizations in Minnesota, for places that don't have an IT department and shouldn't need one.</p>
+  </section>
+</div>
 
-    <section>
-      <h2>What I do</h2>
-      <ul>
-        <li><strong>Websites</strong> <span>Built around the business you actually run, and easy for you to update yourself.</span></li>
-        <li><strong>Connecting your tools</strong> <span>Your booking, payments, email list and website talking to each other, so nothing gets typed in twice.</span></li>
-        <li><strong>Dashboards</strong> <span>The numbers you check every week, in one place, updated on their own.</span></li>
-        <li><strong>Automations</strong> <span>The weekly chores that live in a spreadsheet and your inbox, handled.</span></li>
-        <li><strong>Custom tools</strong> <span>Maps, tours, sign-ups, small apps: whatever the job needs.</span></li>
-      </ul>
-    </section>
+<div class="street-wrap" aria-hidden="true">
+  <svg class="street" viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice">
+    <!-- bakery -->
+    <rect x="40" y="70" width="210" height="170" fill="#f4b740"/>
+    <rect x="40" y="58" width="210" height="16" fill="#123c3a"/>
+    <path d="M60 110h170l-12 26H72z" fill="#c8553d"/>
+    <path d="M60 110h28l-4 26H72zM116 110h28l-2 26h-24zM172 110h28l2 26h-24z" fill="#fff" opacity=".85"/>
+    <rect x="70" y="150" width="90" height="70" fill="#d6edf2" stroke="#123c3a" stroke-width="4"/>
+    <rect x="180" y="150" width="45" height="90" fill="#123c3a"/>
+    <text x="145" y="98" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="18" fill="#123c3a">BAKERY</text>
+    <!-- gym -->
+    <rect x="270" y="30" width="250" height="210" fill="#123c3a"/>
+    <rect x="290" y="55" width="210" height="34" fill="#0e7490"/>
+    <text x="395" y="78" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="900" font-size="20" fill="#fff">CLIMB + LIFT</text>
+    <rect x="292" y="108" width="60" height="50" fill="#f4b740"/><rect x="365" y="108" width="60" height="50" fill="#f4b740"/><rect x="438" y="108" width="60" height="50" fill="#d6edf2"/>
+    <rect x="350" y="175" width="90" height="65" fill="#fff"/><rect x="393" y="175" width="4" height="65" fill="#123c3a"/>
+    <!-- town hall -->
+    <path d="M540 90 650 30l110 60z" fill="#c8553d"/>
+    <rect x="550" y="90" width="200" height="150" fill="#fff" stroke="#123c3a" stroke-width="4"/>
+    <rect x="570" y="105" width="18" height="135" fill="#d6edf2"/><rect x="606" y="105" width="18" height="135" fill="#d6edf2"/><rect x="676" y="105" width="18" height="135" fill="#d6edf2"/><rect x="712" y="105" width="18" height="135" fill="#d6edf2"/>
+    <rect x="634" y="170" width="32" height="70" fill="#123c3a"/>
+    <circle cx="650" cy="68" r="12" fill="#fff" stroke="#123c3a" stroke-width="3"/>
+    <!-- clinic -->
+    <rect x="780" y="80" width="190" height="160" fill="#d6edf2" stroke="#123c3a" stroke-width="4"/>
+    <rect x="780" y="80" width="190" height="30" fill="#0e7490"/>
+    <rect x="860" y="125" width="30" height="10" fill="#c8553d"/><rect x="870" y="115" width="10" height="30" fill="#c8553d"/>
+    <rect x="800" y="160" width="70" height="50" fill="#fff"/><rect x="895" y="160" width="55" height="80" fill="#123c3a"/>
+    <!-- shop + tree -->
+    <rect x="990" y="110" width="170" height="130" fill="#c8553d"/>
+    <rect x="1005" y="135" width="140" height="22" fill="#fff"/>
+    <text x="1075" y="152" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="14" fill="#c8553d">OUTFITTERS</text>
+    <rect x="1010" y="172" width="70" height="55" fill="#f4b740"/><rect x="1095" y="172" width="45" height="68" fill="#123c3a"/>
+    <circle cx="1180" cy="150" r="34" fill="#123c3a"/><rect x="1176" y="175" width="8" height="65" fill="#123c3a"/>
+    <rect x="0" y="240" width="1200" height="20" fill="#123c3a"/>
+  </svg>
+</div>
 
-    <section>
-      <h2>How I work</h2>
-      <ul class="grid">
-        <li><strong>Fixed price, agreed up front.</strong> <span>No hourly meter running.</span></li>
-        <li><strong>You own everything.</strong> <span>The code, the content, the accounts.</span></li>
-        <li><strong>Plain English.</strong> <span>Short updates, no jargon, one point of contact: me.</span></li>
-        <li><strong>Local.</strong> <span>I'm in the Twin Cities and happy to meet in person.</span></li>
-      </ul>
-      <p class="note">My day job is building enterprise systems for large companies. JEF Consulting brings that same work to organizations that are too small to hire a firm.</p>
-    </section>
+<div class="wrap">
+  <section class="intro">
+    <h2>Five things I build.</h2>
+    <p>Each one starts with something that's eating your week.</p>
+  </section>
 
-    <section class="close">
-      <div class="panel">
-        <h2>Got something that should work better?</h2>
-        <p>Tell me what's bugging you. I'll take a look and send a couple of ideas, no charge.</p>
-        <a class="button" href="mailto:joey@joeyfarah.dev">joey@joeyfarah.dev</a>
-      </div>
-    </section>
-  </main>
+  <article class="spread">
+    <div class="art"><svg viewBox="0 0 200 150" aria-hidden="true"><rect x="70" y="8" width="62" height="134" rx="10" fill="#123c3a"/><rect x="75" y="20" width="52" height="110" rx="3" fill="#fff"/><rect x="80" y="26" width="42" height="30" fill="#f4b740"/><rect x="80" y="62" width="30" height="5" fill="#123c3a"/><rect x="80" y="72" width="42" height="4" fill="#cfd8dc"/><rect x="80" y="80" width="38" height="4" fill="#cfd8dc"/><rect x="80" y="112" width="42" height="11" rx="3" fill="#0e7490"/><path d="M145 50l22-10M145 75h26M145 100l22 10" stroke="#0e7490" stroke-width="4" stroke-linecap="round"/></svg></div>
+    <div><h3>Websites</h3>
+      <dl class="ba"><div><dt>Before</dt><dd>A site from years ago that only one person knows how to change.</dd></div><div class="after"><dt>After</dt><dd>A site that looks like the business you run, and that you can update from your phone.</dd></div></dl></div>
+  </article>
 
+  <article class="spread">
+    <div class="art"><svg viewBox="0 0 200 150" aria-hidden="true"><path d="M100 75 40 35M100 75l60-40M100 75l-60 40M100 75l60 40" stroke="#123c3a" stroke-width="4" stroke-dasharray="2 8" stroke-linecap="round"/><circle cx="100" cy="75" r="22" fill="#0e7490"/><rect x="18" y="16" width="44" height="36" rx="8" fill="#f4b740"/><rect x="138" y="16" width="44" height="36" rx="8" fill="#c8553d"/><rect x="18" y="98" width="44" height="36" rx="8" fill="#fff" stroke="#123c3a" stroke-width="4"/><rect x="138" y="98" width="44" height="36" rx="8" fill="#123c3a"/><path d="M90 75l7 7 14-14" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div><h3>Connecting your tools</h3>
+      <dl class="ba"><div><dt>Before</dt><dd>Bookings in one app, payments in another, and the email list copied over by hand.</dd></div><div class="after"><dt>After</dt><dd>One booking updates all of them. Nothing gets typed in twice.</dd></div></dl></div>
+  </article>
+
+  <article class="spread">
+    <div class="art"><svg viewBox="0 0 200 150" aria-hidden="true"><rect x="25" y="15" width="150" height="120" rx="10" fill="#fff"/><rect x="40" y="30" width="60" height="8" fill="#123c3a"/><rect x="45" y="85" width="18" height="35" fill="#cfd8dc"/><rect x="72" y="70" width="18" height="50" fill="#cfd8dc"/><rect x="99" y="60" width="18" height="60" fill="#cfd8dc"/><rect x="126" y="45" width="18" height="75" fill="#0e7490"/><circle cx="160" cy="34" r="6" fill="#f4b740"/></svg></div>
+    <div><h3>Dashboards</h3>
+      <dl class="ba"><div><dt>Before</dt><dd>Five logins every Monday to find out how last week went.</dd></div><div class="after"><dt>After</dt><dd>One page with the numbers you check, already up to date.</dd></div></dl></div>
+  </article>
+
+  <article class="spread">
+    <div class="art"><svg viewBox="0 0 200 150" aria-hidden="true"><rect x="35" y="20" width="130" height="112" rx="8" fill="#fff"/><rect x="35" y="20" width="130" height="24" rx="8" fill="#c8553d"/><rect x="35" y="36" width="130" height="8" fill="#c8553d"/><g fill="#cfd8dc"><rect x="48" y="56" width="20" height="18"/><rect x="76" y="56" width="20" height="18"/><rect x="104" y="56" width="20" height="18"/><rect x="132" y="56" width="20" height="18"/><rect x="76" y="82" width="20" height="18"/><rect x="104" y="82" width="20" height="18"/><rect x="132" y="82" width="20" height="18"/><rect x="48" y="108" width="20" height="18"/><rect x="76" y="108" width="20" height="18"/></g><rect x="48" y="82" width="20" height="18" fill="#0e7490"/><path d="M52 91l4 4 8-8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div><h3>Automations</h3>
+      <dl class="ba"><div><dt>Before</dt><dd>An hour every week copying rows from your inbox into a spreadsheet.</dd></div><div class="after"><dt>After</dt><dd>It happens on its own, and you get a short summary when it's done.</dd></div></dl></div>
+  </article>
+
+  <article class="spread">
+    <div class="art"><svg viewBox="0 0 200 150" aria-hidden="true"><path d="M20 30l50-15 60 15 50-15v105l-50 15-60-15-50 15z" fill="#fff"/><path d="M70 15v105M130 30v105" stroke="#cfd8dc" stroke-width="3"/><path d="M45 105c20-10 30-40 55-40s35 25 55-20" stroke="#0e7490" stroke-width="4" fill="none" stroke-dasharray="6 6" stroke-linecap="round"/><circle cx="45" cy="105" r="8" fill="#c8553d"/><circle cx="100" cy="65" r="8" fill="#f4b740"/><circle cx="155" cy="45" r="8" fill="#123c3a"/></svg></div>
+    <div><h3>Custom tools</h3>
+      <dl class="ba"><div><dt>Before</dt><dd>A paper sign-up sheet and a map taped to the door.</dd></div><div class="after"><dt>After</dt><dd>A walking tour on visitors' phones, or a sign-up page that fills itself. Whatever the job needs.</dd></div></dl></div>
+  </article>
+</div>
+
+<section class="promises">
+  <div class="wrap">
+    <h2>How I work</h2>
+    <ul class="plist">
+      <li><b>Fixed price, agreed up front.</b><span>No hourly meter running.</span></li>
+      <li><b>You own everything.</b><span>The code, the content, the accounts.</span></li>
+      <li><b>Plain English.</b><span>Short updates, no jargon, one point of contact: me.</span></li>
+      <li><b>Local.</b><span>I'm in the Twin Cities and happy to meet in person.</span></li>
+    </ul>
+    <p class="day">My day job is building enterprise systems for large companies. JEF Consulting brings that same work to organizations that are too small to hire a firm.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="close">
+    <h2>Got something that should work better?</h2>
+    <p>Tell me what's bugging you. I'll take a look and send a couple of ideas, no charge.</p>
+    <a class="big-mail" href="mailto:joey@joeyfarah.dev">joey@joeyfarah.dev</a>
+  </section>
   <footer>JEF Consulting LLC · Minnesota</footer>
+</div>
 </body>
 </html>

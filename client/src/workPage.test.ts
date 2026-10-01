@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import path from 'path';
 
 // /work is the client-facing page behind the business-card QR code. It is a
@@ -52,18 +52,32 @@ describe('/work page', () => {
     }
   });
 
-  it('ships no JavaScript and no external stylesheets or fonts', () => {
+  it('ships no JavaScript', () => {
     expect(doc.querySelectorAll('script')).toHaveLength(0);
-    expect(doc.querySelectorAll('link[rel="stylesheet"]')).toHaveLength(0);
+  });
+
+  it('makes no third-party requests: every asset is served from this site', () => {
+    const refs = [
+      ...[...doc.querySelectorAll('link[href]')].map((el) => el.getAttribute('href')!),
+      ...[...doc.querySelectorAll('[src]')].map((el) => el.getAttribute('src')!),
+      ...[...html.matchAll(/url\(([^)]+)\)/g)].map((m) => m[1].replace(/["']/g, '')),
+    ];
+    for (const ref of refs) expect(ref).toMatch(/^(\/(?!\/)|data:)/);
+  });
+
+  it('preloads its self-hosted font, and the file exists', () => {
+    const href = doc.querySelector('link[rel="preload"][as="font"]')?.getAttribute('href');
+    expect(href).toMatch(/^\/work\/.+\.woff2$/);
+    expect(existsSync(path.join(repoRoot, 'client/public', href!))).toBe(true);
   });
 
   it('has no Examples section until an example is cleared', () => {
     expect(text).not.toMatch(/examples/i);
   });
 
-  it('covers the brief: hero, what I do, how I work, close', () => {
+  it('covers the brief: hero, services, how I work, close', () => {
     expect(doc.querySelector('h1')?.textContent).toBe('Websites, and the systems behind them.');
     const headings = [...doc.querySelectorAll('h2')].map((h) => h.textContent);
-    expect(headings).toEqual(['What I do', 'How I work', 'Got something that should work better?']);
+    expect(headings).toEqual(['Five things I build.', 'How I work', 'Got something that should work better?']);
   });
 });
