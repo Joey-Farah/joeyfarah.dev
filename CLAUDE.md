@@ -68,6 +68,28 @@ Hero boot sequence → scroll transition → `IntroSection` (`#joey`) → `WorkS
 - **noindex** (meta + `X-Robots-Tag` header). `lighthouserc.json` turns off the SEO gate for `/work` only; when dropping noindex, also restore that assertion.
 - Examples section omitted until an example is cleared (brief lives in the JEF Consulting HQ repo, `streams/tech-projects/client-page-brief.md`).
 
+### Showcase (`/showcase`), in progress on branch `showcase-tracer`, draft PR #10
+A wow-first gallery Joey can text to a prospect: "a tour of Halvorsen Falls," a **made-up Minnesota town** whose **made-up businesses** each have a concept site showing what JEF could build. It's a separate URL from `/work`, and the two will link both ways.
+- **Structure:** `client/public/showcase/index.html` (gallery, Main Street SVG where the buildings are links), `client/public/showcase/<slug>/index.html` (one static concept per folder, own self-hosted font, inline CSS/JS), `client/public/showcase/shots/<slug>.webp` (phone previews, regenerate with `npm run shots --workspace=client`, which needs Chrome + `cwebp`). Routing, noindex, and the Lighthouse SEO exemption mirror `/work`.
+- **Guardrails, enforced by `client/src/showcase.test.ts` for every concept folder:**
+  - visible concept banner ("Concept site by JEF Consulting … made-up business") linking to `/showcase`
+  - noindex
+  - phone numbers only `555-01xx`
+  - emails only `*.example` (or `joey@joeyfarah.dev`)
+  - no third-party requests
+  - every `[data-demo]` action ends in a "This is a demo" notice
+  - no fake reviews, testimonials, or customer counts; no photos of people posing as staff
+- **Names (web-checked 2026-10-02 for collisions with real businesses):** Pine & Pitch Climbing (built), Ember & Oat (café), Halvorsen Falls Historical Society (walking-tour map), Larch Street Dental, Fjeldheim Builders. The Minnesota SOS business search wasn't checked.
+- **Visuals:** illustrated/generated, no stock photos. Unsplash search mixes in paid Unsplash+ images, so photos only if Joey picks ones confirmed free.
+
+**Next steps (in order):**
+1. **Joey reviews the tracer** on the branch preview (`https://joeyfarah-dev-git-showcase-tracer-joey-farahs-projects.vercel.app/showcase`, Vercel login required). Gate: does Pine & Pitch hit the wow bar? Adjust direction before building more.
+2. Build the remaining four concepts, one slice each, each with its own look and one interactive wow moment: Ember & Oat (menu that changes by time of day, online ordering), Historical Society (illustrated walking-tour map), Larch Street Dental (appointment picker), Fjeldheim Builders (before/after slider, quote form). For each: add a folder, make its Main Street building a link, add a gallery card, run `npm run shots`, and remove it from "Opening soon."
+3. Link `/work` → `/showcase` (a "See examples" button + thumbnail strip) and update `workPage.test.ts`, which currently allows only the mailto link.
+4. Small fix: add a long-cache header for `/showcase/*/*.woff2` like `/work`'s font.
+5. No Mistakes (fresh review, PR body), then merge with Joey's OK. **Merging to `main` deploys to production.**
+6. Later: add Afton as the first real client example after the Oct 12 proposal (confirm with the Afton session); Status gym only once Lucas agrees.
+
 ### Build
 ```bash
 npm install
