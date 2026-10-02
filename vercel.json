@@ -7,10 +7,15 @@
     { "source": "/sitemap.xml", "destination": "/api" },
     { "source": "/work", "destination": "/work/index.html" },
     { "source": "/work/", "destination": "/work/index.html" },
+    { "source": "/showcase", "destination": "/showcase/index.html" },
+    { "source": "/showcase/", "destination": "/showcase/index.html" },
+    { "source": "/showcase/:slug", "destination": "/showcase/:slug/index.html" },
+    { "source": "/showcase/:slug/", "destination": "/showcase/:slug/index.html" },
     { "source": "/((?!api|healthz|sitemap.xml|assets|images|favicon|robots.txt).*)", "destination": "/index.html" }
   ],
   "headers": [
     { "source": "/work(/.*)?", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] },
+    { "source": "/showcase(/.*)?", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] },
     { "source": "/work/(.*)\\.woff2", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
   ]
 }
