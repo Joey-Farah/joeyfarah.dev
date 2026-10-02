@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Concept websites for made-up businesses in a made-up Minnesota town, built by Joey Farah of JEF Consulting.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
+  <title>A Tour of Halvorsen Falls · JEF Consulting</title>
+  <link rel="preload" href="/work/archivo-v1.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e7490'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='15' font-weight='700' fill='%23fff' text-anchor='middle'%3EJF%3C/text%3E%3C/svg%3E">
+  <style>
+    @font-face {
+      font-family: "Archivo";
+      src: url("/work/archivo-v1.woff2") format("woff2");
+      font-weight: 400 900;
+      font-stretch: 100% 125%;
+      font-display: swap;
+    }
+    /* Layout: same family as /work. A walkable Main Street up top, then one big preview per concept, one real project, and the email. */
+    :root {
+      --paper: #ffffff;
+      --ink: #111418;
+      --ink-soft: #4d5660;
+      --teal: #0e7490;
+      --spruce: #123c3a;
+      --sky: #d6edf2;
+      --marigold: #f4b740;
+      --brick: #c8553d;
+      --line: #e2e7ea;
+      --font: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); font-size: 1.0625rem; line-height: 1.55; }
+    .wrap { max-width: 70rem; margin: 0 auto; padding-inline: 1.25rem; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--marigold); outline-offset: 3px; }
+
+    .bar { display: flex; flex-wrap: wrap; gap: .5rem 1rem; justify-content: space-between; align-items: center; padding-block: 1.25rem; font-weight: 600; }
+    .bar span { font-stretch: 125%; font-weight: 800; }
+    .bar a { color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+    h1 { margin: 1.5rem 0 0; font-stretch: 125%; font-weight: 900; font-size: clamp(2.6rem, 11vw, 7rem); line-height: .9; letter-spacing: -.03em; text-wrap: balance; }
+    .intro { font-size: 1.2rem; max-width: 34rem; color: var(--ink-soft); margin: 1.5rem 0 0; }
+
+    .street-wrap { margin-top: 2rem; background: linear-gradient(var(--paper) 0 62%, var(--sky) 62%); overflow-x: auto; scrollbar-width: none; }
+    .street { display: block; height: clamp(15rem, 34vw, 22rem); width: auto; min-width: 100%; margin: 0 auto; }
+    .street a { cursor: pointer; }
+    .street a .bld { transition: transform .25s; transform-box: fill-box; transform-origin: bottom center; }
+    .street a:hover .bld, .street a:focus-visible .bld { transform: translateY(-6px); }
+    .street a:focus-visible { outline: none; }
+    .street a:focus-visible .sign { stroke: var(--marigold); stroke-width: 5; }
+    .street .soon { opacity: .45; }
+    .street-hint { font-size: .9rem; color: var(--ink-soft); margin: .75rem 0 0; }
+
+    h2 { font-stretch: 125%; font-weight: 900; font-size: clamp(2rem, 7vw, 3.6rem); line-height: .95; letter-spacing: -.025em; margin: 0 0 1rem; text-wrap: balance; }
+    .concepts { padding-block: 4.5rem 2rem; }
+    .concept-list { display: grid; gap: 3rem; margin-top: 2.5rem; }
+    .card { display: grid; gap: 1.5rem; align-items: center; text-decoration: none; }
+    .shot { background: var(--sky); border-radius: 1.5rem; padding: 1.5rem 1.5rem 0; overflow: hidden; display: grid; justify-items: center; }
+    .shot img { width: min(17rem, 100%); max-width: 100%; height: auto; border-radius: 1.5rem 1.5rem 0 0; border: .45rem solid var(--ink); border-bottom: 0; display: block; box-shadow: 0 20px 40px -20px rgba(17,20,24,.5); transition: transform .3s; }
+    .card:hover .shot img { transform: translateY(-8px); }
+    .card h3 { font-stretch: 112%; font-weight: 900; font-size: 2rem; letter-spacing: -.02em; line-height: 1; margin: 0 0 .5rem; }
+    .card .kind { font-weight: 700; color: var(--teal); font-size: .95rem; margin: 0 0 .75rem; }
+    .card p { margin: 0 0 1.25rem; color: var(--ink-soft); max-width: 28rem; }
+    .open { display: inline-block; background: var(--ink); color: #fff; font-weight: 700; padding: .8rem 1.2rem; border-radius: .75rem; }
+    .soon-card { border: 2px dashed var(--line); border-radius: 1.5rem; padding: 1.5rem; color: var(--ink-soft); }
+    .soon-card b { color: var(--ink); }
+
+    .real { background: var(--spruce); color: #fff; }
+    .real .wrap { padding-block: 4rem; display: grid; gap: 2rem; align-items: center; }
+    .real h2 { color: #fff; }
+    .tag { display: inline-block; background: var(--marigold); color: var(--ink); font-weight: 800; font-size: .85rem; padding: .25rem .65rem; border-radius: 999px; margin-bottom: 1rem; }
+    .real p { color: #d7e6e4; max-width: 32rem; margin: 0 0 1.5rem; }
+    .real .open { background: #fff; color: var(--spruce); }
+    .real img { width: 100%; max-width: 15rem; height: auto; border-radius: 1.25rem; justify-self: center; }
+
+    .close { padding-block: 5rem 3rem; }
+    .close p { color: var(--ink-soft); max-width: 34rem; margin: 0 0 2rem; font-size: 1.1rem; }
+    .big-mail { display: inline-block; font-stretch: 112%; font-weight: 900; font-size: clamp(1.45rem, 7.4vw, 4rem); letter-spacing: -.02em; line-height: 1.05; color: var(--ink); text-decoration: none; background: linear-gradient(var(--marigold), var(--marigold)) 0 92% / 100% .3em no-repeat; }
+    .close .more { display: block; margin-top: 1.5rem; color: var(--teal); font-weight: 700; }
+    footer { padding-block: 2rem 2.5rem; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .9rem; }
+
+    @media (min-width: 52rem) {
+      .card { grid-template-columns: 1.1fr 1fr; gap: 4rem; }
+      .card:nth-child(even) .shot { order: 2; }
+      .real .wrap { grid-template-columns: 1.2fr 1fr; }
+      .real img { max-width: 22rem; }
+      .street { width: 100%; height: auto; }
+      .swipe { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="bar"><span>Joey Farah</span><a href="/work">What I offer</a></header>
+    <h1>A tour of Halvorsen Falls.</h1>
+    <p class="intro">Halvorsen Falls, Minnesota, is a made-up town, and every business in it is made up too. Each one has the kind of site I'd build for yours. Tap a building to walk in.</p>
+  </div>
+
+  <div class="street-wrap">
+    <svg class="street" viewBox="0 0 1200 300" role="img" aria-label="Main Street, Halvorsen Falls">
+      <!-- Pine & Pitch: old granite mill with holds on the wall -->
+      <a href="/showcase/pine-and-pitch" aria-label="Pine and Pitch Climbing">
+        <g class="bld">
+          <rect x="30" y="40" width="230" height="240" fill="#1d2126"/>
+          <path d="M30 40 145 0l115 40z" fill="#2a3037"/>
+          <rect class="sign" x="52" y="60" width="186" height="38" rx="4" fill="#ffc93c" stroke="#1d2126" stroke-width="3"/>
+          <text x="145" y="86" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="900" font-size="20" fill="#1d2126">PINE &amp; PITCH</text>
+          <circle cx="70" cy="130" r="9" fill="#ff6a4d"/><circle cx="110" cy="160" r="8" fill="#39c6e6"/><circle cx="90" cy="200" r="10" fill="#8a6cff"/><circle cx="220" cy="140" r="9" fill="#8fcf5a"/><circle cx="195" cy="185" r="8" fill="#ffc93c"/>
+          <rect x="120" y="200" width="50" height="80" fill="#ffc93c"/>
+        </g>
+      </a>
+      <!-- Ember & Oat -->
+      <g class="soon"><g class="bld">
+        <rect x="280" y="100" width="190" height="180" fill="#c8553d"/>
+        <path d="M295 140h160l-12 26H307z" fill="#123c3a"/>
+        <rect class="sign" x="300" y="110" width="150" height="24" fill="#fff"/>
+        <text x="375" y="127" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="13" fill="#c8553d">EMBER &amp; OAT</text>
+        <rect x="300" y="180" width="80" height="60" fill="#f4b740"/><rect x="400" y="185" width="45" height="95" fill="#123c3a"/>
+      </g></g>
+      <!-- Historical society -->
+      <g class="soon"><g class="bld">
+        <path d="M490 110 600 50l110 60z" fill="#123c3a"/>
+        <rect x="500" y="110" width="200" height="170" fill="#fff" stroke="#123c3a" stroke-width="4"/>
+        <rect x="520" y="125" width="18" height="155" fill="#d6edf2"/><rect x="556" y="125" width="18" height="155" fill="#d6edf2"/><rect x="626" y="125" width="18" height="155" fill="#d6edf2"/><rect x="662" y="125" width="18" height="155" fill="#d6edf2"/>
+        <rect x="584" y="200" width="32" height="80" fill="#123c3a"/>
+        <circle class="sign" cx="600" cy="88" r="13" fill="#f4b740" stroke="#123c3a" stroke-width="3"/>
+      </g></g>
+      <!-- Larch Street Dental -->
+      <g class="soon"><g class="bld">
+        <rect x="730" y="90" width="200" height="190" fill="#d6edf2" stroke="#123c3a" stroke-width="4"/>
+        <rect class="sign" x="730" y="90" width="200" height="34" fill="#0e7490"/>
+        <text x="830" y="113" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="14" fill="#fff">LARCH ST DENTAL</text>
+        <rect x="750" y="150" width="70" height="60" fill="#fff"/><rect x="850" y="180" width="55" height="100" fill="#123c3a"/>
+      </g></g>
+      <!-- Fjeldheim Builders -->
+      <g class="soon"><g class="bld">
+        <rect x="950" y="120" width="220" height="160" fill="#f4b740"/>
+        <rect class="sign" x="965" y="135" width="190" height="28" fill="#123c3a"/>
+        <text x="1060" y="155" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="13" fill="#f4b740">FJELDHEIM BUILDERS</text>
+        <rect x="975" y="185" width="110" height="95" fill="#fff" stroke="#123c3a" stroke-width="4"/><path d="M975 232h110M1030 185v95" stroke="#123c3a" stroke-width="4"/>
+        <rect x="1105" y="200" width="45" height="80" fill="#123c3a"/>
+      </g></g>
+      <rect x="0" y="280" width="1200" height="20" fill="#123c3a"/>
+    </svg>
+  </div>
+  <div class="wrap"><p class="street-hint"><span class="swipe">Swipe along Main Street. </span>More of it opens soon.</p></div>
+
+  <div class="wrap">
+    <section class="concepts">
+      <h2>Step inside.</h2>
+      <div class="concept-list">
+        <a class="card" href="/showcase/pine-and-pitch">
+          <div class="shot"><img src="/showcase/shots/pine-and-pitch.webp" width="390" height="700" alt="Pine and Pitch Climbing's site on a phone: a climbing wall hero and a route picker"></div>
+          <div>
+            <h3>Pine &amp; Pitch Climbing</h3>
+            <p class="kind">Climbing gym</p>
+            <p>Light up this week's routes on the wall, pick a day, book a class, buy a membership.</p>
+            <span class="open">Open the site</span>
+          </div>
+        </a>
+        <div class="soon-card"><b>Opening soon:</b> Ember &amp; Oat café, the Halvorsen Falls Historical Society, Larch Street Dental, and Fjeldheim Builders.</div>
+      </div>
+    </section>
+  </div>
+
+  <section class="real">
+    <div class="wrap">
+      <div>
+        <span class="tag">Real project</span>
+        <h2>SkyMap Minneapolis</h2>
+        <p>An iPhone app for the Minneapolis Skyway: 178 buildings and 411 businesses, turn-by-turn directions that know which buildings are closed, and it works with no signal at all.</p>
+        <a class="open" href="https://apps.apple.com/us/app/skymap-minneapolis/id6792509326">See it on the App Store</a>
+      </div>
+      <img src="/images/skymap.svg" width="400" height="300" alt="SkyMap Minneapolis app artwork">
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="close">
+      <h2>Want one of these for your business?</h2>
+      <p>Tell me what you do and what's bugging you. I'll send back a couple of ideas, no charge.</p>
+      <a class="big-mail" href="mailto:joey@joeyfarah.dev">joey@<wbr>joeyfarah.dev</a>
+      <a class="more" href="/work">See what I offer</a>
+    </section>
+    <footer>JEF Consulting LLC · Minnesota</footer>
+  </div>
+</body>
+</html>

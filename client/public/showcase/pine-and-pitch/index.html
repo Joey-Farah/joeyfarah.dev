@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1d2126">
+  <title>Pine &amp; Pitch Climbing · Concept site</title>
+  <link rel="preload" href="/showcase/pine-and-pitch/bigshoulders-v1.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d2126'/%3E%3Ccircle cx='11' cy='12' r='5' fill='%23ff6a4d'/%3E%3Ccircle cx='21' cy='20' r='5' fill='%23ffc93c'/%3E%3C/svg%3E">
+  <style>
+    @font-face {
+      font-family: "Big Shoulders";
+      src: url("/showcase/pine-and-pitch/bigshoulders-v1.woff2") format("woff2");
+      font-weight: 500 900;
+      font-display: swap;
+    }
+    /* Layout: a full-bleed climbing wall you can play with, then a week of classes, three plans, and a visit block. */
+    :root {
+      --granite: #1d2126;
+      --granite-2: #2a3037;
+      --chalk: #f3f5f4;
+      --chalk-2: #e3e8e6;
+      --ink: #15181c;
+      --muted: #5b646d;
+      --pine: #1e5a46;
+      --coral: #ff6a4d;
+      --sun: #ffc93c;
+      --violet: #8a6cff;
+      --glacier: #39c6e6;
+      --moss: #8fcf5a;
+      --display: "Big Shoulders", "Arial Narrow", "Helvetica Neue", sans-serif;
+      --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--chalk); color: var(--ink); font-family: var(--body); font-size: 1rem; line-height: 1.55; }
+    a { color: inherit; }
+    button { font: inherit; cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+    .wrap { max-width: 68rem; margin: 0 auto; padding-inline: 1.25rem; }
+
+    /* concept banner (JEF chrome, not part of the made-up brand) */
+    .concept { background: #0e7490; color: #fff; font: 500 .82rem/1.4 system-ui, sans-serif; }
+    .concept .wrap { display: flex; flex-wrap: wrap; gap: .25rem 1rem; justify-content: space-between; padding-block: .55rem; }
+    .concept a { font-weight: 700; }
+
+    /* nav */
+    .nav { background: var(--granite); color: var(--chalk); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .9rem; }
+    .logo { font: 900 1.6rem/1 var(--display); letter-spacing: .02em; text-transform: uppercase; text-decoration: none; }
+    .logo span { color: var(--sun); }
+    .nav ul { display: none; list-style: none; margin: 0; padding: 0; gap: 1.5rem; font-weight: 600; font-size: .95rem; }
+    .nav ul a { text-decoration: none; opacity: .85; }
+    .cta { background: var(--sun); color: var(--granite); border: 0; border-radius: 999px; padding: .6rem 1.1rem; font-weight: 800; text-decoration: none; white-space: nowrap; }
+
+    /* hero wall */
+    .hero { position: relative; background: var(--granite); color: var(--chalk); overflow: hidden; }
+    .wall { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .wall .hold { transition: opacity .35s, transform .35s; transform-box: fill-box; transform-origin: center; }
+    .wall.picking .hold { opacity: .14; }
+    .wall.picking .hold.on { opacity: 1; transform: scale(1.18); filter: drop-shadow(0 0 6px rgba(255,255,255,.55)); }
+    .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(29,33,38,.92) 0%, rgba(29,33,38,.7) 45%, rgba(29,33,38,0) 75%); pointer-events: none; z-index: 1; transition: opacity .35s; }
+    .hero:has(.wall.picking)::before { opacity: .35; }
+    .hero-inner { position: relative; z-index: 2; padding-block: 4rem 2.5rem; display: grid; gap: 1.5rem; }
+    .hero h1 { font: 900 clamp(3.4rem, 15vw, 8.5rem)/.86 var(--display); text-transform: uppercase; margin: 0; letter-spacing: -.005em; text-shadow: 0 2px 30px rgba(0,0,0,.45); max-width: 9ch; }
+    .hero p { max-width: 30rem; margin: 0; font-size: 1.1rem; color: #d9dfe3; text-shadow: 0 1px 12px rgba(0,0,0,.6); }
+    .routes { background: rgba(21,24,28,.82); backdrop-filter: blur(6px); border-radius: 1rem; padding: 1rem; max-width: 34rem; }
+    .routes h2 { font: 800 1.15rem/1 var(--display); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 .75rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .chip { display: inline-flex; align-items: center; gap: .45rem; border: 1.5px solid rgba(255,255,255,.25); background: transparent; color: var(--chalk); border-radius: 999px; padding: .4rem .75rem; font-weight: 700; font-size: .9rem; }
+    .chip i { width: .85rem; height: .85rem; border-radius: 50%; background: var(--c); }
+    .chip[aria-pressed="true"] { background: var(--c); color: var(--granite); border-color: var(--c); }
+    .route-note { margin: .75rem 0 0; font-size: .92rem; color: #c9d1d6; min-height: 1.5em; }
+
+    /* sections */
+    section.block { padding-block: 4rem; }
+    .block h2 { font: 900 clamp(2.4rem, 8vw, 4rem)/.9 var(--display); text-transform: uppercase; margin: 0 0 .5rem; }
+    .lede { color: var(--muted); max-width: 34rem; margin: 0 0 2rem; }
+
+    .days { display: flex; gap: .4rem; overflow-x: auto; padding-bottom: .5rem; margin-bottom: 1.25rem; scrollbar-width: none; }
+    .day { flex: none; border: 0; background: var(--chalk-2); color: var(--ink); border-radius: .75rem; padding: .55rem .8rem; text-align: center; min-width: 3.6rem; }
+    .day b { display: block; font: 800 1.35rem/1 var(--display); }
+    .day small { font-size: .72rem; font-weight: 600; color: var(--muted); }
+    .day[aria-selected="true"] { background: var(--granite); color: var(--chalk); }
+    .day[aria-selected="true"] small { color: var(--sun); }
+    .classes { display: grid; gap: .75rem; }
+    .class { background: #fff; border-radius: 1rem; padding: 1rem 1.1rem; display: grid; grid-template-columns: 4.6rem 1fr; gap: .25rem 1rem; align-items: center; border-left: 6px solid var(--c); }
+    .class time { font: 800 1.5rem/1 var(--display); grid-row: span 2; }
+    .class h3 { margin: 0; font-size: 1.05rem; }
+    .class .meta { font-size: .85rem; color: var(--muted); }
+    .class .row { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: .5rem; }
+    .spots { display: flex; align-items: center; gap: .5rem; font-size: .82rem; font-weight: 600; color: var(--muted); }
+    .bar { width: 6rem; height: .4rem; border-radius: 1rem; background: var(--chalk-2); overflow: hidden; }
+    .bar i { display: block; height: 100%; background: var(--c); transition: width .4s; }
+    .book { border: 0; border-radius: 999px; padding: .55rem 1rem; background: var(--granite); color: #fff; font-weight: 700; }
+    .book[disabled] { background: var(--pine); cursor: default; }
+
+    .plans { display: grid; gap: 1rem; }
+    .plan { background: #fff; border-radius: 1.25rem; padding: 1.5rem; display: grid; gap: .6rem; align-content: start; }
+    .plan.best { background: var(--granite); color: var(--chalk); }
+    .plan h3 { margin: 0; font: 800 1.5rem/1 var(--display); text-transform: uppercase; }
+    .price { font: 900 3.2rem/1 var(--display); }
+    .price small { font: 600 .95rem var(--body); opacity: .7; }
+    .plan ul { margin: 0; padding-left: 1.1rem; font-size: .95rem; }
+    .plan .tag { justify-self: start; background: var(--sun); color: var(--granite); font-weight: 800; font-size: .75rem; padding: .2rem .55rem; border-radius: 999px; }
+    .plan button { margin-top: .5rem; border: 0; border-radius: .75rem; padding: .8rem; font-weight: 800; background: var(--chalk-2); color: var(--ink); }
+    .plan.best button { background: var(--sun); }
+
+    .visit { background: var(--pine); color: #eef5f1; }
+    .visit .wrap { display: grid; gap: 2rem; }
+    .visit h2 { color: #fff; }
+    .hours { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .hours td { padding: .45rem 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+    .hours td + td { text-align: right; }
+    .visit address { font-style: normal; display: grid; gap: .3rem; font-size: 1.05rem; }
+    footer.site { background: var(--granite); color: #9aa4ad; font-size: .85rem; padding-block: 1.5rem; }
+
+    .notice { position: fixed; left: 50%; bottom: 1.25rem; transform: translate(-50%, 150%); background: var(--ink); color: #fff; padding: .85rem 1.1rem; border-radius: .9rem; font-size: .92rem; max-width: calc(100% - 2rem); width: max-content; box-shadow: 0 12px 30px rgba(0,0,0,.3); transition: transform .3s, visibility .3s; visibility: hidden; z-index: 10; }
+    .notice.show { transform: translate(-50%, 0); visibility: visible; }
+    .notice b { color: var(--sun); }
+
+    @media (max-width: 47.99rem) { .hero::before { background: rgba(29,33,38,.74); } }
+    @media (min-width: 48rem) {
+      .nav ul { display: flex; }
+      .hero-inner { padding-block: 7rem 4rem; }
+      .plans { grid-template-columns: repeat(3, 1fr); }
+      .visit .wrap { grid-template-columns: 1fr 1fr; }
+      .classes { grid-template-columns: 1fr 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="concept" data-concept-banner>
+    <div class="wrap"><span>Concept site by JEF Consulting. Pine &amp; Pitch is a made-up business.</span><a href="/showcase">See all concepts</a></div>
+  </div>
+
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="#top">Pine <span>&amp;</span> Pitch</a>
+      <ul><li><a href="#classes">Classes</a></li><li><a href="#plans">Membership</a></li><li><a href="#visit">Visit</a></li></ul>
+      <a class="cta" href="#classes">Book a class</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <svg class="wall" id="wall" aria-hidden="true" preserveAspectRatio="xMidYMid slice"></svg>
+      <div class="wrap hero-inner">
+        <h1>Climb something new</h1>
+        <p>Bouldering and rope climbing inside the old granite mill on the Halvorsen River. Beginner classes every night of the week.</p>
+        <div class="routes">
+          <h2>This week's new routes</h2>
+          <div class="chips" id="chips"></div>
+          <p class="route-note" id="route-note" aria-live="polite">Tap a color to light up its route on the wall.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="classes">
+      <div class="wrap">
+        <h2>Classes this week</h2>
+        <p class="lede">Shoes and harness included in every class. Pick a day, grab a spot.</p>
+        <div class="days" id="days" role="tablist" aria-label="Day"></div>
+        <div class="classes" id="class-list" role="tabpanel"></div>
+      </div>
+    </section>
+
+    <section class="block" id="plans" style="padding-top:0">
+      <div class="wrap">
+        <h2>Climb more, pay less</h2>
+        <p class="lede">No contracts. Freeze or cancel from your account any time.</p>
+        <div class="plans">
+          <div class="plan"><h3>Day pass</h3><div class="price">$22</div><ul><li>All walls, all day</li><li>Gear rental $8</li></ul><button type="button" data-demo>Buy a day pass</button></div>
+          <div class="plan best"><span class="tag">Most popular</span><h3>Monthly</h3><div class="price">$79 <small>/ month</small></div><ul><li>Unlimited climbing</li><li>Two free classes a month</li><li>Bring a friend free on Fridays</li></ul><button type="button" data-demo>Start a membership</button></div>
+          <div class="plan"><h3>10-punch card</h3><div class="price">$180</div><ul><li>Ten visits, no expiry</li><li>Share it with family</li></ul><button type="button" data-demo>Buy a punch card</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block visit" id="visit">
+      <div class="wrap">
+        <div>
+          <h2>Come climb</h2>
+          <address>
+            <span>214 Quarry Road, Halvorsen Falls, MN</span>
+            <a href="tel:6125550142">(612) 555-0142</a>
+            <span>hello@pineandpitch.example</span>
+          </address>
+        </div>
+        <table class="hours" aria-label="Opening hours">
+          <tr><td>Monday to Friday</td><td>6:00 am to 10:00 pm</td></tr>
+          <tr><td>Saturday</td><td>8:00 am to 9:00 pm</td></tr>
+          <tr><td>Sunday</td><td>9:00 am to 7:00 pm</td></tr>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site"><div class="wrap">Pine &amp; Pitch Climbing, Halvorsen Falls. A concept site by JEF Consulting.</div></footer>
+  <div class="notice" data-demo-notice role="status" aria-live="polite"></div>
+
+  <script>
+  (() => {
+    const ROUTES = [
+      { key: 'coral', name: 'Sap Line', grade: 'V2', color: '#ff6a4d', note: 'Big friendly jugs. A great first climb.' },
+      { key: 'sun', name: 'Quarry Dog', grade: 'V4', color: '#ffc93c', note: 'One long reach near the top.' },
+      { key: 'violet', name: 'Mill Wheel', grade: 'V6', color: '#8a6cff', note: 'Steep and pumpy. Save your arms.' },
+      { key: 'glacier', name: 'Ice Out', grade: 'V1', color: '#39c6e6', note: 'Slab warm-up, mostly feet.' },
+      { key: 'moss', name: 'Pine Needle', grade: 'V3', color: '#8fcf5a', note: 'Tiny crimps on a vertical wall.' },
+    ];
+    const $ = (id) => document.getElementById(id);
+    const notice = document.querySelector('[data-demo-notice]');
+    let hideTimer;
+    function demo(what) {
+      notice.innerHTML = `<b>${what}</b> This is a demo, so nothing was booked or charged.`;
+      notice.classList.add('show');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => notice.classList.remove('show'), 3200);
+    }
+
+    // The wall: seeded so every visitor sees the same wall.
+    let seed = 7;
+    const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+    const W = 1200, H = 760, NS = 'http://www.w3.org/2000/svg';
+    const wall = $('wall');
+    wall.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    const el = (tag, attrs) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
+    const defs = el('defs', {});
+    const grad = el('linearGradient', { id: 'g', x1: 0, y1: 0, x2: 0, y2: 1 });
+    grad.append(el('stop', { offset: 0, 'stop-color': '#2f363e' }), el('stop', { offset: 1, 'stop-color': '#1a1e23' }));
+    defs.append(grad); wall.append(defs);
+    wall.append(el('rect', { width: W, height: H, fill: 'url(#g)' }));
+    for (let x = 0; x < W; x += 100) wall.append(el('line', { x1: x, y1: 0, x2: x + 60, y2: H, stroke: '#ffffff', 'stroke-opacity': .05, 'stroke-width': 2 }));
+    for (let y = 0; y < H; y += 40) for (let x = (y / 40) % 2 ? 20 : 0; x < W; x += 40) wall.append(el('circle', { cx: x, cy: y, r: 2, fill: '#000', 'fill-opacity': .35 }));
+    const shapes = [
+      (x, y, s) => el('ellipse', { cx: x, cy: y, rx: s * 1.3, ry: s * .8 }),
+      (x, y, s) => el('circle', { cx: x, cy: y, r: s }),
+      (x, y, s) => el('path', { d: `M${x - s * 1.2} ${y + s * .6} Q${x} ${y - s * 1.6} ${x + s * 1.2} ${y + s * .6} Z` }),
+      (x, y, s) => el('rect', { x: x - s, y: y - s * .7, width: s * 2, height: s * 1.4, rx: s * .5 }),
+    ];
+    const holds = [];
+    ROUTES.forEach((r, ri) => {
+      let x = 120 + ri * 230 + rand() * 60, y = H - 40;
+      for (let i = 0; i < 11; i++) {
+        const s = 11 + rand() * 13;
+        const h = shapes[Math.floor(rand() * shapes.length)](x, y, s);
+        h.setAttribute('fill', r.color);
+        h.setAttribute('class', 'hold');
+        h.dataset.route = r.key;
+        holds.push(h); wall.append(h);
+        x += (rand() - .5) * 170; y -= 55 + rand() * 30;
+        x = Math.max(30, Math.min(W - 30, x));
+      }
+    });
+
+    // Route chips light up one route.
+    const note = $('route-note');
+    let picked = null;
+    for (const r of ROUTES) {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip'; b.style.setProperty('--c', r.color);
+      b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = `<i></i>${r.name} <span>${r.grade}</span>`;
+      b.addEventListener('click', () => {
+        picked = picked === r.key ? null : r.key;
+        document.querySelectorAll('.chip').forEach((c) => c.setAttribute('aria-pressed', String(c === b && picked !== null)));
+        wall.classList.toggle('picking', picked !== null);
+        holds.forEach((h) => h.classList.toggle('on', h.dataset.route === picked));
+        note.textContent = picked ? `${r.name}, ${r.grade}. ${r.note}` : 'Tap a color to light up its route on the wall.';
+      });
+      $('chips').append(b);
+    }
+
+    // A week of classes, starting today.
+    const TEMPLATES = [
+      { t: '6:00', ap: 'pm', name: 'Intro to bouldering', meta: 'Beginner · 60 min · with Maren', cap: 10, c: '#39c6e6' },
+      { t: '7:15', ap: 'pm', name: 'Learn to belay', meta: 'Beginner · 90 min · with Tomas', cap: 6, c: '#ff6a4d' },
+      { t: '6:30', ap: 'am', name: 'Strength for climbers', meta: 'All levels · 45 min · with Ingrid', cap: 12, c: '#8fcf5a' },
+      { t: '5:30', ap: 'pm', name: 'Kids climb club', meta: 'Ages 7 to 12 · 60 min · with Ada', cap: 8, c: '#ffc93c' },
+      { t: '8:00', ap: 'pm', name: 'Projecting night', meta: 'Intermediate · 2 hrs · with Leif', cap: 14, c: '#8a6cff' },
+    ];
+    const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const today = new Date();
+    const week = Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(today); d.setDate(today.getDate() + i);
+      const classes = [0, 1, 2].map((k) => {
+        const tpl = TEMPLATES[(i + k * 2) % TEMPLATES.length];
+        const taken = Math.min(tpl.cap - 1, Math.floor(rand() * tpl.cap));
+        return { ...tpl, taken, mine: false };
+      }).sort((a, b) => (a.ap === b.ap ? parseFloat(a.t) - parseFloat(b.t) : a.ap === 'am' ? -1 : 1));
+      return { d, classes };
+    });
+    let sel = 0;
+    function renderDays() {
+      $('days').innerHTML = '';
+      week.forEach((w, i) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'day'; b.setAttribute('role', 'tab');
+        b.setAttribute('aria-selected', String(i === sel));
+        b.innerHTML = `<small>${i === 0 ? 'Today' : DAYS[w.d.getDay()]}</small><b>${w.d.getDate()}</b>`;
+        b.addEventListener('click', () => { sel = i; renderDays(); renderClasses(); });
+        $('days').append(b);
+      });
+    }
+    function renderClasses() {
+      const list = $('class-list'); list.innerHTML = '';
+      week[sel].classes.forEach((c) => {
+        const left = c.cap - c.taken;
+        const card = document.createElement('article');
+        card.className = 'class'; card.style.setProperty('--c', c.c);
+        card.innerHTML = `<time>${c.t}<small style="font-size:.6em"> ${c.ap}</small></time><h3>${c.name}</h3><div class="meta">${c.meta}</div>
+          <div class="row"><span class="spots"><span class="bar"><i style="width:${(c.taken / c.cap) * 100}%"></i></span>${left ? `${left} of ${c.cap} spots left` : 'Full, join the waitlist'}</span>
+          <button class="book" type="button" data-demo ${c.mine ? 'disabled' : ''}>${c.mine ? "You're in ✓" : left ? 'Book' : 'Waitlist'}</button></div>`;
+        card.querySelector('.book').addEventListener('click', () => {
+          if (c.mine) return;
+          if (c.taken < c.cap) c.taken++;
+          c.mine = true;
+          renderClasses();
+          demo(`Booked: ${c.name}, ${c.t} ${c.ap}.`);
+        });
+        list.append(card);
+      });
+    }
+    renderDays(); renderClasses();
+
+    document.querySelectorAll('.plan [data-demo]').forEach((b) => b.addEventListener('click', () => demo(`${b.textContent}.`)));
+  })();
+  </script>
+</body>
+</html>
