@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useReducedMotion, motion, AnimatePresence } from 'framer-motion';
+import { useReducedMotion, motion } from 'framer-motion';
 import type { BentoBlock, HeroContent } from 'shared/types';
 import StaticProfileCard from './StaticProfileCard';
 import HeadshotFrame from './HeadshotFrame';
@@ -72,12 +72,14 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
     >
       {/* Text keeps its original spot (left edge of the max-w-2xl column); the photo sits right of it, below it on phones. */}
       <div className="flex flex-col md:flex-row items-start md:items-center md:justify-between gap-6 md:gap-12 w-full max-w-2xl">
-        <div className="font-mono text-brand-text min-w-[24ch] space-y-1">
+        <div className="font-mono text-brand-text space-y-1">
           <div className="text-brand-primary text-xs mb-4 select-none">
             {'$ boot'}
           </div>
-          <AnimatePresence>
-            {visibleLines.map((line, i) => (
+          {/* Every line is in the DOM from the start: unbooted ones are invisible slots holding
+              their final size, so the photo and the rest of the layout never shift as lines boot. */}
+          {lines.map((line, i) =>
+            i < visibleLines.length ? (
               <motion.p
                 key={i}
                 data-testid={`boot-line-${i}`}
@@ -88,15 +90,17 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
               >
                 {line}
               </motion.p>
-            ))}
-          </AnimatePresence>
-
-          {!complete && (
-            <span
-              className="inline-block w-2 h-4 bg-brand-primary animate-pulse"
-              data-testid="cursor"
-              aria-hidden="true"
-            />
+            ) : (
+              <p key={i} data-testid={`boot-slot-${i}`} aria-hidden="true" className="relative leading-relaxed">
+                <span className="invisible">{line}</span>
+                {i === visibleLines.length && !complete && (
+                  <span
+                    className="absolute left-0 top-1/2 -translate-y-1/2 inline-block w-2 h-4 bg-brand-primary animate-pulse"
+                    data-testid="cursor"
+                  />
+                )}
+              </p>
+            ),
           )}
         </div>
         {/* Desktop: sits a little higher than the text. `bottom` (not translate) so it doesn't fight framer's transform. */}

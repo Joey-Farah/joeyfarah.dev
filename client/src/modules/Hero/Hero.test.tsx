@@ -120,6 +120,23 @@ describe('Hero', () => {
       expect(screen.getByTestId('hero')).toContainElement(img);
     });
 
+    it('reserves room for every boot line up front, so nothing below them shifts as they appear', async () => {
+      vi.useFakeTimers();
+      render(<Hero data={heroBlock} />);
+
+      expect(screen.queryByTestId('boot-line-0')).not.toBeInTheDocument();
+      const slots = screen.getAllByTestId(/^boot-slot-/);
+      expect(slots).toHaveLength(heroContent.lines.length);
+      slots.forEach((slot) => expect(slot).toHaveAttribute('aria-hidden', 'true'));
+
+      await act(async () => {
+        vi.advanceTimersByTime(80 * heroContent.lines.length + 200);
+      });
+      expect(screen.queryAllByTestId(/^boot-slot-/)).toHaveLength(0);
+
+      vi.useRealTimers();
+    });
+
     it('shows cursor before all lines are rendered', async () => {
       vi.useFakeTimers();
       render(<Hero data={heroBlock} />);
