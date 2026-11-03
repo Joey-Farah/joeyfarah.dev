@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useReducedMotion, motion, AnimatePresence } from 'framer-motion';
 import type { BentoBlock, HeroContent } from 'shared/types';
 import StaticProfileCard from './StaticProfileCard';
+import HeadshotFrame from './HeadshotFrame';
 
 // Timing constants — mobile completes all lines in <1s total; desktop 80ms per line
 const DESKTOP_INTERVAL_MS = 80;
@@ -69,32 +70,41 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
       className="h-[100dvh] flex flex-col items-center justify-center bg-brand-bg px-6 relative"
       data-testid="hero"
     >
-      <div className="font-mono text-brand-text w-full max-w-2xl space-y-1">
-        <div className="text-brand-primary text-xs mb-4 select-none">
-          {'$ boot'}
-        </div>
-        <AnimatePresence>
-          {visibleLines.map((line, i) => (
-            <motion.p
-              key={i}
-              data-testid={`boot-line-${i}`}
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.15 }}
-              className="text-brand-text leading-relaxed"
-            >
-              {line}
-            </motion.p>
-          ))}
-        </AnimatePresence>
+      <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 w-full max-w-3xl">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+        >
+          <HeadshotFrame />
+        </motion.div>
+        <div className="font-mono text-brand-text min-w-[24ch] space-y-1">
+          <div className="text-brand-primary text-xs mb-4 select-none">
+            {'$ boot'}
+          </div>
+          <AnimatePresence>
+            {visibleLines.map((line, i) => (
+              <motion.p
+                key={i}
+                data-testid={`boot-line-${i}`}
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.15 }}
+                className="text-brand-text leading-relaxed"
+              >
+                {line}
+              </motion.p>
+            ))}
+          </AnimatePresence>
 
-        {!complete && (
-          <span
-            className="inline-block w-2 h-4 bg-brand-primary animate-pulse"
-            data-testid="cursor"
-            aria-hidden="true"
-          />
-        )}
+          {!complete && (
+            <span
+              className="inline-block w-2 h-4 bg-brand-primary animate-pulse"
+              data-testid="cursor"
+              aria-hidden="true"
+            />
+          )}
+        </div>
       </div>
 
       {complete && !hasScrolled && (
@@ -102,7 +112,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="absolute bottom-16 md:bottom-10 flex flex-col items-center gap-2 select-none"
+          className="absolute bottom-16 md:bottom-10 [@media(max-height:800px)]:bottom-6 flex flex-col items-center gap-2 select-none"
           aria-hidden="true"
         >
           <span className="font-mono text-sm text-brand-primary tracking-widest">
