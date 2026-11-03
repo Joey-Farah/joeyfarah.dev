@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-03
+
+### Hero headshot
+- **Headshot beside the boot text** (`Hero/HeadshotFrame.tsx`): square photo in a terminal window matching the tile title-bar chrome. It sits left of the boot lines on desktop and above them on phones, sized by viewport height so it never collides with "scroll to explore". 720px WebP, ~29 KB, preloaded so it doesn't wait on `/api/blocks`.
+
 ## 2026-06-11
 
 ### /work — dev-for-hire services page
