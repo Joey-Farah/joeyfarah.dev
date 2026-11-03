@@ -4,6 +4,7 @@
 
 ### Hero headshot
 - **Headshot beside the boot text** (`Hero/HeadshotFrame.tsx`): full uncropped portrait in a Mac-style window (title-bar dots only, matching the tile chrome). The boot text keeps its original position; the photo sits to its right on desktop and below it on phones, sized by viewport height so it never collides with "scroll to explore". 900×1353 WebP, ~50 KB, preloaded so it doesn't wait on `/api/blocks`.
+- **Boot lines no longer shift the layout**: every line renders up front as an invisible slot holding its final size (phone CLS 0.106 → 0). The scroll hint hides under 650px tall, landscape phones go side by side, and the reduced-motion preload is skipped.
 
 ## 2026-06-11
 
