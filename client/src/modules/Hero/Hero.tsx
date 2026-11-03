@@ -99,7 +99,9 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
             />
           )}
         </div>
+        {/* Desktop: sits a little higher than the text. `bottom` (not translate) so it doesn't fight framer's transform. */}
         <motion.div
+          className="md:relative md:bottom-[5dvh]"
           initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4 }}
