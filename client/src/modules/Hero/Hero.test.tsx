@@ -113,6 +113,13 @@ describe('Hero', () => {
       vi.useRealTimers();
     });
 
+    it('shows the headshot alongside the boot text', () => {
+      render(<Hero data={heroBlock} />);
+      const img = screen.getByRole('img', { name: 'Joey Farah' });
+      expect(img).toHaveAttribute('src', '/images/joey-headshot.webp');
+      expect(screen.getByTestId('hero')).toContainElement(img);
+    });
+
     it('shows cursor before all lines are rendered', async () => {
       vi.useFakeTimers();
       render(<Hero data={heroBlock} />);
