@@ -5,18 +5,18 @@ export const HEADSHOT_SRC = '/images/joey-headshot.webp';
 
 /**
  * Joey's headshot in a terminal window, matching the BentoTile title-bar chrome.
- * Full uncropped portrait (2:3). Width tracks viewport height so the photo never
- * collides with the hero's "scroll to explore" hint, stacked on phones or beside the text.
+ * Full uncropped portrait (2:3). Width tracks viewport height (and width, beside the text)
+ * so it fits the 100dvh hero; on screens under 650px tall the hero hides its scroll hint.
  */
 const HeadshotFrame: React.FC = () => (
-  <figure className="w-[min(8rem,16dvh)] md:w-[min(20rem,40dvh)] shrink-0 bg-brand-bg border border-brand-primary/20 rounded-xl overflow-hidden">
+  <figure className="w-[min(8rem,16dvh)] md:w-[min(20rem,40dvh,40vw)] landscape:w-[min(20rem,40dvh,40vw)] shrink-0 bg-brand-bg border border-brand-primary/20 rounded-xl overflow-hidden">
     <div
       aria-hidden="true"
       className="flex items-center gap-2 px-3 py-2 bg-black/40 border-b border-brand-primary/10"
     >
-      <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#ef4444' }} />
-      <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#eab308' }} />
-      <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#22c55e' }} />
+      <span className="inline-block shrink-0 w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#ef4444' }} />
+      <span className="inline-block shrink-0 w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#eab308' }} />
+      <span className="inline-block shrink-0 w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#22c55e' }} />
     </div>
     <img
       src={HEADSHOT_SRC}

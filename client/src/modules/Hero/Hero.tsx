@@ -70,8 +70,9 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
       className="h-[100dvh] flex flex-col items-center justify-center bg-brand-bg px-6 relative"
       data-testid="hero"
     >
-      {/* Text keeps its original spot (left edge of the max-w-2xl column); the photo sits right of it, below it on phones. */}
-      <div className="flex flex-col md:flex-row items-start md:items-center md:justify-between gap-6 md:gap-12 w-full max-w-2xl">
+      {/* Text keeps its original spot (left edge of the max-w-2xl column); the photo sits right of it,
+          below it on portrait phones. */}
+      <div className="flex flex-col md:flex-row landscape:flex-row items-start md:items-center landscape:items-center md:justify-between landscape:justify-between gap-6 md:gap-12 w-full max-w-2xl">
         <div className="font-mono text-brand-text space-y-1">
           <div className="text-brand-primary text-xs mb-4 select-none">
             {'$ boot'}
@@ -119,7 +120,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="absolute bottom-16 md:bottom-10 [@media(max-height:800px)]:bottom-6 flex flex-col items-center gap-2 select-none"
+          className="absolute bottom-16 md:bottom-10 [@media(max-height:800px)]:bottom-6 [@media(max-height:650px)]:hidden flex flex-col items-center gap-2 select-none"
           aria-hidden="true"
         >
           <span className="font-mono text-sm text-brand-primary tracking-widest">
