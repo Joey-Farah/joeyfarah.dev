@@ -5,11 +5,11 @@ export const HEADSHOT_SRC = '/images/joey-headshot.webp';
 
 /**
  * Joey's headshot in a terminal window, matching the BentoTile title-bar chrome.
- * Width tracks viewport height so the stacked phone layout never collides
- * with the hero's "scroll to explore" hint. The title is desktop-only (no room on phones).
+ * Full uncropped portrait (2:3). Width tracks viewport height so the photo never
+ * collides with the hero's "scroll to explore" hint, stacked on phones or beside the text.
  */
 const HeadshotFrame: React.FC = () => (
-  <figure className="w-[min(8rem,20dvh)] md:w-[min(16rem,40dvh)] shrink-0 bg-brand-bg border border-brand-primary/20 rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(6,182,212,0.15)]">
+  <figure className="w-[min(8rem,16dvh)] md:w-[min(16rem,32dvh)] shrink-0 bg-brand-bg border border-brand-primary/20 rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(6,182,212,0.15)]">
     <div
       aria-hidden="true"
       className="flex items-center gap-2 px-3 py-2 bg-black/40 border-b border-brand-primary/10"
@@ -17,13 +17,12 @@ const HeadshotFrame: React.FC = () => (
       <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#ef4444' }} />
       <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#eab308' }} />
       <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#22c55e' }} />
-      <span className="hidden md:inline ml-2 font-mono text-brand-text text-xs truncate select-none">whoami.webp</span>
     </div>
     <img
       src={HEADSHOT_SRC}
       alt="Joey Farah"
-      width={720}
-      height={720}
+      width={640}
+      height={962}
       decoding="async"
       className="block w-full h-auto"
     />

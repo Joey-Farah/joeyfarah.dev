@@ -3,7 +3,7 @@
 ## 2026-11-03
 
 ### Hero headshot
-- **Headshot beside the boot text** (`Hero/HeadshotFrame.tsx`): square photo in a terminal window matching the tile title-bar chrome. The boot text keeps its original position; the photo sits to its right on desktop and below it on phones, sized by viewport height so it never collides with "scroll to explore". 720px WebP, ~29 KB, preloaded so it doesn't wait on `/api/blocks`.
+- **Headshot beside the boot text** (`Hero/HeadshotFrame.tsx`): full uncropped portrait in a Mac-style window (title-bar dots only, matching the tile chrome). The boot text keeps its original position; the photo sits to its right on desktop and below it on phones, sized by viewport height so it never collides with "scroll to explore". 640×962 WebP, ~31 KB, preloaded so it doesn't wait on `/api/blocks`.
 
 ## 2026-06-11
 
