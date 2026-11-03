@@ -70,14 +70,8 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
       className="h-[100dvh] flex flex-col items-center justify-center bg-brand-bg px-6 relative"
       data-testid="hero"
     >
-      <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 w-full max-w-3xl">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4 }}
-        >
-          <HeadshotFrame />
-        </motion.div>
+      {/* Text keeps its original spot (left edge of the max-w-2xl column); the photo sits right of it, below it on phones. */}
+      <div className="flex flex-col md:flex-row items-start md:items-center md:justify-between gap-6 md:gap-12 w-full max-w-2xl">
         <div className="font-mono text-brand-text min-w-[24ch] space-y-1">
           <div className="text-brand-primary text-xs mb-4 select-none">
             {'$ boot'}
@@ -105,6 +99,13 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
             />
           )}
         </div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+        >
+          <HeadshotFrame />
+        </motion.div>
       </div>
 
       {complete && !hasScrolled && (
