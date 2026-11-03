@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Keep in sync with the preload link in client/index.html.
+// Preloaded in client/index.html (headshotPreload.test.ts keeps the two in sync).
 export const HEADSHOT_SRC = '/images/joey-headshot.webp';
 
 /**
