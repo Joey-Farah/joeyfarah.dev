@@ -9,7 +9,7 @@ export const HEADSHOT_SRC = '/images/joey-headshot.webp';
  * collides with the hero's "scroll to explore" hint, stacked on phones or beside the text.
  */
 const HeadshotFrame: React.FC = () => (
-  <figure className="w-[min(8rem,16dvh)] md:w-[min(16rem,32dvh)] shrink-0 bg-brand-bg border border-brand-primary/20 rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(6,182,212,0.15)]">
+  <figure className="w-[min(8rem,16dvh)] md:w-[min(20rem,40dvh)] shrink-0 bg-brand-bg border border-brand-primary/20 rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(6,182,212,0.15)]">
     <div
       aria-hidden="true"
       className="flex items-center gap-2 px-3 py-2 bg-black/40 border-b border-brand-primary/10"
@@ -21,8 +21,8 @@ const HeadshotFrame: React.FC = () => (
     <img
       src={HEADSHOT_SRC}
       alt="Joey Farah"
-      width={640}
-      height={962}
+      width={900}
+      height={1353}
       decoding="async"
       className="block w-full h-auto"
     />
