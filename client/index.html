@@ -8,6 +8,8 @@
     <meta name="description" content="Portfolio of Joey Farah — Oracle Cloud ERP Architect, independent developer, and competitive Melee player. 200K+ invoice migrations. Open-source data tools." />
     <link rel="canonical" href="https://joeyfarah.dev/" />
     <title>joeyfarah.dev</title>
+    <!-- Hero headshot: the hero renders only after /api/blocks returns, so fetch the photo in parallel. Keep in sync with HeadshotFrame.tsx. -->
+    <link rel="preload" as="image" type="image/webp" href="/images/joey-headshot.webp" fetchpriority="high" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Joey Farah" />
