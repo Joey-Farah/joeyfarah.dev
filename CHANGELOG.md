@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-11
+
+### Reading list
+- **Description under the current book** (`ReadingListRenderer.tsx`): books take an optional `description` (shared schema + type). Only the current book shows it, as small muted text under the author, filling the empty space in that column on desktop. Fever Pitch has the first one.
+
 ## 2026-11-03
 
 ### Hero headshot
