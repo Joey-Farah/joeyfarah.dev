@@ -267,3 +267,29 @@ describe('ingestSeed — per-type malformed blocks (Story 33)', () => {
     }
   });
 });
+
+describe('ingestSeed — reading-list book description', () => {
+  it('keeps the optional description on a book (Zod would silently strip an unknown key)', async () => {
+    const block = {
+      slug: 'reading-list',
+      type: 'reading-list',
+      title: 'Reading List',
+      order: 0,
+      visible: true,
+      content: {
+        current: { title: 'Fever Pitch', author: 'Nick Hornby', description: 'A football memoir.' },
+        next: [],
+        recent: [],
+      },
+    };
+    const tmp = path.join(os.tmpdir(), `seed-test-${Date.now()}-${Math.random()}.json`);
+    fs.writeFileSync(tmp, JSON.stringify([block]), { encoding: 'utf-8' });
+    try {
+      const [ingested] = await ingestSeed(tmp);
+      const content = ingested.content as { current: { description?: string } };
+      expect(content.current.description).toBe('A football memoir.');
+    } finally {
+      fs.unlinkSync(tmp);
+    }
+  });
+});
