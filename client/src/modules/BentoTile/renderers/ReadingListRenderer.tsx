@@ -18,6 +18,9 @@ const ReadingListRenderer: React.FC<ReadingListRendererProps> = ({ content }) =>
         <p className="text-brand-text/85 text-xs mb-1">// currently reading</p>
         <p className="text-brand-primary text-sm font-semibold leading-snug">{current.title}</p>
         <p className="text-brand-text/85 text-xs mt-0.5">{current.author}</p>
+        {current.description && (
+          <p className="text-brand-text/85 text-xs mt-3 leading-relaxed">{current.description}</p>
+        )}
       </div>
 
       {/* Divider */}

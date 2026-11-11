@@ -85,6 +85,8 @@ export interface ContactLinksContent {
 export interface ReadingListBook {
   title: string;
   author: string;
+  /** Short synopsis; only rendered for the current book. */
+  description?: string;
 }
 
 export interface ReadingListContent {
