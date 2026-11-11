@@ -95,6 +95,8 @@ Two independent paths — do not confuse them:
 
 Checklist when editing a tile: (1) edit JSON, (2) run `npm run seed` against prod, (3) verify on https://joeyfarah.dev, (4) commit + push.
 
+When Joey finishes a book: move `current` to the front of `recent`, set the new `current`, and give it a one-sentence factual `description` (draft it and have Joey approve it). Only the current book shows its description.
+
 ---
 
 ## What Still Needs To Be Done
