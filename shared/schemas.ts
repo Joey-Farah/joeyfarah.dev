@@ -81,6 +81,7 @@ const ContactLinksContentSchema = z.object({
 const ReadingListBookSchema = z.object({
   title: z.string(),
   author: z.string(),
+  description: z.string().optional(),
 });
 
 const ReadingListContentSchema = z.object({
