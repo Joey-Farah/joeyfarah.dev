@@ -372,7 +372,7 @@
     "order": 11,
     "visible": true,
     "content": {
-      "current": { "title": "The Count of Monte Cristo", "author": "Alexandre Dumas" },
+      "current": { "title": "Fever Pitch", "author": "Nick Hornby" },
       "next": [
         { "title": "The Well of Ascension", "author": "Brandon Sanderson" },
         { "title": "The Brothers Karamazov", "author": "Fyodor Dostoevsky" },
@@ -381,6 +381,7 @@
         { "title": "Point Blank", "author": "Anthony Horowitz" }
       ],
       "recent": [
+        { "title": "The Count of Monte Cristo", "author": "Alexandre Dumas" },
         { "title": "Ego is the Enemy", "author": "Ryan Holiday" },
         { "title": "The Obstacle is the Way", "author": "Ryan Holiday" },
         { "title": "Dune", "author": "Frank Herbert" },
