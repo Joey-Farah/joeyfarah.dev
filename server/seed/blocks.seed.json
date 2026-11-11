@@ -372,7 +372,11 @@
     "order": 11,
     "visible": true,
     "content": {
-      "current": { "title": "Fever Pitch", "author": "Nick Hornby" },
+      "current": {
+        "title": "Fever Pitch",
+        "author": "Nick Hornby",
+        "description": "A memoir of growing up as an obsessive Arsenal fan, told one match at a time from 1968 to 1992."
+      },
       "next": [
         { "title": "The Well of Ascension", "author": "Brandon Sanderson" },
         { "title": "The Brothers Karamazov", "author": "Fyodor Dostoevsky" },
