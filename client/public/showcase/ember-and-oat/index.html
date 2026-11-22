@@ -27,6 +27,8 @@
       --marigold: #f4b740;
       --display: "Fraunces", Georgia, "Times New Roman", serif;
       --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      /* 6 am to 10 pm: pre-dawn, dawn, morning, noon, afternoon, golden hour, dusk, night */
+      --day-track: linear-gradient(90deg, #2b2d52 0%, #f3a982 6%, #9bcbe6 19%, #5fb0e0 44%, #8cc0e0 69%, #f0a45c 81%, #5a3f6e 91%, #141a33 100%);
       color-scheme: light;
     }
     * { box-sizing: border-box; }
@@ -57,14 +59,32 @@
     .hero h1 { font: 700 clamp(3rem, 13vw, 6.5rem)/.92 var(--display); letter-spacing: -.03em; margin: 0; }
     .hero p { max-width: 32rem; margin: 1rem 0 0; font-size: 1.1rem; color: var(--muted); }
 
+    /* the dial: one slider is the clock for the whole page */
+    .dial { padding-top: 1.25rem; }
+    .readout { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .75rem; }
+    .time { font: 700 2.1rem/1 var(--display); font-variant-numeric: tabular-nums; min-width: 6.5ch; }
+    .part { font-weight: 700; color: var(--brick-dark); }
+    .hint { display: block; color: var(--muted); font-size: .9rem; margin: .35rem 0 .25rem; }
+    #clock { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 2.75rem; margin: 0; background: transparent; cursor: grab; }
+    #clock:active { cursor: grabbing; }
+    #clock::-webkit-slider-runnable-track { height: .7rem; border-radius: 1rem; background: var(--day-track); }
+    #clock::-moz-range-track { height: .7rem; border-radius: 1rem; background: var(--day-track); }
+    #clock::-webkit-slider-thumb { -webkit-appearance: none; width: 2.4rem; height: 2.4rem; margin-top: -.85rem; border-radius: 50%; background: var(--marigold); border: 3px solid var(--cream); box-shadow: 0 2px 8px rgba(43,28,21,.35); }
+    #clock::-moz-range-thumb { width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--marigold); border: 3px solid var(--cream); box-shadow: 0 2px 8px rgba(43,28,21,.35); box-sizing: border-box; }
+    #clock:focus-visible { outline: none; }
+    #clock:focus-visible::-webkit-slider-thumb { outline: 3px solid var(--espresso); outline-offset: 2px; }
+    #clock:focus-visible::-moz-range-thumb { outline: 3px solid var(--espresso); outline-offset: 2px; }
+    .ticks { display: flex; justify-content: space-between; font-size: .78rem; font-weight: 600; color: var(--muted); }
+
     /* menu */
     .menu { padding-block: 2.5rem 4rem; }
     .menu-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; border-bottom: 2px solid var(--espresso); padding-bottom: .75rem; }
     .menu h2 { font: 700 clamp(2.2rem, 8vw, 3.4rem)/1 var(--display); letter-spacing: -.02em; margin: 0; }
     .served { color: var(--muted); font-weight: 600; }
     .items { list-style: none; margin: 0; padding: 0; }
-    .item { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .25rem 1rem; padding-block: 1.1rem; border-bottom: 1px solid var(--cream-2); animation: rise .45s both; }
-    .item:nth-child(2) { animation-delay: .04s; } .item:nth-child(3) { animation-delay: .08s; } .item:nth-child(4) { animation-delay: .12s; } .item:nth-child(5) { animation-delay: .16s; }
+    .item { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .25rem 1rem; padding-block: 1.1rem; border-bottom: 1px solid var(--cream-2); }
+    .swap .item { animation: rise .45s both; }
+    .swap .item:nth-child(2) { animation-delay: .04s; } .swap .item:nth-child(3) { animation-delay: .08s; } .swap .item:nth-child(4) { animation-delay: .12s; } .swap .item:nth-child(5) { animation-delay: .16s; }
     @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
     .item h3 { font: 600 1.3rem/1.15 var(--display); margin: 0; }
     .item p { margin: .2rem 0 0; color: var(--muted); font-size: .92rem; }
@@ -130,6 +150,12 @@
       <div class="wrap">
         <h1 id="greeting">Good morning.</h1>
         <p>Oat bowls at sunrise, wood-fired pizza at sundown. A café on Mill Street in Halvorsen Falls. Order ahead and it's waiting on the shelf.</p>
+        <div class="dial">
+          <div class="readout" aria-hidden="true"><span class="time" id="time">9:00 am</span><span class="part" id="part">Morning menu</span></div>
+          <label class="hint" for="clock">Drag the sun through the day</label>
+          <input type="range" id="clock" min="360" max="1320" step="5" value="540">
+          <div class="ticks" aria-hidden="true"><span>6 am</span><span>Noon</span><span>10 pm</span></div>
+        </div>
       </div>
     </section>
 
@@ -182,7 +208,26 @@
         { id: 'latte', name: 'Oat-milk latte', desc: 'Double shot, house-made oat milk.', price: 5.5 },
         { id: 'drip', name: 'Drip coffee', desc: 'Free refills before nine.', price: 3 },
       ] },
+      midday: { title: 'Midday menu', served: 'Served 11 am to 4 pm', items: [
+        { id: 'flatbread', name: 'Ember flatbread', desc: 'Wood-fired, topped with whatever the farm stand had.', price: 14 },
+        { id: 'soup', name: 'Wild rice soup', desc: 'Creamy and smoky, with a thick slice of oat bread.', price: 8 },
+        { id: 'trout', name: 'Smoked trout toast', desc: 'Lake Superior trout, dill, pickled onion.', price: 13 },
+        { id: 'tea', name: 'Lingonberry iced tea', desc: 'Black tea, lingonberry, a little honey.', price: 4 },
+      ] },
+      evening: { title: 'Evening menu', served: 'Served 4 to 9 pm', items: [
+        { id: 'corn-pizza', name: 'Sweet corn & honey pizza', desc: 'Fresh mozzarella, chili honey, basil.', price: 17 },
+        { id: 'mushroom-pizza', name: 'Mushroom & sage pizza', desc: 'Brown butter, sage, a lot of mushrooms.', price: 18 },
+        { id: 'carrots', name: 'Ember-roasted carrots', desc: 'Charred in the oven, on whipped feta.', price: 10 },
+        { id: 'cider', name: 'Local cider', desc: 'Dry, from an orchard up the river.', price: 7 },
+        { id: 'crisp', name: 'Oat & rhubarb crisp', desc: 'Warm, with a scoop of sweet cream.', price: 8 },
+      ] },
     };
+    // Closed: say so, and let people order ahead from the morning menu.
+    MENUS.closed = { title: 'Closed for now', served: 'Order ahead for 7:00 am', items: MENUS.morning.items };
+    const OPEN = 7 * 60, MIDDAY = 11 * 60, EVENING = 16 * 60, CLOSE = 21 * 60;
+    const partAt = (t) => t < OPEN || t >= CLOSE ? 'closed' : t < MIDDAY ? 'morning' : t < EVENING ? 'midday' : 'evening';
+    const greetingAt = (t) => t < OPEN ? 'Almost open.' : t < 720 ? 'Good morning.' : t < 1020 ? 'Good afternoon.' : t < CLOSE ? 'Good evening.' : 'Good night.';
+    const clockText = (t) => { const h = Math.floor(t / 60), m = t % 60; return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'am' : 'pm'}`; };
     const $ = (id) => document.getElementById(id);
     const money = (n) => `$${Number.isInteger(n) ? n : n.toFixed(2)}`;
     const notice = document.querySelector('[data-demo-notice]');
@@ -198,7 +243,8 @@
     const ITEMS = Object.fromEntries(Object.values(MENUS).flatMap((m) => m.items).map((i) => [i.id, i]));
     const bag = new Map();
 
-    function renderMenu(menu) {
+    function renderMenu(menu, animate) {
+      $('menu-items').classList.toggle('swap', animate);
       $('menu-title').textContent = menu.title;
       $('menu-served').textContent = menu.served;
       const list = $('menu-items'); list.innerHTML = '';
@@ -254,7 +300,27 @@
       if (!$('bag').hidden) closeBag();
     });
 
-    renderMenu(MENUS.morning);
+    // The clock: ?at=HH:MM if the link has one, otherwise the visitor's local time.
+    const clock = $('clock');
+    const MIN = Number(clock.min), MAX = Number(clock.max);
+    function startTime() {
+      const at = /^(\d{1,2}):(\d{2})$/.exec(new URLSearchParams(location.search).get('at') ?? '');
+      const now = new Date();
+      const t = at ? Number(at[1]) * 60 + Number(at[2]) : now.getHours() * 60 + now.getMinutes();
+      return Math.min(MAX, Math.max(MIN, Math.round(t / 5) * 5));
+    }
+    let part = null;
+    function setTime(t, animate) {
+      const p = partAt(t);
+      $('time').textContent = clockText(t);
+      $('part').textContent = p === 'closed' ? 'Closed' : MENUS[p].title;
+      $('greeting').textContent = greetingAt(t);
+      clock.setAttribute('aria-valuetext', `${clockText(t)}, ${p === 'closed' ? 'closed' : MENUS[p].title.toLowerCase()}`);
+      if (p !== part) { part = p; renderMenu(MENUS[p], animate); }
+    }
+    clock.addEventListener('input', () => setTime(Number(clock.value), true));
+    clock.value = startTime();
+    setTime(Number(clock.value), false);
     renderBag();
   })();
   </script>
