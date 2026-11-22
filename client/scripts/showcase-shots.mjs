@@ -19,6 +19,8 @@ const CHROME = process.env.CHROME ?? '/Applications/Google Chrome.app/Contents/M
 const W = 390, H = 700, SCALE = 2;
 const publicDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../public');
 const showcaseDir = path.join(publicDir, 'showcase');
+// Concepts whose look depends on the visitor's clock get a fixed time, so the preview doesn't change with the hour it's taken.
+const QUERY = { 'ember-and-oat': '?at=18:30' };
 const TYPES = { '.html': 'text/html', '.woff2': 'font/woff2', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg' };
 
 const server = createServer((req, res) => {
@@ -39,7 +41,7 @@ const tmp = mkdtempSync(path.join(tmpdir(), 'shots-'));
 for (const slug of slugs) {
   const frame = path.join(tmp, `${slug}.html`);
   const png = path.join(tmp, `${slug}.png`);
-  writeFileSync(frame, `<body style="margin:0"><iframe src="http://localhost:${port}/showcase/${slug}/" style="width:${W}px;height:${H}px;border:0;display:block"></iframe></body>`);
+  writeFileSync(frame, `<body style="margin:0"><iframe src="http://localhost:${port}/showcase/${slug}/${QUERY[slug] ?? ''}" style="width:${W}px;height:${H}px;border:0;display:block"></iframe></body>`);
   await run(CHROME, ['--headless=new', '--disable-gpu', '--hide-scrollbars', `--force-device-scale-factor=${SCALE}`,
     '--virtual-time-budget=5000', `--window-size=600,${H}`, `--screenshot=${png}`, `file://${frame}`]);
   const out = path.join(showcaseDir, 'shots', `${slug}.webp`);
