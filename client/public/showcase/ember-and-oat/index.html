@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#fbf3e6">
+  <title>Ember &amp; Oat · Concept site</title>
+  <link rel="preload" href="/showcase/ember-and-oat/fraunces-v1.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c8553d'/%3E%3Ccircle cx='16' cy='17' r='7' fill='%23f4b740'/%3E%3C/svg%3E">
+  <style>
+    @font-face {
+      font-family: "Fraunces";
+      src: url("/showcase/ember-and-oat/fraunces-v1.woff2") format("woff2");
+      font-weight: 400 800;
+      font-display: swap;
+    }
+    /* Layout: a café window you scrub through the day, the menu for that hour, an order-ahead bag, and a visit block. */
+    :root {
+      --cream: #fbf3e6;
+      --cream-2: #f2e3cc;
+      --espresso: #2b1c15;
+      --muted: #6b5546;
+      --brick: #c8553d;
+      --brick-dark: #a2412c;
+      --spruce: #123c3a;
+      --marigold: #f4b740;
+      --display: "Fraunces", Georgia, "Times New Roman", serif;
+      --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cream); color: var(--espresso); font-family: var(--body); font-size: 1rem; line-height: 1.55; }
+    a { color: inherit; }
+    button { font: inherit; cursor: pointer; color: inherit; }
+    :focus-visible { outline: 3px solid var(--marigold); outline-offset: 3px; }
+    .wrap { max-width: 64rem; margin: 0 auto; padding-inline: 1.25rem; }
+
+    /* concept banner (JEF chrome, not part of the made-up brand) */
+    .concept { background: #0e7490; color: #fff; font: 500 .82rem/1.4 system-ui, sans-serif; }
+    .concept .wrap { display: flex; flex-wrap: wrap; gap: .25rem 1rem; justify-content: space-between; padding-block: .55rem; }
+    .concept a { font-weight: 700; }
+
+    /* nav */
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .9rem; }
+    .logo { font: 700 1.55rem/1 var(--display); text-decoration: none; letter-spacing: -.01em; }
+    .logo span { color: var(--brick); font-style: normal; }
+    .nav ul { display: none; list-style: none; margin: 0 auto 0 2rem; padding: 0; gap: 1.5rem; font-weight: 600; font-size: .95rem; }
+    .nav ul a { text-decoration: none; color: var(--muted); }
+    .bag-btn { display: inline-flex; align-items: center; gap: .5rem; background: var(--spruce); color: var(--cream); border: 0; border-radius: 999px; padding: .55rem .6rem .55rem 1rem; font-weight: 700; }
+    .bag-btn .count { display: inline-grid; place-items: center; min-width: 1.6rem; height: 1.6rem; padding-inline: .35rem; border-radius: 999px; background: var(--marigold); color: var(--espresso); font-size: .85rem; font-variant-numeric: tabular-nums; }
+    .bag-btn.bump .count { animation: bump .4s; }
+    @keyframes bump { 40% { transform: scale(1.35); } }
+
+    /* hero */
+    .hero { padding-block: 2.5rem 1.5rem; }
+    .hero h1 { font: 700 clamp(3rem, 13vw, 6.5rem)/.92 var(--display); letter-spacing: -.03em; margin: 0; }
+    .hero p { max-width: 32rem; margin: 1rem 0 0; font-size: 1.1rem; color: var(--muted); }
+
+    /* menu */
+    .menu { padding-block: 2.5rem 4rem; }
+    .menu-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; border-bottom: 2px solid var(--espresso); padding-bottom: .75rem; }
+    .menu h2 { font: 700 clamp(2.2rem, 8vw, 3.4rem)/1 var(--display); letter-spacing: -.02em; margin: 0; }
+    .served { color: var(--muted); font-weight: 600; }
+    .items { list-style: none; margin: 0; padding: 0; }
+    .item { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .25rem 1rem; padding-block: 1.1rem; border-bottom: 1px solid var(--cream-2); animation: rise .45s both; }
+    .item:nth-child(2) { animation-delay: .04s; } .item:nth-child(3) { animation-delay: .08s; } .item:nth-child(4) { animation-delay: .12s; } .item:nth-child(5) { animation-delay: .16s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+    .item h3 { font: 600 1.3rem/1.15 var(--display); margin: 0; }
+    .item p { margin: .2rem 0 0; color: var(--muted); font-size: .92rem; }
+    .price { font: 600 1.2rem/1 var(--display); font-variant-numeric: tabular-nums; }
+    .add { width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 2px solid var(--espresso); background: transparent; font-size: 1.4rem; line-height: 1; display: grid; place-items: center; transition: background .2s, color .2s; }
+    .add:hover { background: var(--espresso); color: var(--cream); }
+    .add.added { background: var(--spruce); border-color: var(--spruce); color: var(--cream); }
+
+    /* visit */
+    .visit { background: var(--spruce); color: #eaf1ee; }
+    .visit .wrap { display: grid; gap: 2rem; padding-block: 4rem; }
+    .visit h2 { font: 700 clamp(2.2rem, 8vw, 3.4rem)/1 var(--display); color: #fff; margin: 0 0 1rem; }
+    .visit address { font-style: normal; display: grid; gap: .3rem; font-size: 1.05rem; }
+    .hours { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .hours td { padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+    .hours td + td { text-align: right; }
+    footer.site { background: var(--espresso); color: #c9b8a8; font-size: .85rem; padding-block: 1.5rem; }
+
+    /* bag sheet */
+    .backdrop { position: fixed; inset: 0; background: rgba(43,28,21,.45); z-index: 20; }
+    .sheet { position: fixed; z-index: 21; left: 0; right: 0; bottom: 0; max-height: 85vh; overflow-y: auto; background: var(--cream); border-radius: 1.25rem 1.25rem 0 0; padding: 1.25rem 1.25rem 1.5rem; box-shadow: 0 -20px 40px rgba(43,28,21,.25); display: grid; gap: 1rem; align-content: start; }
+    .sheet[hidden], .backdrop[hidden] { display: none; }
+    .sheet header { display: flex; align-items: center; justify-content: space-between; }
+    .sheet h2 { font: 700 1.8rem/1 var(--display); margin: 0; }
+    .x { border: 0; background: var(--cream-2); width: 2.4rem; height: 2.4rem; border-radius: 50%; font-size: 1.3rem; line-height: 1; }
+    .empty { margin: 0; color: var(--muted); }
+    .lines { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+    .line { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .75rem; }
+    .line b { font: 600 1.05rem/1.2 var(--display); }
+    .qty { display: inline-flex; align-items: center; gap: .5rem; font-variant-numeric: tabular-nums; }
+    .qty button { width: 2rem; height: 2rem; border-radius: 50%; border: 1.5px solid var(--espresso); background: transparent; line-height: 1; }
+    .total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem; border-top: 2px solid var(--espresso); padding-top: .75rem; }
+    .place { border: 0; border-radius: .9rem; padding: .95rem; background: var(--brick-dark); color: #fff; font-weight: 800; font-size: 1.05rem; }
+    .place[hidden] { display: none; }
+
+    .notice { position: fixed; left: 50%; bottom: 1.25rem; transform: translate(-50%, 150%); background: var(--espresso); color: #fff; padding: .85rem 1.1rem; border-radius: .9rem; font-size: .92rem; max-width: calc(100% - 2rem); width: max-content; box-shadow: 0 12px 30px rgba(0,0,0,.3); transition: transform .3s, visibility .3s; visibility: hidden; z-index: 30; }
+    .notice.show { transform: translate(-50%, 0); visibility: visible; }
+    .notice b { color: var(--marigold); }
+
+    @media (min-width: 48rem) {
+      .nav ul { display: flex; }
+      .visit .wrap { grid-template-columns: 1fr 1fr; }
+      .sheet { left: auto; top: 0; width: 26rem; max-height: none; border-radius: 1.25rem 0 0 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="concept" data-concept-banner>
+    <div class="wrap"><span>Concept site by JEF Consulting. Ember &amp; Oat is a made-up business.</span><a href="/showcase">See all concepts</a></div>
+  </div>
+
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="#top">Ember <span>&amp;</span> Oat</a>
+      <ul><li><a href="#menu">Menu</a></li><li><a href="#visit">Visit</a></li></ul>
+      <button class="bag-btn" id="bag-btn" type="button" aria-haspopup="dialog" aria-controls="bag">Bag <span class="count" id="bag-count">0</span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <h1 id="greeting">Good morning.</h1>
+        <p>Oat bowls at sunrise, wood-fired pizza at sundown. A café on Mill Street in Halvorsen Falls. Order ahead and it's waiting on the shelf.</p>
+      </div>
+    </section>
+
+    <section class="menu" id="menu">
+      <div class="wrap">
+        <div class="menu-head"><h2 id="menu-title">Morning menu</h2><span class="served" id="menu-served">Served 7 to 11 am</span></div>
+        <ul class="items" id="menu-items"></ul>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div class="wrap">
+        <div>
+          <h2>Come in</h2>
+          <address>
+            <span>38 Mill Street, Halvorsen Falls, MN</span>
+            <a href="tel:6125550163">(612) 555-0163</a>
+            <span>hello@emberandoat.example</span>
+          </address>
+        </div>
+        <table class="hours" aria-label="Opening hours">
+          <tr><td>Morning menu</td><td>7:00 to 11:00 am</td></tr>
+          <tr><td>Midday menu</td><td>11:00 am to 4:00 pm</td></tr>
+          <tr><td>Evening menu</td><td>4:00 to 9:00 pm</td></tr>
+          <tr><td>Every day</td><td>7:00 am to 9:00 pm</td></tr>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site"><div class="wrap">Ember &amp; Oat, Halvorsen Falls. A concept site by JEF Consulting.</div></footer>
+
+  <div class="backdrop" id="backdrop" hidden></div>
+  <aside class="sheet" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title" hidden>
+    <header><h2 id="bag-title">Your order</h2><button class="x" id="bag-close" type="button" aria-label="Close your order">×</button></header>
+    <p class="empty" id="bag-empty">Your bag is empty. Tap + on anything that looks good.</p>
+    <ul class="lines" id="bag-lines"></ul>
+    <div class="total" id="bag-total-row" hidden><span>Subtotal</span><span id="bag-total">$0</span></div>
+    <button class="place" id="place" type="button" data-demo hidden>Place order</button>
+  </aside>
+  <div class="notice" data-demo-notice role="status" aria-live="polite"></div>
+
+  <script>
+  (() => {
+    const MENUS = {
+      morning: { title: 'Morning menu', served: 'Served 7 to 11 am', items: [
+        { id: 'oat-bowl', name: 'Maple oat bowl', desc: 'Steel-cut oats, toasted pecans, Minnesota maple.', price: 9 },
+        { id: 'bun', name: 'Cardamom bun', desc: 'Baked at dawn, usually gone by ten.', price: 5 },
+        { id: 'hash', name: 'Wild rice & egg hash', desc: 'Crispy wild rice, two eggs, chives.', price: 12 },
+        { id: 'latte', name: 'Oat-milk latte', desc: 'Double shot, house-made oat milk.', price: 5.5 },
+        { id: 'drip', name: 'Drip coffee', desc: 'Free refills before nine.', price: 3 },
+      ] },
+    };
+    const $ = (id) => document.getElementById(id);
+    const money = (n) => `$${Number.isInteger(n) ? n : n.toFixed(2)}`;
+    const notice = document.querySelector('[data-demo-notice]');
+    let hideTimer;
+    function demo(what) {
+      notice.innerHTML = `<b>${what}</b> This is a demo, so nothing was ordered or charged.`;
+      notice.classList.add('show');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => notice.classList.remove('show'), 3600);
+    }
+
+    // Every item on every menu, by id, so the bag can hold things from any time of day.
+    const ITEMS = Object.fromEntries(Object.values(MENUS).flatMap((m) => m.items).map((i) => [i.id, i]));
+    const bag = new Map();
+
+    function renderMenu(menu) {
+      $('menu-title').textContent = menu.title;
+      $('menu-served').textContent = menu.served;
+      const list = $('menu-items'); list.innerHTML = '';
+      for (const item of menu.items) {
+        const li = document.createElement('li');
+        li.className = 'item';
+        li.innerHTML = `<div><h3>${item.name}</h3><p>${item.desc}</p></div><span class="price">${money(item.price)}</span>
+          <button class="add" type="button" aria-label="Add ${item.name} to your bag">+</button>`;
+        const add = li.querySelector('.add');
+        add.addEventListener('click', () => {
+          bag.set(item.id, (bag.get(item.id) ?? 0) + 1);
+          renderBag();
+          add.classList.add('added'); add.textContent = '✓';
+          setTimeout(() => { add.classList.remove('added'); add.textContent = '+'; }, 900);
+          const btn = $('bag-btn'); btn.classList.remove('bump'); void btn.offsetWidth; btn.classList.add('bump');
+        });
+        list.append(li);
+      }
+    }
+
+    function renderBag() {
+      const count = [...bag.values()].reduce((a, b) => a + b, 0);
+      const total = [...bag].reduce((sum, [id, q]) => sum + ITEMS[id].price * q, 0);
+      $('bag-count').textContent = count;
+      $('bag-btn').setAttribute('aria-label', `Bag, ${count} item${count === 1 ? '' : 's'}`);
+      $('bag-empty').hidden = count > 0;
+      $('bag-total-row').hidden = count === 0;
+      $('place').hidden = count === 0;
+      $('bag-total').textContent = money(total);
+      const lines = $('bag-lines'); lines.innerHTML = '';
+      for (const [id, q] of bag) {
+        const li = document.createElement('li');
+        li.className = 'line';
+        li.innerHTML = `<b>${ITEMS[id].name}</b><span class="qty"><button type="button" aria-label="One fewer ${ITEMS[id].name}">−</button><span>${q}</span><button type="button" aria-label="One more ${ITEMS[id].name}">+</button></span><span>${money(ITEMS[id].price * q)}</span>`;
+        const [less, more] = li.querySelectorAll('button');
+        less.addEventListener('click', () => { q > 1 ? bag.set(id, q - 1) : bag.delete(id); renderBag(); });
+        more.addEventListener('click', () => { bag.set(id, q + 1); renderBag(); });
+        lines.append(li);
+      }
+    }
+
+    function openBag() { $('bag').hidden = false; $('backdrop').hidden = false; $('bag-close').focus(); }
+    function closeBag() { $('bag').hidden = true; $('backdrop').hidden = true; $('bag-btn').focus(); }
+    $('bag-btn').addEventListener('click', openBag);
+    $('bag-close').addEventListener('click', closeBag);
+    $('backdrop').addEventListener('click', closeBag);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('bag').hidden) closeBag(); });
+
+    $('place').addEventListener('click', () => {
+      const count = [...bag.values()].reduce((a, b) => a + b, 0);
+      demo(`Order placed: ${count} item${count === 1 ? '' : 's'}.`);
+      bag.clear(); renderBag();
+      if (!$('bag').hidden) closeBag();
+    });
+
+    renderMenu(MENUS.morning);
+    renderBag();
+  })();
+  </script>
+</body>
+</html>
