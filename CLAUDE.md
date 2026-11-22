@@ -80,7 +80,7 @@ A wow-first gallery Joey can text to a prospect: "a tour of Halvorsen Falls," a 
   - every `[data-demo]` action ends in a "This is a demo" notice
   - no fake reviews, testimonials, or customer counts; no photos of people posing as staff
 - **Names (web-checked 2026-10-02 for collisions with real businesses):** Pine & Pitch Climbing (built), Ember & Oat (café, built), Halvorsen Falls Historical Society (walking-tour map), Larch Street Dental, Fjeldheim Builders. The Minnesota SOS business search wasn't checked.
-- **Offer and outreach role (2026-11-22):** the gallery publishes the website subscription (`[data-offer]`: $249/month, $0 down, the site is theirs after 12 months; tested in `showcase.test.ts`). **The price is pending Joey's sign-off**, so don't merge to `main` until he confirms it. `/showcase` is the link in every cold email of JEF's outreach plan (JEF HQ `streams/tech-projects/outreach-plan.md`).
+- **Offer and outreach role (2026-11-22):** the gallery publishes the website subscription (`[data-offer]`: $99/month, $0 down, up to 30 minutes of changes a month, the site is theirs after 12 months; tested in `showcase.test.ts`). Joey set the price on 2026-11-22, down from a first proposal of $249, to undercut done-for-you providers ($50–150/mo typical). `/showcase` is the link in every cold email of JEF's outreach plan (JEF HQ `streams/tech-projects/outreach-plan.md`).
 - **Visuals:** illustrated/generated, no stock photos. Unsplash search mixes in paid Unsplash+ images, so photos only if Joey picks ones confirmed free.
 
 **Next steps (in order):**
