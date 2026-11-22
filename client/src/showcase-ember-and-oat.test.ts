@@ -85,3 +85,43 @@ describe('Ember & Oat: the menu follows the time of day', () => {
     expect(menuTitle(doc)).toMatch(/closed/i);
   });
 });
+
+describe('Ember & Oat: order ahead for pickup', () => {
+  function openBagWithOneItem(at: string) {
+    const doc = open({ query: `?at=${at}` });
+    doc.querySelector<HTMLButtonElement>('#menu .add')!.click();
+    doc.getElementById('bag-btn')!.click();
+    const slots = [...doc.querySelectorAll<HTMLButtonElement>('#slots button')];
+    return { doc, slots, label: doc.getElementById('pickup-label')?.textContent ?? '' };
+  }
+
+  it('offers pickup times starting 15 minutes after the time on the clock', () => {
+    const { slots, label } = openBagWithOneItem('07:40');
+    expect(slots.map((s) => s.textContent)).toEqual(['7:55 am', '8:10 am', '8:25 am', '8:40 am']);
+    expect(label).toMatch(/today/i);
+  });
+
+  it('stops offering times once the café closes', () => {
+    const { slots } = openBagWithOneItem('20:30');
+    expect(slots.map((s) => s.textContent)).toEqual(['8:45 pm']);
+  });
+
+  it.each([['22:00', /tomorrow/i], ['20:50', /tomorrow/i], ['06:30', /today/i]])(
+    'at %s (closed) it offers the 7:00 am opening',
+    (at, day) => {
+      const { slots, label } = openBagWithOneItem(at);
+      expect(slots[0]?.textContent).toBe('7:00 am');
+      expect(label).toMatch(day);
+    },
+  );
+
+  it('places the order for the pickup time you pick', () => {
+    const { doc, slots } = openBagWithOneItem('07:40');
+    slots[1].click();
+    expect(slots[1].getAttribute('aria-checked')).toBe('true');
+    doc.getElementById('place')!.click();
+    const notice = doc.querySelector('[data-demo-notice]')!.textContent;
+    expect(notice).toContain('pickup at 8:10 am');
+    expect(notice).toMatch(/this is a demo/i);
+  });
+});

@@ -128,6 +128,10 @@
     .line b { font: 600 1.05rem/1.2 var(--display); }
     .qty { display: inline-flex; align-items: center; gap: .5rem; font-variant-numeric: tabular-nums; }
     .qty button { width: 2rem; height: 2rem; border-radius: 50%; border: 1.5px solid var(--espresso); background: transparent; line-height: 1; }
+    .pickup h3 { font: 600 1.15rem/1.2 var(--display); margin: 0 0 .6rem; }
+    .slots { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .slots button { border: 1.5px solid var(--espresso); background: transparent; border-radius: 999px; padding: .45rem .85rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .slots button[aria-checked="true"] { background: var(--espresso); color: var(--cream); }
     .total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem; border-top: 2px solid var(--espresso); padding-top: .75rem; }
     .place { border: 0; border-radius: .9rem; padding: .95rem; background: var(--brick-dark); color: #fff; font-weight: 800; font-size: 1.05rem; }
     .place[hidden] { display: none; }
@@ -313,6 +317,10 @@
     <header><h2 id="bag-title">Your order</h2><button class="x" id="bag-close" type="button" aria-label="Close your order">×</button></header>
     <p class="empty" id="bag-empty">Your bag is empty. Tap + on anything that looks good.</p>
     <ul class="lines" id="bag-lines"></ul>
+    <div class="pickup" id="pickup-row" hidden>
+      <h3 id="pickup-label">Pick up today</h3>
+      <div class="slots" id="slots" role="radiogroup" aria-labelledby="pickup-label"></div>
+    </div>
     <div class="total" id="bag-total-row" hidden><span>Subtotal</span><span id="bag-total">$0</span></div>
     <button class="place" id="place" type="button" data-demo hidden>Place order</button>
   </aside>
@@ -392,6 +400,7 @@
       $('bag-btn').setAttribute('aria-label', `Bag, ${count} item${count === 1 ? '' : 's'}`);
       $('bag-empty').hidden = count > 0;
       $('bag-total-row').hidden = count === 0;
+      $('pickup-row').hidden = count === 0;
       $('place').hidden = count === 0;
       $('bag-total').textContent = money(total);
       const lines = $('bag-lines'); lines.innerHTML = '';
@@ -406,7 +415,41 @@
       }
     }
 
-    function openBag() { $('bag').hidden = false; $('backdrop').hidden = false; $('bag-close').focus(); }
+    // Pickup times follow the clock on the page, not the real one: 15 minutes out, every
+    // 15 minutes, until closing. Too late (or before opening)? Order ahead for 7:00 am.
+    function pickupSlots(t) {
+      let first = Math.ceil((t + 15) / 5) * 5, tomorrow = false;
+      if (first >= CLOSE) { first = OPEN; tomorrow = true; } else first = Math.max(first, OPEN);
+      return { times: [0, 15, 30, 45].map((k) => first + k).filter((x) => x < CLOSE), tomorrow };
+    }
+    let chosen = 0;
+    function renderSlots() {
+      const { times, tomorrow } = pickupSlots(Number(clock.value));
+      chosen = Math.min(chosen, times.length - 1);
+      $('pickup-label').textContent = tomorrow ? 'Pick up tomorrow' : 'Pick up today';
+      const box = $('slots'); box.innerHTML = '';
+      times.forEach((x, i) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.setAttribute('role', 'radio'); b.textContent = clockText(x);
+        b.addEventListener('click', () => choose(i));
+        box.append(b);
+      });
+      choose(chosen, false);
+    }
+    function choose(i, focus = true) {
+      chosen = i;
+      [...$('slots').children].forEach((b, k) => { b.setAttribute('aria-checked', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
+      if (focus) $('slots').children[i].focus();
+    }
+    $('slots').addEventListener('keydown', (e) => {
+      const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+      if (!step) return;
+      e.preventDefault();
+      const n = $('slots').children.length;
+      choose((chosen + step + n) % n);
+    });
+
+    function openBag() { chosen = 0; renderSlots(); $('bag').hidden = false; $('backdrop').hidden = false; $('bag-close').focus(); }
     function closeBag() { $('bag').hidden = true; $('backdrop').hidden = true; $('bag-btn').focus(); }
     $('bag-btn').addEventListener('click', openBag);
     $('bag-close').addEventListener('click', closeBag);
@@ -415,7 +458,8 @@
 
     $('place').addEventListener('click', () => {
       const count = [...bag.values()].reduce((a, b) => a + b, 0);
-      demo(`Order placed: ${count} item${count === 1 ? '' : 's'}.`);
+      const { times, tomorrow } = pickupSlots(Number(clock.value));
+      demo(`${count} item${count === 1 ? '' : 's'} ordered for pickup at ${clockText(times[chosen] ?? times[0])}${tomorrow ? ' tomorrow' : ''}.`);
       bag.clear(); renderBag();
       if (!$('bag').hidden) closeBag();
     });
