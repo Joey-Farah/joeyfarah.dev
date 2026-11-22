@@ -77,6 +77,13 @@ describe('/showcase gallery', () => {
     }
   });
 
+  it('publishes the website subscription: a monthly price, $0 down, and when the site becomes theirs', () => {
+    const offer = doc.querySelector('[data-offer]')?.textContent?.replace(/\s+/g, ' ') ?? '';
+    expect(offer).toMatch(/\$\d+ ?\/ ?month/i);
+    expect(offer).toMatch(/\$0 down/i);
+    expect(offer).toMatch(/yours/i);
+  });
+
   it('labels the concepts as made-up businesses', () => {
     expect(doc.body.textContent).toMatch(/made-up/i);
   });
