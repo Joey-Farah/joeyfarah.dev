@@ -16,6 +16,7 @@
   "headers": [
     { "source": "/work(/.*)?", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] },
     { "source": "/showcase(/.*)?", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] },
-    { "source": "/work/(.*)\\.woff2", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
+    { "source": "/work/(.*)\\.woff2", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
+    { "source": "/showcase/(.*)\\.woff2", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
   ]
 }

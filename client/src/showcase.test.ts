@@ -47,6 +47,15 @@ describe('/showcase routing', () => {
     const rule = vercel.headers?.find((h: { source: string }) => h.source === '/showcase(/.*)?');
     expect(rule?.headers).toContainEqual({ key: 'X-Robots-Tag', value: 'noindex' });
   });
+
+  it("caches the concepts' fonts for a year (bump the -vN suffix when one changes)", () => {
+    const rule = vercel.headers?.find((h: { source: string }) => h.source === '/showcase/(.*)\\.woff2');
+    expect(rule?.headers).toContainEqual({ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' });
+    for (const slug of concepts) {
+      const fonts = readdirSync(path.join(showcaseDir, slug)).filter((f) => f.endsWith('.woff2'));
+      for (const f of fonts) expect(f).toMatch(/-v\d+\.woff2$/);
+    }
+  });
 });
 
 describe('/showcase gallery', () => {
