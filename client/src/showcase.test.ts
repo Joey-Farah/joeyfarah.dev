@@ -89,6 +89,11 @@ describe('/showcase gallery', () => {
     expect(offer).toMatch(/yours/i);
   });
 
+  it('says what happens after 12 months: stay on at the same price, or take the site with them', () => {
+    const offer = doc.querySelector('[data-offer]')?.textContent?.replace(/\s+/g, ' ') ?? '';
+    expect(offer).toMatch(/stay on for \$19 a month, or take it with you/i);
+  });
+
   it("says the site connects to the business's own payment apps and their customers' money never passes through JEF", () => {
     const offer = doc.querySelector('[data-offer]')?.textContent?.replace(/\s+/g, ' ') ?? '';
     expect(offer).toMatch(/apps? you already use/i);
