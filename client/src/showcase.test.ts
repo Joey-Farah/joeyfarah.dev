@@ -43,6 +43,11 @@ describe('/showcase routing', () => {
     }
   });
 
+  it('has Lighthouse CI test every page, not only the first five it finds', () => {
+    const lhci = JSON.parse(readFileSync(path.join(repoRoot, 'lighthouserc.json'), 'utf8'));
+    expect(lhci.ci.collect.maxAutodiscoverUrls).toBe(0);
+  });
+
   it('sends X-Robots-Tag: noindex for everything under /showcase', () => {
     const rule = vercel.headers?.find((h: { source: string }) => h.source === '/showcase(/.*)?');
     expect(rule?.headers).toContainEqual({ key: 'X-Robots-Tag', value: 'noindex' });
@@ -84,6 +89,10 @@ describe('/showcase gallery', () => {
     expect(offer).toMatch(/yours/i);
   });
 
+  it("keeps the Main Street building links reachable by screen readers (no link inside role=img)", () => {
+    for (const a of doc.querySelectorAll('.street a')) expect(a.closest('[role="img"]')).toBeNull();
+  });
+
   it('labels the concepts as made-up businesses', () => {
     expect(doc.body.textContent).toMatch(/made-up/i);
   });
@@ -119,6 +128,11 @@ describe.each(concepts)('concept: %s', (slug) => {
     expect(banner?.textContent).toContain('Concept site by JEF Consulting');
     expect(banner?.textContent).toMatch(/made-up business/i);
     expect(banner?.querySelector('a[href="/showcase"]')).not.toBeNull();
+  });
+
+  it('gives every element a unique id', () => {
+    const ids = [...doc.querySelectorAll('[id]')].map((el) => el.id);
+    expect(ids.filter((id, i) => ids.indexOf(id) !== i)).toEqual([]);
   });
 
   it('uses only fictional phone numbers (555-01xx)', () => {
