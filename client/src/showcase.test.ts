@@ -89,6 +89,12 @@ describe('/showcase gallery', () => {
     expect(offer).toMatch(/yours/i);
   });
 
+  it("says the site connects to the business's own payment apps and their customers' money never passes through JEF", () => {
+    const offer = doc.querySelector('[data-offer]')?.textContent?.replace(/\s+/g, ' ') ?? '';
+    expect(offer).toMatch(/apps? you already use/i);
+    expect(offer).toMatch(/pay you directly/i);
+  });
+
   it("keeps the Main Street building links reachable by screen readers (no link inside role=img)", () => {
     for (const a of doc.querySelectorAll('.street a')) expect(a.closest('[role="img"]')).toBeNull();
   });
