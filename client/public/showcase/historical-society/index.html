@@ -343,7 +343,15 @@
     function go(i) { at = i; render(); walkTo(i); }
     function render() {
       const s = STOPS[at];
-      if (!s) {
+      if (at === STOPS.length) {
+        $('stop-kicker').textContent = 'Tour complete';
+        $('stop-title').textContent = 'You walked 170 years of Halvorsen Falls';
+        $('stop-when').textContent = '';
+        $('stop-story').textContent = 'The museum is right behind you: three rooms of the town\'s history in the old schoolhouse, free, Thursday to Sunday.';
+        $('stop-next').textContent = 'Six stops, 1.1 miles. Thanks for walking with us.';
+        $('tour-next').textContent = 'Walk it again';
+        $('tour-prev').hidden = true;
+      } else if (!s) {
         $('stop-kicker').textContent = 'The walking tour';
         $('stop-title').textContent = 'Six stops, about 40 minutes';
         $('stop-when').textContent = '';
@@ -370,6 +378,8 @@
 
     $('tour-next').addEventListener('click', () => {
       if (at < STOPS.length - 1) go(at + 1);
+      else if (at === STOPS.length - 1) { at = STOPS.length; render(); }
+      else { place(0); go(0); } // walk it again, from the start
     });
 
     $('tour-prev').addEventListener('click', () => { if (at > 0) go(at - 1); });

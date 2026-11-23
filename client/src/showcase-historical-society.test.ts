@@ -63,4 +63,21 @@ describe('Historical Society: walking tour', () => {
     expect(prev.getAttribute('aria-disabled')).toBe('true');
     expect(doc.activeElement).toBe(prev); // aria-disabled, not disabled, so focus stays put
   });
+
+  it('the last stop finishes the tour, invites you into the museum, and can start over', () => {
+    const doc = open();
+    doc.querySelectorAll<HTMLButtonElement>('.pin')[5].click();
+    expect(card(doc)).toMatch(/Last stop/);
+    expect(primary(doc).textContent).toMatch(/finish the tour/i);
+    primary(doc).click();
+    expect(card(doc)).toMatch(/tour complete/i);
+    expect(card(doc)).toMatch(/museum/i);
+    expect(doc.querySelectorAll('.pin.visited')).toHaveLength(6);
+    expect(doc.querySelector('.pin[aria-current]')).toBeNull();
+    expect((doc.getElementById('tour-prev') as HTMLButtonElement).hidden).toBe(true);
+    expect(primary(doc).textContent).toMatch(/walk it again/i);
+    primary(doc).click();
+    expect(card(doc)).toMatch(/Stop 1 of 6/);
+    expect(doc.getElementById('walker')!.dataset.stop).toBe('1');
+  });
 });
