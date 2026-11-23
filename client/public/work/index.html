@@ -66,6 +66,16 @@
   .ba .after dt { color: var(--teal); }
   .ba .after dd { font-weight: 600; }
   
+  .examples { padding-block: 3.5rem 1rem; border-top: 1px solid var(--line); }
+  .examples > p { max-width: 36rem; color: var(--ink-soft); margin: 0; }
+  .shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin: 2rem 0; max-width: 46rem; }
+  .shots a { display: block; text-decoration: none; }
+  .shots img { display: block; width: 100%; height: auto; border-radius: 1.25rem; background: var(--sky); }
+  .shots b { display: block; font-stretch: 112%; font-weight: 800; font-size: 1.2rem; letter-spacing: -.01em; margin-top: .8rem; line-height: 1.15; }
+  .shots span { display: block; color: var(--ink-soft); font-size: .95rem; margin-top: .2rem; }
+  .see { display: inline-block; font-weight: 700; color: var(--teal); border: 2px solid var(--teal); border-radius: .75rem; padding: .75rem 1.25rem; text-decoration: none; }
+  .see:hover { background: var(--teal); color: #fff; }
+
   .promises { background: var(--teal); color: #fff; margin-top: 3rem; }
   .promises .wrap { padding-block: 4.5rem; }
   .promises h2 { color: #fff; }
@@ -85,6 +95,7 @@
     .spread { grid-template-columns: 1fr 1fr; gap: 4rem; padding-block: 3.5rem; }
     .spread:nth-of-type(even) .art { order: 2; }
     .plist { grid-template-columns: repeat(2, 1fr); gap: 2.25rem 3rem; }
+    .shots { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none; gap: 1.5rem; }
   }
   </style>
 </head>
@@ -169,6 +180,16 @@
     <div><h3>Custom tools</h3>
       <dl class="ba"><div><dt>Before</dt><dd>A paper sign-up sheet and a map taped to the door.</dd></div><div class="after"><dt>After</dt><dd>A walking tour on visitors' phones, or a sign-up page that fills itself. Whatever the job needs.</dd></div></dl></div>
   </article>
+
+  <section class="examples">
+    <h2>Tap through a few.</h2>
+    <p>Concept sites I built for made-up businesses in a made-up Minnesota town. Each one does something your site could.</p>
+    <div class="shots">
+      <a href="/showcase/pine-and-pitch"><img src="/showcase/shots/pine-and-pitch.webp" width="390" height="700" alt="Pine and Pitch Climbing's site on a phone: a climbing wall hero and a route picker" loading="lazy"><b>Pine &amp; Pitch Climbing</b><span>Pick this week's routes, book a class.</span></a>
+      <a href="/showcase/ember-and-oat"><img src="/showcase/shots/ember-and-oat.webp" width="390" height="700" alt="Ember and Oat's site on a phone: a café window at golden hour and the evening menu" loading="lazy"><b>Ember &amp; Oat</b><span>Drag the sun; the menu follows the time of day.</span></a>
+    </div>
+    <a class="see" href="/showcase">See all the examples</a>
+  </section>
 </div>
 
 <section class="promises">
