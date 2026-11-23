@@ -118,7 +118,6 @@
     /* bag sheet */
     .backdrop { position: fixed; inset: 0; background: rgba(43,28,21,.45); z-index: 20; }
     .sheet { position: fixed; z-index: 21; left: 0; right: 0; bottom: 0; max-height: 85vh; overflow-y: auto; background: var(--cream); border-radius: 1.25rem 1.25rem 0 0; padding: 1.25rem 1.25rem 1.5rem; box-shadow: 0 -20px 40px rgba(43,28,21,.25); display: grid; gap: 1rem; align-content: start; }
-    .sheet[hidden], .backdrop[hidden] { display: none; }
     .sheet header { display: flex; align-items: center; justify-content: space-between; }
     .sheet h2 { font: 700 1.8rem/1 var(--display); margin: 0; }
     .x { border: 0; background: var(--cream-2); width: 2.4rem; height: 2.4rem; border-radius: 50%; font-size: 1.3rem; line-height: 1; }
@@ -146,6 +145,8 @@
       .sheet { left: auto; top: 0; width: 26rem; max-height: none; border-radius: 1.25rem 0 0 1.25rem; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+    /* Last, so a hidden element stays hidden whatever display its class sets. */
+    [hidden] { display: none !important; }
   </style>
 </head>
 <body>
@@ -170,7 +171,7 @@
             <pattern id="bricks" width="64" height="26" patternUnits="userSpaceOnUse"><path d="M0 .75H64M0 13.75H64M.75 0V13M32.75 13V26" stroke="#6e2618" stroke-opacity=".28" stroke-width="1.5" fill="none"/></pattern>
             <radialGradient id="fire-glow"><stop offset="0" stop-color="#ffb04a" stop-opacity=".9"/><stop offset="1" stop-color="#ffb04a" stop-opacity="0"/></radialGradient>
             <radialGradient id="warm-glow"><stop offset="0" stop-color="#ffe0a0" stop-opacity=".8"/><stop offset="1" stop-color="#ffe0a0" stop-opacity="0"/></radialGradient>
-            <linearGradient id="spill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc56b" stop-opacity=".5"/><stop offset="1" stop-color="#ffc56b" stop-opacity="0"/></linearGradient>
+            <linearGradient id="spill-glow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc56b" stop-opacity=".5"/><stop offset="1" stop-color="#ffc56b" stop-opacity="0"/></linearGradient>
             <mask id="crescent"><rect x="-30" y="-30" width="60" height="60" fill="#fff"/><circle cx="10" cy="-7" r="19" fill="#000"/></mask>
             <clipPath id="pane"><rect x="440" y="440" width="320" height="140"/></clipPath>
             <clipPath id="awning-shape"><path d="M420 380H780L802 422H398Z"/></clipPath>
@@ -267,7 +268,7 @@
             <text id="open-text" x="483" y="467.5" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="12" letter-spacing="1" fill="#a2412c">OPEN</text>
             <path id="glare" d="M440 580L520 440H566L486 580Z" fill="#fff" opacity=".18"/>
           </g>
-          <path id="spill" d="M430 610H770L830 660H370Z" fill="url(#spill)" opacity="0"/>
+          <path id="spill" d="M430 610H770L830 660H370Z" fill="url(#spill-glow)" opacity="0"/>
           <circle class="sconce" cx="411" cy="446" r="46" fill="url(#warm-glow)" opacity="0"/><circle class="sconce" cx="789" cy="446" r="46" fill="url(#warm-glow)" opacity="0"/>
         </svg>
       </div>
@@ -313,7 +314,7 @@
   <footer class="site"><div class="wrap">Ember &amp; Oat, Halvorsen Falls. A concept site by JEF Consulting.</div></footer>
 
   <div class="backdrop" id="backdrop" hidden></div>
-  <aside class="sheet" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title" hidden>
+  <div class="sheet" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title" hidden>
     <header><h2 id="bag-title">Your order</h2><button class="x" id="bag-close" type="button" aria-label="Close your order">×</button></header>
     <p class="empty" id="bag-empty">Your bag is empty. Tap + on anything that looks good.</p>
     <ul class="lines" id="bag-lines"></ul>
@@ -323,7 +324,7 @@
     </div>
     <div class="total" id="bag-total-row" hidden><span>Subtotal</span><span id="bag-total">$0</span></div>
     <button class="place" id="place" type="button" data-demo hidden>Place order</button>
-  </aside>
+  </div>
   <div class="notice" data-demo-notice role="status" aria-live="polite"></div>
 
   <script>
@@ -407,10 +408,13 @@
       for (const [id, q] of bag) {
         const li = document.createElement('li');
         li.className = 'line';
-        li.innerHTML = `<b>${ITEMS[id].name}</b><span class="qty"><button type="button" aria-label="One fewer ${ITEMS[id].name}">−</button><span>${q}</span><button type="button" aria-label="One more ${ITEMS[id].name}">+</button></span><span>${money(ITEMS[id].price * q)}</span>`;
+        li.innerHTML = `<b>${ITEMS[id].name}</b><span class="qty"><button type="button" data-act="less" aria-label="One fewer ${ITEMS[id].name}">−</button><span>${q}</span><button type="button" data-act="more" aria-label="One more ${ITEMS[id].name}">+</button></span><span>${money(ITEMS[id].price * q)}</span>`;
+        li.dataset.id = id;
         const [less, more] = li.querySelectorAll('button');
-        less.addEventListener('click', () => { q > 1 ? bag.set(id, q - 1) : bag.delete(id); renderBag(); });
-        more.addEventListener('click', () => { bag.set(id, q + 1); renderBag(); });
+        // Redrawing replaces the buttons, so put focus back on the same one (or on Close if the line is gone).
+        const refocus = (act) => (lines.querySelector(`[data-id="${id}"] [data-act="${act}"]`) ?? $('bag-close')).focus();
+        less.addEventListener('click', () => { q > 1 ? bag.set(id, q - 1) : bag.delete(id); renderBag(); refocus('less'); });
+        more.addEventListener('click', () => { bag.set(id, q + 1); renderBag(); refocus('more'); });
         lines.append(li);
       }
     }
@@ -422,9 +426,10 @@
       if (first >= CLOSE) { first = OPEN; tomorrow = true; } else first = Math.max(first, OPEN);
       return { times: [0, 15, 30, 45].map((k) => first + k).filter((x) => x < CLOSE), tomorrow };
     }
-    let chosen = 0;
+    let chosen = 0, shown = { times: [], tomorrow: false };
     function renderSlots() {
-      const { times, tomorrow } = pickupSlots(Number(clock.value));
+      shown = pickupSlots(Number(clock.value));
+      const { times, tomorrow } = shown;
       chosen = Math.min(chosen, times.length - 1);
       $('pickup-label').textContent = tomorrow ? 'Pick up tomorrow' : 'Pick up today';
       const box = $('slots'); box.innerHTML = '';
@@ -449,8 +454,10 @@
       choose((chosen + step + n) % n);
     });
 
-    function openBag() { chosen = 0; renderSlots(); $('bag').hidden = false; $('backdrop').hidden = false; $('bag-close').focus(); }
-    function closeBag() { $('bag').hidden = true; $('backdrop').hidden = true; $('bag-btn').focus(); }
+    // While the bag is open the page behind it is inert, so Tab and screen readers stay in the bag.
+    const behind = () => document.querySelectorAll('body > :not(#bag):not(#backdrop):not([data-demo-notice]):not(script)');
+    function openBag() { chosen = 0; renderSlots(); behind().forEach((el) => { el.inert = true; el.setAttribute('inert', ''); }); $('bag').hidden = false; $('backdrop').hidden = false; $('bag-close').focus(); }
+    function closeBag() { behind().forEach((el) => { el.inert = false; el.removeAttribute('inert'); }); $('bag').hidden = true; $('backdrop').hidden = true; $('bag-btn').focus(); }
     $('bag-btn').addEventListener('click', openBag);
     $('bag-close').addEventListener('click', closeBag);
     $('backdrop').addEventListener('click', closeBag);
@@ -458,7 +465,7 @@
 
     $('place').addEventListener('click', () => {
       const count = [...bag.values()].reduce((a, b) => a + b, 0);
-      const { times, tomorrow } = pickupSlots(Number(clock.value));
+      const { times, tomorrow } = shown;
       demo(`${count} item${count === 1 ? '' : 's'} ordered for pickup at ${clockText(times[chosen] ?? times[0])}${tomorrow ? ' tomorrow' : ''}.`);
       bag.clear(); renderBag();
       if (!$('bag').hidden) closeBag();
@@ -471,7 +478,7 @@
       const at = /^(\d{1,2}):(\d{2})$/.exec(new URLSearchParams(location.search).get('at') ?? '');
       const now = new Date();
       const t = at ? Number(at[1]) * 60 + Number(at[2]) : now.getHours() * 60 + now.getMinutes();
-      return Math.min(MAX, Math.max(MIN, Math.round(t / 5) * 5));
+      return Math.min(MAX, Math.max(MIN, Math.floor(t / 5) * 5));
     }
     // ---- the scene ----
     const W = 1200, H = 660, PAD = 70;
@@ -601,8 +608,10 @@
     }
     function scrubTo(clientX) { clock.value = timeAtX(clientX); setTime(Number(clock.value), true); }
     scene.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, on: false, id: e.pointerId }; });
+    const endDrag = () => { drag = null; scene.classList.remove('dragging'); };
     scene.addEventListener('pointermove', (e) => {
       if (!drag) return;
+      if (e.buttons === 0) return endDrag(); // released outside the scene, before capture began
       if (!drag.on && Math.abs(e.clientX - drag.x) > 6 && Math.abs(e.clientX - drag.x) > Math.abs(e.clientY - drag.y)) {
         drag.on = true; scene.classList.add('dragging');
         try { scene.setPointerCapture(drag.id); } catch {}
@@ -610,7 +619,8 @@
       if (drag.on) { e.preventDefault(); scrubTo(e.clientX); }
     });
     scene.addEventListener('pointerup', (e) => { if (drag && !drag.on) scrubTo(e.clientX); drag = null; scene.classList.remove('dragging'); });
-    scene.addEventListener('pointercancel', () => { drag = null; scene.classList.remove('dragging'); });
+    scene.addEventListener('pointercancel', endDrag);
+    window.addEventListener('pointerup', endDrag);
     window.addEventListener('resize', () => { measure(); paint(Number(clock.value)); });
     measure();
     clock.addEventListener('input', () => setTime(Number(clock.value), true));
