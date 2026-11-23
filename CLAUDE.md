@@ -87,7 +87,7 @@ A wow-first gallery Joey can text to a prospect: "a tour of Halvorsen Falls," a 
 1. ~~Joey reviews Pine & Pitch~~ (approved 2026-11-22). **Ember & Oat built 2026-11-22**: drag the sun across an illustrated café front (slider or sideways drag on the scene) and the light, the window and the menu follow the time of day; pickup times follow the clock; `?at=HH:MM` sets the starting time. Behavior tests in `client/src/showcase-ember-and-oat.test.ts`. **Next: Joey reviews it on his phone** at the branch preview (`https://joeyfarah-dev-git-showcase-tracer-joey-farahs-projects.vercel.app/showcase/ember-and-oat`, Vercel login required).
 2. Build the remaining three concepts, one slice each, each with its own look and one interactive wow moment: Historical Society (illustrated walking-tour map), Larch Street Dental (appointment picker), Fjeldheim Builders (before/after slider, quote form). For each: add a folder, make its Main Street building a link, add a gallery card and a `/work` examples card, run `npm run shots`, and remove it from "Opening soon."
 3. ~~Link `/work` → `/showcase`~~ (done 2026-11-22: "Tap through a few." section with a preview per concept; four across on desktop).
-4. No Mistakes (fresh review, PR body), then merge with Joey's OK. **Merging to `main` deploys to production.**
+4. ~~Fresh review and PR body~~ (done 2026-11-22: a fresh-eyes review found 5 Ember & Oat bugs and some accessibility gaps, all fixed with tests; PR body rewritten). Re-run a review after the last concepts land, then merge with Joey's OK. **Merging to `main` deploys to production.**
 5. Later: add Afton as the first real client example after the Oct 12 proposal (confirm with the Afton session); Status gym only once Lucas agrees.
 
 ### Build
