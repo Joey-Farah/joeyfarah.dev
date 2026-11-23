@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#2a2420">
+  <title>Halvorsen Falls Historical Society · Concept site</title>
+  <link rel="preload" href="/showcase/historical-society/playfair-v1.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f5efe2'/%3E%3Cpath d='M6 15 16 7l10 8z' fill='%232a2420'/%3E%3Crect x='8' y='15' width='16' height='11' fill='%23a3402a'/%3E%3Crect x='14' y='19' width='4' height='7' fill='%232a2420'/%3E%3C/svg%3E">
+  <style>
+    @font-face {
+      font-family: "Playfair Display";
+      src: url("/showcase/historical-society/playfair-v1.woff2") format("woff2");
+      font-weight: 600 900;
+      font-display: swap;
+    }
+    /* Layout: the walking tour first (map, walker, the story of each stop), then the museum and a visit block. */
+    :root {
+      --paper: #f5efe2;
+      --paper-2: #ebe2cf;
+      --ink: #2a2420;
+      --muted: #6b6157;
+      --brick: #a3402a;
+      --river: #3d7a99;
+      --pine: #3f5d3a;
+      --gold: #c9962e;
+      --display: "Playfair Display", Georgia, "Times New Roman", serif;
+      --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 1rem; line-height: 1.55; }
+    a { color: inherit; }
+    button { font: inherit; cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .wrap { max-width: 68rem; margin: 0 auto; padding-inline: 1.25rem; }
+
+    /* concept banner (JEF chrome, not part of the made-up brand) */
+    .concept { background: #0e7490; color: #fff; font: 500 .82rem/1.4 system-ui, sans-serif; }
+    .concept .wrap { display: flex; flex-wrap: wrap; gap: .25rem 1rem; justify-content: space-between; padding-block: .55rem; }
+    .concept a { font-weight: 700; }
+
+    /* nav */
+    .nav { border-bottom: 1px solid #d9cdb4; }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .8rem; }
+    .logo { text-decoration: none; line-height: 1.05; }
+    .logo small { display: block; font: 700 .68rem/1 var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--brick); }
+    .logo b { font: 800 1.2rem/1.1 var(--display); }
+    .nav ul { display: none; list-style: none; margin: 0; padding: 0; gap: 1.5rem; font-weight: 600; font-size: .95rem; }
+    .nav ul a { text-decoration: none; }
+    .cta { background: var(--ink); color: var(--paper); border-radius: 999px; padding: .55rem 1rem; font-weight: 700; text-decoration: none; white-space: nowrap; font-size: .92rem; }
+
+    /* the tour */
+    .tour { padding-block: 1.5rem 3rem; }
+    .tour .wrap { display: grid; gap: 1.25rem; }
+    .intro h1 { font: 900 clamp(2.1rem, 9vw, 3.8rem)/1.02 var(--display); margin: 0; letter-spacing: -.01em; }
+    .intro p { margin: .5rem 0 0; color: var(--muted); max-width: 32rem; }
+    .map { position: relative; aspect-ratio: 360 / 440; width: 100%; max-width: 34rem; border-radius: 1.25rem; overflow: hidden; background: #efe6d2; box-shadow: 0 1px 0 #d9cdb4, 0 18px 40px -24px rgba(42,36,32,.45); }
+    .map svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .pin { position: absolute; transform: translate(-50%, -50%); width: 2.4rem; height: 2.4rem; border-radius: 50%; border: 3px solid var(--ink); background: var(--paper); color: var(--ink); font: 800 1.05rem/1 var(--display); display: grid; place-items: center; padding: 0; transition: background .3s, color .3s, transform .3s; }
+    .pin.visited { background: var(--ink); color: var(--paper); }
+    .pin[aria-current="step"] { background: var(--brick); border-color: var(--brick); color: #fff; transform: translate(-50%, -50%) scale(1.12); }
+    .walker { position: absolute; width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--gold); border: 3px solid #fff; box-shadow: 0 0 0 2px var(--ink); transform: translate(-50%, -50%); pointer-events: none; z-index: 2; }
+    .walker::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; border: 2px solid var(--gold); animation: pulse 1.8s ease-out infinite; }
+    @keyframes pulse { from { transform: scale(.5); opacity: 1; } to { transform: scale(1.4); opacity: 0; } }
+
+    .card { background: #fffdf8; border: 1px solid #d9cdb4; border-radius: 1.25rem; padding: 1.25rem 1.25rem 1.1rem; display: grid; gap: .5rem; align-content: start; }
+    .kicker { font: 700 .75rem/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--brick); }
+    .card h2 { font: 800 1.85rem/1.08 var(--display); margin: 0; }
+    .when { margin: 0; font-weight: 700; color: var(--river); font-size: .92rem; }
+    .when:empty { display: none; }
+    .story { margin: 0; }
+    .next-up { margin: .25rem 0 0; font-size: .92rem; color: var(--muted); border-top: 1px dashed #d9cdb4; padding-top: .6rem; }
+    .actions { display: flex; gap: .5rem; margin-top: .5rem; flex-wrap: wrap; }
+    .btn { border: 2px solid var(--ink); border-radius: 999px; padding: .65rem 1.15rem; font-weight: 700; background: transparent; color: var(--ink); }
+    .btn.primary { background: var(--ink); color: var(--paper); flex: 1; }
+    .btn[aria-disabled="true"] { opacity: .35; cursor: default; }
+    .locate { justify-self: start; background: none; border: 0; padding: .25rem 0; color: var(--river); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* sections */
+    section.block { padding-block: 3.5rem; border-top: 1px solid #d9cdb4; }
+    .block h2 { font: 900 clamp(2rem, 7vw, 3rem)/1.05 var(--display); margin: 0 0 .5rem; }
+    .lede { color: var(--muted); max-width: 34rem; margin: 0 0 2rem; }
+    .exhibits { display: grid; gap: 1rem; }
+    .exhibit { background: var(--paper-2); border-radius: 1.25rem; padding: 1.25rem; display: grid; grid-template-columns: 3.5rem 1fr; gap: .25rem 1rem; align-items: start; }
+    .exhibit svg { grid-row: span 2; width: 3.5rem; height: 3.5rem; }
+    .exhibit h3 { margin: 0; font: 800 1.2rem/1.2 var(--display); }
+    .exhibit p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+    .visit { background: var(--ink); color: #efe6d2; border-top: 0; }
+    .visit .wrap { display: grid; gap: 2rem; }
+    .visit h2 { color: #fff; }
+    .visit .lede { color: #cfc4b2; }
+    .hours { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .hours td { padding: .45rem 0; border-bottom: 1px solid rgba(255,255,255,.16); }
+    .hours td + td { text-align: right; }
+    .visit address { font-style: normal; display: grid; gap: .3rem; font-size: 1.05rem; margin-bottom: 1.5rem; }
+    .support { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .support button { border: 0; border-radius: 999px; padding: .75rem 1.2rem; font-weight: 700; background: var(--gold); color: var(--ink); }
+    .support button + button { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.5); }
+    footer.site { background: var(--ink); color: #b5aa98; font-size: .85rem; padding-block: 1.5rem; border-top: 1px solid rgba(255,255,255,.12); }
+
+    .notice { position: fixed; left: 50%; bottom: 1.25rem; transform: translate(-50%, 150%); background: var(--ink); color: #fff; padding: .85rem 1.1rem; border-radius: .9rem; font-size: .92rem; max-width: calc(100% - 2rem); width: max-content; box-shadow: 0 12px 30px rgba(0,0,0,.3); transition: transform .3s, visibility .3s; visibility: hidden; z-index: 10; }
+    .notice.show { transform: translate(-50%, 0); visibility: visible; }
+    .notice b { color: var(--gold); }
+
+    @media (min-width: 48rem) {
+      .nav ul { display: flex; }
+      .tour { padding-block: 3rem 4rem; }
+      .tour .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); grid-template-areas: "intro map" "card map"; align-items: start; column-gap: 2.5rem; }
+      .intro { grid-area: intro; }
+      .map { grid-area: map; justify-self: end; }
+      .card { grid-area: card; }
+      .exhibits { grid-template-columns: repeat(3, 1fr); }
+      .exhibit { grid-template-columns: 1fr; }
+      .exhibit svg { grid-row: auto; }
+      .visit .wrap { grid-template-columns: 1fr 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="concept" data-concept-banner>
+    <div class="wrap"><span>Concept site by JEF Consulting. The Halvorsen Falls Historical Society is a made-up business.</span><a href="/showcase">See all concepts</a></div>
+  </div>
+
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="#top"><small>Halvorsen Falls</small><b>Historical Society</b></a>
+      <ul><li><a href="#tour">Walking tour</a></li><li><a href="#museum">Museum</a></li><li><a href="#visit">Visit</a></li></ul>
+      <a class="cta" href="#visit">Visit</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="tour" id="tour">
+      <div class="wrap">
+        <div class="intro">
+          <h1>Walk 170 years in 40 minutes</h1>
+          <p>A free walking tour of Halvorsen Falls, right on your phone. No app to download.</p>
+        </div>
+
+        <div class="map" id="map" role="group" aria-label="Tour map">
+          <svg viewBox="0 0 360 440" aria-hidden="true">
+            <!-- ground: the hill the schoolhouse sits on, and the park at the falls -->
+            <ellipse cx="300" cy="400" rx="120" ry="70" fill="#e6dbc1"/>
+            <ellipse cx="300" cy="400" rx="80" ry="42" fill="#dfd2b4"/>
+            <path d="M205 175q20-30 50-20l10 45q-30 25-60 10z" fill="#cfd9b8"/>
+            <!-- blocks -->
+            <g fill="#e2d6bc">
+              <rect x="20" y="96" width="62" height="42" rx="3"/><rect x="110" y="96" width="70" height="42" rx="3"/><rect x="190" y="96" width="34" height="42" rx="3"/>
+              <rect x="20" y="162" width="62" height="58" rx="3"/><rect x="110" y="162" width="70" height="58" rx="3"/>
+              <rect x="20" y="244" width="62" height="56" rx="3"/><rect x="110" y="244" width="50" height="30" rx="3"/>
+              <rect x="20" y="318" width="40" height="40" rx="3"/>
+            </g>
+            <!-- railroad -->
+            <path d="M0 66H360" stroke="#6b6157" stroke-width="2"/>
+            <path d="M0 66H360" stroke="#6b6157" stroke-width="7" stroke-dasharray="1.5 6"/>
+            <!-- streets -->
+            <g stroke="#fbf6ea" stroke-width="9" stroke-linecap="round" fill="none">
+              <path d="M96 44V372"/><path d="M14 84H300"/><path d="M96 150H250"/><path d="M14 232H196"/>
+              <path d="M282 108 344 36"/><path d="M96 270 140 296 160 308"/><path d="M196 334 262 372 352 408"/>
+            </g>
+            <!-- the Halvorsen River and the falls -->
+            <path d="M380 10C330 80 305 140 275 190S195 285 165 318 70 398-20 440" stroke="#7fb0c6" stroke-width="38" fill="none"/>
+            <path d="M380 10C330 80 305 140 275 190S195 285 165 318 70 398-20 440" stroke="#a9cfe0" stroke-width="28" fill="none"/>
+            <g stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M258 182l26 14M255 189l25 14M252 196l24 13"/></g>
+            <!-- the swinging bridge -->
+            <path d="M150 300 184 330" stroke="#8a5a3c" stroke-width="4" stroke-linecap="round"/>
+            <!-- labels -->
+            <g font-family="system-ui, sans-serif" font-weight="700" fill="#6b6157" font-size="8.5" letter-spacing="1.5">
+              <text x="290" y="174" transform="rotate(-58 290 174)">HALVORSEN RIVER</text>
+              <text x="91" y="352" transform="rotate(-90 91 352)">MAIN ST</text>
+              <text x="186" y="146">MILL ST</text>
+              <text x="250" y="60">RAILROAD</text>
+            </g>
+            <text x="128" y="174" font-family="system-ui, sans-serif" font-size="8" fill="#a3402a" font-weight="700">Ember &amp; Oat</text>
+            <!-- north arrow -->
+            <g transform="translate(330 420)"><path d="M0-14 5 2H-5z" fill="#2a2420"/><text y="12" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="#2a2420">N</text></g>
+            <!-- the route: dotted to walk, solid where you've been -->
+            <path id="route" d="" fill="none" stroke="#a3402a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.5 7"/>
+            <path id="walked" d="" fill="none" stroke="#a3402a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 10000"/>
+          </svg>
+          <div class="walker" id="walker" hidden></div>
+        </div>
+
+        <div class="card" id="stop-card" aria-live="polite">
+          <div class="kicker" id="stop-kicker"></div>
+          <h2 id="stop-title"></h2>
+          <p class="when" id="stop-when"></p>
+          <p class="story" id="stop-story"></p>
+          <p class="next-up" id="stop-next"></p>
+          <div class="actions">
+            <button class="btn" type="button" id="tour-prev" hidden>Previous</button>
+            <button class="btn primary" type="button" id="tour-next"></button>
+          </div>
+          <button class="locate" type="button" id="locate" data-demo>Show where I am</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="museum">
+      <div class="wrap">
+        <h2>Inside the schoolhouse</h2>
+        <p class="lede">The tour ends at our museum, in the town's first brick school. Three rooms, free to visit.</p>
+        <div class="exhibits">
+          <article class="exhibit">
+            <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="22" fill="none" stroke="#3d7a99" stroke-width="4"/><circle cx="28" cy="28" r="5" fill="#3d7a99"/><path d="M28 6v44M6 28h44M12.4 12.4l31.2 31.2M43.6 12.4 12.4 43.6" stroke="#3d7a99" stroke-width="3"/></svg>
+            <h3>The mill that fed the valley</h3>
+            <p>Ledgers, grain scales and a working model of the mill wheel.</p>
+          </article>
+          <article class="exhibit">
+            <svg viewBox="0 0 56 56" aria-hidden="true"><rect x="8" y="22" width="40" height="26" rx="3" fill="#a9cfe0" stroke="#2a2420" stroke-width="3"/><path d="M14 22V12h28v10" fill="none" stroke="#2a2420" stroke-width="3"/><path d="M16 30h24M16 38h24" stroke="#fff" stroke-width="3"/></svg>
+            <h3>Ice harvest</h3>
+            <p>Saws and tongs from the winters when the river was cut into blocks and shipped by rail.</p>
+          </article>
+          <article class="exhibit">
+            <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M16 38c0-14 4-24 12-24s12 10 12 24z" fill="#c9962e" stroke="#2a2420" stroke-width="3"/><path d="M12 38h32" stroke="#2a2420" stroke-width="3" stroke-linecap="round"/><circle cx="28" cy="44" r="4" fill="#2a2420"/><path d="M28 14V8" stroke="#2a2420" stroke-width="3"/></svg>
+            <h3>The 1900 classroom</h3>
+            <p>Slates, inkwells and the teacher's bell. Kids are welcome to ring it.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block visit" id="visit">
+      <div class="wrap">
+        <div>
+          <h2>Visit the museum</h2>
+          <p class="lede">Free admission. Donations keep the doors open.</p>
+          <address>
+            <span>2 Schoolhouse Hill, Halvorsen Falls, MN</span>
+            <a href="tel:6125550178">(612) 555-0178</a>
+            <span>visit@halvorsenhistory.example</span>
+          </address>
+          <div class="support">
+            <button type="button" data-demo data-what="Membership, $35 a year.">Become a member, $35 a year</button>
+            <button type="button" data-demo data-what="Group tour request.">Plan a group tour</button>
+          </div>
+        </div>
+        <table class="hours" aria-label="Opening hours">
+          <tr><td>Thursday to Saturday</td><td>10:00 am to 4:00 pm</td></tr>
+          <tr><td>Sunday</td><td>Noon to 4:00 pm</td></tr>
+          <tr><td>Monday to Wednesday</td><td>Closed</td></tr>
+          <tr><td>The walking tour</td><td>Any time</td></tr>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site"><div class="wrap">Halvorsen Falls Historical Society. A concept site by JEF Consulting.</div></footer>
+  <div class="notice" data-demo-notice role="status" aria-live="polite"></div>
+
+  <script>
+  (() => {
+    // Map coordinates are in the SVG's 360 x 440 space.
+    const STOPS = [
+      { name: 'The Falls', when: 'Settled 1854', x: 238, y: 196,
+        story: 'Sigrid and Anders Halvorsen claimed the land beside this 22-foot drop in 1854, and the town grew up around it. In April, when the ice goes out, you can hear the falls from Main Street.' },
+      { name: 'The Granite Mill', when: 'Built 1871', x: 282, y: 108,
+        story: 'Granite from the quarry up the road built this flour mill, and the falls turned its wheel for sixty years. The walls still stand, and now they hold climbing routes: it\'s Pine & Pitch Climbing.' },
+      { name: 'The Depot', when: 'Railroad arrived 1886', x: 96, y: 84,
+        story: 'The railroad reached town in 1886, and Halvorsen Falls doubled in five years. The last passenger train left in 1958, but the waiting room still has its oak benches.' },
+      { name: 'Main Street', when: 'Rebuilt 1902', x: 96, y: 232,
+        story: 'A fire in 1901 took most of the wooden storefronts, and the town rebuilt in brick. Look up: the builders carved their names and the year above the doors.' },
+      { name: 'The Swinging Bridge', when: 'Built 1923, rebuilt 1966', x: 167, y: 315,
+        story: 'Mill workers who lived across the river crossed here twice a day. The spring flood of 1965 took the first bridge. The town rebuilt it the next summer, and it still sways a little.' },
+      { name: 'The Schoolhouse', when: 'Built 1894', x: 262, y: 372,
+        story: 'The town\'s first brick school taught children until 1961. Today it\'s our museum: the mill\'s ledgers, ice-harvest tools, and a classroom set up just like 1900.' },
+    ];
+    const W = 360, H = 440;
+    const $ = (id) => document.getElementById(id);
+    const notice = document.querySelector('[data-demo-notice]');
+    let hideTimer;
+    function demo(what, rest = 'This is a demo, so nothing was sent or charged.') {
+      notice.innerHTML = `<b>${what}</b> ${rest}`;
+      notice.classList.add('show');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => notice.classList.remove('show'), 3600);
+    }
+
+    // Pins: real buttons laid over the map, so they work with a keyboard and a screen reader.
+    const map = $('map');
+    const pins = STOPS.map((s, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'pin'; b.textContent = String(i + 1);
+      b.setAttribute('aria-label', `Stop ${i + 1}: ${s.name}`);
+      b.style.left = `${(s.x / W) * 100}%`; b.style.top = `${(s.y / H) * 100}%`;
+      map.append(b);
+      return b;
+    });
+
+    // -1 is the overview before the tour starts.
+    let at = -1;
+    function render() {
+      const s = STOPS[at];
+      if (!s) {
+        $('stop-kicker').textContent = 'The walking tour';
+        $('stop-title').textContent = 'Six stops, about 40 minutes';
+        $('stop-when').textContent = '';
+        $('stop-story').textContent = 'Start at the falls overlook on River Road. Follow the dot on the map, and read each stop\'s story when you get there.';
+        $('stop-next').textContent = '1.1 miles, mostly flat, with one hill at the end.';
+        $('tour-next').textContent = 'Start the tour';
+      } else {
+        $('stop-kicker').textContent = `Stop ${at + 1} of ${STOPS.length}`;
+        $('stop-title').textContent = s.name;
+        $('stop-when').textContent = s.when;
+        $('stop-story').textContent = s.story;
+      }
+      pins.forEach((p, i) => {
+        if (i === at) p.setAttribute('aria-current', 'step'); else p.removeAttribute('aria-current');
+      });
+    }
+
+    $('tour-next').addEventListener('click', () => {
+      if (at < 0) { at = 0; render(); }
+    });
+
+    $('locate').addEventListener('click', () => demo('Show where I am.', 'This is a demo. On a real tour, your phone\'s location shows on the map.'));
+    document.querySelectorAll('.support [data-demo]').forEach((b) => b.addEventListener('click', () => demo(b.dataset.what)));
+    render();
+  })();
+  </script>
+</body>
+</html>

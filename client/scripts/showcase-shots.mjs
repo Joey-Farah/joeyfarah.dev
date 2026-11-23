@@ -20,7 +20,7 @@ const W = 390, H = 700, SCALE = 2;
 const publicDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../public');
 const showcaseDir = path.join(publicDir, 'showcase');
 // Concepts whose look depends on the visitor's clock get a fixed time, so the preview doesn't change with the hour it's taken.
-const QUERY = { 'ember-and-oat': '?at=18:30' };
+const QUERY = { 'ember-and-oat': '?at=18:30', 'historical-society': '?stop=3' };
 const TYPES = { '.html': 'text/html', '.woff2': 'font/woff2', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg' };
 
 const server = createServer((req, res) => {
