@@ -64,9 +64,9 @@ Hero boot sequence → scroll transition → `IntroSection` (`#joey`) → `WorkS
 ### Client page (`/work`)
 - Plain HTML + inline CSS + inline SVG illustrations, no React, no JS, no third-party requests — must stay fast on a phone scanning a business card. Served via `vercel.json` rewrites placed **before** the SPA catch-all.
 - Magazine-style design (chosen 2026-09-30 over an interactive-demo concept; the first plain-text version was rejected as too boring to sell). Archivo variable font self-hosted as `client/public/work/archivo-v1.woff2` (instanced to wdth 100–125, wght 400–900, Latin subset, ~52 KB; cached immutable — bump the `-vN` suffix if the file changes).
-- Deliberately **not** portfolio-styled: white / ink / teal `#0e7490`, no Oracle, Melee, Patreon, or employer content, no link back to the portfolio. One contact action: `joey@joeyfarah.dev`. Guarded by `client/src/workPage.test.ts`.
+- Deliberately **not** portfolio-styled: white / ink / teal `#0e7490`, no Oracle, Melee, Patreon, or employer content, no link back to the portfolio. One contact action: `joey@joeyfarah.dev`; the only other links go to `/showcase`. Guarded by `client/src/workPage.test.ts`.
 - **noindex** (meta + `X-Robots-Tag` header). `lighthouserc.json` turns off the SEO gate for `/work` only; when dropping noindex, also restore that assertion.
-- Examples section omitted until an example is cleared (brief lives in the JEF Consulting HQ repo, `streams/tech-projects/client-page-brief.md`).
+- Examples section ("Tap through a few.", on branch `showcase-tracer`): phone previews of the showcase concepts, labelled as made-up businesses, plus "See all the examples" → `/showcase`. Add each new concept's card there too. Brief: JEF Consulting HQ `streams/tech-projects/client-page-brief.md`.
 
 ### Showcase (`/showcase`), in progress on branch `showcase-tracer`, draft PR #10
 A wow-first gallery Joey can text to a prospect: "a tour of Halvorsen Falls," a **made-up Minnesota town** whose **made-up businesses** each have a concept site showing what JEF could build. It's a separate URL from `/work`, and the two will link both ways.
@@ -85,8 +85,8 @@ A wow-first gallery Joey can text to a prospect: "a tour of Halvorsen Falls," a 
 
 **Next steps (in order):**
 1. ~~Joey reviews Pine & Pitch~~ (approved 2026-11-22). **Ember & Oat built 2026-11-22**: drag the sun across an illustrated café front (slider or sideways drag on the scene) and the light, the window and the menu follow the time of day; pickup times follow the clock; `?at=HH:MM` sets the starting time. Behavior tests in `client/src/showcase-ember-and-oat.test.ts`. **Next: Joey reviews it on his phone** at the branch preview (`https://joeyfarah-dev-git-showcase-tracer-joey-farahs-projects.vercel.app/showcase/ember-and-oat`, Vercel login required).
-2. Build the remaining three concepts, one slice each, each with its own look and one interactive wow moment: Historical Society (illustrated walking-tour map), Larch Street Dental (appointment picker), Fjeldheim Builders (before/after slider, quote form). For each: add a folder, make its Main Street building a link, add a gallery card, run `npm run shots`, and remove it from "Opening soon."
-3. Link `/work` → `/showcase` (a "See examples" button + thumbnail strip) and update `workPage.test.ts`, which currently allows only the mailto link.
+2. Build the remaining three concepts, one slice each, each with its own look and one interactive wow moment: Historical Society (illustrated walking-tour map), Larch Street Dental (appointment picker), Fjeldheim Builders (before/after slider, quote form). For each: add a folder, make its Main Street building a link, add a gallery card and a `/work` examples card, run `npm run shots`, and remove it from "Opening soon."
+3. ~~Link `/work` → `/showcase`~~ (done 2026-11-22: "Tap through a few." section with a preview per concept; four across on desktop).
 4. No Mistakes (fresh review, PR body), then merge with Joey's OK. **Merging to `main` deploys to production.**
 5. Later: add Afton as the first real client example after the Oct 12 proposal (confirm with the Afton session); Status gym only once Lucas agrees.
 
