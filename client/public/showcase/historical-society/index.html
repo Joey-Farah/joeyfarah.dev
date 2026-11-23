@@ -350,6 +350,7 @@
         $('stop-story').textContent = 'Start at the falls overlook on River Road. Follow the dot on the map, and read each stop\'s story when you get there.';
         $('stop-next').textContent = '1.1 miles, mostly flat, with one hill at the end.';
         $('tour-next').textContent = 'Start the tour';
+        $('tour-prev').hidden = true;
       } else {
         $('stop-kicker').textContent = `Stop ${at + 1} of ${STOPS.length}`;
         $('stop-title').textContent = s.name;
@@ -358,6 +359,8 @@
         const last = at === STOPS.length - 1;
         $('stop-next').textContent = last ? 'Last stop. The museum is right here, open Thursday to Sunday.' : `Next: ${STOPS[at + 1].name}, ${WALK_MIN[at]} min walk`;
         $('tour-next').textContent = last ? 'Finish the tour' : 'Next stop';
+        $('tour-prev').hidden = false;
+        $('tour-prev').setAttribute('aria-disabled', String(at === 0));
       }
       pins.forEach((p, i) => {
         if (i === at) p.setAttribute('aria-current', 'step'); else p.removeAttribute('aria-current');
@@ -368,6 +371,8 @@
     $('tour-next').addEventListener('click', () => {
       if (at < STOPS.length - 1) go(at + 1);
     });
+
+    $('tour-prev').addEventListener('click', () => { if (at > 0) go(at - 1); });
 
     $('locate').addEventListener('click', () => demo('Show where I am.', 'This is a demo. On a real tour, your phone\'s location shows on the map.'));
     document.querySelectorAll('.support [data-demo]').forEach((b) => b.addEventListener('click', () => demo(b.dataset.what)));

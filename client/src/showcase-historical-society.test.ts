@@ -46,4 +46,21 @@ describe('Historical Society: walking tour', () => {
     expect(pins().map((p) => p.classList.contains('visited'))).toEqual([true, true, true, false, false, false]);
     expect(doc.getElementById('walker')!.dataset.stop).toBe('4');
   });
+
+  it('"Previous" goes back a stop, and does nothing at the first stop', () => {
+    const doc = open();
+    const prev = doc.getElementById('tour-prev') as HTMLButtonElement;
+    expect(prev.hidden).toBe(true);
+    primary(doc).click();
+    expect(prev.hidden).toBe(false);
+    expect(prev.getAttribute('aria-disabled')).toBe('true');
+    prev.click();
+    expect(card(doc)).toMatch(/Stop 1 of 6/);
+    primary(doc).click();
+    prev.focus();
+    prev.click();
+    expect(card(doc)).toMatch(/Stop 1 of 6/);
+    expect(prev.getAttribute('aria-disabled')).toBe('true');
+    expect(doc.activeElement).toBe(prev); // aria-disabled, not disabled, so focus stays put
+  });
 });
