@@ -288,6 +288,7 @@
       b.type = 'button'; b.className = 'pin'; b.textContent = String(i + 1);
       b.setAttribute('aria-label', `Stop ${i + 1}: ${s.name}`);
       b.style.left = `${(s.x / W) * 100}%`; b.style.top = `${(s.y / H) * 100}%`;
+      b.addEventListener('click', () => go(i));
       map.append(b);
       return b;
     });
@@ -360,6 +361,7 @@
       }
       pins.forEach((p, i) => {
         if (i === at) p.setAttribute('aria-current', 'step'); else p.removeAttribute('aria-current');
+        p.classList.toggle('visited', i < at);
       });
     }
 

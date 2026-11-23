@@ -35,4 +35,15 @@ describe('Historical Society: walking tour', () => {
     expect(doc.activeElement).toBe(primary(doc));
     expect(doc.getElementById('walker')!.dataset.stop).toBe('2');
   });
+
+  it('tapping a stop on the map goes straight to it, and marks the stops already passed', () => {
+    const doc = open();
+    const pins = () => [...doc.querySelectorAll<HTMLButtonElement>('.pin')];
+    pins()[3].click();
+    expect(card(doc)).toMatch(/Stop 4 of 6/);
+    expect(card(doc)).toMatch(/Main Street/);
+    expect(pins()[3].getAttribute('aria-current')).toBe('step');
+    expect(pins().map((p) => p.classList.contains('visited'))).toEqual([true, true, true, false, false, false]);
+    expect(doc.getElementById('walker')!.dataset.stop).toBe('4');
+  });
 });
