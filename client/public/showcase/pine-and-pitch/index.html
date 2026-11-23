@@ -94,7 +94,7 @@
     .bar { width: 6rem; height: .4rem; border-radius: 1rem; background: var(--chalk-2); overflow: hidden; }
     .bar i { display: block; height: 100%; background: var(--c); transition: width .4s; }
     .book { border: 0; border-radius: 999px; padding: .55rem 1rem; background: var(--granite); color: #fff; font-weight: 700; }
-    .book[disabled] { background: var(--pine); cursor: default; }
+    .book[aria-disabled="true"] { background: var(--pine); cursor: default; }
 
     .plans { display: grid; gap: 1rem; }
     .plan { background: #fff; border-radius: 1.25rem; padding: 1.5rem; display: grid; gap: .6rem; align-content: start; }
@@ -300,24 +300,26 @@
         b.type = 'button'; b.className = 'day'; b.setAttribute('role', 'tab');
         b.setAttribute('aria-selected', String(i === sel));
         b.innerHTML = `<small>${i === 0 ? 'Today' : DAYS[w.d.getDay()]}</small><b>${w.d.getDate()}</b>`;
-        b.addEventListener('click', () => { sel = i; renderDays(); renderClasses(); });
+        // Redrawing replaces the tabs, so focus goes back to the one just picked.
+        b.addEventListener('click', () => { sel = i; renderDays(); renderClasses(); $('days').children[i].focus(); });
         $('days').append(b);
       });
     }
     function renderClasses() {
       const list = $('class-list'); list.innerHTML = '';
-      week[sel].classes.forEach((c) => {
+      week[sel].classes.forEach((c, j) => {
         const left = c.cap - c.taken;
         const card = document.createElement('article');
         card.className = 'class'; card.style.setProperty('--c', c.c);
         card.innerHTML = `<time>${c.t}<small style="font-size:.6em"> ${c.ap}</small></time><h3>${c.name}</h3><div class="meta">${c.meta}</div>
           <div class="row"><span class="spots"><span class="bar"><i style="width:${(c.taken / c.cap) * 100}%"></i></span>${left ? `${left} of ${c.cap} spots left` : 'Full, join the waitlist'}</span>
-          <button class="book" type="button" data-demo ${c.mine ? 'disabled' : ''}>${c.mine ? "You're in ✓" : left ? 'Book' : 'Waitlist'}</button></div>`;
+          <button class="book" type="button" data-demo ${c.mine ? 'aria-disabled="true"' : ''}>${c.mine ? "You're in ✓" : left ? 'Book' : 'Waitlist'}</button></div>`;
         card.querySelector('.book').addEventListener('click', () => {
           if (c.mine) return;
           if (c.taken < c.cap) c.taken++;
           c.mine = true;
           renderClasses();
+          list.querySelectorAll('.book')[j].focus(); // stays focusable: aria-disabled, not disabled
           demo(`Booked: ${c.name}, ${c.t} ${c.ap}.`);
         });
         list.append(card);
