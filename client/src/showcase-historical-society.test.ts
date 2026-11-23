@@ -21,4 +21,18 @@ describe('Historical Society: walking tour', () => {
     expect(card(doc)).toMatch(/The Falls/);
     expect(doc.querySelector('.pin[aria-current="step"]')?.getAttribute('aria-label')).toMatch(/^Stop 1: The Falls/);
   });
+
+  it('"Next stop" walks to the next stop, says how far the one after is, and keeps focus on the button', () => {
+    const doc = open();
+    primary(doc).click();
+    expect(card(doc)).toMatch(/Next: The Granite Mill, 4 min walk/);
+    primary(doc).focus();
+    primary(doc).click();
+    expect(card(doc)).toMatch(/Stop 2 of 6/);
+    expect(card(doc)).toMatch(/The Granite Mill/);
+    expect(card(doc)).toMatch(/Next: The Depot, 6 min walk/);
+    expect(primary(doc).textContent).toMatch(/next stop/i);
+    expect(doc.activeElement).toBe(primary(doc));
+    expect(doc.getElementById('walker')!.dataset.stop).toBe('2');
+  });
 });
