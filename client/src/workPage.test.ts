@@ -28,7 +28,6 @@ describe('/work routing', () => {
 
 describe('/work page', () => {
   const doc = new DOMParser().parseFromString(html, 'text/html');
-  const text = doc.body.textContent ?? '';
 
   it('is a standalone HTML document with a noindex meta tag', () => {
     expect(doc.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex');
@@ -38,8 +37,8 @@ describe('/work page', () => {
     const mailtos = [...doc.querySelectorAll('a[href^="mailto:"]')].map((a) => a.getAttribute('href'));
     expect(mailtos.length).toBeGreaterThan(0);
     expect(new Set(mailtos)).toEqual(new Set(['mailto:joey@joeyfarah.dev']));
-    // No other outbound links: nothing competes with the email.
-    expect(doc.querySelectorAll('a:not([href^="mailto:"])')).toHaveLength(0);
+    // The only other links go to the showcase examples on this site.
+    for (const a of doc.querySelectorAll('a:not([href^="mailto:"])')) expect(a.getAttribute('href')).toMatch(/^\/showcase(\/[a-z-]+)?$/);
   });
 
   it('names the company in the footer', () => {
@@ -78,13 +77,25 @@ describe('/work page', () => {
     expect(doc.querySelector('.big-mail')?.innerHTML).toBe('joey@<wbr>joeyfarah.dev');
   });
 
-  it('has no Examples section until an example is cleared', () => {
-    expect(text).not.toMatch(/examples/i);
+  it('shows the showcase concepts as its examples, labelled as made-up businesses', () => {
+    const section = doc.querySelector('section.examples')!;
+    expect(section.textContent).toMatch(/made-up businesses/);
+    const cards = [...section.querySelectorAll('.shots a')];
+    expect(cards.length).toBeGreaterThanOrEqual(2);
+    for (const a of cards) {
+      const slug = a.getAttribute('href')!.replace('/showcase/', '');
+      const img = a.querySelector('img')!;
+      expect(img.getAttribute('src')).toBe(`/showcase/shots/${slug}.webp`);
+      expect(existsSync(path.join(repoRoot, 'client/public/showcase', slug, 'index.html'))).toBe(true);
+      expect(img.getAttribute('alt')).toBeTruthy();
+      expect(img.getAttribute('width')).toBeTruthy();
+    }
+    expect(section.querySelector('a[href="/showcase"]')?.textContent).toMatch(/see all the examples/i);
   });
 
   it('covers the brief: hero, services, how I work, close', () => {
     expect(doc.querySelector('h1')?.textContent).toBe('Websites, and the systems behind them.');
     const headings = [...doc.querySelectorAll('h2')].map((h) => h.textContent);
-    expect(headings).toEqual(['Five things I build.', 'How I work', 'Got something that should work better?']);
+    expect(headings).toEqual(['Five things I build.', 'Tap through a few.', 'How I work', 'Got something that should work better?']);
   });
 });

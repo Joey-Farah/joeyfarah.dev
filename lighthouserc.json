@@ -3,6 +3,7 @@
     "collect": {
       "staticDistDir": "./client/dist",
       "numberOfRuns": 1,
+      "maxAutodiscoverUrls": 0,
       "settings": {
         "preset": "desktop",
         "chromeFlags": "--no-sandbox --headless=new"
@@ -11,7 +12,7 @@
     "assert": {
       "assertMatrix": [
         {
-          "matchingUrlPattern": "^(?!.*/work/).*$",
+          "matchingUrlPattern": "^(?!.*/(work|showcase)/).*$",
           "assertions": {
             "categories:performance": [
               "warn",
@@ -40,7 +41,7 @@
           }
         },
         {
-          "matchingUrlPattern": ".*/work/.*",
+          "matchingUrlPattern": ".*/(work|showcase)/.*",
           "assertions": {
             "categories:performance": [
               "warn",

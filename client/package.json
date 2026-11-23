@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "og": "node scripts/generate-og.mjs"
+    "og": "node scripts/generate-og.mjs",
+    "shots": "node scripts/showcase-shots.mjs"
   },
   "dependencies": {
     "@rive-app/react-canvas": "^4.7.0",

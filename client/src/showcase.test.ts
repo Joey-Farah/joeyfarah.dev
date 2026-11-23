@@ -1,0 +1,180 @@
+import { existsSync, readdirSync, readFileSync } from 'fs';
+import path from 'path';
+import { JSDOM } from 'jsdom';
+
+// /showcase is a gallery of concept sites for made-up businesses in a made-up
+// town (Halvorsen Falls, MN). Like /work, every page is a standalone static
+// file. These tests enforce the guardrails that keep the concepts from passing
+// as real businesses: a visible concept banner, noindex, fictional phone
+// numbers and emails, and actions that end in a "this is a demo" notice.
+
+const repoRoot = path.resolve(__dirname, '../..');
+const showcaseDir = path.join(repoRoot, 'client/public/showcase');
+const vercel = JSON.parse(readFileSync(path.join(repoRoot, 'vercel.json'), 'utf8'));
+const read = (rel: string) => readFileSync(path.join(showcaseDir, rel), 'utf8');
+const parse = (html: string) => new DOMParser().parseFromString(html, 'text/html');
+
+const concepts = readdirSync(showcaseDir, { withFileTypes: true })
+  .filter((d) => d.isDirectory() && existsSync(path.join(showcaseDir, d.name, 'index.html')))
+  .map((d) => d.name);
+
+function localRefs(doc: Document, html: string): string[] {
+  return [
+    ...[...doc.querySelectorAll('link[href]')].map((el) => el.getAttribute('href')!),
+    ...[...doc.querySelectorAll('[src]')].map((el) => el.getAttribute('src')!),
+    ...[...html.matchAll(/url\(([^)]+)\)/g)].map((m) => m[1].replace(/["']/g, '')),
+  ];
+}
+
+describe('/showcase routing', () => {
+  it('rewrites the gallery and each concept before the SPA catch-all', () => {
+    const rewrites: { source: string; destination: string }[] = vercel.rewrites;
+    const catchAll = rewrites.findIndex((r) => r.destination === '/index.html');
+    const expected: Record<string, string> = {
+      '/showcase': '/showcase/index.html',
+      '/showcase/': '/showcase/index.html',
+      '/showcase/:slug': '/showcase/:slug/index.html',
+      '/showcase/:slug/': '/showcase/:slug/index.html',
+    };
+    for (const [source, destination] of Object.entries(expected)) {
+      const i = rewrites.findIndex((r) => r.source === source);
+      expect(rewrites[i]?.destination).toBe(destination);
+      expect(i).toBeLessThan(catchAll);
+    }
+  });
+
+  it('has Lighthouse CI test every page, not only the first five it finds', () => {
+    const lhci = JSON.parse(readFileSync(path.join(repoRoot, 'lighthouserc.json'), 'utf8'));
+    expect(lhci.ci.collect.maxAutodiscoverUrls).toBe(0);
+  });
+
+  it('sends X-Robots-Tag: noindex for everything under /showcase', () => {
+    const rule = vercel.headers?.find((h: { source: string }) => h.source === '/showcase(/.*)?');
+    expect(rule?.headers).toContainEqual({ key: 'X-Robots-Tag', value: 'noindex' });
+  });
+
+  it("caches the concepts' fonts for a year (bump the -vN suffix when one changes)", () => {
+    const rule = vercel.headers?.find((h: { source: string }) => h.source === '/showcase/(.*)\\.woff2');
+    expect(rule?.headers).toContainEqual({ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' });
+    for (const slug of concepts) {
+      const fonts = readdirSync(path.join(showcaseDir, slug)).filter((f) => f.endsWith('.woff2'));
+      for (const f of fonts) expect(f).toMatch(/-v\d+\.woff2$/);
+    }
+  });
+});
+
+describe('/showcase gallery', () => {
+  const html = read('index.html');
+  const doc = parse(html);
+
+  it('is noindex', () => {
+    expect(doc.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex');
+  });
+
+  it('links to every concept, with a preview image that exists', () => {
+    expect(concepts.length).toBeGreaterThan(0);
+    for (const slug of concepts) {
+      expect(doc.querySelector(`a[href="/showcase/${slug}"]`)).not.toBeNull();
+      const img = doc.querySelector(`img[src="/showcase/shots/${slug}.webp"]`);
+      expect(img).not.toBeNull();
+      expect(img?.getAttribute('alt')).toBeTruthy();
+      expect(existsSync(path.join(showcaseDir, 'shots', `${slug}.webp`))).toBe(true);
+    }
+  });
+
+  it('publishes the website subscription: a monthly price, $0 down, and when the site becomes theirs', () => {
+    const offer = doc.querySelector('[data-offer]')?.textContent?.replace(/\s+/g, ' ') ?? '';
+    expect(offer).toMatch(/\$\d+ ?\/ ?month/i);
+    expect(offer).toMatch(/\$0 down/i);
+    expect(offer).toMatch(/yours/i);
+  });
+
+  it('says what happens after 12 months: stay on at the same price, or take the site with them', () => {
+    const offer = doc.querySelector('[data-offer]')?.textContent?.replace(/\s+/g, ' ') ?? '';
+    expect(offer).toMatch(/stay on for \$19 a month, or take it with you/i);
+  });
+
+  it("says the site connects to the business's own payment apps and their customers' money never passes through JEF", () => {
+    const offer = doc.querySelector('[data-offer]')?.textContent?.replace(/\s+/g, ' ') ?? '';
+    expect(offer).toMatch(/apps? you already use/i);
+    expect(offer).toMatch(/pay you directly/i);
+  });
+
+  it("keeps the Main Street building links reachable by screen readers (no link inside role=img)", () => {
+    for (const a of doc.querySelectorAll('.street a')) expect(a.closest('[role="img"]')).toBeNull();
+  });
+
+  it('labels the concepts as made-up businesses', () => {
+    expect(doc.body.textContent).toMatch(/made-up/i);
+  });
+
+  it('links back to /work and offers the one email address', () => {
+    expect(doc.querySelector('a[href="/work"]')).not.toBeNull();
+    const mailtos = new Set([...doc.querySelectorAll('a[href^="mailto:"]')].map((a) => a.getAttribute('href')));
+    expect(mailtos).toEqual(new Set(['mailto:joey@joeyfarah.dev']));
+  });
+
+  it('carries none of the portfolio or employer content', () => {
+    for (const word of ['oracle', 'melee', 'patreon', 'elire', 'slippi', 'ssbm', 'hello@']) {
+      expect(html.toLowerCase()).not.toContain(word);
+    }
+  });
+
+  it('makes no third-party requests', () => {
+    for (const ref of localRefs(doc, html)) expect(ref).toMatch(/^(\/(?!\/)|data:|#)/);
+  });
+});
+
+describe.each(concepts)('concept: %s', (slug) => {
+  const html = read(`${slug}/index.html`);
+  const doc = parse(html);
+  const text = doc.body.textContent ?? '';
+
+  it('is noindex', () => {
+    expect(doc.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex');
+  });
+
+  it('shows a concept banner that names it as made-up and links to the gallery', () => {
+    const banner = doc.querySelector('[data-concept-banner]');
+    expect(banner?.textContent).toContain('Concept site by JEF Consulting');
+    expect(banner?.textContent).toMatch(/made-up business/i);
+    expect(banner?.querySelector('a[href="/showcase"]')).not.toBeNull();
+  });
+
+  it('gives every element a unique id', () => {
+    const ids = [...doc.querySelectorAll('[id]')].map((el) => el.id);
+    expect(ids.filter((id, i) => ids.indexOf(id) !== i)).toEqual([]);
+  });
+
+  it('uses only fictional phone numbers (555-01xx)', () => {
+    const phones = text.match(/\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/g) ?? [];
+    for (const p of phones) expect(p).toMatch(/555[\s.-]01\d\d$/);
+    for (const a of doc.querySelectorAll('a[href^="tel:"]')) {
+      expect(a.getAttribute('href')).toMatch(/555-?01\d\d$/);
+    }
+  });
+
+  it('uses only reserved .example email addresses (or Joey\'s)', () => {
+    const emails = html.match(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g) ?? [];
+    for (const e of emails) expect(e === 'joey@joeyfarah.dev' || e.endsWith('.example')).toBe(true);
+  });
+
+  it('makes no third-party requests', () => {
+    for (const ref of localRefs(doc, html)) expect(ref).toMatch(/^(\/(?!\/)|data:|#)/);
+  });
+
+  it('ends every booking/ordering action in a "this is a demo" notice', async () => {
+    const dom = new JSDOM(html, { runScripts: 'dangerously', pretendToBeVisual: true });
+    const w = dom.window;
+    await new Promise((r) => w.setTimeout(r, 0));
+    const actions = [...w.document.querySelectorAll<HTMLElement>('[data-demo]')];
+    expect(actions.length).toBeGreaterThan(0);
+    for (const el of actions) {
+      const notice = w.document.querySelector('[data-demo-notice]')!;
+      notice.textContent = '';
+      if (el instanceof w.HTMLFormElement) el.requestSubmit();
+      else el.click();
+      expect(notice.textContent).toMatch(/this is a demo/i);
+    }
+  });
+});

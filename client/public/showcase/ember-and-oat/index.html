@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#fbf3e6">
+  <title>Ember &amp; Oat · Concept site</title>
+  <link rel="preload" href="/showcase/ember-and-oat/fraunces-v1.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c8553d'/%3E%3Ccircle cx='16' cy='17' r='7' fill='%23f4b740'/%3E%3C/svg%3E">
+  <style>
+    @font-face {
+      font-family: "Fraunces";
+      src: url("/showcase/ember-and-oat/fraunces-v1.woff2") format("woff2");
+      font-weight: 400 800;
+      font-display: swap;
+    }
+    /* Layout: a café window you scrub through the day, the menu for that hour, an order-ahead bag, and a visit block. */
+    :root {
+      --cream: #fbf3e6;
+      --cream-2: #f2e3cc;
+      --espresso: #2b1c15;
+      --muted: #6b5546;
+      --brick: #c8553d;
+      --brick-dark: #a2412c;
+      --spruce: #123c3a;
+      --marigold: #f4b740;
+      --display: "Fraunces", Georgia, "Times New Roman", serif;
+      --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      /* 6 am to 10 pm: pre-dawn, dawn, morning, noon, afternoon, golden hour, dusk, night */
+      --day-track: linear-gradient(90deg, #2b2d52 0%, #f3a982 6%, #9bcbe6 19%, #5fb0e0 44%, #8cc0e0 69%, #f0a45c 81%, #5a3f6e 91%, #141a33 100%);
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cream); color: var(--espresso); font-family: var(--body); font-size: 1rem; line-height: 1.55; }
+    a { color: inherit; }
+    button { font: inherit; cursor: pointer; color: inherit; }
+    :focus-visible { outline: 3px solid var(--marigold); outline-offset: 3px; }
+    .wrap { max-width: 64rem; margin: 0 auto; padding-inline: 1.25rem; }
+
+    /* concept banner (JEF chrome, not part of the made-up brand) */
+    .concept { background: #0e7490; color: #fff; font: 500 .82rem/1.4 system-ui, sans-serif; }
+    .concept .wrap { display: flex; flex-wrap: wrap; gap: .25rem 1rem; justify-content: space-between; padding-block: .55rem; }
+    .concept a { font-weight: 700; }
+
+    /* nav */
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .9rem; }
+    .logo { font: 700 1.55rem/1 var(--display); text-decoration: none; letter-spacing: -.01em; }
+    .logo span { color: var(--brick); font-style: normal; }
+    .nav ul { display: none; list-style: none; margin: 0 auto 0 2rem; padding: 0; gap: 1.5rem; font-weight: 600; font-size: .95rem; }
+    .nav ul a { text-decoration: none; color: var(--muted); }
+    .bag-btn { display: inline-flex; align-items: center; gap: .5rem; background: var(--spruce); color: var(--cream); border: 0; border-radius: 999px; padding: .55rem .6rem .55rem 1rem; font-weight: 700; }
+    .bag-btn .count { display: inline-grid; place-items: center; min-width: 1.6rem; height: 1.6rem; padding-inline: .35rem; border-radius: 999px; background: var(--marigold); color: var(--espresso); font-size: .85rem; font-variant-numeric: tabular-nums; }
+    .bag-btn.bump .count { animation: bump .4s; }
+    @keyframes bump { 40% { transform: scale(1.35); } }
+
+    /* hero: the café front, lit by whatever time the clock says */
+    .scene { position: relative; height: clamp(22rem, 56vh, 36rem); overflow: hidden; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+    .scene.dragging { cursor: grabbing; }
+    .scene svg { display: block; width: 100%; height: 100%; }
+    .scene .sign { font: 700 46px var(--display); letter-spacing: 3px; fill: var(--cream); }
+    .scene .prop { opacity: 0; transition: opacity .5s; }
+    .scene .prop.on { opacity: 1; }
+    .scene .steam path { animation: steam 2.8s ease-in-out infinite; }
+    .scene .steam path + path { animation-delay: -1.4s; }
+    @keyframes steam { 0% { opacity: 0; transform: translateY(6px); } 40% { opacity: .8; } 100% { opacity: 0; transform: translateY(-14px); } }
+    .scene .flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flicker .9s ease-in-out infinite alternate; }
+    .scene .flame + .flame { animation-duration: 1.3s; }
+    @keyframes flicker { to { transform: scaleY(.82) scaleX(1.06); } }
+    .hero-copy { padding-block: 1.5rem 1rem; }
+    .hero h1 { font: 700 clamp(2.8rem, 12vw, 6rem)/.95 var(--display); letter-spacing: -.03em; margin: 0; }
+    .lede { max-width: 32rem; margin: 1.25rem 0 0; font-size: 1.1rem; color: var(--muted); }
+
+    /* the dial: one slider is the clock for the whole page */
+    .dial { padding-top: .75rem; }
+    .readout { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .75rem; }
+    .time { font: 700 2.1rem/1 var(--display); font-variant-numeric: tabular-nums; min-width: 6.5ch; }
+    .part { font-weight: 700; color: var(--brick-dark); }
+    .hint { display: block; color: var(--muted); font-size: .9rem; margin: .35rem 0 .25rem; }
+    #clock { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 2.75rem; margin: 0; background: transparent; cursor: grab; }
+    #clock:active { cursor: grabbing; }
+    #clock::-webkit-slider-runnable-track { height: .7rem; border-radius: 1rem; background: var(--day-track); }
+    #clock::-moz-range-track { height: .7rem; border-radius: 1rem; background: var(--day-track); }
+    #clock::-webkit-slider-thumb { -webkit-appearance: none; width: 2.4rem; height: 2.4rem; margin-top: -.85rem; border-radius: 50%; background: var(--marigold); border: 3px solid var(--cream); box-shadow: 0 2px 8px rgba(43,28,21,.35); }
+    #clock::-moz-range-thumb { width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--marigold); border: 3px solid var(--cream); box-shadow: 0 2px 8px rgba(43,28,21,.35); box-sizing: border-box; }
+    #clock:focus-visible { outline: none; }
+    #clock:focus-visible::-webkit-slider-thumb { outline: 3px solid var(--espresso); outline-offset: 2px; }
+    #clock:focus-visible::-moz-range-thumb { outline: 3px solid var(--espresso); outline-offset: 2px; }
+    .ticks { display: flex; justify-content: space-between; font-size: .78rem; font-weight: 600; color: var(--muted); }
+
+    /* menu */
+    .menu { padding-block: 2.5rem 4rem; }
+    .menu-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; border-bottom: 2px solid var(--espresso); padding-bottom: .75rem; }
+    .menu h2 { font: 700 clamp(2.2rem, 8vw, 3.4rem)/1 var(--display); letter-spacing: -.02em; margin: 0; }
+    .served { color: var(--muted); font-weight: 600; }
+    .items { list-style: none; margin: 0; padding: 0; }
+    .item { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .25rem 1rem; padding-block: 1.1rem; border-bottom: 1px solid var(--cream-2); }
+    .swap .item { animation: rise .45s both; }
+    .swap .item:nth-child(2) { animation-delay: .04s; } .swap .item:nth-child(3) { animation-delay: .08s; } .swap .item:nth-child(4) { animation-delay: .12s; } .swap .item:nth-child(5) { animation-delay: .16s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+    .item h3 { font: 600 1.3rem/1.15 var(--display); margin: 0; }
+    .item p { margin: .2rem 0 0; color: var(--muted); font-size: .92rem; }
+    .price { font: 600 1.2rem/1 var(--display); font-variant-numeric: tabular-nums; }
+    .add { width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 2px solid var(--espresso); background: transparent; font-size: 1.4rem; line-height: 1; display: grid; place-items: center; transition: background .2s, color .2s; }
+    .add:hover { background: var(--espresso); color: var(--cream); }
+    .add.added { background: var(--spruce); border-color: var(--spruce); color: var(--cream); }
+
+    /* visit */
+    .visit { background: var(--spruce); color: #eaf1ee; }
+    .visit .wrap { display: grid; gap: 2rem; padding-block: 4rem; }
+    .visit h2 { font: 700 clamp(2.2rem, 8vw, 3.4rem)/1 var(--display); color: #fff; margin: 0 0 1rem; }
+    .visit address { font-style: normal; display: grid; gap: .3rem; font-size: 1.05rem; }
+    .hours { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .hours td { padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+    .hours td + td { text-align: right; }
+    footer.site { background: var(--espresso); color: #c9b8a8; font-size: .85rem; padding-block: 1.5rem; }
+
+    /* bag sheet */
+    .backdrop { position: fixed; inset: 0; background: rgba(43,28,21,.45); z-index: 20; }
+    .sheet { position: fixed; z-index: 21; left: 0; right: 0; bottom: 0; max-height: 85vh; overflow-y: auto; background: var(--cream); border-radius: 1.25rem 1.25rem 0 0; padding: 1.25rem 1.25rem 1.5rem; box-shadow: 0 -20px 40px rgba(43,28,21,.25); display: grid; gap: 1rem; align-content: start; }
+    .sheet header { display: flex; align-items: center; justify-content: space-between; }
+    .sheet h2 { font: 700 1.8rem/1 var(--display); margin: 0; }
+    .x { border: 0; background: var(--cream-2); width: 2.4rem; height: 2.4rem; border-radius: 50%; font-size: 1.3rem; line-height: 1; }
+    .empty { margin: 0; color: var(--muted); }
+    .lines { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+    .line { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .75rem; }
+    .line b { font: 600 1.05rem/1.2 var(--display); }
+    .qty { display: inline-flex; align-items: center; gap: .5rem; font-variant-numeric: tabular-nums; }
+    .qty button { width: 2rem; height: 2rem; border-radius: 50%; border: 1.5px solid var(--espresso); background: transparent; line-height: 1; }
+    .pickup h3 { font: 600 1.15rem/1.2 var(--display); margin: 0 0 .6rem; }
+    .slots { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .slots button { border: 1.5px solid var(--espresso); background: transparent; border-radius: 999px; padding: .45rem .85rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .slots button[aria-checked="true"] { background: var(--espresso); color: var(--cream); }
+    .total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem; border-top: 2px solid var(--espresso); padding-top: .75rem; }
+    .place { border: 0; border-radius: .9rem; padding: .95rem; background: var(--brick-dark); color: #fff; font-weight: 800; font-size: 1.05rem; }
+    .place[hidden] { display: none; }
+
+    .notice { position: fixed; left: 50%; bottom: 1.25rem; transform: translate(-50%, 150%); background: var(--espresso); color: #fff; padding: .85rem 1.1rem; border-radius: .9rem; font-size: .92rem; max-width: calc(100% - 2rem); width: max-content; box-shadow: 0 12px 30px rgba(0,0,0,.3); transition: transform .3s, visibility .3s; visibility: hidden; z-index: 30; }
+    .notice.show { transform: translate(-50%, 0); visibility: visible; }
+    .notice b { color: var(--marigold); }
+
+    @media (min-width: 48rem) {
+      .nav ul { display: flex; }
+      .visit .wrap { grid-template-columns: 1fr 1fr; }
+      .sheet { left: auto; top: 0; width: 26rem; max-height: none; border-radius: 1.25rem 0 0 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+    /* Last, so a hidden element stays hidden whatever display its class sets. */
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="concept" data-concept-banner>
+    <div class="wrap"><span>Concept site by JEF Consulting. Ember &amp; Oat is a made-up business.</span><a href="/showcase">See all concepts</a></div>
+  </div>
+
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="#top">Ember <span>&amp;</span> Oat</a>
+      <ul><li><a href="#menu">Menu</a></li><li><a href="#visit">Visit</a></li></ul>
+      <button class="bag-btn" id="bag-btn" type="button" aria-haspopup="dialog" aria-controls="bag">Bag <span class="count" id="bag-count">0</span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="scene" id="scene">
+        <svg id="art" viewBox="0 0 1200 660" preserveAspectRatio="xMidYMax slice" role="img" aria-label="The front of Ember &amp; Oat on Mill Street, at the time of day on the clock below">
+          <defs>
+            <linearGradient id="sky" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="300"><stop id="sky-top" offset="0" stop-color="#8fbfe0"/><stop id="sky-bottom" offset="1" stop-color="#f8dcc0"/></linearGradient>
+            <pattern id="bricks" width="64" height="26" patternUnits="userSpaceOnUse"><path d="M0 .75H64M0 13.75H64M.75 0V13M32.75 13V26" stroke="#6e2618" stroke-opacity=".28" stroke-width="1.5" fill="none"/></pattern>
+            <radialGradient id="fire-glow"><stop offset="0" stop-color="#ffb04a" stop-opacity=".9"/><stop offset="1" stop-color="#ffb04a" stop-opacity="0"/></radialGradient>
+            <radialGradient id="warm-glow"><stop offset="0" stop-color="#ffe0a0" stop-opacity=".8"/><stop offset="1" stop-color="#ffe0a0" stop-opacity="0"/></radialGradient>
+            <linearGradient id="spill-glow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc56b" stop-opacity=".5"/><stop offset="1" stop-color="#ffc56b" stop-opacity="0"/></linearGradient>
+            <mask id="crescent"><rect x="-30" y="-30" width="60" height="60" fill="#fff"/><circle cx="10" cy="-7" r="19" fill="#000"/></mask>
+            <clipPath id="pane"><rect x="440" y="440" width="320" height="140"/></clipPath>
+            <clipPath id="awning-shape"><path d="M420 380H780L802 422H398Z"/></clipPath>
+          </defs>
+
+          <!-- sky -->
+          <rect x="-1500" y="-1500" width="4200" height="2160" fill="url(#sky)"/>
+          <g id="stars" fill="#fff"></g>
+          <g id="moon"><circle r="22" fill="#f3eed8" mask="url(#crescent)"/></g>
+          <g id="sun"><circle r="48" fill="#ffd76a" opacity=".12"/><circle id="sun-disc" r="34" fill="#ffd76a"/></g>
+          <path id="trees"/>
+
+          <!-- the building -->
+          <rect x="-1500" y="292" width="4200" height="368" fill="#c8553d"/>
+          <rect x="-1500" y="292" width="4200" height="368" fill="url(#bricks)"/>
+          <rect x="-1500" y="282" width="4200" height="12" fill="#5e2419"/>
+          <rect x="-1500" y="294" width="4200" height="7" fill="#8a3624"/>
+          <text class="sign" x="600" y="358" text-anchor="middle">EMBER &amp; OAT</text>
+          <g>
+            <path d="M420 380H780L802 422H398Z" fill="#123c3a"/>
+            <g clip-path="url(#awning-shape)" fill="#fbf3e6"><rect x="422" y="378" width="22" height="46"/><rect x="466" y="378" width="22" height="46"/><rect x="510" y="378" width="22" height="46"/><rect x="554" y="378" width="22" height="46"/><rect x="598" y="378" width="22" height="46"/><rect x="642" y="378" width="22" height="46"/><rect x="686" y="378" width="22" height="46"/><rect x="730" y="378" width="22" height="46"/><rect x="774" y="378" width="22" height="46"/></g>
+            <path d="M398 422h404v6a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-22 0a11 11 0 0 1-8 2Z" fill="#123c3a"/>
+          </g>
+          <rect x="428" y="430" width="344" height="162" rx="3" fill="#123c3a"/>
+          <rect x="78" y="440" width="164" height="152" rx="3" fill="#123c3a"/>
+          <rect x="958" y="440" width="164" height="152" rx="3" fill="#123c3a"/>
+          <rect x="806" y="438" width="72" height="172" fill="#123c3a"/>
+          <rect x="405" y="432" width="12" height="18" rx="2" fill="#2b1c15"/><rect x="783" y="432" width="12" height="18" rx="2" fill="#2b1c15"/>
+          <rect x="430" y="592" width="340" height="18" fill="#6b3f2a"/>
+          <g fill="#4f7a3a"><ellipse cx="452" cy="592" rx="18" ry="9"/><ellipse cx="500" cy="590" rx="22" ry="11"/><ellipse cx="556" cy="592" rx="18" ry="9"/><ellipse cx="610" cy="590" rx="22" ry="11"/><ellipse cx="664" cy="592" rx="18" ry="9"/><ellipse cx="716" cy="590" rx="22" ry="11"/><ellipse cx="752" cy="592" rx="14" ry="8"/></g>
+          <g fill="#f4b740"><circle cx="492" cy="584" r="3.5"/><circle cx="512" cy="588" r="3"/><circle cx="604" cy="584" r="3.5"/><circle cx="622" cy="588" r="3"/><circle cx="708" cy="584" r="3.5"/><circle cx="728" cy="588" r="3"/></g>
+          <g><rect x="250" y="574" width="120" height="8" rx="2" fill="#7a4a30"/><rect x="250" y="560" width="120" height="6" rx="2" fill="#7a4a30"/><rect x="258" y="582" width="6" height="28" fill="#2b1c15"/><rect x="356" y="582" width="6" height="28" fill="#2b1c15"/></g>
+          <rect x="-1500" y="610" width="4200" height="50" fill="#cfc6b8"/>
+          <rect x="-1500" y="648" width="4200" height="12" fill="#a89d90"/>
+          <path id="seams" stroke="#000" stroke-opacity=".12" stroke-width="2"/>
+
+          <!-- daylight falls off; gold hour warms the brick -->
+          <rect id="dusk" x="-1500" y="282" width="4200" height="378" fill="#ff8f3d" opacity="0"/>
+          <rect id="night" x="-1500" y="282" width="4200" height="378" fill="#0b1030" opacity="0"/>
+
+          <!-- everything that makes its own light sits above the night -->
+          <rect class="pane" x="88" y="450" width="144" height="132" fill="#f4e4c8"/>
+          <rect class="pane" x="968" y="450" width="144" height="132" fill="#f4e4c8"/>
+          <g fill="#3a2a22" opacity=".55"><rect x="110" y="540" width="40" height="5"/><rect x="128" y="545" width="4" height="37"/><rect x="170" y="540" width="40" height="5"/><rect x="188" y="545" width="4" height="37"/><rect x="990" y="540" width="40" height="5"/><rect x="1008" y="545" width="4" height="37"/><rect x="1050" y="540" width="40" height="5"/><rect x="1068" y="545" width="4" height="37"/></g>
+          <rect class="pane" x="818" y="452" width="48" height="84" fill="#f4e4c8"/>
+          <circle cx="824" cy="560" r="4" fill="#f4b740"/>
+
+          <g clip-path="url(#pane)">
+            <rect class="pane" x="440" y="440" width="320" height="140" fill="#f4e4c8"/>
+            <rect x="440" y="540" width="320" height="40" fill="#2b1c15" opacity=".07"/>
+            <!-- shelves with loaves and jars -->
+            <path d="M450 500H546M450 528H546" stroke="#7a4a30" stroke-width="5"/>
+            <g fill="#b5773f"><ellipse cx="468" cy="492" rx="15" ry="7"/><ellipse cx="500" cy="492" rx="15" ry="7"/><ellipse cx="530" cy="493" rx="12" ry="6"/></g>
+            <g><rect x="458" y="508" width="13" height="18" rx="3" fill="#e8c27a"/><rect x="478" y="511" width="13" height="15" rx="3" fill="#c96a4a"/><rect x="498" y="508" width="13" height="18" rx="3" fill="#e8c27a"/><rect x="518" y="510" width="13" height="16" rx="3" fill="#9bb57a"/></g>
+            <!-- wood-fired oven -->
+            <rect x="697" y="440" width="10" height="26" fill="#3a2a22"/>
+            <path d="M654 580V524C654 486 682 464 702 464S750 486 750 524V580Z" fill="#9c4630"/>
+            <path d="M654 524H750M660 552H744" stroke="#6e2618" stroke-opacity=".35" stroke-width="2"/>
+            <path d="M680 580V550C680 536 690 528 702 528S724 536 724 550V580Z" fill="#1b100c"/>
+            <circle id="oven-glow" cx="702" cy="560" r="62" fill="url(#fire-glow)"/>
+            <g id="flames"><path class="flame" d="M690 580C686 568 694 560 696 550C700 560 706 566 702 580Z" fill="#ff8a2a"/><path class="flame" d="M700 580C698 570 706 562 708 554C712 564 716 572 712 580Z" fill="#ffc44a"/></g>
+            <!-- pendant lamps -->
+            <g class="lamps">
+              <circle class="lamp-glow" cx="572" cy="474" r="46" fill="url(#warm-glow)"/><circle class="lamp-glow" cx="624" cy="474" r="46" fill="url(#warm-glow)"/>
+              <path d="M572 440V460M624 440V460" stroke="#2b1c15" stroke-width="2"/>
+              <path d="M562 470L566 460H578L582 470Z" fill="#123c3a"/><path d="M614 470L618 460H630L634 470Z" fill="#123c3a"/>
+              <circle class="bulb" cx="572" cy="472" r="4" fill="#ffe7a8"/><circle class="bulb" cx="624" cy="472" r="4" fill="#ffe7a8"/>
+            </g>
+            <!-- counter -->
+            <rect x="440" y="552" width="200" height="28" fill="#6b3f2a"/><rect x="440" y="548" width="200" height="6" fill="#8b5a3c"/>
+            <g class="prop" data-part="morning">
+              <path d="M466 548V532H486V548Z" fill="#fbf3e6"/><path d="M486 536a5 5 0 0 1 0 9" stroke="#fbf3e6" stroke-width="3" fill="none"/>
+              <path d="M500 548V534H518V548Z" fill="#c8553d"/><path d="M518 538a5 5 0 0 1 0 8" stroke="#c8553d" stroke-width="3" fill="none"/>
+              <g class="steam" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M472 526c-4-5 4-8 0-13"/><path d="M508 528c-4-5 4-8 0-13"/></g>
+              <path d="M544 548c0-12 32-12 32 0Z" fill="#e8c27a"/>
+            </g>
+            <g class="prop" data-part="midday">
+              <path d="M470 538h40c0 12-9 10-20 10s-20 2-20-10Z" fill="#fbf3e6"/>
+              <g class="steam" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M482 530c-4-5 4-8 0-13"/><path d="M496 530c-4-5 4-8 0-13"/></g>
+              <rect x="530" y="542" width="58" height="6" rx="2" fill="#8b5a3c"/><ellipse cx="559" cy="536" rx="24" ry="8" fill="#b5773f"/>
+            </g>
+            <g class="prop" data-part="evening">
+              <rect x="560" y="545" width="70" height="4" fill="#8b5a3c"/><ellipse cx="520" cy="544" rx="38" ry="7" fill="#d79b54"/><ellipse cx="520" cy="543" rx="32" ry="5" fill="#c8553d"/>
+              <g fill="#fbf3e6"><circle cx="508" cy="543" r="2.5"/><circle cx="524" cy="541" r="2.5"/><circle cx="536" cy="544" r="2.5"/></g>
+              <path d="M466 548v-16h10v16Z" fill="#e8c27a" opacity=".9"/>
+            </g>
+            <g class="prop" data-part="closed" fill="#3a2a22">
+              <path d="M470 548v-4h28v4M474 544v-16M494 544v-16M470 528h28" stroke="#6b3f2a" stroke-width="4" fill="none"/>
+              <path d="M530 548v-4h28v4M534 544v-16M554 544v-16M530 528h28" stroke="#6b3f2a" stroke-width="4" fill="none"/>
+            </g>
+            <!-- the sign on the door glass -->
+            <path d="M456 440L466 452M510 440L500 452" stroke="#2b1c15" stroke-width="1.5"/>
+            <rect id="open-sign" x="452" y="452" width="62" height="22" rx="4" fill="#fbf3e6"/>
+            <text id="open-text" x="483" y="467.5" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="12" letter-spacing="1" fill="#a2412c">OPEN</text>
+            <path id="glare" d="M440 580L520 440H566L486 580Z" fill="#fff" opacity=".18"/>
+          </g>
+          <path id="spill" d="M430 610H770L830 660H370Z" fill="url(#spill-glow)" opacity="0"/>
+          <circle class="sconce" cx="411" cy="446" r="46" fill="url(#warm-glow)" opacity="0"/><circle class="sconce" cx="789" cy="446" r="46" fill="url(#warm-glow)" opacity="0"/>
+        </svg>
+      </div>
+      <div class="wrap hero-copy">
+        <h1 id="greeting">Good morning.</h1>
+        <div class="dial">
+          <div class="readout" aria-hidden="true"><span class="time" id="time">9:00 am</span><span class="part" id="part">Morning menu</span></div>
+          <label class="hint" for="clock">Drag the sun, here or across the sky</label>
+          <input type="range" id="clock" min="360" max="1320" step="5" value="540">
+          <div class="ticks" aria-hidden="true"><span>6 am</span><span>Noon</span><span>10 pm</span></div>
+        </div>
+        <p class="lede">Oat bowls at sunrise, wood-fired pizza at sundown. A café on Mill Street in Halvorsen Falls. Order ahead and it's waiting on the shelf.</p>
+      </div>
+    </section>
+
+    <section class="menu" id="menu">
+      <div class="wrap">
+        <div class="menu-head"><h2 id="menu-title">Morning menu</h2><span class="served" id="menu-served">Served 7 to 11 am</span></div>
+        <ul class="items" id="menu-items"></ul>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div class="wrap">
+        <div>
+          <h2>Come in</h2>
+          <address>
+            <span>38 Mill Street, Halvorsen Falls, MN</span>
+            <a href="tel:6125550163">(612) 555-0163</a>
+            <span>hello@emberandoat.example</span>
+          </address>
+        </div>
+        <table class="hours" aria-label="Opening hours">
+          <tr><td>Morning menu</td><td>7:00 to 11:00 am</td></tr>
+          <tr><td>Midday menu</td><td>11:00 am to 4:00 pm</td></tr>
+          <tr><td>Evening menu</td><td>4:00 to 9:00 pm</td></tr>
+          <tr><td>Every day</td><td>7:00 am to 9:00 pm</td></tr>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site"><div class="wrap">Ember &amp; Oat, Halvorsen Falls. A concept site by JEF Consulting.</div></footer>
+
+  <div class="backdrop" id="backdrop" hidden></div>
+  <div class="sheet" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title" hidden>
+    <header><h2 id="bag-title">Your order</h2><button class="x" id="bag-close" type="button" aria-label="Close your order">×</button></header>
+    <p class="empty" id="bag-empty">Your bag is empty. Tap + on anything that looks good.</p>
+    <ul class="lines" id="bag-lines"></ul>
+    <div class="pickup" id="pickup-row" hidden>
+      <h3 id="pickup-label">Pick up today</h3>
+      <div class="slots" id="slots" role="radiogroup" aria-labelledby="pickup-label"></div>
+    </div>
+    <div class="total" id="bag-total-row" hidden><span>Subtotal</span><span id="bag-total">$0</span></div>
+    <button class="place" id="place" type="button" data-demo hidden>Place order</button>
+  </div>
+  <div class="notice" data-demo-notice role="status" aria-live="polite"></div>
+
+  <script>
+  (() => {
+    const MENUS = {
+      morning: { title: 'Morning menu', served: 'Served 7 to 11 am', items: [
+        { id: 'oat-bowl', name: 'Maple oat bowl', desc: 'Steel-cut oats, toasted pecans, Minnesota maple.', price: 9 },
+        { id: 'bun', name: 'Cardamom bun', desc: 'Baked at dawn, usually gone by ten.', price: 5 },
+        { id: 'hash', name: 'Wild rice & egg hash', desc: 'Crispy wild rice, two eggs, chives.', price: 12 },
+        { id: 'latte', name: 'Oat-milk latte', desc: 'Double shot, house-made oat milk.', price: 5.5 },
+        { id: 'drip', name: 'Drip coffee', desc: 'Free refills before nine.', price: 3 },
+      ] },
+      midday: { title: 'Midday menu', served: 'Served 11 am to 4 pm', items: [
+        { id: 'flatbread', name: 'Ember flatbread', desc: 'Wood-fired, topped with whatever the farm stand had.', price: 14 },
+        { id: 'soup', name: 'Wild rice soup', desc: 'Creamy and smoky, with a thick slice of oat bread.', price: 8 },
+        { id: 'trout', name: 'Smoked trout toast', desc: 'Lake Superior trout, dill, pickled onion.', price: 13 },
+        { id: 'tea', name: 'Lingonberry iced tea', desc: 'Black tea, lingonberry, a little honey.', price: 4 },
+      ] },
+      evening: { title: 'Evening menu', served: 'Served 4 to 9 pm', items: [
+        { id: 'corn-pizza', name: 'Sweet corn & honey pizza', desc: 'Fresh mozzarella, chili honey, basil.', price: 17 },
+        { id: 'mushroom-pizza', name: 'Mushroom & sage pizza', desc: 'Brown butter, sage, a lot of mushrooms.', price: 18 },
+        { id: 'carrots', name: 'Ember-roasted carrots', desc: 'Charred in the oven, on whipped feta.', price: 10 },
+        { id: 'cider', name: 'Local cider', desc: 'Dry, from an orchard up the river.', price: 7 },
+        { id: 'crisp', name: 'Oat & rhubarb crisp', desc: 'Warm, with a scoop of sweet cream.', price: 8 },
+      ] },
+    };
+    // Closed: say so, and let people order ahead from the morning menu.
+    MENUS.closed = { title: 'Closed for now', served: 'Order ahead for 7:00 am', items: MENUS.morning.items };
+    const OPEN = 7 * 60, MIDDAY = 11 * 60, EVENING = 16 * 60, CLOSE = 21 * 60;
+    const partAt = (t) => t < OPEN || t >= CLOSE ? 'closed' : t < MIDDAY ? 'morning' : t < EVENING ? 'midday' : 'evening';
+    const greetingAt = (t) => t < OPEN ? 'Almost open.' : t < 720 ? 'Good morning.' : t < 1020 ? 'Good afternoon.' : t < CLOSE ? 'Good evening.' : 'Good night.';
+    const clockText = (t) => { const h = Math.floor(t / 60), m = t % 60; return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'am' : 'pm'}`; };
+    const $ = (id) => document.getElementById(id);
+    const money = (n) => `$${Number.isInteger(n) ? n : n.toFixed(2)}`;
+    const notice = document.querySelector('[data-demo-notice]');
+    let hideTimer;
+    function demo(what) {
+      notice.innerHTML = `<b>${what}</b> This is a demo, so nothing was ordered or charged.`;
+      notice.classList.add('show');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => notice.classList.remove('show'), 3600);
+    }
+
+    // Every item on every menu, by id, so the bag can hold things from any time of day.
+    const ITEMS = Object.fromEntries(Object.values(MENUS).flatMap((m) => m.items).map((i) => [i.id, i]));
+    const bag = new Map();
+
+    function renderMenu(menu, animate) {
+      $('menu-items').classList.toggle('swap', animate);
+      $('menu-title').textContent = menu.title;
+      $('menu-served').textContent = menu.served;
+      const list = $('menu-items'); list.innerHTML = '';
+      for (const item of menu.items) {
+        const li = document.createElement('li');
+        li.className = 'item';
+        li.innerHTML = `<div><h3>${item.name}</h3><p>${item.desc}</p></div><span class="price">${money(item.price)}</span>
+          <button class="add" type="button" aria-label="Add ${item.name} to your bag">+</button>`;
+        const add = li.querySelector('.add');
+        add.addEventListener('click', () => {
+          bag.set(item.id, (bag.get(item.id) ?? 0) + 1);
+          renderBag();
+          add.classList.add('added'); add.textContent = '✓';
+          setTimeout(() => { add.classList.remove('added'); add.textContent = '+'; }, 900);
+          const btn = $('bag-btn'); btn.classList.remove('bump'); void btn.offsetWidth; btn.classList.add('bump');
+        });
+        list.append(li);
+      }
+    }
+
+    function renderBag() {
+      const count = [...bag.values()].reduce((a, b) => a + b, 0);
+      const total = [...bag].reduce((sum, [id, q]) => sum + ITEMS[id].price * q, 0);
+      $('bag-count').textContent = count;
+      $('bag-btn').setAttribute('aria-label', `Bag, ${count} item${count === 1 ? '' : 's'}`);
+      $('bag-empty').hidden = count > 0;
+      $('bag-total-row').hidden = count === 0;
+      $('pickup-row').hidden = count === 0;
+      $('place').hidden = count === 0;
+      $('bag-total').textContent = money(total);
+      const lines = $('bag-lines'); lines.innerHTML = '';
+      for (const [id, q] of bag) {
+        const li = document.createElement('li');
+        li.className = 'line';
+        li.innerHTML = `<b>${ITEMS[id].name}</b><span class="qty"><button type="button" data-act="less" aria-label="One fewer ${ITEMS[id].name}">−</button><span>${q}</span><button type="button" data-act="more" aria-label="One more ${ITEMS[id].name}">+</button></span><span>${money(ITEMS[id].price * q)}</span>`;
+        li.dataset.id = id;
+        const [less, more] = li.querySelectorAll('button');
+        // Redrawing replaces the buttons, so put focus back on the same one (or on Close if the line is gone).
+        const refocus = (act) => (lines.querySelector(`[data-id="${id}"] [data-act="${act}"]`) ?? $('bag-close')).focus();
+        less.addEventListener('click', () => { q > 1 ? bag.set(id, q - 1) : bag.delete(id); renderBag(); refocus('less'); });
+        more.addEventListener('click', () => { bag.set(id, q + 1); renderBag(); refocus('more'); });
+        lines.append(li);
+      }
+    }
+
+    // Pickup times follow the clock on the page, not the real one: 15 minutes out, every
+    // 15 minutes, until closing. Too late (or before opening)? Order ahead for 7:00 am.
+    function pickupSlots(t) {
+      let first = Math.ceil((t + 15) / 5) * 5, tomorrow = false;
+      if (first >= CLOSE) { first = OPEN; tomorrow = true; } else first = Math.max(first, OPEN);
+      return { times: [0, 15, 30, 45].map((k) => first + k).filter((x) => x < CLOSE), tomorrow };
+    }
+    let chosen = 0, shown = { times: [], tomorrow: false };
+    function renderSlots() {
+      shown = pickupSlots(Number(clock.value));
+      const { times, tomorrow } = shown;
+      chosen = Math.min(chosen, times.length - 1);
+      $('pickup-label').textContent = tomorrow ? 'Pick up tomorrow' : 'Pick up today';
+      const box = $('slots'); box.innerHTML = '';
+      times.forEach((x, i) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.setAttribute('role', 'radio'); b.textContent = clockText(x);
+        b.addEventListener('click', () => choose(i));
+        box.append(b);
+      });
+      choose(chosen, false);
+    }
+    function choose(i, focus = true) {
+      chosen = i;
+      [...$('slots').children].forEach((b, k) => { b.setAttribute('aria-checked', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
+      if (focus) $('slots').children[i].focus();
+    }
+    $('slots').addEventListener('keydown', (e) => {
+      const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+      if (!step) return;
+      e.preventDefault();
+      const n = $('slots').children.length;
+      choose((chosen + step + n) % n);
+    });
+
+    // While the bag is open the page behind it is inert, so Tab and screen readers stay in the bag.
+    const behind = () => document.querySelectorAll('body > :not(#bag):not(#backdrop):not([data-demo-notice]):not(script)');
+    function openBag() { chosen = 0; renderSlots(); behind().forEach((el) => { el.inert = true; el.setAttribute('inert', ''); }); $('bag').hidden = false; $('backdrop').hidden = false; $('bag-close').focus(); }
+    function closeBag() { behind().forEach((el) => { el.inert = false; el.removeAttribute('inert'); }); $('bag').hidden = true; $('backdrop').hidden = true; $('bag-btn').focus(); }
+    $('bag-btn').addEventListener('click', openBag);
+    $('bag-close').addEventListener('click', closeBag);
+    $('backdrop').addEventListener('click', closeBag);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('bag').hidden) closeBag(); });
+
+    $('place').addEventListener('click', () => {
+      const count = [...bag.values()].reduce((a, b) => a + b, 0);
+      const { times, tomorrow } = shown;
+      demo(`${count} item${count === 1 ? '' : 's'} ordered for pickup at ${clockText(times[chosen] ?? times[0])}${tomorrow ? ' tomorrow' : ''}.`);
+      bag.clear(); renderBag();
+      if (!$('bag').hidden) closeBag();
+    });
+
+    // The clock: ?at=HH:MM if the link has one, otherwise the visitor's local time.
+    const clock = $('clock');
+    const MIN = Number(clock.min), MAX = Number(clock.max);
+    function startTime() {
+      const at = /^(\d{1,2}):(\d{2})$/.exec(new URLSearchParams(location.search).get('at') ?? '');
+      const now = new Date();
+      const t = at ? Number(at[1]) * 60 + Number(at[2]) : now.getHours() * 60 + now.getMinutes();
+      return Math.min(MAX, Math.max(MIN, Math.floor(t / 5) * 5));
+    }
+    // ---- the scene ----
+    const W = 1200, H = 660, PAD = 70;
+    const NS = 'http://www.w3.org/2000/svg';
+    const art = $('art'), scene = $('scene');
+    const mix = (a, b, k) => {
+      const pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
+      return '#' + [16, 8, 0].map((sh) => {
+        const x = (pa >> sh) & 255, y = (pb >> sh) & 255;
+        return Math.round(x + (y - x) * k).toString(16).padStart(2, '0');
+      }).join('');
+    };
+    // Piecewise-linear over [minute, value] keys; values are numbers or #rrggbb.
+    const ramp = (keys, t) => {
+      if (t <= keys[0][0]) return keys[0][1];
+      for (let i = 1; i < keys.length; i++) {
+        const [t1, v1] = keys[i];
+        if (t > t1) continue;
+        const [t0, v0] = keys[i - 1], k = (t - t0) / (t1 - t0);
+        return typeof v0 === 'number' ? v0 + (v1 - v0) * k : mix(v0, v1, k);
+      }
+      return keys[keys.length - 1][1];
+    };
+    const SKY_TOP = [[360, '#1d2246'], [420, '#5d6fae'], [480, '#8fbfe0'], [600, '#6fb6e2'], [780, '#58a8de'], [1020, '#78b2db'], [1110, '#d98b6a'], [1170, '#cf6f5a'], [1215, '#5a4478'], [1260, '#262a52'], [1320, '#10152c']];
+    const SKY_BOTTOM = [[360, '#4b3a63'], [420, '#f4b08a'], [480, '#f8dcc0'], [600, '#d6ecf5'], [780, '#cfe9f5'], [1020, '#f3e1b8'], [1110, '#ffc77a'], [1170, '#ffa862'], [1215, '#e0785e'], [1260, '#5b3d63'], [1320, '#222346']];
+    const NIGHT = [[360, 1], [405, .65], [450, 0], [1170, 0], [1230, .6], [1290, 1]];
+    const GOLD = [[360, 0], [420, .45], [480, 0], [1060, 0], [1170, 1], [1230, .35], [1265, 0]];
+    const OPENNESS = [[414, 0], [420, 1], [1260, 1], [1266, 0]];
+    const WARM = [[360, 1], [480, .35], [600, 0], [1050, 0], [1200, 1]];
+    const OVEN = [[360, .15], [650, .2], [675, .55], [945, .55], [970, 1], [1255, 1], [1275, .2]];
+    const SUNRISE = 390, SUNSET = 1215;
+
+    // Seeded so every visitor gets the same stars and tree line.
+    let seed = 11;
+    const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+    for (let i = 0; i < 110; i++) {
+      const c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', (-600 + rand() * 2400).toFixed(1)); c.setAttribute('cy', (-400 + rand() * 650).toFixed(1)); c.setAttribute('r', (.8 + rand() * 1.4).toFixed(2));
+      $('stars').append(c);
+    }
+    let trees = '';
+    for (let x = -620; x < W + 640; x += 22 + rand() * 26) {
+      const h = 26 + rand() * 46, w = h * .5;
+      trees += `M${(x - w / 2).toFixed(1)} 300L${x.toFixed(1)} ${(300 - h).toFixed(1)}L${(x + w / 2).toFixed(1)} 300Z`;
+    }
+    $('trees').setAttribute('d', trees);
+    let seams = '';
+    for (let x = -1530; x < W + 1500; x += 180) seams += `M${x} 610v38`;
+    $('seams').setAttribute('d', seams);
+
+    // Fit the drawing to the screen: always show the window, the door and some sky,
+    // then widen the street (wide screens) or raise the sky (tall phones) to fill the rest.
+    const KEEP = { w: 480, h: 620, cx: 600 };
+    let view = { x0: 0, w: W, y0: 0, s: 1 };
+    function measure() {
+      const r = art.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      const ar = r.width / r.height;
+      const w = Math.max(KEEP.w, KEEP.h * ar), h = w / ar;
+      view = { x0: KEEP.cx - w / 2, w, y0: H - h, s: r.width / w };
+      art.setAttribute('viewBox', `${view.x0.toFixed(1)} ${view.y0.toFixed(1)} ${w.toFixed(1)} ${h.toFixed(1)}`);
+      $('sky').setAttribute('y1', view.y0.toFixed(1));
+    }
+
+    const sunX = (t) => view.x0 + PAD + ((t - MIN) / (MAX - MIN)) * (view.w - 2 * PAD);
+    function paint(t) {
+      const night = ramp(NIGHT, t), gold = ramp(GOLD, t), open = ramp(OPENNESS, t);
+      const skyTop = ramp(SKY_TOP, t);
+      $('sky-top').setAttribute('stop-color', skyTop);
+      $('sky-bottom').setAttribute('stop-color', ramp(SKY_BOTTOM, t));
+      $('stars').setAttribute('opacity', night.toFixed(2));
+      $('moon').setAttribute('opacity', night.toFixed(2));
+      $('moon').setAttribute('transform', `translate(${(view.x0 + view.w - 150).toFixed(1)} ${(view.y0 + 90).toFixed(1)})`);
+
+      // The sun follows the clock left to right and arcs from sunrise to sunset.
+      const d = (t - SUNRISE) / (SUNSET - SUNRISE), lift = d > 0 && d < 1 ? Math.sin(Math.PI * d) : 0;
+      const horizon = 345, top = view.y0 + 72;
+      const sy = lift ? horizon - lift * (horizon - top) : horizon + 50;
+      $('sun').setAttribute('transform', `translate(${sunX(t).toFixed(1)} ${sy.toFixed(1)})`);
+      $('sun-disc').setAttribute('fill', mix('#ff9b4a', '#ffe08a', Math.min(1, lift * 1.8)));
+      $('trees').setAttribute('fill', mix(mix('#3f6b57', '#0e1b22', night), '#6e3b34', gold * .35));
+
+      $('dusk').setAttribute('opacity', (gold * .2).toFixed(3));
+      $('night').setAttribute('opacity', (night * .6).toFixed(3));
+
+      // Inside: lit when open, warmer toward evening; dark when closed.
+      const lit = mix('#f4e4c8', '#f7c47a', ramp(WARM, t));
+      const room = mix('#251b17', lit, open);
+      document.querySelectorAll('#art .pane').forEach((p) => p.setAttribute('fill', room));
+      $('oven-glow').setAttribute('opacity', ramp(OVEN, t).toFixed(2));
+      $('flames').setAttribute('opacity', Math.max(.25, ramp(OVEN, t)).toFixed(2));
+      const lamps = open * (.2 + .8 * Math.max(night, ramp(WARM, t) * .6));
+      document.querySelectorAll('#art .lamp-glow').forEach((g) => g.setAttribute('opacity', lamps.toFixed(2)));
+      document.querySelectorAll('#art .bulb').forEach((b) => b.setAttribute('fill', open ? '#ffe7a8' : '#5a4a3a'));
+      $('glare').setAttribute('opacity', (.04 + .16 * (1 - night)).toFixed(2));
+      $('spill').setAttribute('opacity', (night * open).toFixed(2));
+      document.querySelectorAll('#art .sconce').forEach((g) => g.setAttribute('opacity', (Math.min(1, night * 1.3) * open).toFixed(2)));
+    }
+
+    function showPart(p) {
+      document.querySelectorAll('#art .prop').forEach((g) => g.classList.toggle('on', g.dataset.part === p));
+      const closed = p === 'closed';
+      $('open-text').textContent = closed ? 'CLOSED' : 'OPEN';
+      $('open-text').setAttribute('fill', closed ? '#c9b8a8' : '#a2412c');
+      $('open-sign').setAttribute('fill', closed ? '#3a2a22' : '#fbf3e6');
+    }
+
+    let part = null;
+    function setTime(t, animate) {
+      paint(t);
+      const p = partAt(t);
+      $('time').textContent = clockText(t);
+      $('part').textContent = p === 'closed' ? 'Closed' : MENUS[p].title;
+      $('greeting').textContent = greetingAt(t);
+      clock.setAttribute('aria-valuetext', `${clockText(t)}, ${p === 'closed' ? 'closed' : MENUS[p].title.toLowerCase()}`);
+      if (p !== part) { part = p; renderMenu(MENUS[p], animate); showPart(p); }
+    }
+
+    // Drag sideways anywhere on the scene to move the sun; a tap jumps to that time.
+    // Vertical swipes still scroll the page (touch-action: pan-y).
+    let drag = null;
+    function timeAtX(clientX) {
+      const r = art.getBoundingClientRect();
+      const x = view.x0 + (clientX - r.left) / view.s;
+      const f = Math.min(1, Math.max(0, (x - view.x0 - PAD) / (view.w - 2 * PAD)));
+      return Math.round((MIN + f * (MAX - MIN)) / 5) * 5;
+    }
+    function scrubTo(clientX) { clock.value = timeAtX(clientX); setTime(Number(clock.value), true); }
+    scene.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, on: false, id: e.pointerId }; });
+    const endDrag = () => { drag = null; scene.classList.remove('dragging'); };
+    scene.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      if (e.buttons === 0) return endDrag(); // released outside the scene, before capture began
+      if (!drag.on && Math.abs(e.clientX - drag.x) > 6 && Math.abs(e.clientX - drag.x) > Math.abs(e.clientY - drag.y)) {
+        drag.on = true; scene.classList.add('dragging');
+        try { scene.setPointerCapture(drag.id); } catch {}
+      }
+      if (drag.on) { e.preventDefault(); scrubTo(e.clientX); }
+    });
+    scene.addEventListener('pointerup', (e) => { if (drag && !drag.on) scrubTo(e.clientX); drag = null; scene.classList.remove('dragging'); });
+    scene.addEventListener('pointercancel', endDrag);
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('resize', () => { measure(); paint(Number(clock.value)); });
+    measure();
+    clock.addEventListener('input', () => setTime(Number(clock.value), true));
+    clock.value = startTime();
+    setTime(Number(clock.value), false);
+    renderBag();
+  })();
+  </script>
+</body>
+</html>
