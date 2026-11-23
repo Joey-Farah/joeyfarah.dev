@@ -80,4 +80,12 @@ describe('Historical Society: walking tour', () => {
     expect(card(doc)).toMatch(/Stop 1 of 6/);
     expect(doc.getElementById('walker')!.dataset.stop).toBe('1');
   });
+
+  it('opens at the stop named in the link, like the code on the sign at each stop (?stop=3)', () => {
+    const doc = open('?stop=3');
+    expect(card(doc)).toMatch(/Stop 3 of 6/);
+    expect(card(doc)).toMatch(/The Depot/);
+    expect(doc.getElementById('walker')!.dataset.stop).toBe('3');
+    for (const bad of ['?stop=0', '?stop=9', '?stop=x']) expect(card(open(bad))).toMatch(/six stops/i);
+  });
 });

@@ -355,7 +355,7 @@
         $('stop-kicker').textContent = 'The walking tour';
         $('stop-title').textContent = 'Six stops, about 40 minutes';
         $('stop-when').textContent = '';
-        $('stop-story').textContent = 'Start at the falls overlook on River Road. Follow the dot on the map, and read each stop\'s story when you get there.';
+        $('stop-story').textContent = 'Start at the falls overlook on River Road. Follow the dot on the map, and read each stop\'s story when you get there. Or scan the sign at any stop to pick up the tour right there.';
         $('stop-next').textContent = '1.1 miles, mostly flat, with one hill at the end.';
         $('tour-next').textContent = 'Start the tour';
         $('tour-prev').hidden = true;
@@ -386,7 +386,11 @@
 
     $('locate').addEventListener('click', () => demo('Show where I am.', 'This is a demo. On a real tour, your phone\'s location shows on the map.'));
     document.querySelectorAll('.support [data-demo]').forEach((b) => b.addEventListener('click', () => demo(b.dataset.what)));
-    render();
+
+    // The sign at each stop has a code that opens the tour right there: /showcase/historical-society/?stop=3
+    const n = Number(new URLSearchParams(location.search).get('stop'));
+    if (Number.isInteger(n) && n >= 1 && n <= STOPS.length) { place(CUM[STOP_PT[n - 1]]); go(n - 1); }
+    else render();
   })();
   </script>
 </body>
